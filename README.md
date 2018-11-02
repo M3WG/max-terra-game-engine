@@ -1,1 +1,1 @@
-# Match3Proto
+# m3-prototype
