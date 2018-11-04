@@ -3,6 +3,10 @@ const m3 = (
     'use strict';
 
     return {
+      component: {},
+      config: {},
+      model: {},
+      utility: {},
     };
   }
 )();
