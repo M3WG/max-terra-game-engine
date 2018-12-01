@@ -10,17 +10,15 @@ m3.model.action.create = function(...args) {
 m3.model.action.prototype = (
   function prototypeIIFE() {
 
-    function construct() {
+    function construct(options) {
+      this.turn = options.turn;
+
       return this;
     }
 
     function destruct() {
       return this;
     }
-
-    // Player
-    // Round
-    // Turn
 
     return {
       construct,
