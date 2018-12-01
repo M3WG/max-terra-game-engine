@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>m3-prototype</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="../js/m3.js"></script>
+    <script src="../js/m3/model/action.js"></script>
+    <script src="../js/m3/model/game.js"></script>
+    <script src="../js/m3/model/player.js"></script>
+    <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/turn.js"></script>
+  </head>
+  <body>
+
+    <span id="round">1</span>
+    <span id="turn">1</span>
+    <span id="action">0</span>
+    <button id="increment">Action</button>
+
+    <script>
+      const players = [
+        m3.model.player.create(),
+      ];
+
+      const game = m3.model.game.create({
+        player: players,
+      });
+
+      const actionSpan = document.getElementById('action')
+            increment = document.getElementById('increment'),
+            roundSpan = document.getElementById('round'),
+            turnSpan = document.getElementById('turn');
+
+      let actionCount = 0,
+          roundCount = 0,
+          turnCount = 0;
+
+      increment.addEventListener('click', onIncrement);
+
+      function onIncrement() {
+        const round = game.getCurrentRound(),
+              turn = round.getCurrentTurn();
+
+        turn.createAction({/* ... */});
+
+        actionSpan.innerHTML = turn.getActionCount();
+        roundSpan.innerHTML = game.getRoundCount();
+        turnSpan.innerHTML = round.getTurnCount();
+      }
+    </script>
+
+  </body>
+</html>
