@@ -10,7 +10,12 @@ m3.model.round.create = function(...args) {
 m3.model.round.prototype = (
   function prototypeIIFE() {
 
-    function construct() {
+    function construct(options) {
+      this.game = options.game;
+      this.turn = [];
+
+      this.createTurn();
+
       return this;
     }
 
@@ -18,12 +23,44 @@ m3.model.round.prototype = (
       return this;
     }
 
-    // Game
-    // Turn[]
+    function createTurn() {
+      this.turn.push(
+        m3.model.turn.create({
+          // TODO: Inject player
+          round: this,
+        })
+      );
+
+      return this;
+    }
+
+    function getCurrentTurn() {
+      return this.turn[this.turn.length - 1];
+    }
+
+    function getTurnCount() {
+      return this.turn.length;
+    }
+
+    function onTurnEnd() {
+      // TODO: Check round end
+
+      if (false) {
+        this.game.onRoundEnd();
+      } else {
+        this.createTurn();
+      }
+
+      return this;
+    }
 
     return {
       construct,
       destruct,
+      createTurn,
+      getCurrentTurn,
+      getTurnCount,
+      onTurnEnd,
     };
   }
 )();
