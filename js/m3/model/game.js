@@ -10,7 +10,12 @@ m3.model.game.create = function(...args) {
 m3.model.game.prototype = (
   function prototypeIIFE() {
 
-    function construct() {
+    function construct(options) {
+      this.player = options.player;
+      this.round = [];
+
+      this.createRound();
+
       return this;
     }
 
@@ -18,13 +23,48 @@ m3.model.game.prototype = (
       return this;
     }
 
+    function createRound() {
+      this.round.push(
+        m3.model.round.create({
+          game: this,
+        })
+      );
+    }
+
+    function getCurrentRound() {
+      return this.round[this.round.length - 1];
+    }
+
+    function getPlayers() {
+      // XXX: Not a copy
+      return this.player;
+    }
+
+    function getRoundCount() {
+      return this.round.length;
+    }
+
+    function onRoundEnd() {
+      // TODO: Check game end
+      if (false) {
+        // TODO: ???
+      } else {
+        this.createRound();
+      }
+
+      return this;
+    }
+
     // Map
-    // Player
-    // Round -> Turn -> Action
 
     return {
       construct,
       destruct,
+      createRound,
+      getCurrentRound,
+      getPlayers,
+      getRoundCount,
+      onRoundEnd,
     };
   }
 )();
