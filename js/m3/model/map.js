@@ -17,13 +17,13 @@ m3.model.map.prototype = (
       this.height = height;
       this.width = width;
 
-      for (let x = 0; x < width; x++) {
-        for (let y = 0; y < height; y++) {
-          if (!this.cell[x]) {
-            this.cell[x] = [];
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (!this.cell[y]) {
+            this.cell[y] = [];
           }
 
-          this.cell[x][y] = m3.model.cell.create(/* ... */);
+          this.cell[y][x] = m3.model.cell.create(/* ... */);
         }
       }
 
@@ -35,7 +35,7 @@ m3.model.map.prototype = (
     }
 
     function getCell(x, y) {
-      return this.cell[x][y];
+      return this.cell[y][x];
     }
 
     function getHeight() {
