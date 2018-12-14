@@ -10,7 +10,23 @@ m3.model.map.create = function(...args) {
 m3.model.map.prototype = (
   function prototypeIIFE() {
 
-    function construct() {
+    function construct(options) {
+      const {height, width} = options;
+
+      this.cell = [];
+      this.height = height;
+      this.width = width;
+
+      for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
+          if (!this.cell[x]) {
+            this.cell[x] = [];
+          }
+
+          this.cell[x][y] = m3.model.cell.create(/* ... */);
+        }
+      }
+
       return this;
     }
 
@@ -18,13 +34,27 @@ m3.model.map.prototype = (
       return this;
     }
 
+    function getCell(x, y) {
+      return this.cell[x][y];
+    }
+
+    function getHeight() {
+      return this.height;
+    }
+
+    function getWidth() {
+      return this.width;
+    }
+
     // Game
-    // Cell[][]
     // Archetype?
 
     return {
       construct,
       destruct,
+      getCell,
+      getHeight,
+      getWidth,
     };
   }
 )();
