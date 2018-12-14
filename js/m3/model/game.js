@@ -35,6 +35,10 @@ m3.model.game.prototype = (
       return this.round[this.round.length - 1];
     }
 
+    function getPlayerCount() {
+      return this.player.length;
+    }
+
     function getPlayers() {
       // XXX: Not a copy
       return this.player;
@@ -62,6 +66,7 @@ m3.model.game.prototype = (
       destruct,
       createRound,
       getCurrentRound,
+      getPlayerCount,
       getPlayers,
       getRoundCount,
       onRoundEnd,
