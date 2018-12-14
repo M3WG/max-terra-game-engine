@@ -29,9 +29,11 @@ m3.model.turn.prototype = (
         m3.model.action.create(options)
       );
 
-      // TODO: Check turn end
-      if (false) {
-        this.round.onRoundEnd();
+      // XXX: Hardcoded
+      const isTurnEnd = this.getActionCount() >= 3;
+
+      if (isTurnEnd) {
+        this.round.onTurnEnd();
       }
 
       return this;

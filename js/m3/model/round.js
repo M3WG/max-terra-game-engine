@@ -43,9 +43,9 @@ m3.model.round.prototype = (
     }
 
     function onTurnEnd() {
-      // TODO: Check round end
+      const isRoundEnd = this.getTurnCount() >= this.game.getPlayerCount();
 
-      if (false) {
+      if (isRoundEnd) {
         this.game.onRoundEnd();
       } else {
         this.createTurn();
