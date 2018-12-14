@@ -41,10 +41,12 @@
       increment.addEventListener('click', onIncrement);
 
       function onIncrement() {
+        const currentTurn = game.getCurrentRound().getCurrentTurn();
+
+        currentTurn.createAction({/* ... */});
+
         const round = game.getCurrentRound(),
               turn = round.getCurrentTurn();
-
-        turn.createAction({/* ... */});
 
         actionSpan.innerHTML = turn.getActionCount();
         roundSpan.innerHTML = game.getRoundCount();
