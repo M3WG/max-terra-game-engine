@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>m3-prototype</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="../js/m3.js"></script>
+    <script src="../js/m3/model/action.js"></script>
+    <script src="../js/m3/model/cell.js"></script>
+    <script src="../js/m3/model/game.js"></script>
+    <script src="../js/m3/model/map.js"></script>
+    <script src="../js/m3/model/player.js"></script>
+    <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/turn.js"></script>
+  </head>
+  <body>
+
+    <table id="map"></table>
+
+    <script>
+      const players = [
+        m3.model.player.create(),
+      ];
+
+      const map = m3.model.map.create({
+        height: 10,
+        width: 10,
+      });
+
+      const game = m3.model.game.create({
+        map,
+        player: players,
+      });
+
+      const height = map.getHeight(),
+            width = map.getWidth();
+
+      const table = document.getElementById('map');
+
+      for (let y = 0; y < height; y++) {
+        const tr = document.createElement('tr');
+        table.appendChild(tr);
+
+        for (let x = 0; x < width; x++) {
+          const cell = map.getCell(x, y);
+          const td = document.createElement('td');
+
+          tr.appendChild(td);
+
+          map.getCell(x, y).tile = 0;
+
+          td.onclick = function onClick() {
+            game.getCurrentRound().getCurrentTurn().createAction({
+              x,
+              y,
+              tile: 1,
+            });
+            render();
+          }
+        }
+      }
+
+      render();
+
+      function render() {
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const cell = map.getCell(x, y),
+                  td = table.children.item(y).children.item(x);
+
+            td.innerHTML = cell.tile;
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>
