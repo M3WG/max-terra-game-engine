@@ -11,6 +11,7 @@ m3.model.game.prototype = (
   function prototypeIIFE() {
 
     function construct(options) {
+      this.map = options.map;
       this.player = options.player;
       this.round = [];
 
