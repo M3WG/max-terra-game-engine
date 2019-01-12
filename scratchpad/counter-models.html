@@ -23,34 +23,34 @@
     <script>
       const players = [
         m3.model.player.create(),
-      ];
+      ]
 
       const game = m3.model.game.create({
         player: players,
-      });
+      })
 
       const actionSpan = document.getElementById('action')
-            increment = document.getElementById('increment'),
-            roundSpan = document.getElementById('round'),
-            turnSpan = document.getElementById('turn');
+        increment = document.getElementById('increment'),
+        roundSpan = document.getElementById('round'),
+        turnSpan = document.getElementById('turn')
 
       let actionCount = 0,
-          roundCount = 0,
-          turnCount = 0;
+        roundCount = 0,
+        turnCount = 0
 
-      increment.addEventListener('click', onIncrement);
+      increment.addEventListener('click', onIncrement)
 
       function onIncrement() {
-        const currentTurn = game.getCurrentRound().getCurrentTurn();
+        const currentTurn = game.getCurrentRound().getCurrentTurn()
 
-        currentTurn.createAction({/* ... */});
+        currentTurn.createAction({/* ... */})
 
         const round = game.getCurrentRound(),
-              turn = round.getCurrentTurn();
+          turn = round.getCurrentTurn()
 
-        actionSpan.innerHTML = turn.getActionCount();
-        roundSpan.innerHTML = game.getRoundCount();
-        turnSpan.innerHTML = round.getTurnCount();
+        actionSpan.innerHTML = turn.getActionCount()
+        roundSpan.innerHTML = game.getRoundCount()
+        turnSpan.innerHTML = round.getTurnCount()
       }
     </script>
 

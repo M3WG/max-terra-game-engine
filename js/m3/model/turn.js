@@ -1,46 +1,46 @@
-'use strict';
+'use strict'
 
-m3.model.turn = {};
+m3.model.turn = {}
 
 m3.model.turn.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.turn.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct(options) {
-      this.action = [];
-      this.player = options.player;
-      this.round = options.round;
+      this.action = []
+      this.player = options.player
+      this.round = options.round
 
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     function createAction(options) {
-      options.turn = this;
+      options.turn = this
 
       this.action.push(
         m3.model.action.create(options)
-      );
+      )
 
       // XXX: Hardcoded
-      const isTurnEnd = this.getActionCount() >= 3;
+      const isTurnEnd = this.getActionCount() >= 3
 
       if (isTurnEnd) {
-        this.round.onTurnEnd();
+        this.round.onTurnEnd()
       }
 
-      return this;
+      return this
     }
 
     function getActionCount() {
-      return this.action.length;
+      return this.action.length
     }
 
     return {
@@ -48,6 +48,6 @@ m3.model.turn.prototype = (
       destruct,
       createAction,
       getActionCount,
-    };
+    }
   }
-)();
+)()

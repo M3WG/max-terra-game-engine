@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 m3.config.tiles = [
   undefined,

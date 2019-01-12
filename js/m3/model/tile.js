@@ -1,21 +1,21 @@
-'use strict';
+'use strict'
 
-m3.model.tile = {};
+m3.model.tile = {}
 
 m3.model.tile.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.tile.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct() {
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     // id
@@ -24,6 +24,6 @@ m3.model.tile.prototype = (
     return {
       construct,
       destruct,
-    };
+    }
   }
-)();
+)()

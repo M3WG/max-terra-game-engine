@@ -1,26 +1,26 @@
-'use strict';
+'use strict'
 
-m3.model.user = {};
+m3.model.user = {}
 
 m3.model.user.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.user.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct() {
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     return {
       construct,
       destruct,
-    };
+    }
   }
-)();
+)()

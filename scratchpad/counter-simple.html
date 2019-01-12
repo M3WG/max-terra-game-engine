@@ -15,36 +15,36 @@
 
     <script>
       const actionsPerTurn = 3,
-            players = [0],
-            playerCount = players.length;
+        players = [0],
+        playerCount = players.length
 
       const actionSpan = document.getElementById('action')
-            increment = document.getElementById('increment'),
-            roundSpan = document.getElementById('round'),
-            turnSpan = document.getElementById('turn');
+        increment = document.getElementById('increment'),
+        roundSpan = document.getElementById('round'),
+        turnSpan = document.getElementById('turn')
 
       let actionCount = 0,
-          roundCount = 0,
-          turnCount = 0;
+        roundCount = 0,
+        turnCount = 0
 
-      increment.addEventListener('click', onIncrement);
+      increment.addEventListener('click', onIncrement)
 
       function onIncrement() {
-        actionCount++;
+        actionCount++
 
         if (actionCount >= actionsPerTurn) {
-          turnCount++;
-          actionCount = 0;
+          turnCount++
+          actionCount = 0
         }
 
         if (turnCount >= playerCount) {
-          roundCount++;
-          turnCount = 0;
+          roundCount++
+          turnCount = 0
         }
 
-        actionSpan.innerHTML = actionCount + 1;
-        roundSpan.innerHTML = roundCount + 1;
-        turnSpan.innerHTML = turnCount + 1;
+        actionSpan.innerHTML = actionCount + 1
+        roundSpan.innerHTML = roundCount + 1
+        turnSpan.innerHTML = turnCount + 1
       }
     </script>
 

@@ -1,26 +1,26 @@
-'use strict';
+'use strict'
 
-m3.model.round = {};
+m3.model.round = {}
 
 m3.model.round.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.round.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct(options) {
-      this.game = options.game;
-      this.turn = [];
+      this.game = options.game
+      this.turn = []
 
-      this.createTurn();
+      this.createTurn()
 
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     function createTurn() {
@@ -29,29 +29,29 @@ m3.model.round.prototype = (
           // TODO: Inject player
           round: this,
         })
-      );
+      )
 
-      return this;
+      return this
     }
 
     function getCurrentTurn() {
-      return this.turn[this.turn.length - 1];
+      return this.turn[this.turn.length - 1]
     }
 
     function getTurnCount() {
-      return this.turn.length;
+      return this.turn.length
     }
 
     function onTurnEnd() {
-      const isRoundEnd = this.getTurnCount() >= this.game.getPlayerCount();
+      const isRoundEnd = this.getTurnCount() >= this.game.getPlayerCount()
 
       if (isRoundEnd) {
-        this.game.onRoundEnd();
+        this.game.onRoundEnd()
       } else {
-        this.createTurn();
+        this.createTurn()
       }
 
-      return this;
+      return this
     }
 
     return {
@@ -61,6 +61,6 @@ m3.model.round.prototype = (
       getCurrentTurn,
       getTurnCount,
       onTurnEnd,
-    };
+    }
   }
-)();
+)()

@@ -1,52 +1,52 @@
-'use strict';
+'use strict'
 
-m3.model.map = {};
+m3.model.map = {}
 
 m3.model.map.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.map.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct(options) {
-      const {height, width} = options;
+      const {height, width} = options
 
-      this.cell = [];
-      this.height = height;
-      this.width = width;
+      this.cell = []
+      this.height = height
+      this.width = width
 
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
           if (!this.cell[y]) {
-            this.cell[y] = [];
+            this.cell[y] = []
           }
 
           this.cell[y][x] = m3.model.cell.create({
             x,
             y,
-          });
+          })
         }
       }
 
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     function getCell(x, y) {
-      return this.cell[y][x];
+      return this.cell[y][x]
     }
 
     function getHeight() {
-      return this.height;
+      return this.height
     }
 
     function getWidth() {
-      return this.width;
+      return this.width
     }
 
     // Game
@@ -58,6 +58,6 @@ m3.model.map.prototype = (
       getCell,
       getHeight,
       getWidth,
-    };
+    }
   }
-)();
+)()

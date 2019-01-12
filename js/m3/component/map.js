@@ -10,7 +10,7 @@ m3.component.map.create = function create(...args) {
 
 m3.component.map.prototype = (
   function prototypeIIFE(undefined) {
-    const _delegate = m3.component.base.prototype;
+    const _delegate = m3.component.base.prototype
 
     function construct(...args) {
       _delegate.construct.call(this, ...args)

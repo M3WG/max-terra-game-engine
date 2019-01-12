@@ -41,6 +41,6 @@ m3.component.base.prototype = (
       construct,
       destruct,
       attach,
-    };
+    }
   }
-)();
+)()

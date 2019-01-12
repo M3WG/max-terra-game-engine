@@ -1,21 +1,21 @@
-'use strict';
+'use strict'
 
-m3.model.path = {};
+m3.model.path = {}
 
 m3.model.path.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.path.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct() {
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     // Cell[]
@@ -23,6 +23,6 @@ m3.model.path.prototype = (
     return {
       construct,
       destruct,
-    };
+    }
   }
-)();
+)()

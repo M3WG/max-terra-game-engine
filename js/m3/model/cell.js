@@ -1,29 +1,29 @@
-'use strict';
+'use strict'
 
-m3.model.cell = {};
+m3.model.cell = {}
 
 m3.model.cell.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.cell.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct() {
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     function getX() {
-      return this.config.x;
+      return this.config.x
     }
 
     function getY() {
-      return this.config.y;
+      return this.config.y
     }
 
     // Tile
@@ -34,6 +34,6 @@ m3.model.cell.prototype = (
       destruct,
       getX,
       getY,
-    };
+    }
   }
-)();
+)()

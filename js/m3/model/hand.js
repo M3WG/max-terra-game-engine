@@ -1,21 +1,21 @@
-'use strict';
+'use strict'
 
-m3.model.hand = {};
+m3.model.hand = {}
 
 m3.model.hand.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.hand.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct() {
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     // Player
@@ -24,6 +24,6 @@ m3.model.hand.prototype = (
     return {
       construct,
       destruct,
-    };
+    }
   }
-)();
+)()

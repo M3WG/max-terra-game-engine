@@ -1,27 +1,27 @@
-'use strict';
+'use strict'
 
-m3.model.game = {};
+m3.model.game = {}
 
 m3.model.game.create = function(...args) {
-  const Instance = Object.create(this.prototype);
-  return Instance.construct(...args);
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
 }
 
 m3.model.game.prototype = (
-  function prototypeIIFE() {
+  function prototypeIIFE(undefined) {
 
     function construct(options) {
-      this.map = options.map;
-      this.player = options.player;
-      this.round = [];
+      this.map = options.map
+      this.player = options.player
+      this.round = []
 
-      this.createRound();
+      this.createRound()
 
-      return this;
+      return this
     }
 
     function destruct() {
-      return this;
+      return this
     }
 
     function createRound() {
@@ -29,24 +29,24 @@ m3.model.game.prototype = (
         m3.model.round.create({
           game: this,
         })
-      );
+      )
     }
 
     function getCurrentRound() {
-      return this.round[this.round.length - 1];
+      return this.round[this.round.length - 1]
     }
 
     function getPlayerCount() {
-      return this.player.length;
+      return this.player.length
     }
 
     function getPlayers() {
       // XXX: Not a copy
-      return this.player;
+      return this.player
     }
 
     function getRoundCount() {
-      return this.round.length;
+      return this.round.length
     }
 
     function onRoundEnd() {
@@ -54,10 +54,10 @@ m3.model.game.prototype = (
       if (false) {
         // TODO: ???
       } else {
-        this.createRound();
+        this.createRound()
       }
 
-      return this;
+      return this
     }
 
     // Map
@@ -71,6 +71,6 @@ m3.model.game.prototype = (
       getPlayers,
       getRoundCount,
       onRoundEnd,
-    };
+    }
   }
-)();
+)()
