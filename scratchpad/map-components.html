@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>m3-prototype</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="../css/component/cell.css" rel="stylesheet" type="text/css" />
+    <link href="../css/component/map.css" rel="stylesheet" type="text/css" />
+
+    <script src="../js/m3.js"></script>
+    <script src="../js/m3/component/base.js"></script>
+    <script src="../js/m3/component/cell.js"></script>
+    <script src="../js/m3/component/map.js"></script>
+    <script src="../js/m3/model/action.js"></script>
+    <script src="../js/m3/model/cell.js"></script>
+    <script src="../js/m3/model/game.js"></script>
+    <script src="../js/m3/model/map.js"></script>
+    <script src="../js/m3/model/player.js"></script>
+    <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/turn.js"></script>
+  </head>
+  <body>
+
+    <script>
+      const players = [
+        m3.model.player.create(),
+      ]
+
+      const map = m3.model.map.create({
+        height: 10,
+        width: 10,
+      })
+
+      const game = m3.model.game.create({
+        map,
+        player: players,
+      })
+
+      const mapComponent = m3.component.map.create({
+        model: map,
+        onCellClick: function(cellComponent) {
+          game.getCurrentRound().getCurrentTurn().createAction({
+            x: cellComponent.getX(),
+            y: cellComponent.getY(),
+            tile: 1,
+          })
+
+          mapComponent.render()
+        },
+      }, document.body).attach()
+    </script>
+
+  </body>
+</html>
