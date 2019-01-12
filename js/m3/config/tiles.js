@@ -4,8 +4,8 @@ m3.config.tiles = [
   undefined,
   /*
   {
-    color: 'red',
-    key: 'value',
+    color: 'blue',
+    key: 'water',
   },
   */
 ]
