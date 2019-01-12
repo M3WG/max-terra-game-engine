@@ -2,7 +2,6 @@
 
 m3.config.tiles = [
   undefined,
-  /*
   {
     color: 'white',
     desc: 'city',
@@ -23,5 +22,4 @@ m3.config.tiles = [
     color: 'black',
     desc: 'mountain'
   },
-  */
 ]
