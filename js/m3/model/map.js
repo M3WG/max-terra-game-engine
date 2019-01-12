@@ -23,7 +23,10 @@ m3.model.map.prototype = (
             this.cell[y] = [];
           }
 
-          this.cell[y][x] = m3.model.cell.create(/* ... */);
+          this.cell[y][x] = m3.model.cell.create({
+            x,
+            y,
+          });
         }
       }
 

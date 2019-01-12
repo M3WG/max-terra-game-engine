@@ -18,12 +18,22 @@ m3.model.cell.prototype = (
       return this;
     }
 
+    function getX() {
+      return this.config.x;
+    }
+
+    function getY() {
+      return this.config.y;
+    }
+
     // Tile
     // Claim
 
     return {
       construct,
       destruct,
+      getX,
+      getY,
     };
   }
 )();
