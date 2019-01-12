@@ -8,7 +8,5 @@ Please assign these to the `m3.config` namespace:
  */
 'use strict';
 
-m3.config.foo = {
-  /* ... */
-};
+m3.config.foo = /* ... */
 ```

@@ -6,15 +6,22 @@ Please assign these to the `m3.component` namespace:
 /**
  * @file js/m3/component/foo.js
  */
-'use strict';
+'use strict'
 
-m3.component.foo = {};
+m3.component.foo = {}
 
-m3.component.foo.create = function create() {
-  const instance = Object.create(m3.component.foo.prototype);
-  // ...
-  return instance;
+m3.component.foo.create = function create(...args) {
+  const instance = Object.create(m3.component.foo.prototype)
+  return instance.construct(...args)
 }
 
-m3.component.foo.prototype = /* ... */
+m3.component.foo.prototype = (
+  function prototypeIIFE() {
+    const _delegate = m3.component.base.prototype
+
+    return Object.setPrototypeOf({
+
+    }, _delegate)
+  }
+)()
 ```

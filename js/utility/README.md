@@ -5,8 +5,8 @@ Please assign these to the `utility` namespace:
 /**
  * @file js/utility/foo.js
  */
-'use strict';
-var utility = utility || {};
+'use strict'
+var utility = utility || {}
 
 utility.foo = /* ... */
 ```

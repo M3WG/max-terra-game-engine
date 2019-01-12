@@ -5,7 +5,14 @@ Please assign these to the `m3.app` namespace:
 /**
  * @file js/m3/app/foo.js
  */
-'use strict';
+'use strict'
 
-m3.app.foo = /* ... */
+m3.app.foo = (
+  function fooIIFE(undefined) {
+
+    return {
+      
+    }
+  }
+)()
 ```
