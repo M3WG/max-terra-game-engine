@@ -18,6 +18,10 @@ m3.component.cell.prototype = (
       this._cell = []
       _build.call(this)
 
+      if (this.config.model) {
+        this.config.model.on('change', _onModelChange.bind(this))
+      }
+
       this.render().attach()
 
       return this
@@ -54,6 +58,10 @@ m3.component.cell.prototype = (
       if (this.config.onClick) {
         this.config.onClick(this)
       }
+    }
+
+    function _onModelChange(data) {
+      this.render()
     }
 
     return Object.setPrototypeOf({
