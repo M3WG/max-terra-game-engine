@@ -16,7 +16,10 @@ utility.pubsub.decorate = function decorate(target) {
   target._pubsub = instance
 
   methods.forEach(function bind(method) {
-    target[method] = instance[method].bind(instance)
+    target[method] = function decorated(...args) {
+      instance[method](...args)
+      return target
+    }
   })
 
   return target
