@@ -10,10 +10,10 @@ m3.component.cell.create = function create(...args) {
 
 m3.component.cell.prototype = (
   function prototypeIIFE(undefined) {
-    const _delegate = m3.component.base.prototype
+    const _prototype = m3.component.base.prototype
 
     function construct(...args) {
-      _delegate.construct.call(this, ...args)
+      _prototype.construct.call(this, ...args)
 
       this._cell = []
       _build.call(this)
@@ -70,6 +70,6 @@ m3.component.cell.prototype = (
       getX,
       getY,
       render,
-    }, _delegate)
+    }, _prototype)
   }
 )()
