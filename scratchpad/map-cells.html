@@ -37,10 +37,10 @@
 
           tr.appendChild(td)
 
-          map.getCell(x, y).tileType = 0
+          cell._tileType = 0
 
           td.onclick = function onClick() {
-            map.getCell(x, y).tileType = 1
+            cell._tileType = 1
             render()
           }
         }
@@ -54,7 +54,7 @@
             const cell = map.getCell(x, y),
               td = table.children.item(y).children.item(x)
 
-            td.innerHTML = cell.tileType
+            td.innerHTML = cell._tileType
           }
         }
       }

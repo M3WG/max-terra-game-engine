@@ -51,12 +51,11 @@
 
           tr.appendChild(td)
 
-          map.getCell(x, y).tile = 0
+          cell.setTile(0)
 
           td.onclick = function onClick() {
             game.getCurrentRound().getCurrentTurn().createAction({
-              x,
-              y,
+              cell,
               tile: 1,
             })
             render()
@@ -72,7 +71,7 @@
             const cell = map.getCell(x, y),
                   td = table.children.item(y).children.item(x)
 
-            td.innerHTML = cell.tile
+            td.innerHTML = cell.getTile()
           }
         }
       }

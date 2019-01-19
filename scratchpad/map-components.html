@@ -47,8 +47,7 @@
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
           game.getCurrentRound().getCurrentTurn().createAction({
-            x: cell.getX(),
-            y: cell.getY(),
+            cell,
             tile: 1,
           })
         })
