@@ -44,6 +44,13 @@ m3.model.map.prototype = (
       return this.cell[y][x]
     }
 
+    function getCells() {
+      return this.cell.reduce(function reduceCells(cells, row) {
+        cells.push(...row)
+        return cells
+      }, [])
+    }
+
     function getHeight() {
       return this.height
     }
@@ -59,6 +66,7 @@ m3.model.map.prototype = (
       construct,
       destruct,
       getCell,
+      getCells,
       getHeight,
       getWidth,
     }, _prototype)
