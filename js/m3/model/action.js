@@ -34,7 +34,7 @@ m3.model.action.prototype = (
       const map = this.turn.round.game.map
       const cell = map.getCell(this.x, this.y)
 
-      cell.tile = this.tile
+      cell.setTile(this.tile)
     }
 
     return Object.setPrototypeOf({

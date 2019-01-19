@@ -36,7 +36,7 @@ m3.component.cell.prototype = (
     }
 
     function render() {
-      this._rootElement.innerHTML = this.getModel().tile || 0
+      this._rootElement.innerHTML = this.getModel().getTile() || 0
 
       return this
     }

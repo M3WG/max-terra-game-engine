@@ -21,6 +21,10 @@ m3.model.cell.prototype = (
       return this
     }
 
+    function getTile() {
+      return this.tile
+    }
+
     function getX() {
       return this.config.x
     }
@@ -29,14 +33,22 @@ m3.model.cell.prototype = (
       return this.config.y
     }
 
+    function setTile(tile) {
+      this.tile = tile
+      this.emit('change')
+      return this
+    }
+
     // Tile
     // Claim
 
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getTile,
       getX,
       getY,
+      setTile,
     }, _prototype)
   }
 )()
