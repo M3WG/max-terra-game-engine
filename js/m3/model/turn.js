@@ -32,6 +32,8 @@ m3.model.turn.prototype = (
         m3.model.action.create(options)
       )
 
+      this.emit('change')
+
       // XXX: Hardcoded
       const isTurnEnd = this.getActionCount() >= 3
 

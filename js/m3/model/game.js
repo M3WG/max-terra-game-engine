@@ -33,6 +33,10 @@ m3.model.game.prototype = (
           game: this,
         })
       )
+
+      this.emit('change')
+
+      return this
     }
 
     function getCurrentRound() {

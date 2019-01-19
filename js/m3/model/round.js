@@ -34,6 +34,8 @@ m3.model.round.prototype = (
         })
       )
 
+      this.emit('change')
+
       return this
     }
 
