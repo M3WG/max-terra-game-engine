@@ -10,9 +10,12 @@
     <script src="../js/utility/pubsub.js"></script>
     <script src="../js/m3/model/base.js"></script>
     <script src="../js/m3/model/action.js"></script>
+    <script src="../js/m3/model/cell.js"></script>
     <script src="../js/m3/model/game.js"></script>
+    <script src="../js/m3/model/map.js"></script>
     <script src="../js/m3/model/player.js"></script>
     <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/tile.js"></script>
     <script src="../js/m3/model/turn.js"></script>
   </head>
   <body>
@@ -27,7 +30,13 @@
         m3.model.player.create(),
       ]
 
+      const map = m3.model.map.create({
+        height: 1,
+        width: 1,
+      })
+
       const game = m3.model.game.create({
+        map,
         player: players,
       })
 
@@ -45,7 +54,9 @@
       function onIncrement() {
         const currentTurn = game.getCurrentRound().getCurrentTurn()
 
-        currentTurn.createAction({/* ... */})
+        currentTurn.createAction({
+          cell: map.getCell(0, 0)
+        })
 
         const round = game.getCurrentRound(),
           turn = round.getCurrentTurn()
