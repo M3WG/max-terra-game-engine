@@ -29,6 +29,13 @@ m3.component.map.prototype = (
       }
     }
 
+    function getCells() {
+      return this._cell.reduce(function reduceCells(cells, row) {
+        cells.push(...row)
+        return cells
+      }, [])
+    }
+
     function getModel() {
       return this.config.model
     }
@@ -86,6 +93,7 @@ m3.component.map.prototype = (
     return Object.setPrototypeOf({
       construct,
       getCell,
+      getCells,
       getModel,
       render,
     }, _prototype)
