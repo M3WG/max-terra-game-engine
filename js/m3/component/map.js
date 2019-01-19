@@ -80,7 +80,6 @@ m3.component.map.prototype = (
 
           this._cell[y][x] = m3.component.cell.create({
             model: map.getCell(x, y),
-            onClick: this.config.onCellClick,
             x,
             y,
           }, td, this)
