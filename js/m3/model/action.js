@@ -14,10 +14,9 @@ m3.model.action.prototype = (
     function construct(options) {
       _prototype.construct.apply(this, arguments)
 
+      this.cell = options.cell
       this.tile = options.tile
       this.turn = options.turn
-      this.x = options.x
-      this.y = options.y
 
       _swapTile.call(this)
 
@@ -31,10 +30,7 @@ m3.model.action.prototype = (
     // XXX: Not the time or place for this
     // TODO: Good luck future us
     function _swapTile() {
-      const map = this.turn.round.game.map
-      const cell = map.getCell(this.x, this.y)
-
-      cell.setTile(this.tile)
+      this.cell.setTile(this.tile)
     }
 
     return Object.setPrototypeOf({
