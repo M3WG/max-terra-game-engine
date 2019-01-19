@@ -9,8 +9,11 @@ m3.model.claim.create = function(...args) {
 
 m3.model.claim.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct() {
+      _prototype.construct.apply(this, arguments)
+
       return this
     }
 
@@ -22,9 +25,9 @@ m3.model.claim.prototype = (
     // Tile[]
     // Claim type?
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
-    }
+    }, _prototype)
   }
 )()

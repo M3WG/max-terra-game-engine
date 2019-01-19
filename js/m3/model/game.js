@@ -9,8 +9,11 @@ m3.model.game.create = function(...args) {
 
 m3.model.game.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct(options) {
+      _prototype.construct.apply(this, arguments)
+
       this.map = options.map
       this.player = options.player
       this.round = []
@@ -62,7 +65,7 @@ m3.model.game.prototype = (
 
     // Map
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
       createRound,
@@ -71,6 +74,6 @@ m3.model.game.prototype = (
       getPlayers,
       getRoundCount,
       onRoundEnd,
-    }
+    }, _prototype)
   }
 )()

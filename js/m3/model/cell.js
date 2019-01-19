@@ -9,8 +9,11 @@ m3.model.cell.create = function(...args) {
 
 m3.model.cell.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct() {
+      _prototype.construct.apply(this, arguments)
+
       return this
     }
 
@@ -29,11 +32,11 @@ m3.model.cell.prototype = (
     // Tile
     // Claim
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
       getX,
       getY,
-    }
+    }, _prototype)
   }
 )()

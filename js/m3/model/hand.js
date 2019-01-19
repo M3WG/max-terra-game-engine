@@ -9,8 +9,11 @@ m3.model.hand.create = function(...args) {
 
 m3.model.hand.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct() {
+      _prototype.construct.apply(this, arguments)
+
       return this
     }
 
@@ -21,9 +24,9 @@ m3.model.hand.prototype = (
     // Player
     // Prefab[]
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
-    }
+    }, _prototype)
   }
 )()

@@ -9,8 +9,11 @@ m3.model.turn.create = function(...args) {
 
 m3.model.turn.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct(options) {
+      _prototype.construct.apply(this, arguments)
+
       this.action = []
       this.player = options.player
       this.round = options.round
@@ -43,11 +46,11 @@ m3.model.turn.prototype = (
       return this.action.length
     }
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
       createAction,
       getActionCount,
-    }
+    }, _prototype)
   }
 )()

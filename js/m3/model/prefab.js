@@ -9,8 +9,11 @@ m3.model.prefab.create = function(...args) {
 
 m3.model.prefab.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct() {
+      _prototype.construct.apply(this, arguments)
+
       return this
     }
 
@@ -20,9 +23,9 @@ m3.model.prefab.prototype = (
 
     // Tile[][]
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
-    }
+    }, _prototype)
   }
 )()

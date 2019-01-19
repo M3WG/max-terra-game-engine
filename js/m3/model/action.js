@@ -9,10 +9,13 @@ m3.model.action.create = function(...args) {
 
 m3.model.action.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct(options) {
-      this.turn = options.turn
+      _prototype.construct.apply(this, arguments)
+
       this.tile = options.tile
+      this.turn = options.turn
       this.x = options.x
       this.y = options.y
 
@@ -34,9 +37,9 @@ m3.model.action.prototype = (
       cell.tile = this.tile
     }
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
-    }
+    }, _prototype)
   }
 )()

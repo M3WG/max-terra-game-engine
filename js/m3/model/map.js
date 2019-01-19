@@ -9,8 +9,11 @@ m3.model.map.create = function(...args) {
 
 m3.model.map.prototype = (
   function prototypeIIFE(undefined) {
+    const _prototype = m3.model.base.prototype
 
     function construct(options) {
+      _prototype.construct.apply(this, arguments)
+
       const {height, width} = options
 
       this.cell = []
@@ -52,12 +55,12 @@ m3.model.map.prototype = (
     // Game
     // Archetype?
 
-    return {
+    return Object.setPrototypeOf({
       construct,
       destruct,
       getCell,
       getHeight,
       getWidth,
-    }
+    }, _prototype)
   }
 )()
