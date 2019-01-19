@@ -38,7 +38,7 @@ m3.model.turn.prototype = (
       const isTurnEnd = this.getActionCount() >= 3
 
       if (isTurnEnd) {
-        this.round.onTurnEnd()
+        this.emit('end')
       }
 
       return this

@@ -27,12 +27,13 @@ m3.model.round.prototype = (
     }
 
     function createTurn() {
-      this.turn.push(
-        m3.model.turn.create({
-          // TODO: Inject player
-          round: this,
-        })
-      )
+      const turn = m3.model.turn.create({
+        // TODO: Inject player
+        round: this,
+      })
+
+      turn.on('end', _onTurnEnd.bind(this))
+      this.turn.push(turn)
 
       this.emit('change')
 
@@ -47,11 +48,11 @@ m3.model.round.prototype = (
       return this.turn.length
     }
 
-    function onTurnEnd() {
+    function _onTurnEnd() {
       const isRoundEnd = this.getTurnCount() >= this.game.getPlayerCount()
 
       if (isRoundEnd) {
-        this.game.onRoundEnd()
+        this.emit('end')
       } else {
         this.createTurn()
       }
@@ -65,7 +66,6 @@ m3.model.round.prototype = (
       createTurn,
       getCurrentTurn,
       getTurnCount,
-      onTurnEnd,
     }, _prototype)
   }
 )()

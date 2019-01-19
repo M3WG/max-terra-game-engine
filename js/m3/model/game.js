@@ -28,11 +28,12 @@ m3.model.game.prototype = (
     }
 
     function createRound() {
-      this.round.push(
-        m3.model.round.create({
-          game: this,
-        })
-      )
+      const round = m3.model.round.create({
+        game: this,
+      })
+
+      round.on('end', _onRoundEnd.bind(this))
+      this.round.push(round)
 
       this.emit('change')
 
@@ -56,7 +57,7 @@ m3.model.game.prototype = (
       return this.round.length
     }
 
-    function onRoundEnd() {
+    function _onRoundEnd() {
       // TODO: Check game end
       if (false) {
         // TODO: ???
@@ -77,7 +78,6 @@ m3.model.game.prototype = (
       getPlayerCount,
       getPlayers,
       getRoundCount,
-      onRoundEnd,
     }, _prototype)
   }
 )()
