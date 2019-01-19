@@ -40,13 +40,13 @@ utility.pubsub.prototype = (
       return this
     }
 
-    function emit(event, data) {
+    function emit(event, ...args) {
       if (!this._handlers[event]) {
         return this
       }
 
       this._handlers[event].forEach(function execute(handler) {
-        handler(data)
+        handler(...args)
       })
 
       return this
