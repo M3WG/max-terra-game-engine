@@ -42,14 +42,17 @@
 
       const mapComponent = m3.component.map.create({
         model: map,
-        onCellClick: function(cellComponent) {
+      }, document.body).attach()
+
+      mapComponent.getCells().forEach(function subscribeClick(cell) {
+        cell.on('click', function onClick() {
           game.getCurrentRound().getCurrentTurn().createAction({
-            x: cellComponent.getX(),
-            y: cellComponent.getY(),
+            x: cell.getX(),
+            y: cell.getY(),
             tile: 1,
           })
-        },
-      }, document.body).attach()
+        })
+      })
     </script>
 
   </body>
