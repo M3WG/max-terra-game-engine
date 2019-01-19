@@ -27,6 +27,12 @@ m3.component.cell.prototype = (
       return this
     }
 
+    function click() {
+      this.emit('click')
+
+      return this
+    }
+
     function getModel() {
       return this.config.model
     }
@@ -55,9 +61,7 @@ m3.component.cell.prototype = (
       e.preventDefault()
       e.stopPropagation()
 
-      if (this.config.onClick) {
-        this.config.onClick(this)
-      }
+      this.click()
     }
 
     function _onModelChange(data) {
@@ -66,6 +70,7 @@ m3.component.cell.prototype = (
 
     return Object.setPrototypeOf({
       construct,
+      click,
       getModel,
       getX,
       getY,
