@@ -10,6 +10,8 @@ m3.component.base.prototype = (
       this._parentElement = parentElement
       this.parent = parentComponent
 
+      utility.pubsub.decorate(this)
+
       return this
     }
 
