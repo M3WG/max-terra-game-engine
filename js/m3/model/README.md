@@ -1,5 +1,6 @@
 Reusable models representing game concepts.
 They consist of two parts: the prototype and one or more factory methods.
+Typically their prototypes extend `m3.model.base.prototype`.
 
 Please assign these to the `m3.model` namespace:
 ```js
@@ -11,25 +12,23 @@ Please assign these to the `m3.model` namespace:
 m3.model.foo = {}
 
 m3.model.foo.create = function create(...args) {
-  const instance = Object.create(m3.model.foo.prototype)
+  const instance = Object.create(this.prototype)
   return instance.construct(...args)
 }
 
 m3.model.foo.prototype = (
   function prototypeIIFE() {
+    const _prototype = m3.model.base.prototype
 
     function construct(options) {
+      _prototype.construct.call(this)
+
       return this
     }
 
-    function destruct() {
-      return this
-    }
-
-    return {
+    return Object.setPrototypeOf({
       construct,
-      destruct,
-    }
+    }, _prototype)
   }
 )()
 ```
