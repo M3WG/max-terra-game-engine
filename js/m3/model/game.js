@@ -12,7 +12,7 @@ m3.model.game.prototype = (
     const _prototype = m3.model.base.prototype
 
     function construct(options) {
-      _prototype.construct.apply(this, arguments)
+      _prototype.construct.call(this)
 
       this.map = options.map
       this.player = options.player

@@ -5,7 +5,7 @@ m3.model.base = {}
 m3.model.base.prototype = (
   function prototypeIIFE(undefined) {
 
-    function construct(options) {
+    function construct() {
       utility.pubsub.decorate(this)
 
       return this

@@ -11,8 +11,8 @@ m3.model.user.prototype = (
   function prototypeIIFE(undefined) {
     const _prototype = m3.model.base.prototype
 
-    function construct() {
-      _prototype.construct.apply(this, arguments)
+    function construct(options) {
+      _prototype.construct.call(this)
 
       return this
     }

@@ -12,7 +12,7 @@ m3.model.action.prototype = (
     const _prototype = m3.model.base.prototype
 
     function construct(options) {
-      _prototype.construct.apply(this, arguments)
+      _prototype.construct.call(this)
 
       this.cell = options.cell
       this.tile = options.tile
