@@ -3,7 +3,7 @@
 m3.component.cell = {}
 
 m3.component.cell.create = function create(...args) {
-  const instance = Object.create(m3.component.cell.prototype)
+  const instance = Object.create(this.prototype)
   instance.construct(...args)
   return instance
 }

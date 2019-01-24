@@ -3,7 +3,7 @@
 m3.component.map = {}
 
 m3.component.map.create = function create(...args) {
-  const instance = Object.create(m3.component.map.prototype)
+  const instance = Object.create(this.prototype)
   instance.construct(...args)
   return instance
 }
