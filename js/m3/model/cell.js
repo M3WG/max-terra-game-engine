@@ -33,8 +33,8 @@ m3.model.cell.prototype = (
       return this.config.y
     }
 
-    function setTile(tile) {
-      this.tile = tile
+    function setTile(id) {
+      this.tile = m3.model.tile.createWithId(id)
       this.emit('change')
       return this
     }
