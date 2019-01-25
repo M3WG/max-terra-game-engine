@@ -46,7 +46,10 @@ m3.component.cell.prototype = (
     }
 
     function render() {
-      this._rootElement.innerHTML = this.getModel().getTile() || 0
+      const tile = this.getModel().getTile()
+
+      this._rootElement.innerHTML = tile ? tile.getId() : 0
+      this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
 
       return this
     }
