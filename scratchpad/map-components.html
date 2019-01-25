@@ -10,7 +10,9 @@
     <link href="../css/component/map.css" rel="stylesheet" type="text/css" />
 
     <script src="../js/m3.js"></script>
+    <script src="../js/utility/array.js"></script>
     <script src="../js/utility/pubsub.js"></script>
+    <script src="../js/m3/config/tiles.js"></script>
     <script src="../js/m3/component/base.js"></script>
     <script src="../js/m3/component/cell.js"></script>
     <script src="../js/m3/component/map.js"></script>
@@ -21,7 +23,9 @@
     <script src="../js/m3/model/map.js"></script>
     <script src="../js/m3/model/player.js"></script>
     <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/tile.js"></script>
     <script src="../js/m3/model/turn.js"></script>
+    <script src="../js/m3/utility/map.js"></script>
   </head>
   <body>
 
@@ -44,6 +48,10 @@
         model: map,
       }, document.body).attach()
 
+      // Map generation
+      m3.utility.map.randomize(map)
+
+      // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
           game.getCurrentRound().getCurrentTurn().createAction({
