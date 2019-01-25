@@ -13,8 +13,13 @@ m3.model.base.prototype = (
       return this
     }
 
+    function getId() {
+      return this.config.id
+    }
+
     return {
       construct,
+      getId,
     }
   }
 )()
