@@ -20,8 +20,8 @@ m3.model.foo.prototype = (
   function prototypeIIFE() {
     const _prototype = m3.model.base.prototype
 
-    function construct(options) {
-      _prototype.construct.call(this)
+    function construct(...args) {
+      _prototype.construct.call(this, ...args)
 
       return this
     }
