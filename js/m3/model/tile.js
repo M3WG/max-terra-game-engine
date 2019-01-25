@@ -38,12 +38,17 @@ m3.model.tile.prototype = (
       return this
     }
 
+    function  getColor() {
+      return this.config.color
+    }
+
     // id
     // color
 
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getColor,
     }, _prototype)
   }
 )()
