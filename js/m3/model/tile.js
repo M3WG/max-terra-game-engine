@@ -7,6 +7,23 @@ m3.model.tile.create = function(...args) {
   return instance.construct(...args)
 }
 
+m3.model.tile.createWithId = function(id) {
+  if (this.prototype.isPrototypeOf(id)) {
+    return id
+  }
+
+  if (this.store.has(id)) {
+    return this.store.get(id)
+  }
+
+  const config = m3.config.tiles[id]
+  config.id = id
+
+  const instance = this.create(config)
+  this.store.set(id, instance)
+  return instance
+}
+
 m3.model.tile.prototype = (
   function prototypeIIFE(undefined) {
     const _prototype = m3.model.base.prototype
@@ -30,3 +47,5 @@ m3.model.tile.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.tile.store = new Map()
