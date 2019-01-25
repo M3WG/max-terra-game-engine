@@ -11,8 +11,8 @@ m3.model.map.prototype = (
   function prototypeIIFE(undefined) {
     const _prototype = m3.model.base.prototype
 
-    function construct(options) {
-      _prototype.construct.call(this)
+    function construct(...args) {
+      _prototype.construct.call(this, ...args)
 
       const {height, width} = options
 
