@@ -14,7 +14,7 @@ m3.model.round.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      this.game = options.game
+      this.game = this.config.game
       this.turn = []
 
       this.createTurn()

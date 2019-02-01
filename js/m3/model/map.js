@@ -14,7 +14,8 @@ m3.model.map.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      const {height, width} = options
+      const height = this.config.height,
+        width = this.config.width
 
       this.cell = []
       this.height = height

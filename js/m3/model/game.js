@@ -14,8 +14,8 @@ m3.model.game.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      this.map = options.map
-      this.player = options.player
+      this.map = this.config.map
+      this.player = this.config.player
       this.round = []
 
       this.createRound()

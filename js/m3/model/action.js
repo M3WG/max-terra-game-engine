@@ -14,9 +14,9 @@ m3.model.action.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      this.cell = options.cell
-      this.tile = options.tile
-      this.turn = options.turn
+      this.cell = this.config.cell
+      this.tile = this.config.tile
+      this.turn = this.config.turn
 
       _swapTile.call(this)
 

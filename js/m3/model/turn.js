@@ -15,8 +15,8 @@ m3.model.turn.prototype = (
       _prototype.construct.call(this, ...args)
 
       this.action = []
-      this.player = options.player
-      this.round = options.round
+      this.player = this.config.player
+      this.round = this.config.round
 
       return this
     }
