@@ -3,27 +3,27 @@
 m3.config.tiles = {
   1: {
     id: 1,
-    color: '#CCCCCC',
+    color: '#ced1c0',
     desc: 'city',
   },
   2: {
     id: 2,
-    color: 'blue',
+    color: '#4146db',
     desc: 'water'
   },
   3: {
     id: 3,
-    color: 'yellow',
+    color: '#edde6f',
     desc: 'field'
   },
   4: {
     id: 4,
-    color: 'green',
+    color: '#2d873e',
     desc: 'forest'
   },
   5: {
     id: 5,
-    color: '#333333',
+    color: '#38262b',
     desc: 'mountain'
   },
 }
