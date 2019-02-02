@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>m3-prototype</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="../css/component/cell.css" rel="stylesheet" type="text/css" />
+    <link href="../css/component/map.css" rel="stylesheet" type="text/css" />
+
+    <script src="../js/m3.js"></script>
+    <script src="../js/utility/array.js"></script>
+    <script src="../js/utility/pubsub.js"></script>
+    <script src="../js/m3/config/claimTypes.js"></script>
+    <script src="../js/m3/config/tiles.js"></script>
+    <script src="../js/m3/component/base.js"></script>
+    <script src="../js/m3/component/cell.js"></script>
+    <script src="../js/m3/component/map.js"></script>
+    <script src="../js/m3/model/base.js"></script>
+    <script src="../js/m3/model/action.js"></script>
+    <script src="../js/m3/model/cell.js"></script>
+    <script src="../js/m3/model/claim.js"></script>
+    <script src="../js/m3/model/claimType.js"></script>
+    <script src="../js/m3/model/game.js"></script>
+    <script src="../js/m3/model/map.js"></script>
+    <script src="../js/m3/model/player.js"></script>
+    <script src="../js/m3/model/round.js"></script>
+    <script src="../js/m3/model/tile.js"></script>
+    <script src="../js/m3/model/turn.js"></script>
+    <script src="../js/m3/utility/claim.js"></script>
+    <script src="../js/m3/utility/map.js"></script>
+  </head>
+  <body>
+
+    <script>
+      const players = [
+        m3.model.player.create(),
+      ]
+
+      const map = m3.model.map.create({
+        height: 10,
+        width: 10,
+      })
+
+      const game = m3.model.game.create({
+        map,
+        player: players,
+      })
+
+      const mapComponent = m3.component.map.create({
+        model: map,
+      }, document.body).attach()
+
+      // Map generation
+      m3.utility.map.randomize(map)
+
+      // Click event handlers
+      mapComponent.getCells().forEach(function subscribeClick(cell) {
+        cell.on('click', function onClick() {
+          const tile = m3.model.tile.createWithId(1)
+          const claim = _checkClaims(cell, tile)
+
+          game.getCurrentRound().getCurrentTurn().createAction({
+            cell: cell.getModel(),
+            claim,
+            tile,
+          })
+        })
+      })
+
+      function _checkClaims(cell, tile) {
+        const cellX = cell.getModel().getX(),
+          cellY = cell.getModel().getY()
+
+        // TODO: check all claim types against cell/tile
+
+        let result = true
+
+        for (let x = cellX - 1; x <= cellX + 1; x++) {
+          const check = map.getCell(x, cellY)
+          if (cell && x != cellX) {
+            result &= check.tile.getId() == tile.getId()
+          }
+        }
+
+        if (result) {
+          return {
+            cell: [
+              map.getCell(cellX - 1, cellY),
+              map.getCell(cellX, cellY),
+              map.getCell(cellX + 1, cellY),
+            ],
+            type: m3.model.claimType.createWithId(0)
+          }
+        }
+      }
+    </script>
+
+  </body>
+</html>
