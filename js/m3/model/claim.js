@@ -14,6 +14,8 @@ m3.model.claim.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
+      this.type = this.config.type
+
       return this
     }
 
