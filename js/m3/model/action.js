@@ -18,6 +18,12 @@ m3.model.action.prototype = (
       this.tile = this.config.tile
       this.turn = this.config.turn
 
+      if (this.config.claim) {
+        if (m3.utility.claim.verify(/*...*/)) {
+          this.claim = m3.model.claim.create(this.config.claim)
+        }
+      }
+
       _swapTile.call(this)
 
       return this
