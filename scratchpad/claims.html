@@ -60,10 +60,8 @@
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
           const tile = m3.model.tile.createWithId(1)
-          const claim = _checkClaims(cell, tile)
 
           game.getCurrentRound().getCurrentTurn().createAction({
-            cell: cell.getModel(),
             claim,
             tile,
           })
