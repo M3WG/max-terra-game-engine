@@ -5,9 +5,11 @@ m3.config.claimTypes = {
     id: 1,
     name: 'city',
     shape: [
-      [1, 1],
-      [1, 1],
-    ],
+        [
+          [1, 1],
+          [1, 1],
+        ],
+      ]
   },
   2: {
     id: 2,
@@ -41,8 +43,10 @@ m3.config.claimTypes = {
     id: 4,
     name: 'mine',
     shape: [
-      [5, 5, 5],
-      [0, 5, 0],
-    ],
+      [
+        [5, 5, 5],
+        [0, 5, 0],
+      ],
+    ]
   },
 }
