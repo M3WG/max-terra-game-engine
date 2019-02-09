@@ -62,7 +62,7 @@
           const tile = m3.model.tile.createWithId(1)
 
           game.getCurrentRound().getCurrentTurn().createAction({
-            claim,
+            cell: cell.getModel(),
             tile,
           })
         })
