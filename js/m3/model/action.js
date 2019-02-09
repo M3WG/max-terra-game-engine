@@ -18,12 +18,7 @@ m3.model.action.prototype = (
       this.tile = this.config.tile
       this.turn = this.config.turn
 
-      if (this.config.claim) {
-        if (m3.utility.claim.verify(/*...*/)) {
-          this.claim = m3.model.claim.create(this.config.claim)
-        }
-      }
-
+      _claimCheck.call(this)
       _swapTile.call(this)
 
       return this
@@ -31,6 +26,12 @@ m3.model.action.prototype = (
 
     function destruct() {
       return this
+    }
+
+    // XXX: Not the time or place for this
+    // TODO: Good luck future us
+    function _claimCheck() {
+      // TODO
     }
 
     // XXX: Not the time or place for this
