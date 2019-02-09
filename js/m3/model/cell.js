@@ -21,6 +21,10 @@ m3.model.cell.prototype = (
       return this
     }
 
+    function getClaim() {
+      return this.claim
+    }
+
     function getTile() {
       return this.tile
     }
@@ -33,21 +37,28 @@ m3.model.cell.prototype = (
       return this.config.y
     }
 
+    function setClaim(claim) {
+      if (m3.model.claim.prototype.isPrototypeOf(claim)) {
+        this.claim = claim
+      }
+
+      return this
+    }
+
     function setTile(id) {
       this.tile = m3.model.tile.createWithId(id)
       this.emit('change')
       return this
     }
 
-    // Tile
-    // Claim
-
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getClaim,
       getTile,
       getX,
       getY,
+      setClaim,
       setTile,
     }, _prototype)
   }
