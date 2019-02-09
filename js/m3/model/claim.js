@@ -16,6 +16,8 @@ m3.model.claim.prototype = (
 
       this.type = this.config.type
 
+      _claimCells.call(this);
+
       return this
     }
 
@@ -23,9 +25,16 @@ m3.model.claim.prototype = (
       return this
     }
 
+    function getCells() {
+      return utility.array.copy(this.config.cell)
+    }
+
+    function _claimCells() {
+      const setClaim = (cell) => cell.setClaim(this)
+      this.getCells().forEach(setClaim)
+    }
+
     // Player
-    // Tile[]
-    // Claim type?
 
     return Object.setPrototypeOf({
       construct,
