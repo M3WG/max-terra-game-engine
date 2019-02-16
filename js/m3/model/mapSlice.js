@@ -14,6 +14,8 @@ m3.model.mapSlice.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
+      _sanitizeConfig(this.config)
+
       this.cell = _getCells(this.config)
       this.map = this.config.map
 
@@ -54,22 +56,60 @@ m3.model.mapSlice.prototype = (
     function _getCells(config) {
       const cells = [],
         height = config.height,
-        left = config.x,
         map = config.map,
-        top = config.y,
+        originX = config.x,
+        originY = config.y,
         width = config.width
 
-      for (let y = top; y < top + height; y++) {
-        for (let x = left; x < left + width; x++) {
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
           if (!cells[y]) {
             cells[y] = []
           }
 
-          cells[y][x] = map.getCell(x, y)
+          cells[y][x] = map.getCell(x + originX, y + originY)
         }
       }
 
       return cells
+    }
+
+    function _sanitizeConfig(config) {
+      const map = config.map,
+        mapHeight = map.getHeight(),
+        mapWidth = map.getWidth()
+
+      if (config.height < 0) {
+        config.height = Math.abs(config.height)
+        config.y -= config.height
+      }
+
+      if (config.width < 0) {
+        config.width = Math.abs(config.width)
+        config.x -= config.width
+      }
+
+      const rawX = config.x,
+        rawY = config.y
+
+      config.x = Math.max(0, Math.min(config.x, mapWidth - 1))
+      config.y = Math.max(0, Math.min(config.y, mapHeight - 1))
+
+      if (config.x != rawX) {
+        config.width = Math.abs(config.x - rawX)
+      }
+
+      if (config.y != rawY) {
+        config.height = Math.abs(config.y - rawY)
+      }
+
+      if (config.x + config.width >= mapWidth) {
+        config.width -= config.x + config.width - mapWidth + 1
+      }
+
+      if (config.y + config.height >= mapHeight) {
+        config.height -= config.y + config.height - mapHeight + 1
+      }
     }
 
     return Object.setPrototypeOf({
