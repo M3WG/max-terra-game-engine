@@ -14,7 +14,7 @@ m3.model.mapSlice.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      this.cell = _getCells.call(this)
+      this.cell = _getCells(this.config)
       this.map = this.config.map
 
       return this
@@ -47,21 +47,21 @@ m3.model.mapSlice.prototype = (
       return this.config.y
     }
 
-    function _getCells() {
-      const cells = cell = [],
-        height = this.config.height,
-        left = this.config.x,
-        map = this.config.map,
-        top = this.config.y,
-        width = this.config.width
+    function _getCells(config) {
+      const cells = [],
+        height = config.height,
+        left = config.x,
+        map = config.map,
+        top = config.y,
+        width = config.width
 
       for (let y = top; y < top + height; y++) {
         for (let x = left; x < left + width; x++) {
-          if (!this.cell[y]) {
-            this.cell[y] = []
+          if (!cells[y]) {
+            cells[y] = []
           }
 
-          this.cell[y][x] = map.getCell(x, y)
+          cells[y][x] = map.getCell(x, y)
         }
       }
 
