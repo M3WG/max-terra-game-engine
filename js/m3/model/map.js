@@ -14,25 +14,7 @@ m3.model.map.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      const height = this.config.height,
-        width = this.config.width
-
-      this.cell = []
-      this.height = height
-      this.width = width
-
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          if (!this.cell[y]) {
-            this.cell[y] = []
-          }
-
-          this.cell[y][x] = m3.model.cell.create({
-            x,
-            y,
-          })
-        }
-      }
+      _createCells.call(this)
 
       return this
     }
@@ -53,11 +35,32 @@ m3.model.map.prototype = (
     }
 
     function getHeight() {
-      return this.height
+      return this.config.height
     }
 
     function getWidth() {
-      return this.width
+      return this.config.width
+    }
+
+    function _createCells() {
+      const height = this.config.height,
+        width = this.config.width
+
+      this.cell = []
+
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          if (!this.cell[y]) {
+            this.cell[y] = []
+          }
+
+          this.cell[y][x] = m3.model.cell.create({
+            map: this,
+            x,
+            y,
+          })
+        }
+      }
     }
 
     // Game
