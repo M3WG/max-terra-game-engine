@@ -15,12 +15,16 @@ utility.array.randomIndex = array => {
 }
 
 utility.array.randomValue = array => {
+  const randomIndex = utility.array.randomIndex
+
   if (Array.isArray(array)) {
-    return array[this.randomIndex(array)]
+    const index = randomIndex(array)
+    return array[index]
   }
 }
 
 utility.array.reverse = array => {
   const copy = utility.array.copy
+
   return copy(array).reverse()
 }
