@@ -9,7 +9,7 @@ m3.utility.action.validate = function validate(options) {
     throw new Error('Please provide a cell')
   }
 
-  if (cell.getClaim()) {
+  if (cell.claim) {
     throw new Error('Cell is already claimed')
   }
 

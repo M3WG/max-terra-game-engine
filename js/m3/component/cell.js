@@ -46,7 +46,7 @@ m3.component.cell.prototype = (
     }
 
     function render() {
-      const tile = this.getModel().getTile()
+      const tile = this.getModel().tile
 
       this._rootElement.innerHTML = tile ? tile.getId() : 0
       this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'

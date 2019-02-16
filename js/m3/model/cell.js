@@ -21,14 +21,6 @@ m3.model.cell.prototype = (
       return this
     }
 
-    function getClaim() {
-      return this.claim
-    }
-
-    function getTile() {
-      return this.tile
-    }
-
     function getX() {
       return this.config.x
     }
@@ -54,8 +46,6 @@ m3.model.cell.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
-      getClaim,
-      getTile,
       getX,
       getY,
       setClaim,
