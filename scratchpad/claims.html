@@ -67,33 +67,6 @@
           })
         })
       })
-
-      function _checkClaims(cell, tile) {
-        const cellX = cell.getModel().getX(),
-          cellY = cell.getModel().getY()
-
-        // TODO: check all claim types against cell/tile
-
-        let result = true
-
-        for (let x = cellX - 1; x <= cellX + 1; x++) {
-          const check = map.getCell(x, cellY)
-          if (cell && x != cellX) {
-            result &= check.tile.getId() == tile.getId()
-          }
-        }
-
-        if (result) {
-          return {
-            cell: [
-              map.getCell(cellX - 1, cellY),
-              map.getCell(cellX, cellY),
-              map.getCell(cellX + 1, cellY),
-            ],
-            type: m3.model.claimType.createWithId(0)
-          }
-        }
-      }
     </script>
 
   </body>
