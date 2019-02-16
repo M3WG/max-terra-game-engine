@@ -38,9 +38,19 @@ m3.model.claimType.prototype = (
       return this
     }
 
+    function getPriority() {
+      return this.config.priority
+    }
+
+    function getShapes() {
+      return this.config.shape
+    }
+
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getPriority,
+      getShapes,
     }, _prototype)
   }
 )()
