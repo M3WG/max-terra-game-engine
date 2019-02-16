@@ -14,7 +14,7 @@ m3.model.base.prototype = (
     }
 
     function getId() {
-      return this.config.id
+      return Number(this.config.id)
     }
 
     return {
