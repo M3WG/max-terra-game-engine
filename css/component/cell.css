@@ -1,4 +1,9 @@
 .m3-c-cell {
+  align-items: center;
   border: 1px dashed #999999;
-  padding: 1em;
+  display: flex;
+  height: 3em;
+  justify-content: center;
+  line-height: 1;
+  width: 3em;
 }
