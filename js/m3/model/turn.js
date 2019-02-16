@@ -30,9 +30,8 @@ m3.model.turn.prototype = (
 
       m3.utility.action.validate(options)
 
-      this.action.push(
-        m3.model.action.create(options)
-      )
+      const action = m3.model.action.create(options)
+      this.action.push(action)
 
       this.emit('change')
 
