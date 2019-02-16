@@ -4,7 +4,7 @@ var utility = utility || {}
 
 utility.pubsub = {}
 
-utility.pubsub.create = function cretae() {
+utility.pubsub.create = function create() {
   const instance = Object.create(this.prototype)
   return instance.construct()
 }
