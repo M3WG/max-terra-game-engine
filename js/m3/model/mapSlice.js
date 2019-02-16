@@ -20,6 +20,10 @@ m3.model.mapSlice.prototype = (
       return this
     }
 
+    function destruct() {
+      return this
+    }
+
     function getCell(x, y) {
       return this.cell[y][x]
     }
@@ -70,6 +74,7 @@ m3.model.mapSlice.prototype = (
 
     return Object.setPrototypeOf({
       construct,
+      destruct,
       getCell,
       getCells,
       getHeight,
