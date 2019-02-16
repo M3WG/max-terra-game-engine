@@ -14,6 +14,8 @@ m3.model.cell.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
+      this.map = this.config.map
+
       return this
     }
 
