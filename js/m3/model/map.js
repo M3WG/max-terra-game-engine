@@ -34,7 +34,9 @@ m3.model.map.prototype = (
     }
 
     function getCell(x, y) {
-      return this.cell[y][x]
+      if (this.cell[y]) {
+        return this.cell[y][x]
+      }
     }
 
     function getCells() {
