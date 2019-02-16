@@ -37,7 +37,7 @@ m3.model.game.prototype = (
 
       this.emit('change')
 
-      return this
+      return round
     }
 
     function getCurrentRound() {

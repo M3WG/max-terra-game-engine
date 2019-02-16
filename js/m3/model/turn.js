@@ -43,7 +43,7 @@ m3.model.turn.prototype = (
         this.emit('end')
       }
 
-      return this
+      return action
     }
 
     function getActionCount() {
