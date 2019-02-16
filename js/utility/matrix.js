@@ -26,7 +26,7 @@ utility.matrix.rotate180 = matrix => {
 }
 
 utility.matrix.rotate270 = matrix => {
-  const flip = utility.matrix.flip
+  const flip = utility.matrix.flip,
     reverse = utility.array.reverse
 
   return reverse(
