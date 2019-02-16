@@ -19,3 +19,8 @@ utility.array.randomValue = array => {
     return array[this.randomIndex(array)]
   }
 }
+
+utility.array.reverse = array => {
+  const copy = utility.array.copy
+  return copy(array).reverse()
+}
