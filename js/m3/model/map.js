@@ -23,6 +23,16 @@ m3.model.map.prototype = (
       return this
     }
 
+    function createSlice(x, y, height, width) {
+      return m3.model.mapSlice.create({
+        height,
+        map: this,
+        width,
+        x,
+        y,
+      })
+    }
+
     function getCell(x, y) {
       return this.cell[y][x]
     }
@@ -70,6 +80,7 @@ m3.model.map.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      createSlice,
       getCell,
       getCells,
       getHeight,
