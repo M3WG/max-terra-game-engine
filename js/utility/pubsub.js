@@ -4,13 +4,13 @@ var utility = utility || {}
 
 utility.pubsub = {}
 
-utility.pubsub.create = function create() {
-  const instance = Object.create(this.prototype)
-  return instance.construct()
+utility.pubsub.create = (...args) => {
+  const instance = Object.create(utility.pubsub.prototype)
+  return instance.construct(...args)
 }
 
-utility.pubsub.decorate = function decorate(target) {
-  const instance = this.create(),
+utility.pubsub.decorate = (target) => {
+  const instance = utility.pubsub.create(),
     methods = ['emit', 'off', 'on']
 
   target._pubsub = instance
@@ -26,10 +26,10 @@ utility.pubsub.decorate = function decorate(target) {
 }
 
 utility.pubsub.prototype = (
-  function prototypeIIFE(undefined) {
+  (undefined) => {
 
     function construct() {
-      this._handlers = {}
+      this._handler = {}
 
       return this
     }
@@ -41,20 +41,19 @@ utility.pubsub.prototype = (
     }
 
     function emit(event, ...args) {
-      if (!this._handlers[event]) {
+      if (!this._handler[event]) {
         return this
       }
 
-      this._handlers[event].forEach(function execute(handler) {
-        handler(...args)
-      })
+      const execute = (handler) => handler(...args)
+      this._handler[event].forEach(execute)
 
       return this
     }
 
     function off(event, handler) {
       if (event === undefined) {
-        Object.keys(this._handlers).forEach((event) => {
+        Object.keys(this._handler).forEach((event) => {
           this.off(event)
         })
 
@@ -62,14 +61,14 @@ utility.pubsub.prototype = (
       }
 
       if (handler === undefined) {
-        delete this._handlers[event]
+        delete this._handler[event]
       }
 
-      if (!this._handlers[event]) {
+      if (!this._handler[event]) {
         return this
       }
 
-      const handlers = this._handlers[event],
+      const handlers = this._handler[event],
         index = handlers.indexOf(handler)
 
       if (index != -1) {
@@ -80,11 +79,11 @@ utility.pubsub.prototype = (
     }
 
     function on(event, handler) {
-      if (!this._handlers[event]) {
-        this._handlers[event] = []
+      if (!this._handler[event]) {
+        this._handler[event] = []
       }
 
-      this._handlers[event].push(handler)
+      this._handler[event].push(handler)
 
       return this
     }
