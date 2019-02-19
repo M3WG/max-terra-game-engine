@@ -3,13 +3,11 @@
 m3.component.map = {}
 
 m3.component.map.create = function create(...args) {
-  const instance = Object.create(this.prototype)
-  instance.construct(...args)
-  return instance
+  return Object.create(this.prototype).construct(...args)
 }
 
 m3.component.map.prototype = (
-  function prototypeIIFE(undefined) {
+  (undefined) => {
     const _prototype = m3.component.base.prototype
 
     function construct(...args) {

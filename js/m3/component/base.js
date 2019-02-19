@@ -3,7 +3,7 @@
 m3.component.base = {}
 
 m3.component.base.prototype = (
-  function prototypeIIFE() {
+  (undefined) => {
 
     function construct(config, parentElement, parentComponent) {
       this.config = Object.assign({}, config)

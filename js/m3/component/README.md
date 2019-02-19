@@ -12,12 +12,11 @@ Please assign these to the `m3.component` namespace:
 m3.component.foo = {}
 
 m3.component.foo.create = function create(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
+  return Object.create(this.prototype).construct(...args)
 }
 
 m3.component.foo.prototype = (
-  function prototypeIIFE() {
+  (undefined) => {
     const _prototype = m3.component.base.prototype
 
     function construct(...args) {
@@ -30,7 +29,7 @@ m3.component.foo.prototype = (
     }
 
     function _build() {
-      
+
     }
 
     return Object.setPrototypeOf({
