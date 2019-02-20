@@ -4,10 +4,7 @@ var utility = utility || {}
 
 utility.pubsub = {}
 
-utility.pubsub.create = (...args) => {
-  const instance = Object.create(utility.pubsub.prototype)
-  return instance.construct(...args)
-}
+utility.pubsub.create = (...args) => Object.create(utility.pubsub.prototype).construct(...args)
 
 utility.pubsub.decorate = (target) => {
   const instance = utility.pubsub.create(),
@@ -15,7 +12,7 @@ utility.pubsub.decorate = (target) => {
 
   target._pubsub = instance
 
-  methods.forEach(function bind(method) {
+  methods.forEach((method) => {
     target[method] = function decorated(...args) {
       instance[method](...args)
       return target

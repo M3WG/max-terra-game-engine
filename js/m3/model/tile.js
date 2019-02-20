@@ -25,7 +25,7 @@ m3.model.tile.createWithId = function(id) {
 }
 
 m3.model.tile.prototype = (
-  function prototypeIIFE(undefined) {
+  (undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {

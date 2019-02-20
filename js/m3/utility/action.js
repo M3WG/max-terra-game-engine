@@ -2,7 +2,7 @@
 
 m3.utility.action = {}
 
-m3.utility.action.validate = function validate(options) {
+m3.utility.action.validate = (options) => {
   const cell = options.cell
 
   if (!m3.model.cell.prototype.isPrototypeOf(cell)) {

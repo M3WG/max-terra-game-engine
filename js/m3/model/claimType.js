@@ -25,7 +25,7 @@ m3.model.claimType.createWithId = function(id) {
 }
 
 m3.model.claimType.prototype = (
-  function prototypeIIFE(undefined) {
+  (undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {

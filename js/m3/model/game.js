@@ -8,7 +8,7 @@ m3.model.game.create = function(...args) {
 }
 
 m3.model.game.prototype = (
-  function prototypeIIFE(undefined) {
+  (undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
