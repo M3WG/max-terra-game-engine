@@ -13,5 +13,9 @@ m3.utility.action.validate = (options) => {
     throw new Error('Cell is already claimed')
   }
 
+  if (cell.tile.getId() == 2) {
+    throw new Error('Cell contains water')
+  }
+
   return true
 }
