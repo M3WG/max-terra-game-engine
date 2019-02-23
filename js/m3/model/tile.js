@@ -38,8 +38,12 @@ m3.model.tile.prototype = (
       return this
     }
 
-    function  getColor() {
+    function getColor() {
       return this.config.color
+    }
+
+    function getName() {
+      return this.config.desc
     }
 
     // id
@@ -49,6 +53,7 @@ m3.model.tile.prototype = (
       construct,
       destruct,
       getColor,
+      getName,
     }, _prototype)
   }
 )()
