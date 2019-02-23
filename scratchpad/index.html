@@ -28,6 +28,7 @@
     <script src="../js/m3/component/base.js"></script>
     <script src="../js/m3/component/cell.js"></script>
     <script src="../js/m3/component/map.js"></script>
+    <script src="../js/m3/component/picker.js"></script>
 
     <!--<script src="../js/m3/config/.js"></script>-->
     <script src="../js/m3/config/claimTypes.js"></script>
@@ -61,6 +62,13 @@
   <body>
 
     <script>
+      const claimTypes = Object.values(m3.config.claimTypes)
+        .map((config) => m3.model.claimType.create(config))
+        .sort((a, b) => b.getPriority() - a.getPriority())
+
+      const tiles = Object.values(m3.config.tiles)
+        .map((config) => m3.model.tile.create(config))
+
       const players = [
         m3.model.player.create(),
       ]
@@ -79,13 +87,23 @@
         model: map,
       }, document.body).attach()
 
+      const pickerOptions = tiles.map((tile) => ({
+          label: tile.getName(),
+          value: tile.getId(),
+        }))
+
+      const pickerComponent = m3.component.picker.create({
+        option: pickerOptions,
+      }, document.body).attach()
+
       // Map generation
       m3.utility.map.randomize(map)
 
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
-          const tile = m3.model.tile.createWithId(1)
+          const pickerValue = pickerComponent.getValue(),
+            tile = m3.model.tile.createWithId(pickerValue)
 
           const action = game.getCurrentRound().getCurrentTurn().createAction({
             cell: cell.getModel(),
@@ -96,10 +114,6 @@
           _checkClaims(action)
         })
       })
-
-      const claimTypes = Object.values(m3.config.claimTypes)
-        .map((config) => m3.model.claimType.create(config))
-        .sort((a, b) => b.getPriority() - a.getPriority())
 
       function _checkClaims(action) {
         const cell = action.cell,
