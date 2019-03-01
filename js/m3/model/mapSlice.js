@@ -55,6 +55,10 @@ m3.model.mapSlice.prototype = (
       return this.config.y
     }
 
+    function rotate() {
+      this.cell = utility.matrix.rotate90(this.cell)
+    }
+
     function _getCells(config) {
       const cells = [],
         height = config.height,
@@ -125,6 +129,7 @@ m3.model.mapSlice.prototype = (
       getWidth,
       getX,
       getY,
+      rotate,
     }, _prototype)
   }
 )()
