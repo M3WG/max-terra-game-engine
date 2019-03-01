@@ -58,6 +58,7 @@
     <script src="../js/m3/utility/claim.js"></script>
     <script src="../js/m3/utility/crawler.js"></script>
     <script src="../js/m3/utility/map.js"></script>
+    <script src="../js/m3/utility/match.js"></script>
   </head>
   <body>
 
@@ -116,34 +117,9 @@
       })
 
       function _checkClaims(action) {
-        const cell = action.cell,
-          x = cell.getX(),
-          y = cell.getY()
-
-        const toMatrix = (slice) => slice.cell.map((row) => (
-          row.map(cell => cell.tile.getId())
-        ))
-
-        const slice = map.createSlice(x - 3, y - 3, 7, 7)
-        const matrix = toMatrix(slice)
-
-        claimTypes.forEach((type) => {
-          const shapes = type.getShapes()
-
-          const tests = shapes.reduce((shapes, shape) => {
-            shapes.push(...[
-              shape,
-              utility.matrix.rotate90(shape),
-              utility.matrix.rotate180(shape),
-              utility.matrix.rotate270(shape),
-            ])
-
-            return shapes
-          }, [])
-
-          // TODO: Check whether test exists within matrix AND cell exists within match
-          // TODO: Return the match? config for a claim? e.g. {type, cell: []}
-        })
+        console.log(
+          m3.utility.match(action)
+        )
       }
     </script>
 
