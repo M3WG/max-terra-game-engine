@@ -27,7 +27,9 @@ m3.model.mapSlice.prototype = (
     }
 
     function getCell(x, y) {
-      return this.cell[y][x]
+      if (this.cell[y]) {
+        return this.cell[y][x]
+      }
     }
 
     function getCells() {
@@ -75,6 +77,8 @@ m3.model.mapSlice.prototype = (
     }
 
     function _sanitizeConfig(config) {
+      // FIXME
+      return
       const map = config.map,
         mapHeight = map.getHeight(),
         mapWidth = map.getWidth()
