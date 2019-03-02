@@ -26,6 +26,11 @@ m3.model.mapSlice.prototype = (
       return this
     }
 
+    function flip() {
+      this.cell = utility.matrix.flip(this.cell)
+      return this
+    }
+
     function getCell(x, y) {
       if (this.cell[y]) {
         return this.cell[y][x]
@@ -57,6 +62,7 @@ m3.model.mapSlice.prototype = (
 
     function rotate() {
       this.cell = utility.matrix.rotate90(this.cell)
+      return this
     }
 
     function _getCells(config) {
@@ -120,6 +126,7 @@ m3.model.mapSlice.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      flip,
       getCell,
       getCells,
       getHeight,
