@@ -1,6 +1,11 @@
 'use strict'
 
 m3.config.tiles = {
+  0: {
+    id: 0,
+    color: '#FF00FF',
+    desc: 'space',
+  },
   1: {
     id: 1,
     color: '#ced1c0',
