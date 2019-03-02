@@ -24,9 +24,16 @@ m3.model.player.prototype = (
     // User
     // color
 
+    function incrementScore(value) {
+      this.score += value
+
+      return this
+    }
+
     return Object.setPrototypeOf({
       construct,
       destruct,
+      incrementScore,
     }, _prototype)
   }
 )()
