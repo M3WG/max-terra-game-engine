@@ -28,6 +28,16 @@ m3.utility.match = (action) => {
         if (is(cx, cy + 1, 1)) {
           if (is(cx + 1, cy + 1, 1)) {
             return 'city A'
+
+            // TODO: return matched cells
+            /*
+            return [
+              slice.getCell(cx, cy),
+              slice.getCell(cx + 1, cy),
+              slice.getCell(cx, cy + 1),
+              slice.getCell(cx + 1, cy + 1),
+            ]
+            */
           }
         }
       }
@@ -110,17 +120,15 @@ m3.utility.match = (action) => {
           }
         } // end of testing mine shape
 
-  /* Test if a farmstead A B C  or A
-                         D         B C D needs mirror logic
-
-  */
-
     for (let flips = 0; flips < 2; flips++) {
+      /* Test if a farmstead A B C
+                             D
+      */
       //A
       if (is(cx, cy, 3)) {
         if (is(cx + 1, cy, 3)) {
           if (is(cx +2, cy, 3)) {
-            if (is(cx, cy - 1, 3)) {
+            if (is(cx, cy + 1, 3)) {
               return 'farmstead A'
             }
           }
@@ -130,7 +138,7 @@ m3.utility.match = (action) => {
       if (is(cx, cy, 3)) {
         if (is(cx - 1, cy, 3)) {
           if (is(cx +1, cy, 3)) {
-            if (is(cx - 1, cy - 1, 3)) {
+            if (is(cx - 1, cy + 1, 3)) {
               return 'farmstead B'
             }
           }
@@ -140,7 +148,7 @@ m3.utility.match = (action) => {
       if (is(cx, cy, 3)) {
         if (is(cx - 1, cy, 3)) {
           if (is(cx - 2, cy, 3)) {
-            if (is(cx - 2, cy - 1, 3)) {
+            if (is(cx - 2, cy + 1, 3)) {
               return 'farmstead C'
             }
           }
@@ -157,14 +165,14 @@ m3.utility.match = (action) => {
         }
       }
 
-      /* Test if a logging camp A B   or   A B
-                                  C D    C D  needs mirror logic
+      /* Test if a logging camp A B
+                                  C D
       */
       //A
       if (is(cx, cy, 4)) {
         if (is(cx + 1, cy, 4)) {
-          if (is(cx + 1, cy - 1, 4)) {
-            if (is(cx + 2, cy - 1, 4)) {
+          if (is(cx + 1, cy + 1, 4)) {
+            if (is(cx + 2, cy + 1, 4)) {
               return 'logging camp A'
             }
           }
@@ -173,8 +181,8 @@ m3.utility.match = (action) => {
       //B
       if (is(cx, cy, 4)) {
         if (is(cx - 1, cy, 4)) {
-          if (is(cx, cy - 1, 4)) {
-            if (is(cx + 1, cy - 1, 4)) {
+          if (is(cx, cy + 1, 4)) {
+            if (is(cx + 1, cy + 1, 4)) {
               return 'logging camp B'
             }
           }
@@ -201,9 +209,10 @@ m3.utility.match = (action) => {
         }
       }
 
+      // End of flips loop. Flip slice.
       slice.flip()
     }
-    
+
     // End of tests loop. Rotate slice.
     slice.rotate()
   }
