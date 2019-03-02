@@ -111,9 +111,11 @@ m3.utility.match = (action) => {
         } // end of testing mine shape
 
   /* Test if a farmstead A B C  or A
-                         D         B C D
+                         D         B C D needs mirror logic
 
   */
+
+    for (let flips = 0; flips < 2; flips++) {
       //A
       if (is(cx, cy, 3)) {
         if (is(cx + 1, cy, 3)) {
@@ -154,8 +156,9 @@ m3.utility.match = (action) => {
           }
         }
       }
+
       /* Test if a logging camp A B   or   A B
-                                  C D    C D
+                                  C D    C D  needs mirror logic
       */
       //A
       if (is(cx, cy, 4)) {
@@ -197,8 +200,11 @@ m3.utility.match = (action) => {
           }
         }
       }
+
+      slice.flip()
+    }
+    
     // End of tests loop. Rotate slice.
     slice.rotate()
-    console.log('rotation')
   }
 }
