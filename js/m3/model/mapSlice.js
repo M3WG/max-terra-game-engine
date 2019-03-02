@@ -81,42 +81,39 @@ m3.model.mapSlice.prototype = (
     }
 
     function _sanitizeConfig(config) {
-      // FIXME
-      return
       const map = config.map,
         mapHeight = map.getHeight(),
         mapWidth = map.getWidth()
 
       if (config.height < 0) {
         config.height = Math.abs(config.height)
-        config.y -= config.height
       }
 
       if (config.width < 0) {
         config.width = Math.abs(config.width)
-        config.x -= config.width
       }
 
-      const rawX = config.x,
-        rawY = config.y
-
-      config.x = Math.max(0, Math.min(config.x, mapWidth - 1))
-      config.y = Math.max(0, Math.min(config.y, mapHeight - 1))
-
-      if (config.x != rawX) {
-        config.width = Math.abs(config.x - rawX)
+      if (config.x < 0) {
+        config.width += config.x
+        config.x = 0
       }
 
-      if (config.y != rawY) {
-        config.height = Math.abs(config.y - rawY)
+      if (config.x >= mapWidth) {
+        config.width = 1
+        config.x = mapWidth - 1
       }
 
       if (config.x + config.width >= mapWidth) {
-        config.width -= config.x + config.width - mapWidth + 1
+        config.width -= config.x + config.width - mapWidth
+      }
+
+      if (config.y >= mapHeight) {
+        config.height = 1
+        config.y = mapHeight - 1
       }
 
       if (config.y + config.height >= mapHeight) {
-        config.height -= config.y + config.height - mapHeight + 1
+        config.height -= config.y + config.height - mapHeight
       }
     }
 
