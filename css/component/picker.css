@@ -1,0 +1,7 @@
+.m3-c-picker {
+  bottom: 0%;
+  font-size: 1.5em;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+}
