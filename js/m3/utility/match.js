@@ -22,34 +22,10 @@ m3.utility.match = (action) => {
   for (const claimType of m3.model.claimType.getAll()) {
     const shape = claimType.getShape()
 
-    if (shape.rotate) {
-      for (let rotations = 0; rotations < 4; rotations++) {
-        if (shape.mirror) {
-          for (let mirrors = 0; mirrors < 2; mirrors++) {
-            for (const test of shape.test) {
-              if (evaluateTest(test)) {
-                return m3.model.claim.create({
-                  cell: gatherTestCells(test),
-                  type: claimType,
-                })
-              }
-            }
-            slice.flip()
-          }
-        } else {
-          for (const test of shape.test) {
-            if (evaluateTest(test)) {
-              return m3.model.claim.create({
-                cell: gatherTestCells(test),
-                type: claimType,
-              })
-            }
-          }
-        }
-        slice.rotate()
-      }
-    } else if (shape.mirror) {
-      for (let mirrors = 0; mirrors < 2; mirrors++) {
+    let rotations = shape.rotate ? 4 : 0
+    do {
+      let mirrors = shape.mirror ? 2 : 0
+      do {
         for (const test of shape.test) {
           if (evaluateTest(test)) {
             return m3.model.claim.create({
@@ -58,17 +34,14 @@ m3.utility.match = (action) => {
             })
           }
         }
-        slice.flip()
-      }
-    } else {
-      for (const test of shape.test) {
-        if (evaluateTest(test)) {
-          return m3.model.claim.create({
-            cell: gatherTestCells(test),
-            type: claimType,
-          })
+        if (mirrors > 0) {
+          slice.flip()
         }
+      } while (mirrors-->1)
+
+      if (rotations > 0) {
+        slice.rotate()
       }
-    }
+    } while (rotations-->1)
   }
 }
