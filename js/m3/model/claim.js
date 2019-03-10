@@ -39,6 +39,7 @@ m3.model.claim.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getCells,
     }, _prototype)
   }
 )()
