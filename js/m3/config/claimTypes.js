@@ -5,52 +5,140 @@ m3.config.claimTypes = {
     id: 1,
     name: 'city',
     priority: 1,
-    shape: [
-      [
-        [1, 1],
-        [1, 1],
+    shape: {
+      mirror: false,
+      rotate: false,
+      test: [
+        [
+          {dx: 0, dy: 0, tile: 1},
+          {dx: 1, dy: 0, tile: 1},
+          {dx: 0, dy: 1, tile: 1},
+          {dx: 1, dy: 1, tile: 1},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 1},
+          {dx: -1, dy: 0, tile: 1},
+          {dx: 0, dy: 1, tile: 1},
+          {dx: -1, dy: 1, tile: 1},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 1},
+          {dx: 1, dy: 0, tile: 1},
+          {dx: 0, dy: -1, tile: 1},
+          {dx: 1, dy: -1, tile: 1},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 1},
+          {dx: -1, dy: 0, tile: 1},
+          {dx: 0, dy: -1, tile: 1},
+          {dx: -1, dy: -1, tile: 1},
+        ],
       ],
-    ],
+    },
   },
   2: {
     id: 2,
     name: 'farmstead',
     priority: 1,
-    shape: [
-      [
-        [3, 3, 3],
-        [3, 0, 0],
+    shape: {
+      mirror: true,
+      rotate: true,
+      test: [
+        [
+          {dx: 0, dy: 0, tile: 3},
+          {dx: 1, dy: 0, tile: 3},
+          {dx: 2, dy: 0, tile: 3},
+          {dx: 0, dy: 1, tile: 3},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 3},
+          {dx: -1, dy: 0, tile: 3},
+          {dx: 1, dy: 0, tile: 3},
+          {dx: -1, dy: 1, tile: 3},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 3},
+          {dx: -1, dy: 0, tile: 3},
+          {dx: -2, dy: 0, tile: 3},
+          {dx: -2, dy: 1, tile: 3},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 3},
+          {dx: 0, dy: -1, tile: 3},
+          {dx: 1, dy: -1, tile: 3},
+          {dx: 2, dy: -1, tile: 3},
+        ],
       ],
-      [
-        [3, 0, 0],
-        [3, 3, 3],
-      ],
-    ],
+    },
   },
   3: {
     id: 3,
     name: 'logging camp',
     priority: 1,
-    shape: [
-      [
-        [4, 4, 0],
-        [0, 4, 4],
+    shape: {
+      mirror: true,
+      rotate: true,
+      test: [
+        [
+          {dx: 0, dy: 0, tile: 4},
+          {dx: 1, dy: 0, tile: 4},
+          {dx: 1, dy: 1, tile: 4},
+          {dx: 2, dy: 1, tile: 4},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 4},
+          {dx: -1, dy: 0, tile: 4},
+          {dx: 0, dy: 1, tile: 4},
+          {dx: 1, dy: 1, tile: 4},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 4},
+          {dx: -1, dy: -1, tile: 4},
+          {dx: 0, dy: -1, tile: 4},
+          {dx: 1, dy: 0, tile: 4},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 4},
+          {dx: -2, dy: -1, tile: 4},
+          {dx: -1, dy: -1, tile: 4},
+          {dx: -1, dy: 0, tile: 4},
+        ],
       ],
-      [
-        [0, 4, 4],
-        [4, 4, 0],
-      ],
-    ],
+    },
   },
   4: {
     id: 4,
     name: 'mine',
     priority: 1,
-    shape: [
-      [
-        [5, 5, 5],
-        [0, 5, 0],
+    shape: {
+      mirror: false,
+      rotate: true,
+      test: [
+        [
+          {dx: 0, dy: 0, tile: 5},
+          {dx: -1, dy: 1, tile: 5},
+          {dx: 0, dy: 1, tile: 5},
+          {dx: 1, dy: 1, tile: 5},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 5},
+          {dx: 1, dy: -1, tile: 5},
+          {dx: 1, dy: 0, tile: 5},
+          {dx: 2, dy: 0, tile: 5},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 5},
+          {dx: 0, dy: -1, tile: 5},
+          {dx: -1, dy: 0, tile: 5},
+          {dx: 1, dy: 0, tile: 5},
+        ],
+        [
+          {dx: 0, dy: 0, tile: 5},
+          {dx: -1, dy: 0, tile: 5},
+          {dx: -1, dy: -1, tile: 5},
+          {dx: -2, dy: 0, tile: 5},
+        ],
       ],
-    ]
+    },
   },
 }
