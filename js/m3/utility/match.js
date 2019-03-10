@@ -9,7 +9,7 @@ m3.utility.match = (action) => {
   const is = (x, y, id) => {
     const cell = slice.getCell(x, y)
 
-    if (!cell) {
+    if (!cell || cell.claim) {
       return false
     }
 
