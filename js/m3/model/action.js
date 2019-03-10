@@ -18,8 +18,8 @@ m3.model.action.prototype = (
       this.tile = this.config.tile
       this.turn = this.config.turn
 
-      _claimCheck.call(this)
       _swapTile.call(this)
+      _claimCheck.call(this)
 
       return this
     }
@@ -31,7 +31,7 @@ m3.model.action.prototype = (
     // XXX: Not the time or place for this
     // TODO: Good luck future us
     function _claimCheck() {
-      // TODO
+      m3.utility.match(this)
     }
 
     // XXX: Not the time or place for this
