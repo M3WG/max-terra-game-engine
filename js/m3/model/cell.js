@@ -34,6 +34,7 @@ m3.model.cell.prototype = (
     function setClaim(claim) {
       if (m3.model.claim.prototype.isPrototypeOf(claim)) {
         this.claim = claim
+        this.emit('change')
       }
 
       return this
