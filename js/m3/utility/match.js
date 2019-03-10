@@ -16,198 +16,287 @@ m3.utility.match = (action) => {
     return cell.tile.getId() == id
   }
 
+  const test = (...tests) => tests.reduce((result, [id, x, y]) => result && is(x, y, id), true)
+
+  const createClaim = (type, ...cells) => m3.model.claim.create({
+    cell: cells.map(([id, x, y]) => slice.getCell(x, y)),
+    type: m3.model.claimType.createWithId(type),
+  })
+
+  /* test a city
+    AB
+    CD
+  */
+  //A
+  if (test(
+    [1, cx, cy],
+    [1, cx + 1, cy],
+    [1, cx, cy + 1],
+    [1, cx + 1, cy + 1]
+  )) {
+    return createClaim(
+      1,
+      [1, cx, cy],
+      [1, cx + 1, cy],
+      [1, cx, cy + 1],
+      [1, cx + 1, cy + 1]
+    )
+  }
+
+  //B
+  if (test(
+    [1, cx, cy],
+    [1, cx - 1, cy],
+    [1, cx, cy + 1],
+    [1, cx - 1, cy + 1]
+  )) {
+    return createClaim(
+      1,
+      [1, cx, cy],
+      [1, cx - 1, cy],
+      [1, cx, cy + 1],
+      [1, cx - 1, cy + 1]
+    )
+  }
+
+  //C
+  if (test(
+    [1, cx, cy],
+    [1, cx + 1, cy],
+    [1, cx, cy - 1],
+    [1, cx + 1, cy - 1]
+  )) {
+    return createClaim(
+      1,
+      [1, cx, cy],
+      [1, cx + 1, cy],
+      [1, cx, cy - 1],
+      [1, cx + 1, cy - 1]
+    )
+  }
+
+  //D
+  if (test(
+    [1, cx, cy],
+    [1, cx - 1, cy],
+    [1, cx, cy - 1],
+    [1, cx - 1, cy - 1]
+  )) {
+    return createClaim(
+      1,
+      [1, cx, cy],
+      [1, cx - 1, cy],
+      [1, cx, cy - 1],
+      [1, cx - 1, cy - 1]
+    )
+  }
+  //end of testing city shape
+
   for (let rotation = 0; rotation < 4; rotation++) {
-
-    /* test a city
-      AB
-      CD
-    */
-    //A
-    if (is(cx, cy, 1)) {
-      if (is(cx + 1, cy, 1)) {
-        if (is(cx, cy + 1, 1)) {
-          if (is(cx + 1, cy + 1, 1)) {
-            return 'city A'
-
-            // TODO: return matched cells
-            /*
-            return [
-              slice.getCell(cx, cy),
-              slice.getCell(cx + 1, cy),
-              slice.getCell(cx, cy + 1),
-              slice.getCell(cx + 1, cy + 1),
-            ]
-            */
-          }
-        }
-      }
-    }
-
-    //B
-    if (is(cx, cy, 1)) {
-      if (is(cx - 1, cy, 1)) {
-        if (is(cx, cy + 1, 1)) {
-          if (is(cx - 1, cy + 1, 1)) {
-            return 'city B'
-          }
-        }
-      }
-    }
-
-    //C
-    if (is(cx, cy, 1)) {
-      if (is(cx + 1, cy, 1)) {
-        if (is(cx, cy - 1, 1)) {
-          if (is(cx + 1, cy - 1, 1)) {
-            return 'city C'
-          }
-        }
-      }
-    }
-
-    //D
-    if (is(cx, cy, 1)) {
-      if (is(cx - 1, cy, 1)) {
-        if (is(cx, cy - 1, 1)) {
-          if (is(cx - 1, cy - 1, 1)) {
-            return 'city D'
-          }
-        }
-      }
-    } //end of testing city shape
 
     /* Mine tests  A
                  B C D */
-    // Assuming center tile is A
-    if(is(cx, cy, 5)){
-      if(is(cx-1, cy+1, 5)){
-    	   if(is(cx, cy+1,5 )){
-    	      if(is(cx+1,cy+1,5)){
-    		        return 'mine A'
-            }
-          }
-        }
-      }
+    // A
+    if (test(
+      [5, cx, cy],
+      [5, cx - 1, cy + 1],
+      [5, cx, cy + 1],
+      [5, cx + 1, cy + 1]
+    )) {
+      return createClaim(
+        4,
+        [5, cx, cy],
+        [5, cx - 1, cy + 1],
+        [5, cx, cy + 1],
+        [5, cx + 1, cy + 1]
+      )
+    }
 
     // B
-    if(is(cx+1, cy-1, 5)){
-      if(is(cx, cy, 5)){
-    	   if(is(cx+1, cy, 5)){
-    	      if(is(cx+2, cy, 5)){
-    	         return 'mine B'
-    	      }
-    	    }
-        }
-      }
-    //C
-    if(is(cx, cy-1, 5)){
-      if(is(cx-1, cy, 5)){
-    	   if(is(cx, cy, 5)){
-    	      if(is(cx+1, cy, 5)){
-    		        return 'mine C'
-    	      }
-         }
-      }
+    if (test(
+      [5, cx, cy],
+      [5, cx + 1, cy - 1],
+      [5, cx + 1, cy],
+      [5, cx + 2, cy]
+    )) {
+      return createClaim(
+        4,
+        [5, cx, cy],
+        [5, cx + 1, cy - 1],
+        [5, cx + 1, cy],
+        [5, cx + 2, cy]
+      )
     }
+
+    //C
+    if (test(
+      [5, cx, cy],
+      [5, cx, cy - 1],
+      [5, cx - 1, cy],
+      [5, cx + 1, cy]
+    )) {
+      return createClaim(
+        4,
+        [5, cx, cy],
+        [5, cx, cy - 1],
+        [5, cx - 1, cy],
+        [5, cx + 1, cy]
+      )
+    }
+
     //D
-    if(is(cx-1, cy-1, 5)){
-      if(is(cx-2, cy, 5)){
-    	   if(is(cx-1, cy, 5)){
-    	      if(is(cx, cy, 5)){
-    		        return 'mine D'
-              }
-            }
-          }
-        } // end of testing mine shape
+    if (test(
+      [5, cx, cy],
+      [5, cx - 1, cy],
+      [5, cx - 1, cy - 1],
+      [5, cx - 2, cy]
+    )) {
+      return createClaim(
+        4,
+        [5, cx, cy],
+        [5, cx - 1, cy],
+        [5, cx - 1, cy - 1],
+        [5, cx - 2, cy]
+      )
+    }
+    // end of testing mine shape
 
     for (let flips = 0; flips < 2; flips++) {
       /* Test if a farmstead A B C
                              D
       */
       //A
-      if (is(cx, cy, 3)) {
-        if (is(cx + 1, cy, 3)) {
-          if (is(cx +2, cy, 3)) {
-            if (is(cx, cy + 1, 3)) {
-              return 'farmstead A'
-            }
-          }
-        }
+      if (test(
+        [3, cx, cy],
+        [3, cx + 1, cy],
+        [3, cx + 2, cy],
+        [3, cx, cy + 1]
+      )) {
+        return createClaim(
+          2,
+          [3, cx, cy],
+          [3, cx + 1, cy],
+          [3, cx + 2, cy],
+          [3, cx, cy + 1]
+        )
       }
+
       //B
-      if (is(cx, cy, 3)) {
-        if (is(cx - 1, cy, 3)) {
-          if (is(cx +1, cy, 3)) {
-            if (is(cx - 1, cy + 1, 3)) {
-              return 'farmstead B'
-            }
-          }
-        }
+      if (test(
+        [3, cx, cy],
+        [3, cx - 1, cy],
+        [3, cx + 1, cy],
+        [3, cx - 1, cy + 1]
+      )) {
+        return createClaim(
+          2,
+          [3, cx, cy],
+          [3, cx - 1, cy],
+          [3, cx + 1, cy],
+          [3, cx - 1, cy + 1]
+        )
       }
+
       //C
-      if (is(cx, cy, 3)) {
-        if (is(cx - 1, cy, 3)) {
-          if (is(cx - 2, cy, 3)) {
-            if (is(cx - 2, cy + 1, 3)) {
-              return 'farmstead C'
-            }
-          }
-        }
+      if (test(
+        [3, cx, cy],
+        [3, cx - 1, cy],
+        [3, cx - 2, cy],
+        [3, cx - 2, cy + 1]
+      )) {
+        return createClaim(
+          2,
+          [3, cx, cy],
+          [3, cx - 1, cy],
+          [3, cx - 2, cy],
+          [3, cx - 2, cy + 1]
+        )
       }
+
       //D
-      if (is(cx, cy, 3)) {
-        if (is(cx, cy - 1, 3)) {
-          if (is(cx + 1, cy - 1, 3)) {
-            if (is(cx + 2, cy - 1, 3)) {
-              return 'farmstead D'
-            }
-          }
-        }
+      if (test(
+        [3, cx, cy],
+        [3, cx, cy - 1],
+        [3, cx + 1, cy - 1],
+        [3, cx + 2, cy - 1]
+      )) {
+        return createClaim(
+          2,
+          [3, cx, cy],
+          [3, cx, cy - 1],
+          [3, cx + 1, cy - 1],
+          [3, cx + 2, cy - 1]
+        )
       }
+      // end of testing farmstead shape
 
       /* Test if a logging camp A B
                                   C D
       */
       //A
-      if (is(cx, cy, 4)) {
-        if (is(cx + 1, cy, 4)) {
-          if (is(cx + 1, cy + 1, 4)) {
-            if (is(cx + 2, cy + 1, 4)) {
-              return 'logging camp A'
-            }
-          }
-        }
+      if (test(
+        [4, cx, cy],
+        [4, cx + 1, cy],
+        [4, cx + 1, cy + 1],
+        [4, cx + 2, cy + 1]
+      )) {
+        return createClaim(
+          3,
+          [4, cx, cy],
+          [4, cx + 1, cy],
+          [4, cx + 1, cy + 1],
+          [4, cx + 2, cy + 1]
+        )
       }
+
       //B
-      if (is(cx, cy, 4)) {
-        if (is(cx - 1, cy, 4)) {
-          if (is(cx, cy + 1, 4)) {
-            if (is(cx + 1, cy + 1, 4)) {
-              return 'logging camp B'
-            }
-          }
-        }
+      if (test(
+        [4, cx, cy],
+        [4, cx - 1, cy],
+        [4, cx, cy + 1],
+        [4, cx + 1, cy + 1]
+      )) {
+        return createClaim(
+          3,
+          [4, cx, cy],
+          [4, cx - 1, cy],
+          [4, cx, cy + 1],
+          [4, cx + 1, cy + 1]
+        )
       }
+
       //C
-      if (is(cx, cy, 4)) {
-        if (is(cx - 1, cy - 1, 4)) {
-          if (is(cx, cy - 1, 4)) {
-            if (is(cx + 1, cy, 4)) {
-              return 'logging camp C'
-            }
-          }
-        }
+      if (test(
+        [4, cx, cy],
+        [4, cx - 1, cy - 1],
+        [4, cx, cy - 1],
+        [4, cx + 1, cy]
+      )) {
+        return createClaim(
+          3,
+          [4, cx, cy],
+          [4, cx - 1, cy - 1],
+          [4, cx, cy - 1],
+          [4, cx + 1, cy]
+        )
       }
+
       //D
-      if (is(cx, cy, 4)) {
-        if (is(cx - 2, cy - 1, 4)) {
-          if (is(cx - 1, cy - 1, 4)) {
-            if (is(cx - 1, cy, 4)) {
-              return 'logging camp D'
-            }
-          }
-        }
+      if (test(
+        [4, cx, cy],
+        [4, cx - 2, cy - 1],
+        [4, cx - 1, cy - 1],
+        [4, cx - 1, cy]
+      )) {
+        return createClaim(
+          3,
+          [4, cx, cy],
+          [4, cx - 2, cy - 1],
+          [4, cx - 1, cy - 1],
+          [4, cx - 1, cy]
+        )
       }
+      // end of testing logging camp shape
 
       // End of flips loop. Flip slice.
       slice.flip()
