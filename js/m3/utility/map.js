@@ -29,3 +29,9 @@ m3.utility.map.randomize = function(model) {
     cell.setTile(index)
   })
 }
+
+m3.utility.map.zero = function(model) {
+  model.getCells().forEach(function setTile(cell) {
+    cell.setTile(0)
+  })
+}
