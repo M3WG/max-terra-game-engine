@@ -68,10 +68,6 @@
   <body>
 
     <script>
-      const claimTypes = Object.values(m3.config.claimTypes)
-        .map((config) => m3.model.claimType.create(config))
-        .sort((a, b) => b.getPriority() - a.getPriority())
-
       const tiles = Object.values(m3.config.tiles)
         .map((config) => m3.model.tile.create(config))
 
