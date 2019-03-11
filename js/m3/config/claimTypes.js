@@ -7,8 +7,7 @@ m3.config.claimTypes = {
     priority: 1,
     shape: {
       mirror: false,
-      rotate: false,
-      test: [
+      permutation: [
         [
           {dx: 0, dy: 0, tile: 1},
           {dx: 1, dy: 0, tile: 1},
@@ -34,6 +33,7 @@ m3.config.claimTypes = {
           {dx: -1, dy: -1, tile: 1},
         ],
       ],
+      rotate: false,
     },
   },
   2: {
@@ -42,8 +42,7 @@ m3.config.claimTypes = {
     priority: 1,
     shape: {
       mirror: true,
-      rotate: true,
-      test: [
+      permutation: [
         [
           {dx: 0, dy: 0, tile: 3},
           {dx: 1, dy: 0, tile: 3},
@@ -69,6 +68,7 @@ m3.config.claimTypes = {
           {dx: 2, dy: -1, tile: 3},
         ],
       ],
+      rotate: true,
     },
   },
   3: {
@@ -77,8 +77,7 @@ m3.config.claimTypes = {
     priority: 1,
     shape: {
       mirror: true,
-      rotate: true,
-      test: [
+      permutation: [
         [
           {dx: 0, dy: 0, tile: 4},
           {dx: 1, dy: 0, tile: 4},
@@ -104,6 +103,7 @@ m3.config.claimTypes = {
           {dx: -1, dy: 0, tile: 4},
         ],
       ],
+      rotate: true,
     },
   },
   4: {
@@ -112,8 +112,7 @@ m3.config.claimTypes = {
     priority: 1,
     shape: {
       mirror: false,
-      rotate: true,
-      test: [
+      permutation: [
         [
           {dx: 0, dy: 0, tile: 5},
           {dx: -1, dy: 1, tile: 5},
@@ -139,6 +138,7 @@ m3.config.claimTypes = {
           {dx: -2, dy: 0, tile: 5},
         ],
       ],
+      rotate: true,
     },
   },
 }

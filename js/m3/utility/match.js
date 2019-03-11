@@ -16,8 +16,8 @@ m3.utility.match = (action) => {
     return cell.tile.getId() == id
   }
 
-  const evaluateTest = x => x.reduce((result, {dx, dy, tile}) => result && is(cx + dx, cy + dy, tile), true)
-  const gatherTestCells = x => x.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
+  const gatherPermutation = cells => cells.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
+  const testPermutation = cells => cells.reduce((result, {dx, dy, tile}) => result && is(cx + dx, cy + dy, tile), true)
 
   for (const claimType of m3.model.claimType.getAll()) {
     const shape = claimType.getShape()
@@ -26,10 +26,10 @@ m3.utility.match = (action) => {
     do {
       let mirrors = shape.mirror ? 2 : 0
       do {
-        for (const test of shape.test) {
-          if (evaluateTest(test)) {
+        for (const permutation of shape.permutation) {
+          if (testPermutation(permutation)) {
             return m3.model.claim.create({
-              cell: gatherTestCells(test),
+              cell: gatherPermutation(permutation),
               type: claimType,
             })
           }
