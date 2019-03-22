@@ -14,6 +14,8 @@ m3.model.player.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
+      this.score = 0
+
       return this
     }
 
