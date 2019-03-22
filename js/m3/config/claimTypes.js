@@ -3,8 +3,10 @@
 m3.config.claimTypes = {
   1: {
     id: 1,
+    lineOfSight: 1,
     name: 'city',
     priority: 1,
+    score: 24,
     shape: {
       mirror: false,
       permutation: [
@@ -38,8 +40,10 @@ m3.config.claimTypes = {
   },
   2: {
     id: 2,
+    lineOfSight: 4,
     name: 'farmstead',
     priority: 1,
+    score: 8,
     shape: {
       mirror: true,
       permutation: [
@@ -73,8 +77,10 @@ m3.config.claimTypes = {
   },
   3: {
     id: 3,
+    lineOfSight: 3,
     name: 'logging camp',
     priority: 1,
+    score: 12,
     shape: {
       mirror: true,
       permutation: [
@@ -108,7 +114,9 @@ m3.config.claimTypes = {
   },
   4: {
     id: 4,
+    lineOfSight: 2,
     name: 'mine',
+    score: 16,
     priority: 1,
     shape: {
       mirror: false,
