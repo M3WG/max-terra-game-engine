@@ -54,6 +54,7 @@ m3.component.map.prototype = (
 
       this._table = document.createElement('table')
       this._table.className = 'm3-c-map--table'
+      this._table.cellSpacing = 0
       this._rootElement.appendChild(this._table)
 
       const model = this.getModel()
