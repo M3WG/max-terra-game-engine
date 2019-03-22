@@ -31,7 +31,8 @@ m3.model.action.prototype = (
     // XXX: Not the time or place for this
     // TODO: Good luck future us
     function _claimCheck() {
-      m3.utility.match(this)
+      // TODO: Somewhere more accessible, e.g. player.claim
+      this.claim = m3.utility.match(this)
     }
 
     // XXX: Not the time or place for this
