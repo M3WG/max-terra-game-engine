@@ -16,8 +16,16 @@ m3.model.claimType.prototype = (
       return this
     }
 
+    function getLineOfSight() {
+      return this.config.lineOFSight;
+    }
+
     function getPriority() {
       return this.config.priority
+    }
+
+    function getScore() {
+      return this.config.score
     }
 
     function getShape() {
@@ -27,7 +35,9 @@ m3.model.claimType.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getLineOfSight,
       getPriority,
+      getScore,
       getShape,
     }, _prototype)
   }
