@@ -130,7 +130,19 @@
             // TODO: put claim somewhere useful
           }
 
-          const action = turn.createAction(options)
+          const action = turn.createAction(options),
+            isTurnEnd = turn.getActionCount() >= 3
+
+          if (isTurnEnd) {
+            const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
+
+            if (isRoundEnd) {
+              // TODO: Check game end condition
+              game.createRound()
+            } else {
+              round.createTurn()
+            }
+          }
 
           model.setTile(tile)
         })

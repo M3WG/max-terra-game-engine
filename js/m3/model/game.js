@@ -27,7 +27,6 @@ m3.model.game.prototype = (
         game: this,
       })
 
-      round.on('end', _onRoundEnd.bind(this))
       this.round.push(round)
 
       this.emit('change')
@@ -50,17 +49,6 @@ m3.model.game.prototype = (
 
     function getRoundCount() {
       return this.round.length
-    }
-
-    function _onRoundEnd() {
-      // TODO: Check game end
-      if (false) {
-        // TODO: ???
-      } else {
-        this.createRound()
-      }
-
-      return this
     }
 
     // Map

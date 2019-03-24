@@ -28,7 +28,6 @@ m3.model.round.prototype = (
         round: this,
       })
 
-      turn.on('end', _onTurnEnd.bind(this))
       this.turn.push(turn)
 
       this.emit('change')
@@ -42,18 +41,6 @@ m3.model.round.prototype = (
 
     function getTurnCount() {
       return this.turn.length
-    }
-
-    function _onTurnEnd() {
-      const isRoundEnd = this.getTurnCount() >= this.game.getPlayerCount()
-
-      if (isRoundEnd) {
-        this.emit('end')
-      } else {
-        this.createTurn()
-      }
-
-      return this
     }
 
     return Object.setPrototypeOf({
