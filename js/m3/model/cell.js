@@ -36,7 +36,7 @@ m3.model.cell.prototype = (
     }
 
     function setTile(id) {
-      this.tile = m3.model.tile.createWithId(id)
+      this.tile = m3.model.tile.get(id)
       this.emit('change')
       return this
     }

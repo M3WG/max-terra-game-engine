@@ -2,23 +2,6 @@
 
 m3.model.tile = {}
 
-m3.model.tile.createWithId = function(id) {
-  if (this.prototype.isPrototypeOf(id)) {
-    return id
-  }
-
-  if (this.store.has(id)) {
-    return this.store.get(id)
-  }
-
-  const config = m3.config.tiles[id]
-  config.id = id
-
-  const instance = this.create(config)
-  this.store.set(id, instance)
-  return instance
-}
-
 m3.model.tile.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -56,6 +39,28 @@ m3.model.tile.prototype = (
 m3.model.tile.create = function(...args) {
   const instance = Object.create(this.prototype)
   return instance.construct(...args)
+}
+
+m3.model.tile.get = function (id) {
+  if (this.prototype.isPrototypeOf(id)) {
+    return id
+  }
+
+  if (this.store.has(id)) {
+    return this.store.get(id)
+  }
+
+  const config = m3.config.tiles[id]
+  config.id = id
+
+  const instance = this.create(config)
+  this.store.set(id, instance)
+  return instance
+}
+
+m3.model.tile.getAll = function () {
+  return Object.entries(m3.config.tiles)
+    .map(([id]) => this.get(id))
 }
 
 m3.model.tile.store = new Map()

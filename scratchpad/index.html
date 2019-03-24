@@ -68,9 +68,6 @@
   <body>
 
     <script>
-      const tiles = Object.values(m3.config.tiles)
-        .map((config) => m3.model.tile.create(config))
-
       const players = [
         m3.model.player.create(),
       ]
@@ -89,7 +86,7 @@
         model: map,
       }, document.body).attach()
 
-      const pickerOptions = tiles.map((tile) => ({
+      const pickerOptions = m3.model.tile.getAll().map((tile) => ({
           label: tile.getName(),
           value: tile.getId(),
         }))
@@ -112,7 +109,7 @@
           const model = cell.getModel(),
             pickerValue = pickerComponent.getValue(),
             round = game.getCurrentRound(),
-            tile = m3.model.tile.createWithId(pickerValue),
+            tile = m3.model.tile.get(pickerValue),
             turn = round.getCurrentTurn()
 
           const options = {
