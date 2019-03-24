@@ -1,7 +1,8 @@
 'use strict'
 
 m3.utility.match = (action) => {
-  const center = action.cell,
+  const actionTileId = action.tile.getId(),
+    center = action.cell,
     cx = 3,
     cy = 3,
     slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7)
@@ -11,6 +12,10 @@ m3.utility.match = (action) => {
 
     if (!cell || cell.claim) {
       return false
+    }
+
+    if (x == cx && y == cy && id == actionTileId) {
+      return cell.tile.getId() == actionTileId
     }
 
     return cell.tile.getId() == id
