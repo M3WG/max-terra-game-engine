@@ -13,7 +13,6 @@ m3.model.action.prototype = (
       this.tile = this.config.tile
       this.turn = this.config.turn
 
-      _swapTile.call(this)
       _incrementScore.call(this)
 
       return this
@@ -29,12 +28,6 @@ m3.model.action.prototype = (
       if (this.config.claim) {
         this.turn.player.incrementScore(this.config.claim.type.getScore())
       }
-    }
-
-    // XXX: Not the time or place for this
-    // TODO: Good luck future us
-    function _swapTile() {
-      this.cell.setTile(this.tile)
     }
 
     return Object.setPrototypeOf({

@@ -104,11 +104,12 @@
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
-          const pickerValue = pickerComponent.getValue(),
+          const model = cell.getModel(),
+            pickerValue = pickerComponent.getValue(),
             tile = m3.model.tile.createWithId(pickerValue)
 
           const options = {
-            cell: cell.getModel(),
+            cell: model,
             tile,
           }
 
@@ -118,13 +119,13 @@
 
           const match = m3.utility.match(options)
 
-          console.log(match)
-
           if (match) {
             options.claim = m3.model.claim.create(match)
           }
 
           const action = game.getCurrentRound().getCurrentTurn().createAction(options)
+
+          model.setTile(tile)
         })
       })
     </script>
