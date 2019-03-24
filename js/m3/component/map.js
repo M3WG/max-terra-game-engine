@@ -2,10 +2,6 @@
 
 m3.component.map = {}
 
-m3.component.map.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
-
 m3.component.map.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
@@ -97,3 +93,7 @@ m3.component.map.prototype = (
     }, _prototype)
   }
 )()
+
+m3.component.map.create = function create(...args) {
+  return Object.create(this.prototype).construct(...args)
+}

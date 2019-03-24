@@ -2,10 +2,6 @@
 
 m3.component.picker = {}
 
-m3.component.picker.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
-
 m3.component.picker.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
@@ -58,3 +54,7 @@ m3.component.picker.prototype = (
     }, _prototype)
   }
 )()
+
+m3.component.picker.create = function create(...args) {
+  return Object.create(this.prototype).construct(...args)
+}

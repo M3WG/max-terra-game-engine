@@ -2,11 +2,6 @@
 
 m3.model.mapSlice = {}
 
-m3.model.mapSlice.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.mapSlice.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -137,3 +132,8 @@ m3.model.mapSlice.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.mapSlice.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}

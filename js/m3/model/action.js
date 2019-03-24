@@ -2,11 +2,6 @@
 
 m3.model.action = {}
 
-m3.model.action.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.action.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -56,3 +51,8 @@ m3.model.action.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.action.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}

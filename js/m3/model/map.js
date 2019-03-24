@@ -2,11 +2,6 @@
 
 m3.model.map = {}
 
-m3.model.map.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.map.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -90,3 +85,8 @@ m3.model.map.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.map.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}

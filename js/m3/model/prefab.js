@@ -2,11 +2,6 @@
 
 m3.model.prefab = {}
 
-m3.model.prefab.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.prefab.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -29,3 +24,8 @@ m3.model.prefab.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.prefab.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}

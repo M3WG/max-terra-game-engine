@@ -2,11 +2,6 @@
 
 m3.model.hand = {}
 
-m3.model.hand.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.hand.prototype = (
   (undefined) => {
     const _prototype = m3.model.base.prototype
@@ -30,3 +25,8 @@ m3.model.hand.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.hand.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}

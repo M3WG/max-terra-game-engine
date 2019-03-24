@@ -2,11 +2,6 @@
 
 m3.model.tile = {}
 
-m3.model.tile.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
 m3.model.tile.createWithId = function(id) {
   if (this.prototype.isPrototypeOf(id)) {
     return id
@@ -57,5 +52,10 @@ m3.model.tile.prototype = (
     }, _prototype)
   }
 )()
+
+m3.model.tile.create = function(...args) {
+  const instance = Object.create(this.prototype)
+  return instance.construct(...args)
+}
 
 m3.model.tile.store = new Map()

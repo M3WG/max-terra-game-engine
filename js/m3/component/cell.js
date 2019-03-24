@@ -2,10 +2,6 @@
 
 m3.component.cell = {}
 
-m3.component.cell.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
-
 m3.component.cell.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
@@ -85,3 +81,7 @@ m3.component.cell.prototype = (
     }, _prototype)
   }
 )()
+
+m3.component.cell.create = function create(...args) {
+  return Object.create(this.prototype).construct(...args)
+}
