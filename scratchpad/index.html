@@ -106,7 +106,9 @@
         cell.on('click', function onClick() {
           const model = cell.getModel(),
             pickerValue = pickerComponent.getValue(),
-            tile = m3.model.tile.createWithId(pickerValue)
+            round = game.getCurrentRound(),
+            tile = m3.model.tile.createWithId(pickerValue),
+            turn = round.getCurrentTurn()
 
           const options = {
             cell: model,
@@ -120,10 +122,15 @@
           const match = m3.utility.match(options)
 
           if (match) {
-            options.claim = m3.model.claim.create(match)
+            const claim = m3.model.claim.create(match),
+              score = claim.type.getScore()
+
+            turn.player.incrementScore(score)
+
+            // TODO: put claim somewhere useful
           }
 
-          const action = game.getCurrentRound().getCurrentTurn().createAction(options)
+          const action = turn.createAction(options)
 
           model.setTile(tile)
         })

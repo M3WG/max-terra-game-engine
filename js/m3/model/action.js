@@ -13,21 +13,11 @@ m3.model.action.prototype = (
       this.tile = this.config.tile
       this.turn = this.config.turn
 
-      _incrementScore.call(this)
-
       return this
     }
 
     function destruct() {
       return this
-    }
-
-    // XXX: Not the time or place for this
-    // TODO: Good luck future us
-    function _incrementScore() {
-      if (this.config.claim) {
-        this.turn.player.incrementScore(this.config.claim.type.getScore())
-      }
     }
 
     return Object.setPrototypeOf({
