@@ -23,8 +23,6 @@ m3.model.turn.prototype = (
     function createAction(options) {
       options.turn = this
 
-      m3.utility.action.validate(options)
-
       const action = m3.model.action.create(options)
       this.action.push(action)
 

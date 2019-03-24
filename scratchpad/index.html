@@ -107,10 +107,16 @@
           const pickerValue = pickerComponent.getValue(),
             tile = m3.model.tile.createWithId(pickerValue)
 
-          const action = game.getCurrentRound().getCurrentTurn().createAction({
+          const options = {
             cell: cell.getModel(),
             tile,
-          })
+          }
+
+          if (!m3.utility.action.validate(options)) {
+            return;
+          }
+
+          const action = game.getCurrentRound().getCurrentTurn().createAction(options)
         })
       })
     </script>
