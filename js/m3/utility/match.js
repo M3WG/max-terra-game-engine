@@ -14,8 +14,8 @@ m3.utility.match = (action) => {
       return false
     }
 
-    if (x == cx && y == cy && id == actionTileId) {
-      return cell.tile.getId() == actionTileId
+    if (x == cx && y == cy) {
+      return id == actionTileId
     }
 
     return cell.tile.getId() == id

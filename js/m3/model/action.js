@@ -27,7 +27,7 @@ m3.model.action.prototype = (
     // TODO: Good luck future us
     function _incrementScore() {
       if (this.config.claim) {
-        this.turn.player.incrementScore(this.claim.type.getScore())
+        this.turn.player.incrementScore(this.config.claim.type.getScore())
       }
     }
 
