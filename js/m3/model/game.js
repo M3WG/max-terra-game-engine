@@ -13,8 +13,6 @@ m3.model.game.prototype = (
       this.player = this.config.player
       this.round = []
 
-      this.createRound()
-
       return this
     }
 

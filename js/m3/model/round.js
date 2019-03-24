@@ -12,8 +12,6 @@ m3.model.round.prototype = (
       this.game = this.config.game
       this.turn = []
 
-      this.createTurn()
-
       return this
     }
 

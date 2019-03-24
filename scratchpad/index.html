@@ -101,6 +101,10 @@
       // Map generation
       m3.utility.map.randomize(map)
 
+      // Create initial round/turn
+      game.createRound().createTurn({
+      })
+
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
