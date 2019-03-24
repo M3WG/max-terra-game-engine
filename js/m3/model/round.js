@@ -19,13 +19,10 @@ m3.model.round.prototype = (
       return this
     }
 
-    function createTurn() {
-      const turn = m3.model.turn.create({
-        // TODO: Inject current player
-        player: this.game.player[0],
-        round: this,
-      })
+    function createTurn(options) {
+      options.round = this
 
+      const turn = m3.model.turn.create(options)
       this.turn.push(turn)
 
       this.emit('change')
