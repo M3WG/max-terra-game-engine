@@ -38,6 +38,10 @@ m3.model.game.prototype = (
       return this.round[this.round.length - 1]
     }
 
+    function getPlayer(index) {
+      return this.player[index]
+    }
+
     function getPlayerCount() {
       return this.player.length
     }
@@ -58,6 +62,7 @@ m3.model.game.prototype = (
       destruct,
       createRound,
       getCurrentRound,
+      getPlayer,
       getPlayerCount,
       getPlayers,
       getRoundCount,
