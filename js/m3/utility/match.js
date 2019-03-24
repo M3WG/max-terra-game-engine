@@ -33,10 +33,10 @@ m3.utility.match = (action) => {
       do {
         for (const permutation of shape.permutation) {
           if (testPermutation(permutation)) {
-            return m3.model.claim.create({
+            return {
               cell: gatherPermutation(permutation),
               type: claimType,
-            })
+            }
           }
         }
         if (mirrors > 0) {

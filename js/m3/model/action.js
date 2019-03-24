@@ -14,7 +14,6 @@ m3.model.action.prototype = (
       this.turn = this.config.turn
 
       _swapTile.call(this)
-      _claimCheck.call(this)
       _incrementScore.call(this)
 
       return this
@@ -26,15 +25,8 @@ m3.model.action.prototype = (
 
     // XXX: Not the time or place for this
     // TODO: Good luck future us
-    function _claimCheck() {
-      // TODO: Somewhere more accessible, e.g. player.claim
-      this.claim = m3.utility.match(this)
-    }
-
-    // XXX: Not the time or place for this
-    // TODO: Good luck future us
     function _incrementScore() {
-      if (this.claim) {
+      if (this.config.claim) {
         this.turn.player.incrementScore(this.claim.type.getScore())
       }
     }

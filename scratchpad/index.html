@@ -116,6 +116,14 @@
             return;
           }
 
+          const match = m3.utility.match(options)
+
+          console.log(match)
+
+          if (match) {
+            options.claim = m3.model.claim.create(match)
+          }
+
           const action = game.getCurrentRound().getCurrentTurn().createAction(options)
         })
       })
