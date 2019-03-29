@@ -29,6 +29,11 @@ m3.config.tiles = {
   5: {
     id: 5,
     color: '#38262b',
-    desc: 'mountain'
+    desc: 'stone'
+  },
+  6: {
+    id: 6,
+    color: '#ff9900',
+    desc: 'ore'
   },
 }

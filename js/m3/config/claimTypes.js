@@ -115,7 +115,7 @@ m3.config.claimTypes = {
   4: {
     id: 4,
     lineOfSight: 2,
-    name: 'mine',
+    name: 'quarry',
     score: 16,
     priority: 1,
     shape: {
