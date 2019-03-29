@@ -19,13 +19,12 @@ m3.model.round.prototype = (
       return this
     }
 
+    // TODO: Deprecate and prefer pushTurn() via a game controller
     function createTurn(options) {
       options.round = this
 
       const turn = m3.model.turn.create(options)
-      this.turn.push(turn)
-
-      this.emit('change')
+      this.pushTurn(turn)
 
       return turn
     }
@@ -38,12 +37,24 @@ m3.model.round.prototype = (
       return this.turn.length
     }
 
+    function pushTurn(turn) {
+      if (!m3.model.turn.prototype.isPrototypeOf(turn)) {
+        throw new Error('Please provide a valid turn')
+      }
+
+      this.turn.push(turn)
+      this.emit('change')
+
+      return this
+    }
+
     return Object.setPrototypeOf({
       construct,
       destruct,
       createTurn,
       getCurrentTurn,
       getTurnCount,
+      pushTurn,
     }, _prototype)
   }
 )()
