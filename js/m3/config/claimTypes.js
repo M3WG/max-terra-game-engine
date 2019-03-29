@@ -3,7 +3,7 @@
 m3.config.claimTypes = {
   1: {
     id: 1,
-    lineOfSight: 1,
+    lineOfSight: 2,
     name: 'city',
     priority: 1,
     score: 24,
@@ -40,7 +40,7 @@ m3.config.claimTypes = {
   },
   2: {
     id: 2,
-    lineOfSight: 4,
+    lineOfSight: 3,
     name: 'farmstead',
     priority: 1,
     score: 8,
