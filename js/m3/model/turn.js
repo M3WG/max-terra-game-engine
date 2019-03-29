@@ -20,13 +20,12 @@ m3.model.turn.prototype = (
       return this
     }
 
+    // TODO: Deprecate and prefer pushAction() via a game controller
     function createAction(options) {
       options.turn = this
 
       const action = m3.model.action.create(options)
-      this.action.push(action)
-
-      this.emit('change')
+      this.pushAction(action)
 
       return action
     }
@@ -35,11 +34,23 @@ m3.model.turn.prototype = (
       return this.action.length
     }
 
+    function pushAction(action) {
+      if (!m3.model.action.prototype.isPrototypeOf(action)) {
+        throw new Error('Please provide a valid action')
+      }
+
+      this.action.push(action)
+      this.emit('change')
+
+      return this
+    }
+
     return Object.setPrototypeOf({
       construct,
       destruct,
       createAction,
       getActionCount,
+      pushAction,
     }, _prototype)
   }
 )()
