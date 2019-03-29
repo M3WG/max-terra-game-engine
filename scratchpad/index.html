@@ -69,6 +69,8 @@
   </head>
   <body>
 
+    <div class="m3-a-status"></div>
+
     <script>
       const players = [
         m3.model.player.create(),
@@ -103,6 +105,16 @@
       // Create initial round/turn
       game.createRound().createTurn({
         player: game.getPlayer(0),
+      })
+
+      // Create score components
+      const status = document.querySelector('.m3-a-status')
+      const scoreComponents = players.map((player) => {
+        const container = document.createElement('div')
+        container.className = 'm3-a-score--score'
+        status.appendChild(container)
+
+        m3.component.score.create({model: player}, container)
       })
 
       // Click event handlers
@@ -156,6 +168,22 @@
         })
       })
     </script>
+
+    <style>
+      body {
+        padding-top: 3em;
+      }
+
+      .m3-a-status {
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+    </style>
 
   </body>
 </html>
