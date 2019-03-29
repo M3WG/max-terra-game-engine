@@ -20,14 +20,13 @@ m3.model.game.prototype = (
       return this
     }
 
+    // TODO: Deprecate and prefer pushRound() via a game controller
     function createRound() {
       const round = m3.model.round.create({
         game: this,
       })
 
-      this.round.push(round)
-
-      this.emit('change')
+      this.pushRound(round)
 
       return round
     }
@@ -53,6 +52,17 @@ m3.model.game.prototype = (
       return this.round.length
     }
 
+    function pushRound(round) {
+      if (!m3.model.round.prototype.isPrototypeOf(round)) {
+        throw new Error('Please provide a valid round')
+      }
+
+      this.round.push(round)
+      this.emit('change')
+
+      return this
+    }
+
     // Map
 
     return Object.setPrototypeOf({
@@ -64,6 +74,7 @@ m3.model.game.prototype = (
       getPlayerCount,
       getPlayers,
       getRoundCount,
+      pushRound,
     }, _prototype)
   }
 )()
