@@ -36,4 +36,9 @@ m3.config.tiles = {
     color: '#ff9900',
     desc: 'ore'
   },
+  7: {
+    id: 7,
+    color: '#990099',
+    desc: 'magic'
+  },
 }
