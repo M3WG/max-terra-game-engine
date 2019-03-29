@@ -21,12 +21,14 @@ m3.utility.map.importCsv = function(model, csv) {
 }
 
 m3.utility.map.randomize = function(model) {
-  model.getCells().forEach(function setTile(cell) {
-    const index = utility.array.randomValue(
-      Object.keys(m3.config.tiles)
-    )
+  // XXX: Disable magic tile
+  // TODO: Do something more sophisticated with tile weights
+  const tiles = Object.keys(m3.config.tiles).slice(0, -1)
 
-    cell.setTile(index)
+  model.getCells().forEach(function setTile(cell) {
+    cell.setTile(
+      utility.array.randomValue(tiles)
+    )
   })
 }
 
