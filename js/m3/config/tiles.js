@@ -3,7 +3,7 @@
 m3.config.tiles = {
   0: {
     id: 0,
-    color: '#FF00FF',
+    color: 'transparent',
     desc: 'space',
   },
   1: {
@@ -28,7 +28,7 @@ m3.config.tiles = {
   },
   5: {
     id: 5,
-    color: '#38262b',
+    color: '#5D5D5D',
     desc: 'stone'
   },
   6: {
@@ -38,7 +38,7 @@ m3.config.tiles = {
   },
   7: {
     id: 7,
-    color: '#990099',
+    color: '#FF00FF',
     desc: 'magic'
   },
 }
