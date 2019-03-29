@@ -1,0 +1,10 @@
+.m3-c-score {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 2px solid transparent;
+  display: flex;
+  height: 3em;
+  justify-content: center;
+  line-height: 1;
+  width: 3em;
+}
