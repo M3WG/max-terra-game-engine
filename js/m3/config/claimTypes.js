@@ -149,4 +149,29 @@ m3.config.claimTypes = {
       rotate: true,
     },
   },
+  5: {
+    id: 1,
+    lineOfSight: 1,
+    name: 'mine',
+    priority: 1,
+    score: 20,
+    shape: {
+      mirror: false,
+      permutation: [
+        [
+          {dx: 0, dy: 0, tile: 6},
+          {dx: 1, dy: 0, tile: 6},
+          {dx: 2, dy: 0, tile: 6},
+          {dx: 3, dy: 0, tile: 6},
+        ],
+        [
+          {dx: -1, dy: 0, tile: 6},
+          {dx: 0, dy: 0, tile: 6},
+          {dx: 1, dy: 0, tile: 6},
+          {dx: 2, dy: 0, tile: 6},
+        ],
+      ],
+      rotate: true,
+    },
+  },
 }
