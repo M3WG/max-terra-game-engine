@@ -3,7 +3,7 @@
 m3.config.tiles = {
   0: {
     id: 0,
-    color: 'transparent',
+    color: '#000000',
     desc: 'space',
   },
   1: {
