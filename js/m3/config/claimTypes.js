@@ -150,8 +150,8 @@ m3.config.claimTypes = {
     },
   },
   5: {
-    id: 1,
-    lineOfSight: 1,
+    id: 5,
+    lineOfSight: 2,
     name: 'mine',
     priority: 1,
     score: 20,
@@ -172,6 +172,22 @@ m3.config.claimTypes = {
         ],
       ],
       rotate: true,
+    },
+  },
+  6: {
+    id: 6,
+    lineOfSight: 6,
+    name: 'tower',
+    priority: 1,
+    score: 0,
+    shape: {
+      mirror: false,
+      permutation: [
+        [
+          {dx: 0, dy: 0, tile: 7},
+        ],
+      ],
+      rotate: false,
     },
   },
 }
