@@ -23,6 +23,7 @@ m3.model.player.prototype = (
 
     function incrementScore(value) {
       this.score += value
+      this.emit('change')
 
       return this
     }
