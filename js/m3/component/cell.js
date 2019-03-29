@@ -9,7 +9,6 @@ m3.component.cell.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
-      this._cell = []
       _build.call(this)
 
       if (this.config.model) {
