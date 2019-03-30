@@ -17,5 +17,9 @@ m3.utility.action.validate = (options) => {
     throw new Error('Cell contains water')
   }
 
+  if (cell.tile.getId() == options.tile.getId()) {
+    throw new Error('Cell cannot be changed to itself')
+  }
+
   return true
 }
