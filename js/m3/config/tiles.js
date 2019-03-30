@@ -5,40 +5,48 @@ m3.config.tiles = {
     id: 0,
     color: '#000000',
     desc: 'space',
+    icon: '⭐',
   },
   1: {
     id: 1,
-    color: '#ced1c0',
+    color: '#FFFFFF',
     desc: 'house',
+    icon: '👪',
   },
   2: {
     id: 2,
     color: '#4146db',
-    desc: 'water'
+    desc: 'water',
+    icon: '🌊',
   },
   3: {
     id: 3,
     color: '#edde6f',
-    desc: 'field'
+    desc: 'field',
+    icon: '🌻',
   },
   4: {
     id: 4,
     color: '#2d873e',
-    desc: 'forest'
+    desc: 'forest',
+    icon: '🌲',
   },
   5: {
     id: 5,
-    color: '#5D5D5D',
-    desc: 'stone'
+    color: '#555555',
+    desc: 'stone',
+    icon: '⛰️',
   },
   6: {
     id: 6,
-    color: '#ff9900',
-    desc: 'ore'
+    color: '#FF9900',
+    desc: 'ore',
+    icon: '💎',
   },
   7: {
     id: 7,
     color: '#FF00FF',
-    desc: 'magic'
+    desc: 'magic',
+    icon: '🧙',
   },
 }
