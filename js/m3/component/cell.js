@@ -43,6 +43,7 @@ m3.component.cell.prototype = (
 
       this._rootElement.innerHTML = tile ? tile.getId() : 0
       this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
+      this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
 
       if (this.getModel().claim) {
         this._rootElement.classList.add('m3-c-cell-claim')
