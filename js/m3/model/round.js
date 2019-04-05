@@ -33,6 +33,10 @@ m3.model.round.prototype = (
       return this.turn[this.turn.length - 1]
     }
 
+    function getPlayer() {
+      return this.config.player
+    }
+
     function getTurnCount() {
       return this.turn.length
     }
@@ -53,6 +57,7 @@ m3.model.round.prototype = (
       destruct,
       createTurn,
       getCurrentTurn,
+      getPlayer,
       getTurnCount,
       pushTurn,
     }, _prototype)
