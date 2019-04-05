@@ -11,11 +11,18 @@ m3.model.cell.prototype = (
 
       this.map = this.config.map
 
+      // TODO: Game controller?
+      this._fog = true
+
       return this
     }
 
     function destruct() {
       return this
+    }
+
+    function getFog() {
+      return this._fog
     }
 
     function getX() {
@@ -35,6 +42,12 @@ m3.model.cell.prototype = (
       return this
     }
 
+    function setFog(state) {
+      this._fog = Boolean(state)
+      this.emit('change')
+      return this
+    }
+
     function setTile(id) {
       this.tile = m3.model.tile.get(id)
       this.emit('change')
@@ -44,9 +57,11 @@ m3.model.cell.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getFog,
       getX,
       getY,
       setClaim,
+      setFog,
       setTile,
     }, _prototype)
   }
