@@ -82,6 +82,8 @@
         m3.model.player.create(),
       ]
 
+      const claimStore = []
+
       const map = m3.model.map.create({
         height: 50,
         width: 50,
@@ -145,6 +147,8 @@
 
         cell.setTile(7).setClaim(claim)
 
+        claimStore.push(claim)
+
         return claim
       }
 
@@ -180,7 +184,7 @@
 
             turn.player.incrementScore(score)
 
-            // TODO: put claim somewhere useful
+            claimStore.push(claim)
           }
 
           const action = turn.createAction(options),
