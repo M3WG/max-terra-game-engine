@@ -69,9 +69,13 @@
   </head>
   <body>
 
-    <div class="m3-a-status"></div>
+    <div class="m3-a-topBar"></div>
+    <div class="m3-a-bottomBar"></div>
 
     <script>
+      const bottomBar = document.querySelector('.m3-a-bottomBar'),
+        topBar = document.querySelector('.m3-a-topBar')
+
       const players = [
         m3.model.player.create(),
         m3.model.player.create(),
@@ -92,6 +96,7 @@
         model: map,
       }, document.body).attach()
 
+      // Create picker component
       const pickerOptions = m3.model.tile.getAll().map((tile) => ({
         label: tile.getName(),
         value: tile.getId(),
@@ -109,7 +114,7 @@
 
       const pickerComponent = m3.component.picker.create({
         option: pickerOptions,
-      }, document.body).attach()
+      }, bottomBar).attach()
 
       // Map generation
       m3.utility.map.randomize(map)
@@ -120,11 +125,10 @@
       })
 
       // Create score components
-      const status = document.querySelector('.m3-a-status')
       const scoreComponents = players.map((player) => {
         const container = document.createElement('div')
         container.className = 'm3-a-score--score'
-        status.appendChild(container)
+        topBar.appendChild(container)
 
         m3.component.score.create({model: player}, container)
       })
@@ -185,10 +189,21 @@
 
     <style>
       body {
-        padding-top: 3em;
+        padding: 3em 0;
       }
 
-      .m3-a-status {
+      .m3-a-bottomBar {
+        background-color: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .m3-a-topBar {
         background-color: rgba(0, 0, 0, 0.5);
         display: flex;
         justify-content: space-between;
@@ -196,6 +211,7 @@
         position: fixed;
         top: 0;
         width: 100%;
+        z-index: 2;
       }
     </style>
 
