@@ -155,6 +155,10 @@
       createStartLocation(players[0], 10, 10)
       createStartLocation(players[1], 40, 10)
       createStartLocation(players[2], 10, 40)
+      
+      claimStore.forEach((claim) => {
+        claim.getFogShape().forEach((cell) => cell.setFog(false))
+      })
 
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
@@ -183,6 +187,8 @@
               score = claim.type.getScore()
 
             turn.player.incrementScore(score)
+
+            claim.getFogShape().forEach((cell) => cell.setFog(false))
 
             claimStore.push(claim)
           }
