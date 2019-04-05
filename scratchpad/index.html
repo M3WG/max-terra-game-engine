@@ -133,6 +133,25 @@
         m3.component.score.create({model: player}, container)
       })
 
+      // Create start locations
+      const createStartLocation = (player, x, y) => {
+        const cell = map.getCell(x, y)
+
+        const claim = m3.model.claim.create({
+          cell: [cell],
+          player,
+          type: m3.model.claimType.get(6),
+        })
+
+        cell.setTile(7).setClaim(claim)
+
+        return claim
+      }
+
+      createStartLocation(players[0], 10, 10)
+      createStartLocation(players[1], 40, 10)
+      createStartLocation(players[2], 10, 40)
+
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
@@ -154,6 +173,8 @@
           const match = m3.utility.match(options)
 
           if (match) {
+            match.player = round.getPlayer()
+
             const claim = m3.model.claim.create(match),
               score = claim.type.getScore()
 
