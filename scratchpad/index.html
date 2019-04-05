@@ -93,9 +93,19 @@
       }, document.body).attach()
 
       const pickerOptions = m3.model.tile.getAll().map((tile) => ({
-          label: tile.getName(),
-          value: tile.getId(),
-        }))
+        label: tile.getName(),
+        value: tile.getId(),
+      })).sort((a, b) => {
+        if (a.value == 0) {
+          return 1
+        }
+
+        if (b.value == 0) {
+          return -1
+        }
+
+        return a.label.localeCompare(b.label)
+      })
 
       const pickerComponent = m3.component.picker.create({
         option: pickerOptions,
