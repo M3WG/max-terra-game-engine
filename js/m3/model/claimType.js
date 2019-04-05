@@ -17,7 +17,7 @@ m3.model.claimType.prototype = (
     }
 
     function getLineOfSight() {
-      return this.config.lineOFSight;
+      return this.config.lineOfSight;
     }
 
     function getPriority() {
