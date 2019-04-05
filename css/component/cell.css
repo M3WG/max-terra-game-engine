@@ -7,6 +7,10 @@
   line-height: 1;
   width: 3em;
 }
+  .m3-c-cell--icon {
+    filter: grayscale(1);
+    opacity: 0.2;
+  }
 
 .m3-c-cell-claim {
   border-color: #000000;

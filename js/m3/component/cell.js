@@ -41,9 +41,9 @@ m3.component.cell.prototype = (
     function render() {
       const tile = this.getModel().tile
 
-      this._rootElement.innerHTML = tile ? tile.getIcon() : ''
       this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
       this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
+      this._icon.innerHTML = tile ? tile.getIcon() : ''
 
       if (this.getModel().claim) {
         this._rootElement.classList.add('m3-c-cell-claim')
@@ -58,6 +58,10 @@ m3.component.cell.prototype = (
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-cell'
       this._rootElement.addEventListener('click', _onClick.bind(this))
+
+      this._icon = document.createElement('div')
+      this._icon.className = 'm3-c-cell--icon'
+      this._rootElement.appendChild(this._icon)
     }
 
     function _onClick(e) {
