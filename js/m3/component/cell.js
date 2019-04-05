@@ -39,16 +39,23 @@ m3.component.cell.prototype = (
     }
 
     function render() {
-      const tile = this.getModel().tile
+      const model = this.getModel(),
+        tile = this.getModel().tile
 
       this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
       this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
       this._icon.innerHTML = tile ? tile.getIcon() : ''
 
-      if (this.getModel().claim) {
+      if (model.claim) {
         this._rootElement.classList.add('m3-c-cell-claim')
       } else {
         this._rootElement.classList.remove('m3-c-cell-claim')
+      }
+
+      if (model.getFog()) {
+        this._rootElement.classList.add('m3-c-cell-fog')
+      } else {
+        this._rootElement.classList.remove('m3-c-cell-fog')
       }
 
       return this
