@@ -24,6 +24,30 @@ m3.model.claim.prototype = (
       return utility.array.copy(this.config.cell)
     }
 
+    function getFogShape() {
+      const radius = this.type.getLineOfSight()
+
+      return this.getCells().reduce((shape, cell) => {
+        const cx = cell.getX(),
+          cy = cell.getY(),
+          map = cell.map,
+          slice = map.createSlice(cx - radius, cy - radius, radius * 2 + 1, radius * 2 + 1)
+
+        // XXX: Distance formula
+        const isWithinRadius = (cell) => Math.sqrt(Math.pow(cx - cell.getX(), 2) + Math.pow(cy - cell.getY(), 2)) <= radius
+
+        slice.getCells()
+          .filter(isWithinRadius)
+          .forEach((cell) => {
+            if (!shape.includes(cell)) {
+              shape.push(cell)
+            }
+          })
+
+        return shape
+      }, [])
+    }
+
     function getPlayer() {
       return this.config.player
     }
@@ -39,6 +63,7 @@ m3.model.claim.prototype = (
       construct,
       destruct,
       getCells,
+      getFogShape,
       getPlayer,
     }, _prototype)
   }
