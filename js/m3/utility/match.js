@@ -3,9 +3,9 @@
 m3.utility.match = (action) => {
   const actionTileId = action.tile.getId(),
     center = action.cell,
-    cx = 3,
-    cy = 3,
     slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7)
+
+  const {x: cx, y: cy} = slice.getCellCoordinates(center)
 
   const is = (x, y, id) => {
     const cell = slice.getCell(x, y)

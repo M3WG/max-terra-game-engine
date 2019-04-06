@@ -39,6 +39,13 @@ m3.model.mapSlice.prototype = (
       }, [])
     }
 
+    function getCellCoordinates(cell) {
+      return {
+        x: cell.getX() - this.config.x,
+        y: cell.getY() - this.config.y,
+      }
+    }
+
     function getHeight() {
       return this.config.height
     }
@@ -123,6 +130,7 @@ m3.model.mapSlice.prototype = (
       destruct,
       flip,
       getCell,
+      getCellCoordinates,
       getCells,
       getHeight,
       getWidth,
