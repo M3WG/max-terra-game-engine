@@ -34,7 +34,14 @@ m3.model.claim.prototype = (
           slice = map.createSlice(cx - radius, cy - radius, radius * 2 + 1, radius * 2 + 1)
 
         // XXX: Distance formula
-        const isWithinRadius = (cell) => Math.sqrt(Math.pow(cx - cell.getX(), 2) + Math.pow(cy - cell.getY(), 2)) <= radius
+        const isWithinRadius = (cell) => {
+          // XXX: Issue within mapSlice where getCells() returns undefined cells when out-of-bounds
+          if (cell === undefined) {
+            return false
+          }
+
+          return Math.sqrt(Math.pow(cx - cell.getX(), 2) + Math.pow(cy - cell.getY(), 2)) <= radius
+        }
 
         slice.getCells()
           .filter(isWithinRadius)

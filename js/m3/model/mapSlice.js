@@ -77,11 +77,13 @@ m3.model.mapSlice.prototype = (
 
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
+          const cell = map.getCell(x + originX, y + originY)
+
           if (!cells[y]) {
             cells[y] = []
           }
 
-          cells[y][x] = map.getCell(x + originX, y + originY)
+          cells[y][x] = cell
         }
       }
 
