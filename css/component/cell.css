@@ -15,6 +15,18 @@
 .m3-c-cell-claim {
   border-color: #000000;
 }
+.m3-c-cell-claimDown {
+  border-bottom-color: transparent;
+}
+.m3-c-cell-claimLeft {
+  border-left-color: transparent;
+}
+.m3-c-cell-claimRight {
+  border-right-color: transparent;
+}
+.m3-c-cell-claimUp {
+  border-top-color: transparent;
+}
 .m3-c-cell-fog {
   filter: grayscale(1);
   opacity: 0.1;

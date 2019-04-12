@@ -47,9 +47,16 @@ m3.component.cell.prototype = (
       this._icon.innerHTML = tile ? tile.getIcon() : ''
 
       if (model.claim) {
-        this._rootElement.classList.add('m3-c-cell-claim')
+        this._rootElement.classList.add('m3-c-cell-claim', ..._getClaimDirectionClassnames.call(this))
+
       } else {
-        this._rootElement.classList.remove('m3-c-cell-claim')
+        this._rootElement.classList.remove(
+          'm3-c-cell-claim',
+          'm3-c-cell-claimDown',
+          'm3-c-cell-claimLeft',
+          'm3-c-cell-claimRight',
+          'm3-c-cell-claimUp',
+        )
       }
 
       if (model.getFog()) {
@@ -69,6 +76,40 @@ m3.component.cell.prototype = (
       this._icon = document.createElement('div')
       this._icon.className = 'm3-c-cell--icon'
       this._rootElement.appendChild(this._icon)
+    }
+
+    function _getClaimDirectionClassnames() {
+      const classnames = [],
+        model = this.getModel(),
+        x = this.getX(),
+        y = this.getY()
+
+      const map = model.map
+
+      const down = map.getCell(x, y + 1),
+        left = map.getCell(x - 1, y),
+        right = map.getCell(x + 1, y),
+        up = map.getCell(x, y - 1)
+
+      const claimCells = model.claim.getCells()
+
+      if (down && claimCells.includes(down)) {
+        classnames.push('m3-c-cell-claimDown')
+      }
+
+      if (left && claimCells.includes(left)) {
+        classnames.push('m3-c-cell-claimLeft')
+      }
+
+      if (right && claimCells.includes(right)) {
+        classnames.push('m3-c-cell-claimRight')
+      }
+
+      if (up && claimCells.includes(up)) {
+        classnames.push('m3-c-cell-claimUp')
+      }
+
+      return classnames
     }
 
     function _onClick(e) {
