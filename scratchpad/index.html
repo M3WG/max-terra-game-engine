@@ -232,13 +232,16 @@
             const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
 
             if (isRoundEnd) {
+              const firstPlayer = game.getPlayer(0)
+
+              // XXX: Goes forever!
               // TODO: Check game end condition
               game.createRound().createTurn({
-                player: game.getPlayer(0),
+                player: firstPlayer,
               })
 
-              scrollToStartLocation(game.getPlayer(0))
-              setActiveScore(game.getPlayer(0))
+              scrollToStartLocation(firstPlayer)
+              setActiveScore(firstPlayer)
             } else {
               const nextPlayer = game.getPlayer(round.getTurnCount())
 
