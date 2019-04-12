@@ -160,6 +160,8 @@
         claim.getFogShape().forEach((cell) => cell.setFog(false))
       })
 
+      scrollToStartLocation(players[0])
+
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
@@ -205,9 +207,13 @@
                 player: game.getPlayer(0),
               })
             } else {
+              const nextPlayer = game.getPlayer(round.getTurnCount())
+
               round.createTurn({
-                player: game.getPlayer(round.getTurnCount())
+                player: nextPlayer,
               })
+
+              scrollToStartLocation(nextPlayer)
             }
           }
 
@@ -216,6 +222,21 @@
       })
 
       // Utility functions
+      function scrollToStartLocation(player) {
+        const claim = startLocations[players.indexOf(player)]
+        const cell = claim.getCells()[0],
+          cellComponent = mapComponent.getCell(cell.getX(), cell.getY()),
+          rect = cellComponent.getBoundingClientRect(),
+          x = rect.x - vw(50) + (0.5 * rect.width),
+          y = rect.y - vh(50) + (0.5 * rect.height)
+
+        window.scrollBy({
+          left: x,
+          top: y,
+          behavior: 'smooth',
+        })
+      }
+
       function vh(value) {
         return window.innerHeight / 100 * value
       }
