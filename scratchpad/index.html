@@ -236,6 +236,9 @@
               game.createRound().createTurn({
                 player: game.getPlayer(0),
               })
+
+              scrollToStartLocation(game.getPlayer(0))
+              setActiveScore(game.getPlayer(0))
             } else {
               const nextPlayer = game.getPlayer(round.getTurnCount())
 
