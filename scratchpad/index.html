@@ -127,6 +127,8 @@
         return m3.component.score.create({model: player}, container)
       })
 
+      setActiveScore(players[0])
+
       // Create start locations
       const createStartLocation = (player, x, y) => {
         const cell = map.getCell(x, y)
@@ -214,6 +216,7 @@
               })
 
               scrollToStartLocation(nextPlayer)
+              setActiveScore(nextPlayer)
             }
           }
 
@@ -222,6 +225,12 @@
       })
 
       // Utility functions
+      function setActiveScore(player) {
+        scoreComponents.forEach((component) => {
+          component.setActive(component.getModel() == player)
+        })
+      }
+
       function scrollToStartLocation(player) {
         const claim = startLocations[players.indexOf(player)]
         const cell = claim.getCells()[0],
