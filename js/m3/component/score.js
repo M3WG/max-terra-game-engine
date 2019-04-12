@@ -30,6 +30,16 @@ m3.component.score.prototype = (
       return this
     }
 
+    function setActive(state) {
+      if (state) {
+        this._rootElement.classList.add('m3-c-score-active')
+      } else {
+        this._rootElement.classList.remove('m3-c-score-active')
+      }
+
+      return this
+    }
+
     function _build() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-score'
@@ -47,6 +57,7 @@ m3.component.score.prototype = (
       construct,
       getModel,
       render,
+      setActive,
     }, _prototype)
   }
 )()
