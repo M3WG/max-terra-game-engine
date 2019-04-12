@@ -39,10 +39,15 @@ m3.component.base.prototype = (
       return this
     }
 
+    function getBoundingClientRect() {
+      return this._rootElement.getBoundingClientRect()
+    }
+
     return {
       construct,
       destruct,
       attach,
+      getBoundingClientRect,
     }
   }
 )()
