@@ -144,9 +144,17 @@
         return claim
       }
 
-      createStartLocation(players[0], 10, 10)
-      createStartLocation(players[1], 40, 10)
-      createStartLocation(players[2], 10, 40)
+      const startLocationCoordinates = [
+        {x: 25, y: 25},
+        {x: 75, y: 25},
+        {x: 75, y: 75},
+        {x: 25, y: 75},
+      ]
+
+      const startLocations = players.map((player, index) => {
+        const {x, y} = startLocationCoordinates[index]
+        return createStartLocation(player, x, y)
+      })
 
       claimStore.forEach((claim) => {
         claim.getFogShape().forEach((cell) => cell.setFog(false))
