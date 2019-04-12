@@ -73,14 +73,11 @@
     <div class="m3-a-bottomBar"></div>
 
     <script>
+      const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4),
+        players = Array(playerCount).fill().map(() => m3.model.player.create())
+
       const bottomBar = document.querySelector('.m3-a-bottomBar'),
         topBar = document.querySelector('.m3-a-topBar')
-
-      const players = [
-        m3.model.player.create(),
-        m3.model.player.create(),
-        m3.model.player.create(),
-      ]
 
       const claimStore = []
 
