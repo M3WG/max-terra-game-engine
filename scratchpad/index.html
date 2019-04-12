@@ -124,7 +124,7 @@
         container.className = 'm3-a-score--score'
         topBar.appendChild(container)
 
-        m3.component.score.create({model: player}, container)
+        return m3.component.score.create({model: player}, container)
       })
 
       // Create start locations
