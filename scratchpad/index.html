@@ -69,6 +69,34 @@
   </head>
   <body>
 
+    <style>
+      body {
+        padding: 3em 0;
+      }
+
+      .m3-a-bottomBar {
+        background-color: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .m3-a-topBar {
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+    </style>
+
     <div class="m3-a-topBar"></div>
     <div class="m3-a-bottomBar"></div>
 
@@ -254,34 +282,5 @@
         return window.innerWidth / 100 * value
       }
     </script>
-
-    <style>
-      body {
-        padding: 3em 0;
-      }
-
-      .m3-a-bottomBar {
-        background-color: rgba(0, 0, 0, 0.5);
-        bottom: 0;
-        display: flex;
-        justify-content: space-between;
-        left: 0;
-        position: fixed;
-        width: 100%;
-        z-index: 2;
-      }
-
-      .m3-a-topBar {
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: space-between;
-        left: 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 2;
-      }
-    </style>
-
   </body>
 </html>
