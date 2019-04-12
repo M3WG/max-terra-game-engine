@@ -99,20 +99,15 @@
       }, document.body).attach()
 
       // Create picker component
-      const pickerOptions = m3.model.tile.getAll().map((tile) => ({
-        label: tile.getName(),
+      const pickerOptions = m3.model.tile.getAll().filter((tile) => {
+        // XXX: Hide space
+        return tile.getId() != 0
+      }).sort((a, b) => {
+        return a.getName().localeCompare(b.getName())
+      }).map((tile) => ({
+        label: tile.getIcon() + ' ' + tile.getName(),
         value: tile.getId(),
-      })).sort((a, b) => {
-        if (a.value == 0) {
-          return 1
-        }
-
-        if (b.value == 0) {
-          return -1
-        }
-
-        return a.label.localeCompare(b.label)
-      })
+      }))
 
       const pickerComponent = m3.component.picker.create({
         option: pickerOptions,
@@ -155,7 +150,7 @@
       createStartLocation(players[0], 10, 10)
       createStartLocation(players[1], 40, 10)
       createStartLocation(players[2], 10, 40)
-      
+
       claimStore.forEach((claim) => {
         claim.getFogShape().forEach((cell) => cell.setFog(false))
       })
