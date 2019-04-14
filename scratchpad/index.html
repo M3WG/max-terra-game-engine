@@ -244,8 +244,7 @@
                 player: firstPlayer,
               })
 
-              scrollToStartLocation(firstPlayer)
-              setActiveScore(firstPlayer)
+              setupNextPlayer(firstPlayer)
             } else {
               const nextPlayer = game.getPlayer(round.getTurnCount())
 
@@ -253,8 +252,7 @@
                 player: nextPlayer,
               })
 
-              scrollToStartLocation(nextPlayer)
-              setActiveScore(nextPlayer)
+              setupNextPlayer(nextPlayer)
             }
           }
 
@@ -267,6 +265,15 @@
         scoreComponents.forEach((component) => {
           component.setActive(component.getModel() == player)
         })
+      }
+
+      function setupNextPlayer(player) {
+        scrollToStartLocation(player)
+        setActiveScore(player)
+
+        if (players.length > 1) {
+          alert('Up next: ' + player.getName())
+        }
       }
 
       function scrollToStartLocation(player) {
