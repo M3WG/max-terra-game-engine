@@ -194,11 +194,8 @@ m3.config.claimTypes = {
 
 // Fun fact: Semi-colon prevents "Uncaught TypeError: {(intermediate value)...} is not a function"
 ;(function normalize() {
-  Object.values(m3.config.claimTypes).forEach((type) => {
+  Object.values(m3.config.claimTypes).filter((type) => type.id !== 6).forEach((type) => {
     type.score = 1
-
-    if (type.id !== 6) {
-      type.lineOfSight = 3
-    }
+    type.lineOfSight = 3
   })
 })()
