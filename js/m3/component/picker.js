@@ -18,6 +18,13 @@ m3.component.picker.prototype = (
       return this._rootElement.value
     }
 
+    // XXX: Unsophisticated
+    function setValue(value) {
+      this._rootElement.selectedIndex = value
+
+      return this
+    }
+
     function _build() {
       this._rootElement = document.createElement('select')
       this._rootElement.className = 'm3-c-picker'
@@ -51,6 +58,7 @@ m3.component.picker.prototype = (
     return Object.setPrototypeOf({
       construct,
       getValue,
+      setValue,
     }, _prototype)
   }
 )()
