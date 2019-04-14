@@ -21,6 +21,12 @@ m3.model.player.prototype = (
     // User
     // color
 
+    // XXX: Temporary
+    // TODO: Prefer account name via this.user
+    function getName() {
+      return this.config.name
+    }
+
     function incrementScore(value) {
       this.score += value
       this.emit('change')
@@ -31,6 +37,7 @@ m3.model.player.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getName,
       incrementScore,
     }, _prototype)
   }
