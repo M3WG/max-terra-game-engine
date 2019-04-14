@@ -210,8 +210,12 @@
             tile,
           }
 
-          if (!m3.utility.action.validate(options)) {
-            return;
+          try {
+            m3.utility.action.validate(options)
+          } catch (e) {
+            console.error(e)
+            alert('Invalid action: ' + e.message)
+            return
           }
 
           const match = m3.utility.match(options)
