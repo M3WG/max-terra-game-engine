@@ -5,6 +5,8 @@
   height: 3em;
   justify-content: center;
   line-height: 1;
+  transition: all 0.5s ease;
+  transition-property: filter, opacity;
   width: 3em;
 }
   .m3-c-cell--icon {
