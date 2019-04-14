@@ -102,7 +102,11 @@
 
     <script>
       const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4),
-        players = Array(playerCount).fill().map(() => m3.model.player.create())
+        players = Array(playerCount).fill().map((_, index) =>
+          m3.model.player.create({
+            name: 'Player ' + (index + 1),
+          })
+        )
 
       const bottomBar = document.querySelector('.m3-a-bottomBar'),
         topBar = document.querySelector('.m3-a-topBar')
