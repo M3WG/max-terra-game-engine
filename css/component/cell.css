@@ -1,6 +1,5 @@
 .m3-c-cell {
   align-items: center;
-  border: 5px solid transparent;
   display: flex;
   height: 3em;
   justify-content: center;
@@ -17,7 +16,7 @@
 
 .m3-c-cell-claim {
   animation: m3-c-cell--onClaim 0.25s ease 0s 1 normal both;
-  border-color: #000000;
+  border: 5px solid transparent;
 }
   @keyframes m3-c-cell--onClaim {
     0% {
@@ -32,16 +31,20 @@
   }
 
 .m3-c-cell-claimDown {
-  border-bottom-color: transparent;
+  border-bottom: 0;
+  padding-bottom: 5px;
 }
 .m3-c-cell-claimLeft {
-  border-left-color: transparent;
+  border-left: 0;
+  padding-left: 5px;
 }
 .m3-c-cell-claimRight {
-  border-right-color: transparent;
+  border-right: 0;
+  padding-right: 5px;
 }
 .m3-c-cell-claimUp {
-  border-top-color: transparent;
+  border-top: 0;
+  padding-top: 5px;
 }
 .m3-c-cell-fog {
   filter: grayscale(1);
