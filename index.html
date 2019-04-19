@@ -101,9 +101,17 @@
     <div class="m3-a-bottomBar"></div>
 
     <script>
+      const playerColors = [
+        '#FF0000',
+        '#0000FF',
+        '#FFFF00',
+        '#FF00FF',
+      ];
+
       const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4),
         players = Array(playerCount).fill().map((_, index) =>
           m3.model.player.create({
+            color: playerColors[index],
             name: 'Player ' + (index + 1),
           })
         )
