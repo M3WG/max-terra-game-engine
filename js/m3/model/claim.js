@@ -9,6 +9,7 @@ m3.model.claim.prototype = (
     function construct(...args) {
       _prototype.construct.call(this, ...args)
 
+      this.player = this.config.player
       this.type = this.config.type
 
       _claimCells.call(this);
@@ -55,10 +56,6 @@ m3.model.claim.prototype = (
       }, [])
     }
 
-    function getPlayer() {
-      return this.config.player
-    }
-
     function _claimCells() {
       const setClaim = (cell) => cell.setClaim(this)
       this.getCells().forEach(setClaim)
@@ -71,7 +68,6 @@ m3.model.claim.prototype = (
       destruct,
       getCells,
       getFogShape,
-      getPlayer,
     }, _prototype)
   }
 )()
