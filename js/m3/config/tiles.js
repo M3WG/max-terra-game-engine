@@ -5,7 +5,7 @@ m3.config.tiles = {
     id: 0,
     color: '#000000',
     desc: 'void',
-    icon: '',
+    icon: '&nbsp;',
   },
   1: {
     id: 1,
