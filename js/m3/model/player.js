@@ -19,7 +19,10 @@ m3.model.player.prototype = (
     }
 
     // User
-    // color
+
+    function getColor() {
+      return this.config.color;
+    }
 
     // XXX: Temporary
     // TODO: Prefer account name via this.user
@@ -37,6 +40,7 @@ m3.model.player.prototype = (
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getColor,
       getName,
       incrementScore,
     }, _prototype)
