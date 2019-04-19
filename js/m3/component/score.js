@@ -33,8 +33,10 @@ m3.component.score.prototype = (
     function setActive(state) {
       if (state) {
         this._rootElement.classList.add('m3-c-score-active')
+        this._rootElement.style.borderColor = this.config.model.getColor()
       } else {
         this._rootElement.classList.remove('m3-c-score-active')
+        this._rootElement.style.borderColor = 'transparent'
       }
 
       return this
