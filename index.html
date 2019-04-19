@@ -221,7 +221,7 @@
           const match = m3.utility.match(options)
 
           if (match) {
-            match.player = round.getPlayer()
+            match.player = turn.player
 
             const claim = m3.model.claim.create(match),
               score = claim.type.getScore()
