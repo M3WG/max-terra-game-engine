@@ -40,7 +40,7 @@ m3.config.tiles = {
   6: {
     id: 6,
     color: '#FF9900',
-    desc: 'ore',
+    desc: 'gold',
     icon: '💎',
   },
   7: {
