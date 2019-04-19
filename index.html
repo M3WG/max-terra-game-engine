@@ -1,4 +1,3 @@
-<!-- XXX: The full prototype. -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,14 +6,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/main.css" rel="stylesheet" type="text/css" />
     <link href="./css/app.css" rel="stylesheet" />
     <link href="./css/keyframes.css" rel="stylesheet" />
     <link href="./css/utility.css" rel="stylesheet" />
     <link href="./css/component/cell.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/map.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/picker.css" rel="stylesheet" type="text/css" />
-    <link href="../css/component/score.css" rel="stylesheet" type="text/css" />
+    <link href="./css/component/score.css" rel="stylesheet" type="text/css" />
 
     <!--<script src="./lib/.js"></script>-->
 
@@ -66,10 +65,244 @@
     <script src="./js/m3/utility/claim.js"></script>
     <script src="./js/m3/utility/crawler.js"></script>
     <script src="./js/m3/utility/map.js"></script>
+    <script src="./js/m3/utility/match.js"></script>
   </head>
   <body>
-    <div class="m3-a-app">
-      <!-- TODO: Application elements, i.e. those with files within js/m3/app -->
-    </div>
+
+    <style>
+      body {
+        padding: 3em 0;
+      }
+
+      .m3-a-bottomBar {
+        background-color: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .m3-a-topBar {
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+    </style>
+
+    <div class="m3-a-topBar"></div>
+    <div class="m3-a-bottomBar"></div>
+
+    <script>
+      const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4),
+        players = Array(playerCount).fill().map((_, index) =>
+          m3.model.player.create({
+            name: 'Player ' + (index + 1),
+          })
+        )
+
+      const bottomBar = document.querySelector('.m3-a-bottomBar'),
+        topBar = document.querySelector('.m3-a-topBar')
+
+      const claimStore = []
+
+      const map = m3.model.map.create({
+        height: 100,
+        width: 100,
+      })
+
+      const game = m3.model.game.create({
+        map,
+        player: players,
+      })
+
+      const mapComponent = m3.component.map.create({
+        model: map,
+      }, document.body).attach()
+
+      // Create picker component
+      const pickerOptions = m3.model.tile.getAll().filter((tile) => {
+        // XXX: Hide space
+        return tile.getId() != 0
+      }).sort((a, b) => {
+        return a.getName().localeCompare(b.getName())
+      }).map((tile) => ({
+        label: tile.getIcon() + ' ' + tile.getName(),
+        value: tile.getId(),
+      }))
+
+      const pickerComponent = m3.component.picker.create({
+        option: pickerOptions,
+      }, bottomBar).attach()
+
+      // Map generation
+      m3.utility.map.randomize(map)
+
+      // Create initial round/turn
+      game.createRound().createTurn({
+        player: game.getPlayer(0),
+      })
+
+      // Create score components
+      const scoreComponents = players.map((player) => {
+        const container = document.createElement('div')
+        container.className = 'm3-a-score--score'
+        topBar.appendChild(container)
+
+        return m3.component.score.create({model: player}, container)
+      })
+
+      setActiveScore(players[0])
+
+      // Create start locations
+      const createStartLocation = (player, x, y) => {
+        const cell = map.getCell(x, y)
+
+        const claim = m3.model.claim.create({
+          cell: [cell],
+          player,
+          type: m3.model.claimType.get(6),
+        })
+
+        cell.setTile(7).setClaim(claim)
+
+        claimStore.push(claim)
+
+        return claim
+      }
+
+      const startLocationCoordinates = [
+        {x: 25, y: 25},
+        {x: 75, y: 25},
+        {x: 75, y: 75},
+        {x: 25, y: 75},
+      ]
+
+      const startLocations = players.map((player, index) => {
+        const {x, y} = startLocationCoordinates[index]
+        return createStartLocation(player, x, y)
+      })
+
+      claimStore.forEach((claim) => {
+        claim.getFogShape().forEach((cell) => cell.setFog(false))
+      })
+
+      scrollToStartLocation(players[0])
+
+      // Click event handlers
+      mapComponent.getCells().forEach(function subscribeClick(cell) {
+        cell.on('click', function onClick() {
+          const model = cell.getModel(),
+            pickerValue = pickerComponent.getValue(),
+            round = game.getCurrentRound(),
+            tile = m3.model.tile.get(pickerValue),
+            turn = round.getCurrentTurn()
+
+          const options = {
+            cell: model,
+            tile,
+          }
+
+          try {
+            m3.utility.action.validate(options)
+          } catch (e) {
+            console.error(e)
+            alert('Invalid action: ' + e.message)
+            return
+          }
+
+          const match = m3.utility.match(options)
+
+          if (match) {
+            match.player = round.getPlayer()
+
+            const claim = m3.model.claim.create(match),
+              score = claim.type.getScore()
+
+            turn.player.incrementScore(score)
+
+            claim.getFogShape().forEach((cell) => cell.setFog(false))
+
+            claimStore.push(claim)
+          }
+
+          const action = turn.createAction(options),
+            isTurnEnd = turn.getActionCount() >= 3
+
+          if (isTurnEnd) {
+            const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
+
+            if (isRoundEnd) {
+              const firstPlayer = game.getPlayer(0)
+
+              // XXX: Goes forever!
+              // TODO: Check game end condition
+              game.createRound().createTurn({
+                player: firstPlayer,
+              })
+
+              setupNextPlayer(firstPlayer)
+            } else {
+              const nextPlayer = game.getPlayer(round.getTurnCount())
+
+              round.createTurn({
+                player: nextPlayer,
+              })
+
+              setupNextPlayer(nextPlayer)
+            }
+          }
+
+          model.setTile(tile)
+        })
+      })
+
+      // Utility functions
+      function setActiveScore(player) {
+        scoreComponents.forEach((component) => {
+          component.setActive(component.getModel() == player)
+        })
+      }
+
+      function setupNextPlayer(player) {
+        scrollToStartLocation(player)
+        setActiveScore(player)
+
+        if (players.length > 1) {
+          pickerComponent.setValue(0)
+          alert('Up next: ' + player.getName())
+        }
+      }
+
+      function scrollToStartLocation(player) {
+        const claim = startLocations[players.indexOf(player)]
+        const cell = claim.getCells()[0],
+          cellComponent = mapComponent.getCell(cell.getX(), cell.getY()),
+          rect = cellComponent.getBoundingClientRect(),
+          x = rect.x - vw(50) + (0.5 * rect.width),
+          y = rect.y - vh(50) + (0.5 * rect.height)
+
+        window.scrollBy({
+          left: x,
+          top: y,
+          behavior: 'smooth',
+        })
+      }
+
+      function vh(value) {
+        return window.innerHeight / 100 * value
+      }
+
+      function vw(value) {
+        return window.innerWidth / 100 * value
+      }
+    </script>
   </body>
 </html>
