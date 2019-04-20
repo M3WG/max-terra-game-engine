@@ -1,0 +1,7 @@
+.m3-c-minimap {
+  border: 2px solid #FFFFFF;
+  height: 12.5vmin;
+  opacity: 0.75;
+  pointer-events: auto;
+  width: 12.5vmin;
+}

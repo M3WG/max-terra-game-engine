@@ -12,6 +12,7 @@
     <link href="./css/utility.css" rel="stylesheet" />
     <link href="./css/component/cell.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/map.css" rel="stylesheet" type="text/css" />
+    <link href="./css/component/minimap.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/picker.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/score.css" rel="stylesheet" type="text/css" />
 
@@ -34,6 +35,7 @@
     <script src="./js/m3/component/base.js"></script>
     <script src="./js/m3/component/cell.js"></script>
     <script src="./js/m3/component/map.js"></script>
+    <script src="./js/m3/component/minimap.js"></script>
     <script src="./js/m3/component/picker.js"></script>
     <script src="./js/m3/component/score.js"></script>
 
@@ -85,6 +87,13 @@
         z-index: 2;
       }
 
+      .m3-a-minimap {
+        bottom: 3em;
+        left: 0;
+        pointer-events: none;
+        position: fixed;
+      }
+
       .m3-a-topBar {
         background-color: rgba(0, 0, 0, 0.5);
         display: flex;
@@ -99,6 +108,7 @@
 
     <div class="m3-a-topBar"></div>
     <div class="m3-a-bottomBar"></div>
+    <div class="m3-a-minimap"></div>
 
     <script>
       const playerColors = [
@@ -133,7 +143,14 @@
 
       const mapComponent = m3.component.map.create({
         model: map,
-      }, document.body).attach()
+      }, document.body).setId('map').attach()
+
+      // TODO: Enable when complete
+      /*
+      const minimapComponent = m3.component.minimap.create({
+        model: map,
+      }, document.querySelector('.m3-a-minimap')).attach()
+      */
 
       // Create picker component
       const pickerOptions = m3.model.tile.getAll().filter((tile) => {
