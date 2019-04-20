@@ -43,11 +43,23 @@ m3.component.base.prototype = (
       return this._rootElement.getBoundingClientRect()
     }
 
+    function getId() {
+      return this._rootElement.id
+    }
+
+    function setId(id) {
+      this._rootElement.id = id
+
+      return this
+    }
+
     return {
       construct,
       destruct,
       attach,
       getBoundingClientRect,
+      getId,
+      setId,
     }
   }
 )()
