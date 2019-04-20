@@ -82,6 +82,7 @@ m3.component.cell.prototype = (
     function _getClaimDirectionClassnames() {
       const classnames = [],
         model = this.getModel(),
+        player = model.claim.player,
         x = this.getX(),
         y = this.getY()
 
@@ -92,21 +93,21 @@ m3.component.cell.prototype = (
         right = map.getCell(x + 1, y),
         up = map.getCell(x, y - 1)
 
-      const claimCells = model.claim.getCells()
+      const isContiguous = (cell) => cell && cell.claim && cell.claim.player == player
 
-      if (down && claimCells.includes(down)) {
+      if (isContiguous(down)) {
         classnames.push('m3-c-cell-claimDown')
       }
 
-      if (left && claimCells.includes(left)) {
+      if (isContiguous(left)) {
         classnames.push('m3-c-cell-claimLeft')
       }
 
-      if (right && claimCells.includes(right)) {
+      if (isContiguous(right)) {
         classnames.push('m3-c-cell-claimRight')
       }
 
-      if (up && claimCells.includes(up)) {
+      if (isContiguous(up)) {
         classnames.push('m3-c-cell-claimUp')
       }
 
