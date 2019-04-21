@@ -15,6 +15,8 @@
     <link href="./css/component/minimap.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/picker.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/score.css" rel="stylesheet" type="text/css" />
+    <link href="./css/component/tilePicker.css" rel="stylesheet" type="text/css" />
+    <link href="./css/component/tilePickerOption.css" rel="stylesheet" type="text/css" />
 
     <!--<script src="./lib/.js"></script>-->
 
@@ -38,6 +40,8 @@
     <script src="./js/m3/component/minimap.js"></script>
     <script src="./js/m3/component/picker.js"></script>
     <script src="./js/m3/component/score.js"></script>
+    <script src="./js/m3/component/tilePicker.js"></script>
+    <script src="./js/m3/component/tilePickerOption.js"></script>
 
     <!--<script src="./js/m3/config/.js"></script>-->
     <script src="./js/m3/config/claimTypes.js"></script>
@@ -76,13 +80,17 @@
         padding: 3em 0;
       }
 
-      .m3-a-bottomBar {
-        background-color: rgba(0, 0, 0, 0.5);
-        bottom: 0;
-        display: flex;
-        justify-content: space-between;
+      .m3-a-map {
+        position: relative;
+        z-index: 1;
+      }
+
+      .m3-a-ui {
+        height: 100%;
         left: 0;
         position: fixed;
+        pointer-events: none;
+        top: 0;
         width: 100%;
         z-index: 2;
       }
@@ -91,7 +99,15 @@
         bottom: 3em;
         left: 0;
         pointer-events: none;
-        position: fixed;
+        position: absolute;
+      }
+
+      .m3-a-tilePicker {
+        bottom: 0;
+        filter: drop-shadow(0 0 2em #000000);
+        left: 0;
+        position: absolute;
+        width: 100%;
       }
 
       .m3-a-topBar {
@@ -99,16 +115,18 @@
         display: flex;
         justify-content: space-between;
         left: 0;
-        position: fixed;
+        position: absolute;
         top: 0;
         width: 100%;
-        z-index: 2;
       }
     </style>
 
-    <div class="m3-a-topBar"></div>
-    <div class="m3-a-bottomBar"></div>
-    <div class="m3-a-minimap"></div>
+    <div class="m3-a-map"></div>
+    <div class="m3-a-ui">
+      <div class="m3-a-topBar"></div>
+      <div class="m3-a-tilePicker"></div>
+      <div class="m3-a-minimap"></div>
+    </div>
 
     <script>
       const playerColors = [
@@ -126,8 +144,7 @@
           })
         )
 
-      const bottomBar = document.querySelector('.m3-a-bottomBar'),
-        topBar = document.querySelector('.m3-a-topBar')
+      const topBar = document.querySelector('.m3-a-topBar')
 
       const claimStore = []
 
@@ -143,7 +160,7 @@
 
       const mapComponent = m3.component.map.create({
         model: map,
-      }, document.body).setId('map').attach()
+      }, document.querySelector('.m3-a-map')).setId('map').attach()
 
       // TODO: Enable when complete
       /*
@@ -159,13 +176,12 @@
       }).sort((a, b) => {
         return a.getName().localeCompare(b.getName())
       }).map((tile) => ({
-        label: tile.getIcon() + ' ' + tile.getName(),
-        value: tile.getId(),
+        tile,
       }))
 
-      const pickerComponent = m3.component.picker.create({
+      const tilePickerComponent = m3.component.tilePicker.create({
         option: pickerOptions,
-      }, bottomBar).attach()
+      }, document.querySelector('.m3-a-tilePicker')).attach()
 
       // Map generation
       m3.utility.map.randomize(map)
@@ -225,9 +241,8 @@
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
           const model = cell.getModel(),
-            pickerValue = pickerComponent.getValue(),
             round = game.getCurrentRound(),
-            tile = m3.model.tile.get(pickerValue),
+            tile = tilePickerComponent.getValue(),
             turn = round.getCurrentTurn()
 
           const options = {
@@ -301,7 +316,7 @@
         setActiveScore(player)
 
         if (players.length > 1) {
-          pickerComponent.setValue(0)
+          tilePickerComponent.setSelectedIndex(0)
           alert('Up next: ' + player.getName())
         }
       }
