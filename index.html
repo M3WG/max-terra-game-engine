@@ -15,7 +15,6 @@
     <link href="./css/component/map.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/minimap.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/picker.css" rel="stylesheet" type="text/css" />
-    <link href="./css/component/score.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/tilePicker.css" rel="stylesheet" type="text/css" />
     <link href="./css/component/tilePickerOption.css" rel="stylesheet" type="text/css" />
 
@@ -41,7 +40,8 @@
     <script src="./js/m3/component/map.js"></script>
     <script src="./js/m3/component/minimap.js"></script>
     <script src="./js/m3/component/picker.js"></script>
-    <script src="./js/m3/component/score.js"></script>
+    <script src="./js/m3/component/scoreboard.js"></script>
+    <script src="./js/m3/component/scoreboardPlayer.js"></script>
     <script src="./js/m3/component/tilePicker.js"></script>
     <script src="./js/m3/component/tilePickerOption.js"></script>
 
@@ -124,11 +124,13 @@
     <div class="m3-a-map"></div>
     <div class="m3-a-ui">
       <div class="m3-a-gameStatus"></div>
+      <div class="m3-a-scoreboard"></div>
       <div class="m3-a-tilePicker"></div>
       <div class="m3-a-minimap"></div>
     </div>
 
     <script>
+      // Create players
       const playerColors = [
         '#FF0000',
         '#0000FF',
@@ -196,12 +198,11 @@
         claim.getFogShape().forEach((cell) => cell.setFog(false))
       })
 
-      // Create map component
+      // Create components
       const mapComponent = m3.component.map.create({
         model: map,
       }, document.querySelector('.m3-a-map')).setId('map').attach()
 
-      // Create minimap component
       // TODO: Enable when complete
       /*
       const minimapComponent = m3.component.minimap.create({
@@ -209,12 +210,14 @@
       }, document.querySelector('.m3-a-minimap')).attach()
       */
 
-      // Create game status component
+      const scoreboardComponent = m3.component.scoreboard.create({
+        player: players,
+      }, document.querySelector('.m3-a-scoreboard')).attach()
+
       const gameStatusComponent = m3.component.gameStatus.create({
         model: game,
       }, document.querySelector('.m3-a-gameStatus')).attach()
 
-      // Create tile picker component
       const tilePickerOptions = m3.model.tile.getAll().filter((tile) => {
         // XXX: Hide space
         return tile.getId() != 0
