@@ -9,13 +9,15 @@
   width: 10vmin;
 }
   .m3-c-tilePickerOption::after {
-    border: 0.25em solid transparent;
+    border: 0.25em solid rgba(0, 0, 0, 0.75);
     content: '';
     height: 100%;
     left: 0;
+    opacity: 0;
     position: absolute;
     top: 0;
-    transition: border-color 0.25s ease;
+    transition: all 0.25s ease;
+    transition-property: filter, opacity;
     width: 100%;
     z-index: 4;
   }
@@ -58,8 +60,9 @@
 
 .m3-c-tilePickerOption-selected {}
   .m3-c-tilePickerOption-selected::after {
-    border-color: #FFFFAA;
+    opacity: 1;
   }
   .m3-c-tilePickerOption-selected .m3-c-tilePickerOption--icon {
+    filter: grayscale(0);
     opacity: 1;
   }
