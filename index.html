@@ -141,15 +141,18 @@
         '#FF00FF',
       ];
 
-      const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4),
-        players = Array(playerCount).fill().map((_, index) =>
-          m3.model.player.create({
-            color: playerColors[index],
-            name: 'Player ' + (index + 1),
-          })
-        )
+      const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4)
+      const players = Array(playerCount).fill().map((_, index) =>
+        m3.model.player.create({
+          color: playerColors[index],
+          name: 'Player ' + (index + 1),
+        })
+      )
 
       const claimStore = []
+      const playerViews = new Map(
+        players.map((player) => [player, {}])
+      )
 
       // Create game
       const map = m3.model.map.create({
@@ -240,7 +243,8 @@
           const model = cell.getModel(),
             round = game.getCurrentRound(),
             tile = tilePickerComponent.getValue(),
-            turn = round.getCurrentTurn()
+            turn = round.getCurrentTurn(),
+            turnPlayer = turn.player
 
           const options = {
             cell: model,
@@ -260,7 +264,7 @@
           const match = m3.utility.match(options)
 
           if (match) {
-            match.player = turn.player
+            match.player = turnPlayer
 
             const claim = m3.model.claim.create(match),
               score = claim.type.getScore()
@@ -287,7 +291,7 @@
                 player: firstPlayer,
               })
 
-              setupNextPlayer(firstPlayer)
+              transitionPlayerView(firstPlayer, turnPlayer)
             } else {
               const nextPlayer = game.getPlayer(round.getTurnCount())
 
@@ -295,7 +299,7 @@
                 player: nextPlayer,
               })
 
-              setupNextPlayer(nextPlayer)
+              transitionPlayerView(nextPlayer, turnPlayer)
             }
           }
 
@@ -303,30 +307,46 @@
         })
       })
 
-      // Begin
-      scrollToStartLocation(players[0])
-
-      // Utility functions
-      function setupNextPlayer(player) {
-        scrollToStartLocation(player)
-
-        if (players.length > 1) {
-          tilePickerComponent.setSelectedIndex(0)
-          alert('Up next: ' + player.getName())
-        }
-      }
-
-      function scrollToStartLocation(player) {
-        const claim = startLocations[players.indexOf(player)]
+      // Initialize player views
+      startLocations.forEach((claim) => {
         const cell = claim.getCells()[0],
           cellComponent = mapComponent.getCell(cell.getX(), cell.getY()),
+          player = claim.player,
           rect = cellComponent.getBoundingClientRect(),
-          x = rect.x - vw(50) + (0.5 * rect.width),
-          y = rect.y - vh(50) + (0.5 * rect.height)
+          x = cellComponent._rootElement.offsetLeft - vw(50) + (0.5 * rect.width),
+          y = cellComponent._rootElement.offsetTop - vh(50) + (0.5 * rect.height)
 
-        window.scrollBy({
-          left: x,
-          top: y,
+        const playerView = playerViews.get(player)
+
+        playerView.tile = 0
+        playerView.x = x
+        playerView.y = y
+      })
+
+      // Set up first player view
+      transitionPlayerView(players[0])
+
+      // Utility functions
+      function transitionPlayerView(nextPlayer, currentPlayer) {
+        if (nextPlayer === currentPlayer) {
+          return
+        }
+
+        const currentView = playerViews.get(currentPlayer),
+          nextView = playerViews.get(nextPlayer)
+
+        if (currentView) {
+          currentView.tile = tilePickerComponent.getSelectedIndex()
+          currentView.x = window.scrollX
+          currentView.y = window.scrollY
+
+          alert('Up next: ' + nextPlayer.getName())
+        }
+
+        tilePickerComponent.setSelectedIndex(nextView.tile)
+        window.scrollTo({
+          left: nextView.x,
+          top: nextView.y,
           behavior: 'smooth',
         })
       }
