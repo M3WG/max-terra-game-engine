@@ -1,0 +1,32 @@
+.m3-c-scoreboard {
+  display: flex;
+  pointer-events: none;
+}
+  .m3-c-scoreboard--player {
+    display: flex;
+  }
+  .m3-c-scoreboard--player + .m3-c-scoreboard--player {
+    margin-top: 0.5em;
+  }
+  .m3-c-scoreboard--playerColor {
+    height: 1em;
+    flex: 0 0 auto;
+    width: 1em;
+  }
+  .m3-c-scoreboard--playerName {
+    flex: 1 1 auto;
+    padding: 0 0.5rem;
+  }
+  .m3-c-scoreboard--playerScore {
+    flex: 0 0 auto;
+    padding: 0 0.5rem;
+  }
+  .m3-c-scoreboard--players {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #FFFFFF;
+    flex: 0 0 auto;
+    font-weight: 700;
+    list-style-type: none;
+    padding: 1em;
+    pointer-events: auto;
+  }
