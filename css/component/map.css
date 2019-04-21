@@ -1,1 +1,8 @@
-.m3-c-map {}
+.m3-c-map {
+  background-color: #111111;
+  padding: 50vh 50vw;
+}
+  .m3-c-map--table {
+    background-color: #000000;
+    box-shadow: 0 0 8em #000000;
+  }
