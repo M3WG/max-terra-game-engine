@@ -11,7 +11,7 @@ m3.component.tilePicker.prototype = (
 
       _build.call(this)
 
-      this.setSelectedIndex(0).attach()
+      this.setSelectedIndex(0)
 
       return this
     }
