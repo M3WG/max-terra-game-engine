@@ -36,6 +36,7 @@
     <!--<script src="./js/m3/component/.js"></script>-->
     <script src="./js/m3/component/base.js"></script>
     <script src="./js/m3/component/cell.js"></script>
+    <script src="./js/m3/component/gameStatus.js"></script>
     <script src="./js/m3/component/map.js"></script>
     <script src="./js/m3/component/minimap.js"></script>
     <script src="./js/m3/component/picker.js"></script>
@@ -95,6 +96,14 @@
         z-index: 2;
       }
 
+      .m3-a-gameStatus {
+        filter: drop-shadow(0 0 2em #000000);
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
       .m3-a-minimap {
         bottom: 3em;
         left: 0;
@@ -109,21 +118,11 @@
         position: absolute;
         width: 100%;
       }
-
-      .m3-a-topBar {
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: space-between;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
     </style>
 
     <div class="m3-a-map"></div>
     <div class="m3-a-ui">
-      <div class="m3-a-topBar"></div>
+      <div class="m3-a-gameStatus"></div>
       <div class="m3-a-tilePicker"></div>
       <div class="m3-a-minimap"></div>
     </div>
@@ -144,8 +143,6 @@
           })
         )
 
-      const topBar = document.querySelector('.m3-a-topBar')
-
       const claimStore = []
 
       const map = m3.model.map.create({
@@ -153,9 +150,14 @@
         width: 100,
       })
 
+      // Create game
       const game = m3.model.game.create({
         map,
         player: players,
+      })
+
+      game.createRound().createTurn({
+        player: game.getPlayer(0),
       })
 
       const mapComponent = m3.component.map.create({
@@ -168,6 +170,11 @@
         model: map,
       }, document.querySelector('.m3-a-minimap')).attach()
       */
+
+      // Create gameStatus component
+      const gameStatusComponent = m3.component.gameStatus.create({
+        model: game,
+      }, document.querySelector('.m3-a-gameStatus')).attach()
 
       // Create picker component
       const pickerOptions = m3.model.tile.getAll().filter((tile) => {
@@ -185,22 +192,6 @@
 
       // Map generation
       m3.utility.map.randomize(map)
-
-      // Create initial round/turn
-      game.createRound().createTurn({
-        player: game.getPlayer(0),
-      })
-
-      // Create score components
-      const scoreComponents = players.map((player) => {
-        const container = document.createElement('div')
-        container.className = 'm3-a-score--score'
-        topBar.appendChild(container)
-
-        return m3.component.score.create({model: player}, container)
-      })
-
-      setActiveScore(players[0])
 
       // Create start locations
       const createStartLocation = (player, x, y) => {
@@ -258,6 +249,8 @@
             return
           }
 
+          model.setTile(tile)
+
           const match = m3.utility.match(options)
 
           if (match) {
@@ -300,20 +293,13 @@
             }
           }
 
-          model.setTile(tile)
+          gameStatusComponent.render()
         })
       })
 
       // Utility functions
-      function setActiveScore(player) {
-        scoreComponents.forEach((component) => {
-          component.setActive(component.getModel() == player)
-        })
-      }
-
       function setupNextPlayer(player) {
         scrollToStartLocation(player)
-        setActiveScore(player)
 
         if (players.length > 1) {
           tilePickerComponent.setSelectedIndex(0)
