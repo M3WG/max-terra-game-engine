@@ -146,12 +146,12 @@
 
       const claimStore = []
 
+      // Create game
       const map = m3.model.map.create({
         height: 100,
         width: 100,
       })
 
-      // Create game
       const game = m3.model.game.create({
         map,
         player: players,
@@ -161,40 +161,9 @@
         player: game.getPlayer(0),
       })
 
-      const mapComponent = m3.component.map.create({
-        model: map,
-      }, document.querySelector('.m3-a-map')).setId('map').attach()
-
-      // TODO: Enable when complete
-      /*
-      const minimapComponent = m3.component.minimap.create({
-        model: map,
-      }, document.querySelector('.m3-a-minimap')).attach()
-      */
-
-      // Create gameStatus component
-      const gameStatusComponent = m3.component.gameStatus.create({
-        model: game,
-      }, document.querySelector('.m3-a-gameStatus')).attach()
-
-      // Create picker component
-      const pickerOptions = m3.model.tile.getAll().filter((tile) => {
-        // XXX: Hide space
-        return tile.getId() != 0
-      }).sort((a, b) => {
-        return a.getName().localeCompare(b.getName())
-      }).map((tile) => ({
-        tile,
-      }))
-
-      const tilePickerComponent = m3.component.tilePicker.create({
-        option: pickerOptions,
-      }, document.querySelector('.m3-a-tilePicker')).attach()
-
       // Map generation
       m3.utility.map.randomize(map)
 
-      // Create start locations
       const createStartLocation = (player, x, y) => {
         const cell = map.getCell(x, y)
 
@@ -227,7 +196,37 @@
         claim.getFogShape().forEach((cell) => cell.setFog(false))
       })
 
-      scrollToStartLocation(players[0])
+      // Create map component
+      const mapComponent = m3.component.map.create({
+        model: map,
+      }, document.querySelector('.m3-a-map')).setId('map').attach()
+
+      // Create minimap component
+      // TODO: Enable when complete
+      /*
+      const minimapComponent = m3.component.minimap.create({
+        model: map,
+      }, document.querySelector('.m3-a-minimap')).attach()
+      */
+
+      // Create game status component
+      const gameStatusComponent = m3.component.gameStatus.create({
+        model: game,
+      }, document.querySelector('.m3-a-gameStatus')).attach()
+
+      // Create tile picker component
+      const tilePickerOptions = m3.model.tile.getAll().filter((tile) => {
+        // XXX: Hide space
+        return tile.getId() != 0
+      }).sort((a, b) => {
+        return a.getName().localeCompare(b.getName())
+      }).map((tile) => ({
+        tile,
+      }))
+
+      const tilePickerComponent = m3.component.tilePicker.create({
+        option: tilePickerOptions,
+      }, document.querySelector('.m3-a-tilePicker')).attach()
 
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
@@ -297,6 +296,9 @@
           gameStatusComponent.render()
         })
       })
+
+      // Begin
+      scrollToStartLocation(players[0])
 
       // Utility functions
       function setupNextPlayer(player) {
