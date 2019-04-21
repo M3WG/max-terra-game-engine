@@ -45,8 +45,9 @@ m3.component.tilePickerOption.prototype = (
     function _build() {
       const tile = this.getValue()
 
-      this._rootElement = document.createElement('div')
+      this._rootElement = document.createElement('button')
       this._rootElement.className = 'm3-c-tilePickerOption'
+      this._rootElement.type = 'button'
       this._rootElement.addEventListener('click', _onClick.bind(this))
 
       const color = document.createElement('div')

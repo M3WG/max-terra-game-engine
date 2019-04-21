@@ -1,6 +1,10 @@
 .m3-c-tilePickerOption {
+  background: transparent;
+  border: 0;
   height: 10vmin;
+  font-size: 1em;
   overflow: hidden;
+  padding: 0;
   position: relative;
   width: 10vmin;
 }
