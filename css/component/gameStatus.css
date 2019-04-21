@@ -1,0 +1,34 @@
+.m3-c-gameStatus {
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+  .m3-c-gameStatus--action {}
+  .m3-c-gameStatus--color {
+    height: 1.25em;
+  }
+  .m3-c-gameStatus--item {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+  .m3-c-gameStatus--item + .m3-c-gameStatus--item {
+    border-left: 1px solid #CCCCCC;
+  }
+  .m3-c-gameStatus--items {
+    background-color: #FFFFFF;
+    display: flex;
+    list-style-type: none;
+  }
+  .m3-c-gameStatus--label {
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    text-transform: uppercase;
+  }
+  .m3-c-gameStatus--round {}
+  .m3-c-gameStatus--turn {}
+  .m3-c-gameStatus--value {
+    font-size: 2em;
+    padding: 0.25rem 0.5rem;
+  }
