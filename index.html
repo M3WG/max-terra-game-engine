@@ -224,12 +224,11 @@
         model: game,
       }, document.querySelector('.m3-a-gameStatus')).attach()
 
-      const tilePickerOptions = m3.model.tile.getAll().filter((tile) => {
-        // XXX: Hide space
-        return tile.getId() != 0
-      }).sort((a, b) => {
-        return a.getName().localeCompare(b.getName())
-      }).map((tile) => ({
+      const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
+        tile.config.picker && tile.config.picker.active
+      ).sort((a, b) =>
+        a.config.picker.position - b.config.picker.position
+      ).map((tile) => ({
         tile,
       }))
 
