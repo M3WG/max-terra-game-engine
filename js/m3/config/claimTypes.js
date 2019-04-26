@@ -7,36 +7,7 @@ m3.config.claimTypes = {
     name: 'city',
     priority: 1,
     score: 24,
-    shape: {
-      mirror: false,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 1},
-          {dx: 1, dy: 0, tile: 1},
-          {dx: 0, dy: 1, tile: 1},
-          {dx: 1, dy: 1, tile: 1},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 1},
-          {dx: -1, dy: 0, tile: 1},
-          {dx: 0, dy: 1, tile: 1},
-          {dx: -1, dy: 1, tile: 1},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 1},
-          {dx: 1, dy: 0, tile: 1},
-          {dx: 0, dy: -1, tile: 1},
-          {dx: 1, dy: -1, tile: 1},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 1},
-          {dx: -1, dy: 0, tile: 1},
-          {dx: 0, dy: -1, tile: 1},
-          {dx: -1, dy: -1, tile: 1},
-        ],
-      ],
-      rotate: false,
-    },
+    type: 1,
   },
   2: {
     id: 2,
@@ -44,36 +15,7 @@ m3.config.claimTypes = {
     name: 'farmstead',
     priority: 1,
     score: 8,
-    shape: {
-      mirror: true,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 3},
-          {dx: 1, dy: 0, tile: 3},
-          {dx: 2, dy: 0, tile: 3},
-          {dx: 0, dy: 1, tile: 3},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 3},
-          {dx: -1, dy: 0, tile: 3},
-          {dx: 1, dy: 0, tile: 3},
-          {dx: -1, dy: 1, tile: 3},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 3},
-          {dx: -1, dy: 0, tile: 3},
-          {dx: -2, dy: 0, tile: 3},
-          {dx: -2, dy: 1, tile: 3},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 3},
-          {dx: 0, dy: -1, tile: 3},
-          {dx: 1, dy: -1, tile: 3},
-          {dx: 2, dy: -1, tile: 3},
-        ],
-      ],
-      rotate: true,
-    },
+    type: 3,
   },
   3: {
     id: 3,
@@ -81,36 +23,7 @@ m3.config.claimTypes = {
     name: 'logging camp',
     priority: 1,
     score: 12,
-    shape: {
-      mirror: true,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 4},
-          {dx: 1, dy: 0, tile: 4},
-          {dx: 1, dy: 1, tile: 4},
-          {dx: 2, dy: 1, tile: 4},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 4},
-          {dx: -1, dy: 0, tile: 4},
-          {dx: 0, dy: 1, tile: 4},
-          {dx: 1, dy: 1, tile: 4},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 4},
-          {dx: -1, dy: -1, tile: 4},
-          {dx: 0, dy: -1, tile: 4},
-          {dx: 1, dy: 0, tile: 4},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 4},
-          {dx: -2, dy: -1, tile: 4},
-          {dx: -1, dy: -1, tile: 4},
-          {dx: -1, dy: 0, tile: 4},
-        ],
-      ],
-      rotate: true,
-    },
+    type: 4,
   },
   4: {
     id: 4,
@@ -118,36 +31,7 @@ m3.config.claimTypes = {
     name: 'quarry',
     score: 16,
     priority: 1,
-    shape: {
-      mirror: false,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 5},
-          {dx: -1, dy: 1, tile: 5},
-          {dx: 0, dy: 1, tile: 5},
-          {dx: 1, dy: 1, tile: 5},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 5},
-          {dx: 1, dy: -1, tile: 5},
-          {dx: 1, dy: 0, tile: 5},
-          {dx: 2, dy: 0, tile: 5},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 5},
-          {dx: 0, dy: -1, tile: 5},
-          {dx: -1, dy: 0, tile: 5},
-          {dx: 1, dy: 0, tile: 5},
-        ],
-        [
-          {dx: 0, dy: 0, tile: 5},
-          {dx: -1, dy: 0, tile: 5},
-          {dx: -1, dy: -1, tile: 5},
-          {dx: -2, dy: 0, tile: 5},
-        ],
-      ],
-      rotate: true,
-    },
+    type: 5,
   },
   5: {
     id: 5,
@@ -155,24 +39,7 @@ m3.config.claimTypes = {
     name: 'mine',
     priority: 1,
     score: 20,
-    shape: {
-      mirror: false,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 6},
-          {dx: 1, dy: 0, tile: 6},
-          {dx: 2, dy: 0, tile: 6},
-          {dx: 3, dy: 0, tile: 6},
-        ],
-        [
-          {dx: -1, dy: 0, tile: 6},
-          {dx: 0, dy: 0, tile: 6},
-          {dx: 1, dy: 0, tile: 6},
-          {dx: 2, dy: 0, tile: 6},
-        ],
-      ],
-      rotate: true,
-    },
+    type: 6,
   },
   6: {
     id: 6,
@@ -180,15 +47,7 @@ m3.config.claimTypes = {
     name: 'tower',
     priority: 1,
     score: 0,
-    shape: {
-      mirror: false,
-      permutation: [
-        [
-          {dx: 0, dy: 0, tile: 7},
-        ],
-      ],
-      rotate: false,
-    },
+    type: 7,
   },
 }
 
