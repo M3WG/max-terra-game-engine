@@ -14,19 +14,26 @@ m3.utility.match = (action) => {
       return false
     }
 
-    if (x == cx && y == cy) {
-      return id == actionTileId
-    }
-
-    return cell.tile.getId() == id
+    return cell.tile.getId() == actionTileId
   }
 
   const gatherPermutation = cells => cells.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
-  const testPermutation = cells => cells.reduce((result, {dx, dy, tile}) => result && is(cx + dx, cy + dy, tile), true)
+  const testPermutation = cells => cells.reduce((result, {dx, dy}) => result && is(cx + dx, cy + dy), true)
 
-  for (const claimType of m3.model.claimType.getAll()) {
-    const shape = claimType.getShape()
+  // XXX: Simplest way to retrieve
+  // TODO: Create easier way to derive claim type from tile id
+  // TODO: Prevent water and special tiles from matching
+  const claimType = ((id) => {
+    const claimTypes = m3.model.claimType.getAll()
 
+    for (const claimType of claimTypes) {
+      if (claimType.getId() == id) {
+        return claimType
+      }
+    }
+  })(actionTileId);
+
+  for (const shape of m3.config.shapes) {
     let rotations = shape.rotate ? 4 : 0
     do {
       let mirrors = shape.mirror ? 2 : 0
