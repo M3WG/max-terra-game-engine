@@ -48,7 +48,7 @@ m3.component.cell.prototype = (
 
       if (model.claim) {
         this._rootElement.classList.add('m3-c-cell-claim', ..._getClaimDirectionClassnames.call(this))
-        this._rootElement.style.borderColor = model.claim.player.getColor()
+        this._rootElement.style.backgroundColor = model.claim.player.getColor()
       } else {
         this._rootElement.classList.remove(
           'm3-c-cell-claim',
@@ -57,7 +57,6 @@ m3.component.cell.prototype = (
           'm3-c-cell-claimRight',
           'm3-c-cell-claimUp',
         )
-        this._rootElement.style.borderColor = 'transparent'
       }
 
       if (model.getFog()) {
