@@ -1,13 +1,19 @@
 'use strict'
 
 m3.utility.match = (action) => {
-  const actionTileId = action.tile.getId(),
+  const actionTile = action.tile
+
+  if (!actionTile.isMatchable()) {
+    return
+  }
+
+  const actionTileId = actionTile.getId(),
     center = action.cell,
     slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7)
 
   const {x: cx, y: cy} = slice.getCellCoordinates(center)
 
-  const is = (x, y, id) => {
+  const is = (x, y) => {
     const cell = slice.getCell(x, y)
 
     if (!cell || cell.claim) {
@@ -20,19 +26,6 @@ m3.utility.match = (action) => {
   const gatherPermutation = cells => cells.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
   const testPermutation = cells => cells.reduce((result, {dx, dy}) => result && is(cx + dx, cy + dy), true)
 
-  // XXX: Simplest way to retrieve
-  // TODO: Create easier way to derive claim type from tile id
-  // TODO: Prevent water and special tiles from matching
-  const claimType = ((id) => {
-    const claimTypes = m3.model.claimType.getAll()
-
-    for (const claimType of claimTypes) {
-      if (claimType.getId() == id) {
-        return claimType
-      }
-    }
-  })(actionTileId);
-
   for (const shape of m3.config.shapes) {
     let rotations = shape.rotate ? 4 : 0
     do {
@@ -42,7 +35,7 @@ m3.utility.match = (action) => {
           if (testPermutation(permutation)) {
             return {
               cell: gatherPermutation(permutation),
-              type: claimType,
+              type: actionTile.getClaimType(),
             }
           }
         }
