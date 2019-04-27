@@ -21,15 +21,16 @@ m3.utility.map.importCsv = function(model, csv) {
 }
 
 m3.utility.map.randomize = function(model) {
-  // XXX: Disable magic tile
-  // TODO: Do something more sophisticated with tile weights
-  const tiles = Object.keys(m3.config.tiles).slice(0, -1)
+  const tiles = utility.array.shuffle(
+    m3.model.tile.getAll().reduce((tiles, tile) => [
+      ...tiles,
+      ...Array(tile.getRandomWeight()).fill(tile)
+    ], [])
+  )
 
-  model.getCells().forEach(function setTile(cell) {
-    cell.setTile(
-      utility.array.randomValue(tiles)
-    )
-  })
+  model.getCells().forEach((cell) => cell.setTile(
+    utility.array.randomValue(tiles)
+  ))
 }
 
 m3.utility.map.zero = function(model) {
