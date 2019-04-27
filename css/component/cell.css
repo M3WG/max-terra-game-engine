@@ -12,12 +12,17 @@
   .m3-c-cell--icon {
     filter: grayscale(1);
     opacity: 0.333333;
+    transition: all 0.5s ease;
   }
 
 .m3-c-cell-claim {
   animation: m3-c-cell--onClaim 0.25s ease 0s 1 normal both;
   border: 5px solid transparent;
 }
+  .m3-c-cell-claim .m3-c-cell--icon {
+    filter: none;
+    opacity: 1;
+  }
   @keyframes m3-c-cell--onClaim {
     0% {
       filter: brightness(1);
