@@ -7,6 +7,7 @@ m3.config.tiles = {
     desc: 'void',
     icon: '&nbsp;',
     picker: {},
+    randomWeight: 10,
   },
   1: {
     id: 1,
@@ -19,6 +20,7 @@ m3.config.tiles = {
       active: true,
       position: 0,
     },
+    randomWeight: 196,
   },
   2: {
     id: 2,
@@ -29,6 +31,7 @@ m3.config.tiles = {
       active: true,
       position: 6,
     },
+    randomWeight: 196,
   },
   3: {
     id: 3,
@@ -41,6 +44,7 @@ m3.config.tiles = {
       active: true,
       position: 1,
     },
+    randomWeight: 196,
   },
   4: {
     id: 4,
@@ -53,6 +57,7 @@ m3.config.tiles = {
       active: true,
       position: 2,
     },
+    randomWeight: 196,
   },
   5: {
     id: 5,
@@ -65,6 +70,7 @@ m3.config.tiles = {
       active: true,
       position: 3,
     },
+    randomWeight: 196,
   },
   6: {
     id: 6,
@@ -73,6 +79,7 @@ m3.config.tiles = {
     desc: 'gold',
     icon: '💎',
     picker: {},
+    randomWeight: 5,
   },
   7: {
     id: 7,
@@ -80,5 +87,6 @@ m3.config.tiles = {
     desc: 'magic',
     icon: '🧙',
     picker: {},
+    randomWeight: 5,
   },
 }
