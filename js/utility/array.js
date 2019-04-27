@@ -26,3 +26,15 @@ utility.array.reverse = array => {
 
   return copy(array).reverse()
 }
+
+utility.array.shuffle = array => {
+  array = utility.array.copy(array)
+
+  for (let i = array.length - 1; i > 0; i--) {
+    // Fun fact: Semi-colon prevents "Uncaught ReferenceError: j is not defined"
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]
+  }
+
+  return array
+}
