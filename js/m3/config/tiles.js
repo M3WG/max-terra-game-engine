@@ -83,7 +83,7 @@ m3.config.tiles = {
   },
   7: {
     id: 7,
-    color: '#FF00FF',
+    color: '#FF66FF',
     desc: 'magic',
     icon: '🧙',
     picker: {},
