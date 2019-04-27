@@ -32,6 +32,10 @@ m3.model.tile.prototype = (
       return this.config.desc
     }
 
+    function getRandomWeight() {
+      return this.config.randomWeight
+    }
+
     function isMatchable() {
       return Boolean(this.config.matchable)
     }
@@ -46,6 +50,7 @@ m3.model.tile.prototype = (
       getColor,
       getIcon,
       getName,
+      getRandomWeight,
       isMatchable,
     }, _prototype)
   }
