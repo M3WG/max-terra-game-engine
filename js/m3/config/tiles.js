@@ -72,7 +72,6 @@ m3.config.tiles = {
     color: '#FF9900',
     desc: 'gold',
     icon: '💎',
-    matchable: true,
     picker: {},
   },
   7: {
