@@ -277,7 +277,7 @@
           }
 
           const action = turn.createAction(options),
-            isTurnEnd = turn.getActionCount() >= 3
+            isTurnEnd = turn.getActionCount() >= 4
 
           if (isTurnEnd) {
             const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
