@@ -16,6 +16,10 @@ m3.model.tile.prototype = (
       return this
     }
 
+    function getClaimType() {
+      return m3.model.claimType.get(this.config.claimType)
+    }
+
     function getColor() {
       return this.config.color
     }
@@ -28,15 +32,21 @@ m3.model.tile.prototype = (
       return this.config.desc
     }
 
+    function isMatchable() {
+      return Boolean(this.config.matchable)
+    }
+
     // id
     // color
 
     return Object.setPrototypeOf({
       construct,
       destruct,
+      getClaimType,
       getColor,
       getIcon,
       getName,
+      isMatchable,
     }, _prototype)
   }
 )()
