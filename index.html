@@ -155,6 +155,19 @@
         players.map((player) => [player, {}])
       )
 
+      const startingInventory = [
+        [1, Infinity],
+        [3, Infinity],
+        [4, Infinity],
+        [5, Infinity],
+        [2, Infinity],
+        [6, 4],
+        [7, 4],
+      ]
+      const playerInventories = new Map(
+        players.map((player) => [player, new Map(startingInventory)])
+      )
+
       // Create game
       const map = m3.model.map.create({
         height: 100,
