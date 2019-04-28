@@ -4,7 +4,9 @@ m3.component.tilePickerOption = {}
 
 m3.component.tilePickerOption.prototype = (
   (undefined) => {
-    const _prototype = m3.component.base.prototype,
+    const _prototype = m3.component.base.prototype
+
+    const _disabledModifier = 'm3-c-tilePickerOption-disabled',
       _selectedModifier = 'm3-c-tilePickerOption-selected'
 
     function construct(...args) {
@@ -28,8 +30,22 @@ m3.component.tilePickerOption.prototype = (
       return this.config.tile
     }
 
+    function isDisabled() {
+      return this._rootElement.classList.contains(_disabledModifier)
+    }
+
     function isSelected() {
       return this._rootElement.classList.contains(_selectedModifier)
+    }
+
+    function setDisabled(state) {
+      if (state) {
+        this._rootElement.classList.add(_disabledModifier)
+      } else {
+        this._rootElement.classList.remove(_disabledModifier)
+      }
+
+      return this
     }
 
     function setSelected(state) {
@@ -77,7 +93,9 @@ m3.component.tilePickerOption.prototype = (
       construct,
       click,
       getValue,
+      isDisabled,
       isSelected,
+      setDisabled,
       setSelected,
     }, _prototype)
   }
