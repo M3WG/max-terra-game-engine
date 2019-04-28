@@ -80,6 +80,11 @@ m3.component.tilePickerOption.prototype = (
       label.className = 'm3-c-tilePickerOption--label'
       label.innerHTML = tile.getName()
       this._rootElement.appendChild(label)
+
+      const inventory = document.createElement('div')
+      inventory.className = 'm3-c-tilePickerOption--inventory'
+      this._rootElement.appendChild(inventory)
+      this._inventory = inventory
     }
 
     function _onClick(e) {

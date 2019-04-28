@@ -40,6 +40,17 @@
     transition: opacity 0.25s ease;
     z-index: 2;
   }
+  .m3-c-tilePickerOption--inventory {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 0.25em 0.5em;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 3;
+  }
   .m3-c-tilePickerOption--label {
     background-color: #000000;
     bottom: 0;
