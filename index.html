@@ -340,6 +340,21 @@
       transitionPlayerView(players[0])
 
       // Utility functions
+      function decrementInventory(player, tile) {
+        const inventory = playerInventories.get(player),
+          tileId = tile.getId(),
+          value = inventory.get(tileId)
+
+        inventory.set(tileId, value - 1 || 0)
+      }
+
+      function getInventory(player, tile) {
+        const inventory = playerInventories.get(player),
+          tileId = tile.getId()
+
+        return inventory.get(tileId) || 0
+      }
+
       function transitionPlayerView(nextPlayer, currentPlayer) {
         if (nextPlayer === currentPlayer) {
           return
@@ -361,6 +376,18 @@
           left: nextView.x,
           top: nextView.y,
           behavior: 'smooth',
+        })
+      }
+
+      function updateTilePickerInventory(player) {
+        const inventory = playerInventories.get(player)
+
+        tilePickerComponent.getOptions().forEach((option) => {
+          const tile = option.getValue(),
+            tileId = tile.getId(),
+            value = inventory.get(tileId)
+
+          option.setInventory(value)
         })
       }
 
