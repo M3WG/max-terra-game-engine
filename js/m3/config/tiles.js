@@ -29,7 +29,7 @@ m3.config.tiles = {
     icon: '🌊',
     picker: {
       active: true,
-      position: 6,
+      position: 4,
     },
     randomWeight: 196,
   },
@@ -78,7 +78,11 @@ m3.config.tiles = {
     color: '#FF9900',
     desc: 'gold',
     icon: '💎',
-    picker: {},
+    matchable: true,
+    picker: {
+      active: true,
+      position: 5,
+    },
     randomWeight: 5,
   },
   7: {
@@ -86,7 +90,10 @@ m3.config.tiles = {
     color: '#FF66FF',
     desc: 'magic',
     icon: '🧙',
-    picker: {},
+    picker: {
+      active: true,
+      position: 6,
+    },
     randomWeight: 5,
   },
 }
