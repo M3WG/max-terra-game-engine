@@ -5,34 +5,21 @@
   justify-content: center;
   line-height: 1;
   position: relative;
-  transition: all 0.5s ease;
-  transition-property: filter, opacity;
   width: 3em;
 }
   .m3-c-cell--icon {
     filter: grayscale(1);
     opacity: 0.25;
-    transition: all 0.5s ease;
+    transition: all 0.25s ease;
+    transition-property: filter, opacity;
   }
 
 .m3-c-cell-claim {
-  animation: m3-c-cell--onClaim 0.25s ease 0s 1 normal both;
   border: 5px outset rgba(127, 127, 127, 0.75);
 }
   .m3-c-cell-claim .m3-c-cell--icon {
     filter: none;
     opacity: 1;
-  }
-  @keyframes m3-c-cell--onClaim {
-    0% {
-      filter: brightness(1);
-    }
-    25% {
-      filter: brightness(1.5);
-    }
-    100% {
-      filter: brightness(1);
-    }
   }
 
 .m3-c-cell-claimDown {

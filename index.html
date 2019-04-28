@@ -253,6 +253,8 @@
       // Click event handlers
       mapComponent.getCells().forEach(function subscribeClick(cell) {
         cell.on('click', function onClick() {
+          const start = performance.now()
+
           const model = cell.getModel(),
             round = game.getCurrentRound(),
             tile = tilePickerComponent.getValue(),
