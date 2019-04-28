@@ -265,6 +265,10 @@
           }
 
           try {
+            if (getPlayerInventory(turnPlayer, tile) <= 0) {
+              throw new Error('Inventory is zero')
+            }
+
             m3.utility.action.validate(options)
           } catch (e) {
             console.error(e)
@@ -272,6 +276,8 @@
             return
           }
 
+          modifyPlayerInventory(turnPlayer, tile, -1)
+          modifyPlayerInventory(turnPlayer, model.tile, +1)
           model.setTile(tile)
 
           const match = m3.utility.match(options)
@@ -314,6 +320,8 @@
 
               transitionPlayerView(nextPlayer, turnPlayer)
             }
+          } else {
+            updateTilePickerInventory(turnPlayer)
           }
 
           gameStatusComponent.render()
@@ -356,6 +364,8 @@
       }
 
       function transitionPlayerView(nextPlayer, currentPlayer) {
+        updateTilePickerInventory(nextPlayer)
+
         if (nextPlayer === currentPlayer) {
           return
         }
@@ -372,6 +382,7 @@
         }
 
         tilePickerComponent.setSelectedIndex(nextView.tile)
+
         window.scrollTo({
           left: nextView.x,
           top: nextView.y,
