@@ -38,6 +38,26 @@ m3.component.tilePickerOption.prototype = (
       return this._rootElement.classList.contains(_selectedModifier)
     }
 
+    function setInventory(value) {
+      value = Math.max(0, value) || 0
+
+      if (value == Infinity || value == -Infinity) {
+        value = '∞'
+      }
+
+      this._inventory.innerHTML = value
+
+      const isDisabled = this.isDisabled()
+
+      if (!isDisabled && !value) {
+        this.setDisabled(true)
+      } else if (isDisabled && value) {
+        this.setDisabled(false)
+      }
+
+      return this
+    }
+
     function setDisabled(state) {
       if (state) {
         this._rootElement.classList.add(_disabledModifier)
@@ -100,6 +120,7 @@ m3.component.tilePickerOption.prototype = (
       getValue,
       isDisabled,
       isSelected,
+      setInventory,
       setDisabled,
       setSelected,
     }, _prototype)
