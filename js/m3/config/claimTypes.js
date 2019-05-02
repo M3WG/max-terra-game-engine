@@ -3,10 +3,10 @@
 m3.config.claimTypes = {
   1: {
     id: 1,
-    lineOfSight: 2,
+    lineOfSight: 3,
     name: 'city',
     priority: 1,
-    score: 24,
+    score: 10,
     type: 1,
   },
   2: {
@@ -14,7 +14,7 @@ m3.config.claimTypes = {
     lineOfSight: 3,
     name: 'farmstead',
     priority: 1,
-    score: 8,
+    score: 10,
     type: 3,
   },
   3: {
@@ -22,20 +22,20 @@ m3.config.claimTypes = {
     lineOfSight: 3,
     name: 'logging camp',
     priority: 1,
-    score: 12,
+    score: 10,
     type: 4,
   },
   4: {
     id: 4,
-    lineOfSight: 2,
+    lineOfSight: 3,
     name: 'quarry',
-    score: 16,
+    score: 10,
     priority: 1,
     type: 5,
   },
   5: {
     id: 5,
-    lineOfSight: 2,
+    lineOfSight: 3,
     name: 'mine',
     priority: 1,
     score: 100,
@@ -58,11 +58,3 @@ m3.config.claimTypes = {
     type: 7,
   },
 }
-
-// Fun fact: Semi-colon prevents "Uncaught TypeError: {(intermediate value)...} is not a function"
-;(function normalize() {
-  Object.values(m3.config.claimTypes).filter((type) => type.id !== 6).forEach((type) => {
-    type.score = 1
-    type.lineOfSight = 3
-  })
-})()
