@@ -251,16 +251,16 @@
       }, document.querySelector('.m3-a-tilePicker')).attach()
 
       // Click event handlers
-      mapComponent.getCells().forEach(function subscribeClick(cell) {
-        cell.on('click', function onClick() {
-          const model = cell.getModel(),
+      mapComponent.getCells().forEach((component) => {
+        component.on('click', () => {
+          const cell = component.getModel(),
             round = game.getCurrentRound(),
             tile = tilePickerComponent.getValue(),
             turn = round.getCurrentTurn(),
             turnPlayer = turn.player
 
           const options = {
-            cell: model,
+            cell,
             tile,
           }
 
@@ -277,8 +277,8 @@
           }
 
           modifyPlayerInventory(turnPlayer, tile, -1)
-          modifyPlayerInventory(turnPlayer, model.tile, +1)
-          model.setTile(tile)
+          modifyPlayerInventory(turnPlayer, cell.tile, +1)
+          cell.setTile(tile)
 
           const match = m3.utility.match(options)
 
