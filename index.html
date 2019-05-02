@@ -316,7 +316,7 @@
 
           claimStore.push(claim)
           turnPlayer.incrementScore(claim.type.getScore())
-          claim.getFogShape().forEach((cell) => cell.setFog(false))
+          drawClaimFog(claim, false)
         }
 
         const action = turn.createAction(options),
@@ -352,6 +352,12 @@
       }
 
       // Utility functions
+      function drawClaimFog(claim, state) {
+        const drawCellFog = (cell) => cell.setFog(state)
+
+        return claim.getFogShape().forEach(drawCellFog)
+      }
+
       function getPlayerInventory(player, tile) {
         const inventory = playerInventories.get(player),
           tileId = tile.getId()
