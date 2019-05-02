@@ -8,10 +8,18 @@ m3.utility.match = (action) => {
   }
 
   const actionTileId = actionTile.getId(),
-    center = action.cell,
-    slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7)
+    center = action.cell
 
-  const {x: cx, y: cy} = slice.getCellCoordinates(center)
+  // XXX: Special case for single magic tile to tower
+  if (actionTileId == 7) {
+    return {
+      cell: [center],
+      type: m3.model.claimType.get(6),
+    }
+  }
+
+  const slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7),
+        {x: cx, y: cy} = slice.getCellCoordinates(center)
 
   const is = (x, y) => {
     const cell = slice.getCell(x, y)
