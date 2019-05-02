@@ -19,7 +19,7 @@ m3.utility.action.validate = (options) => {
     throw new Error('Cell is claimed')
   }
 
-  if (cellTile.getId() == 2) {
+  if (cellTile.getId() == 2 && !tile.isPlaceableInWater()) {
     throw new Error('Cell contains water')
   }
 

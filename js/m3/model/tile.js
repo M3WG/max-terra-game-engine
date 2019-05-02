@@ -40,6 +40,10 @@ m3.model.tile.prototype = (
       return Boolean(this.config.matchable)
     }
 
+    function isPlaceableInWater() {
+      return Boolean(this.config.placeableInWater)
+    }
+
     // id
     // color
 
@@ -52,6 +56,7 @@ m3.model.tile.prototype = (
       getName,
       getRandomWeight,
       isMatchable,
+      isPlaceableInWater,
     }, _prototype)
   }
 )()
