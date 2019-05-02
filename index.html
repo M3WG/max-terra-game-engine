@@ -223,6 +223,10 @@
         model: map,
       }, document.querySelector('.m3-a-map')).setId('map').attach()
 
+      mapComponent.getCells().forEach((component) => {
+        component.on('click', () => doAction(component))
+      })
+
       // TODO: Enable when complete
       /*
       const minimapComponent = m3.component.minimap.create({
@@ -250,82 +254,6 @@
         option: tilePickerOptions,
       }, document.querySelector('.m3-a-tilePicker')).attach()
 
-      // Click event handlers
-      mapComponent.getCells().forEach((component) => {
-        component.on('click', () => {
-          const cell = component.getModel(),
-            round = game.getCurrentRound(),
-            tile = tilePickerComponent.getValue(),
-            turn = round.getCurrentTurn(),
-            turnPlayer = turn.player
-
-          const options = {
-            cell,
-            tile,
-          }
-
-          try {
-            if (getPlayerInventory(turnPlayer, tile) <= 0) {
-              throw new Error('Inventory is zero')
-            }
-
-            m3.utility.action.validate(options)
-          } catch (e) {
-            console.error(e)
-            alert('Invalid action: ' + e.message)
-            return
-          }
-
-          modifyPlayerInventory(turnPlayer, tile, -1)
-          modifyPlayerInventory(turnPlayer, cell.tile, +1)
-          cell.setTile(tile)
-
-          const match = m3.utility.match(options)
-
-          if (match) {
-            const claim = m3.model.claim.create({
-              player: turnPlayer,
-              ...match,
-            })
-
-            claimStore.push(claim)
-            turnPlayer.incrementScore(claim.type.getScore())
-            claim.getFogShape().forEach((cell) => cell.setFog(false))
-          }
-
-          const action = turn.createAction(options),
-            isTurnEnd = turn.getActionCount() >= 4
-
-          if (isTurnEnd) {
-            const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
-
-            if (isRoundEnd) {
-              const firstPlayer = game.getPlayer(0)
-
-              // XXX: Goes forever!
-              // TODO: Check game end condition
-              game.createRound().createTurn({
-                player: firstPlayer,
-              })
-
-              transitionPlayerView(firstPlayer, turnPlayer)
-            } else {
-              const nextPlayer = game.getPlayer(round.getTurnCount())
-
-              round.createTurn({
-                player: nextPlayer,
-              })
-
-              transitionPlayerView(nextPlayer, turnPlayer)
-            }
-          } else {
-            updateTilePickerInventory(turnPlayer)
-          }
-
-          gameStatusComponent.render()
-        })
-      })
-
       // Initialize player views
       startLocations.forEach((claim) => {
         const cell = claim.getCells()[0],
@@ -344,6 +272,80 @@
 
       // Set up first player view
       transitionPlayerView(players[0])
+
+      // Action logic
+      function doAction(component) {
+        const cell = component.getModel(),
+          round = game.getCurrentRound(),
+          tile = tilePickerComponent.getValue(),
+          turn = round.getCurrentTurn(),
+          turnPlayer = turn.player
+
+        const options = {
+          cell,
+          tile,
+        }
+
+        try {
+          if (getPlayerInventory(turnPlayer, tile) <= 0) {
+            throw new Error('Inventory is zero')
+          }
+
+          m3.utility.action.validate(options)
+        } catch (e) {
+          console.error(e)
+          alert('Invalid action: ' + e.message)
+          return
+        }
+
+        modifyPlayerInventory(turnPlayer, tile, -1)
+        modifyPlayerInventory(turnPlayer, cell.tile, +1)
+        cell.setTile(tile)
+
+        const match = m3.utility.match(options)
+
+        if (match) {
+          const claim = m3.model.claim.create({
+            player: turnPlayer,
+            ...match,
+          })
+
+          claimStore.push(claim)
+          turnPlayer.incrementScore(claim.type.getScore())
+          claim.getFogShape().forEach((cell) => cell.setFog(false))
+        }
+
+        const action = turn.createAction(options),
+          isTurnEnd = turn.getActionCount() >= 4
+
+        if (isTurnEnd) {
+          const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
+
+          if (isRoundEnd) {
+            const firstPlayer = game.getPlayer(0)
+
+            // XXX: Goes forever!
+            // TODO: Check game end condition
+            game.createRound().createTurn({
+              player: firstPlayer,
+            })
+
+            transitionPlayerView(firstPlayer, turnPlayer)
+          } else {
+            const nextPlayer = game.getPlayer(round.getTurnCount())
+
+            round.createTurn({
+              player: nextPlayer,
+            })
+
+            transitionPlayerView(nextPlayer, turnPlayer)
+          }
+        } else {
+          updateTilePickerInventory(turnPlayer)
+        }
+
+        gameStatusComponent.render()
+      }
 
       // Utility functions
       function getPlayerInventory(player, tile) {
