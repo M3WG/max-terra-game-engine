@@ -97,6 +97,7 @@ m3.config.tiles = {
       active: true,
       position: 6,
     },
+    placeableInFog: true,
     placeableInWater: true,
     randomWeight: 5,
   },

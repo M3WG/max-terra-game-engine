@@ -287,6 +287,10 @@
         }
 
         try {
+          if (cell.getFog() && !tile.isPlaceableInFog()) {
+            throw new Error('Tile type cannot be placed in fog')
+          }
+
           if (getPlayerInventory(turnPlayer, tile) <= 0) {
             throw new Error('Inventory is zero')
           }

@@ -40,6 +40,10 @@ m3.model.tile.prototype = (
       return Boolean(this.config.matchable)
     }
 
+    function isPlaceableInFog() {
+      return Boolean(this.config.placeableInFog)
+    }
+
     function isPlaceableInWater() {
       return Boolean(this.config.placeableInWater)
     }
@@ -56,6 +60,7 @@ m3.model.tile.prototype = (
       getName,
       getRandomWeight,
       isMatchable,
+      isPlaceableInFog,
       isPlaceableInWater,
     }, _prototype)
   }
