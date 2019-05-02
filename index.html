@@ -150,6 +150,8 @@
         })
       )
 
+      const sharedFog = confirm('Choose OK for Shared Fog.')
+
       const claimStore = []
       const playerViews = new Map(
         players.map((player) => [player, {}])
@@ -214,10 +216,6 @@
         return createStartLocation(player, x, y)
       })
 
-      claimStore.forEach((claim) => {
-        claim.getFogShape().forEach((cell) => cell.setFog(false))
-      })
-
       // Create components
       const mapComponent = m3.component.map.create({
         model: map,
@@ -272,6 +270,10 @@
 
       // Set up first player view
       transitionPlayerView(players[0])
+
+      if (sharedFog) {
+        claimStore.forEach((claim) => drawClaimFog(claim, false))
+      }
 
       // Action logic
       function doAction(component) {
@@ -400,6 +402,13 @@
         }
 
         tilePickerComponent.setSelectedIndex(nextView.tile)
+
+        if (!sharedFog) {
+          if (currentPlayer) {
+            drawPlayerFog(currentPlayer, true)
+          }
+          drawPlayerFog(nextPlayer, false)
+        }
 
         window.scrollTo({
           left: nextView.x,
