@@ -358,6 +358,14 @@
         return claim.getFogShape().forEach(drawCellFog)
       }
 
+      function drawPlayerFog(player, state) {
+        const filterInPlayer = (claim) => claim.player == player
+        const drawFog = (claim) => drawClaimFog(claim, state)
+
+        claimStore.filter(filterInPlayer)
+          .forEach(drawFog)
+      }
+
       function getPlayerInventory(player, tile) {
         const inventory = playerInventories.get(player),
           tileId = tile.getId()
