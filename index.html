@@ -283,16 +283,14 @@
           const match = m3.utility.match(options)
 
           if (match) {
-            match.player = turnPlayer
-
-            const claim = m3.model.claim.create(match),
-              score = claim.type.getScore()
-
-            turn.player.incrementScore(score)
-
-            claim.getFogShape().forEach((cell) => cell.setFog(false))
+            const claim = m3.model.claim.create({
+              player: turnPlayer,
+              ...match,
+            })
 
             claimStore.push(claim)
+            turnPlayer.incrementScore(claim.type.getScore())
+            claim.getFogShape().forEach((cell) => cell.setFog(false))
           }
 
           const action = turn.createAction(options),
