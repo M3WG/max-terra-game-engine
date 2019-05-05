@@ -28,7 +28,8 @@ m3.component.gameStatus.prototype = (
       this._roundValue.innerHTML = game.getRoundCount()
       this._turnColor.style.backgroundColor = turn.player.getColor()
       this._turnValue.innerHTML = turn.player.getName()
-      this._actionValue.innerHTML = turn.getActionCount() + 1
+      // XXX: Hardcoded at 4 actions per turn
+      this._actionValue.innerHTML = 4 - turn.getActionCount()
     }
 
     function _build() {
