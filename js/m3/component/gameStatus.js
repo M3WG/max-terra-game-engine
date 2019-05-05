@@ -63,7 +63,7 @@ m3.component.gameStatus.prototype = (
 
       const action = document.createElement('li')
       action.className = 'm3-c-gameStatus--item m3-c-gameStatus--action'
-      action.innerHTML = '<div class="m3-c-gameStatus--label">Action</div>'
+      action.innerHTML = '<div class="m3-c-gameStatus--label">Actions</div>'
       items.appendChild(action)
 
       this._actionValue = document.createElement('div')
