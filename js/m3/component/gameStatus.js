@@ -28,7 +28,8 @@ m3.component.gameStatus.prototype = (
       this._roundValue.innerHTML = game.getRoundCount()
       this._turnColor.style.backgroundColor = turn.player.getColor()
       this._turnValue.innerHTML = turn.player.getName()
-      this._actionValue.innerHTML = turn.getActionCount() + 1
+      // XXX: Hardcoded at 4 actions per turn
+      this._actionValue.innerHTML = 4 - turn.getActionCount()
     }
 
     function _build() {
@@ -62,7 +63,7 @@ m3.component.gameStatus.prototype = (
 
       const action = document.createElement('li')
       action.className = 'm3-c-gameStatus--item m3-c-gameStatus--action'
-      action.innerHTML = '<div class="m3-c-gameStatus--label">Action</div>'
+      action.innerHTML = '<div class="m3-c-gameStatus--label">Actions</div>'
       items.appendChild(action)
 
       this._actionValue = document.createElement('div')
