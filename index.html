@@ -337,6 +337,7 @@
             })
 
             transitionPlayerView(firstPlayer, turnPlayer)
+            updateRoundScores()
           } else {
             const nextPlayer = game.getPlayer(round.getTurnCount())
 
@@ -345,6 +346,7 @@
             })
 
             transitionPlayerView(nextPlayer, turnPlayer)
+            updateTurnScore(turnPlayer)
           }
         } else {
           updateTilePickerInventory(turnPlayer)
@@ -417,6 +419,10 @@
         })
       }
 
+      function updateRoundScores() {
+        // TODO
+      }
+
       function updateTilePickerInventory(player) {
         const inventory = playerInventories.get(player)
 
@@ -427,6 +433,10 @@
 
           option.setInventory(value)
         })
+      }
+
+      function updateTurnScore(player) {
+        // TODO
       }
 
       function vh(value) {
