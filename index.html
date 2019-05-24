@@ -336,8 +336,9 @@
               player: firstPlayer,
             })
 
-            transitionPlayerView(firstPlayer, turnPlayer)
+            updateTurnScore(turnPlayer)
             updateRoundScores()
+            transitionPlayerView(firstPlayer, turnPlayer)
           } else {
             const nextPlayer = game.getPlayer(round.getTurnCount())
 
@@ -345,8 +346,8 @@
               player: nextPlayer,
             })
 
-            transitionPlayerView(nextPlayer, turnPlayer)
             updateTurnScore(turnPlayer)
+            transitionPlayerView(nextPlayer, turnPlayer)
           }
         } else {
           updateTilePickerInventory(turnPlayer)
