@@ -72,6 +72,7 @@
 
     <!--<script src="./js/m3/utility/.js"></script>-->
     <script src="./js/m3/utility/action.js"></script>
+    <script src="./js/m3/utility/adjacency.js"></script>
     <script src="./js/m3/utility/claim.js"></script>
     <script src="./js/m3/utility/crawler.js"></script>
     <script src="./js/m3/utility/map.js"></script>
@@ -447,6 +448,25 @@
       function vw(value) {
         return window.innerWidth / 100 * value
       }
+
+      /*
+      Adjacency:
+      each round:
+      for each city claim, get adjacent claims
+        when claims are adjacent, they go into an array of their adjacent claims
+        each claim appears in only one array, even if it's just by itself
+        if claim already belongs in an array, skip checks and use reference to that array
+        cities are adjacent if they appear
+        eventually adjacency checks will include all water
+
+      claims have "Centers" which is the midpoint between all cells--becomes important with greedy matching
+      score per turn: each bucket of adjacencies, for each city claim, collect score from all other adjacent claims divided by a distance modifier multiplied by type modifier (and modifier based on city size)
+
+      Greedy matching:
+      Eliminate shape checks
+      Instead crawl through for at least four adjacent cells of same type
+      Additional cells beyond 4 become part of the claim
+      */
     </script>
   </body>
 </html>
