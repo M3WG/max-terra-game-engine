@@ -22,11 +22,8 @@ m3.utility.adjacency.getClaims = (claim) => {
     tests.forEach((test) => {
       if (test.claim && !claims.includes(test.claim)) {
         claims.push(test.claim)
-        count += 1
       }
     })
-
-    return count
   }
 
   claim.getCells().forEach(pushAdjacencies)
@@ -42,11 +39,10 @@ m3.utility.adjacency.getClaims = (claim) => {
         return
       }
 
-      const count = claim.getCells().reduce((count, cell) => {
-        return count + pushAdjacencies(cell)
-      }, 0)
+      const length = claims.length
+      claim.getCells().forEach(pushAdjacencies)
 
-      if (count > 0) {
+      if (claims.length > length) {
         more = true
       }
     })
