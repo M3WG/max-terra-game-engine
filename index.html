@@ -438,7 +438,16 @@
       }
 
       function updateTurnScore(player) {
-        // TODO
+        const isCity = (claim) => claim.type.getId() === 1,
+          isPlayerOwned = (claim) => claim.player === player,
+          isPlayerOwnedCity = (claim) => isPlayerOwned(claim) && isCity(claim)
+
+        player.incrementScore(
+          claimStore.filter(isPlayerOwnedCity).reduce((score, city) => {
+            const adjacencies = m3.utility.adjacency.getClaims(city)
+            return score + adjacencies.length - 1
+          }, 0)
+        )
       }
 
       function vh(value) {
