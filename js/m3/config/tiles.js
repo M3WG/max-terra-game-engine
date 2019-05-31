@@ -3,9 +3,9 @@
 m3.config.tiles = {
   0: {
     id: 0,
-    color: '#000000',
+    color: '#4B0082',
     desc: 'void',
-    icon: '&nbsp;',
+    icon: '🌀',
     picker: {},
     randomWeight: 10,
   },
@@ -24,7 +24,7 @@ m3.config.tiles = {
   },
   2: {
     id: 2,
-    color: '#4146db',
+    color: '#5B60E1',
     desc: 'water',
     icon: '🌊',
     picker: {
@@ -37,7 +37,7 @@ m3.config.tiles = {
   3: {
     id: 3,
     claimType: 2,
-    color: '#edde6f',
+    color: '#F0E48A',
     desc: 'field',
     icon: '🌻',
     matchable: true,
@@ -50,7 +50,7 @@ m3.config.tiles = {
   4: {
     id: 4,
     claimType: 3,
-    color: '#2d873e',
+    color: '#287736',
     desc: 'forest',
     icon: '🌲',
     matchable: true,
@@ -63,7 +63,7 @@ m3.config.tiles = {
   5: {
     id: 5,
     claimType: 4,
-    color: '#555555',
+    color: '#424242',
     desc: 'stone',
     icon: '⛰️',
     matchable: true,
