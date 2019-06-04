@@ -2,16 +2,19 @@
 
 m3.utility.crawler = {}
 
-m3.utility.crawler.create = (...args) => Object.create(utility.crawler.prototype).construct(...args)
+m3.utility.crawler.create = (...args) => Object.create(m3.utility.crawler.prototype).construct(...args)
 
 m3.utility.crawler.prototype = (
   (undefined) => {
 
     function construct(options) {
-      this.setMap(options.map)
-      this.setCell(options.cell)
+      if (m3.model.cell.prototype.isPrototypeOf(options.cell)) {
+        return this.setCell(options.cell)
+      }
 
-      return this
+      return this.setMap(options.map)
+        .setX(options.x)
+        .setY(options.y)
     }
 
     function destruct() {
@@ -47,53 +50,61 @@ m3.utility.crawler.prototype = (
     }
 
     function getX() {
-      if (this.cell) {
-        return this.cell.getX()
-      }
+      return this._x;
     }
 
     function getY() {
-      if (this.cell) {
-        return this.cell.getY()
-      }
+      return this._y;
     }
 
     function goDown() {
-      return this.setCell(
-        this.getDown()
-      )
+      return this.setY(this.getY() + 1)
     }
 
     function goLeft() {
-      return this.setCell(
-        this.getLeft()
-      )
+      return this.setX(this.getX() - 1)
     }
 
     function goRight() {
-      return this.setCell(
-        this.getRight()
-      )
+      return this.setX(this.getX() + 1)
     }
 
     function goUp() {
-      return this.setCell(
-        this.getUp()
-      )
+      return this.setY(this.getY() - 1)
+    }
+
+    function setCoordinates(x, y) {
+      return this.setX(x).setY(y)
     }
 
     function setCell(cell) {
-      if (m3.model.cell.prototype.isPrototypeOf(cell)) {
-        this.cell = cell
+      if (!m3.model.cell.prototype.isPrototypeOf(cell)) {
+        throw new Error('Please provide a valid cell')
       }
+
+      return this.setMap(cell.map)
+        .setX(cell.getX())
+        .setY(cell.getY())
+    }
+
+    function setMap(map) {
+      if (!m3.model.map.prototype.isPrototypeOf(map)) {
+        throw new Error('Please provide a valid map')
+      }
+
+      this.map = map
 
       return this
     }
 
-    function setMap(cell) {
-      if (m3.model.map.prototype.isPrototypeOf(cell)) {
-        this.map = map
-      }
+    function setX(x) {
+      this._x = Number(x) || 0
+
+      return this
+    }
+
+    function setY(y) {
+      this._y = Number(y) || 0
 
       return this
     }
@@ -112,7 +123,10 @@ m3.utility.crawler.prototype = (
       goRight,
       goUp,
       setCell,
+      setCoordinates,
       setMap,
+      setX,
+      setY,
     }
   }
 )()
