@@ -13,7 +13,7 @@ m3.utility.adjacency.getClaims = (claim) => {
 
   const collectAdjacenctClaims = (claim) => {
     return claim.getCells().reduce((result, cell) => {
-      crawler.setCell(cell)
+      crawler.initializeWithCell(cell)
 
       crawler.getAdjacent().forEach((test) => {
         if (test.claim && !claims.includes(test.claim)) {
