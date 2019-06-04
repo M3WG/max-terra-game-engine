@@ -21,6 +21,15 @@ m3.utility.crawler.prototype = (
       return this
     }
 
+    function getAdjacent() {
+      return [
+        this.getDown(),
+        this.getLeft(),
+        this.getRight(),
+        this.getUp(),
+      ].filter((cell) => m3.model.cell.prototype.isPrototypeOf(cell))
+    }
+
     function getDown() {
       const x = this.getX(),
         y = this.getY() - 1
@@ -112,6 +121,7 @@ m3.utility.crawler.prototype = (
     return {
       construct,
       destruct,
+      getAdjacent,
       getDown,
       getLeft,
       getRight,
