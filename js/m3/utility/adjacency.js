@@ -2,52 +2,44 @@ m3.utility.adjacency = {}
 
 // TODO: Eventually return a linked-list hub-and-spoke type model (e.g. path)
 m3.utility.adjacency.getClaims = (claim) => {
-  const cells = claim.getCells(),
-    claims = [claim]
-
-  const pushAdjacencies = (cell) => {
-    let count = 0
-
-    const map = cell.map,
-      x = cell.getX(),
-      y = cell.getY()
-
-    const tests = [
-      map.getCell(x - 1, y),
-      map.getCell(x + 1, y),
-      map.getCell(x, y - 1),
-      map.getCell(x, y + 1),
-    ]
-
-    tests.forEach((test) => {
-      if (test.claim && !claims.includes(test.claim)) {
-        claims.push(test.claim)
-      }
-    })
+  if (!m3.model.claim.prototype.isPrototypeOf(claim)) {
+    throw new Error('Please provide a valid claim')
   }
 
-  claim.getCells().forEach(pushAdjacencies)
-
-  let more
-  const testedClaims = []
-
-  do {
-    more = false
-
-    claims.forEach((claim) => {
-      if (testedClaims.includes(claim)) {
-        return
-      }
-
-      const length = claims.length
-      claim.getCells().forEach(pushAdjacencies)
-
-      if (claims.length > length) {
-        more = true
-      }
+  const claims = [claim],
+    crawler = m3.utility.crawler.create({
+      cell: claim.getCells()[0],
     })
 
-  } while (more)
+  const collectAdjacenctClaims = (claim) => {
+    return claim.getCells().reduce((result, cell) => {
+      crawler.setCell(cell)
+
+      crawler.getAdjacent().forEach((test) => {
+        if (test.claim && !claims.includes(test.claim)) {
+          claims.push(test.claim)
+          result = true
+        }
+      })
+
+      return result
+    }, false)
+  }
+
+  const testedClaims = []
+  let more = true
+
+  collectAdjacenctClaims(claim)
+
+  while (more) {
+    more = claims.reduce((result, claim) => {
+      if (testedClaims.includes(claim)) {
+        return result
+      }
+
+      return collectAdjacenctClaims(claim) || result
+    }, false)
+  }
 
   return claims
 }
