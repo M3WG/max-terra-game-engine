@@ -444,7 +444,7 @@
 
         player.incrementScore(
           claimStore.filter(isPlayerOwnedCity).reduce((score, city) => {
-            const adjacencies = m3.utility.adjacency.getClaims(city)
+            const adjacencies = m3.utility.adjacency.getClaimsGreedy(city)
             return score + adjacencies.length - 1
           }, 0)
         )
