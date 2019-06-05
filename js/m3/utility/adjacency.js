@@ -11,14 +11,14 @@ m3.utility.adjacency.getCells = (
 m3.utility.adjacency.getSimilarCells = (
   () => {
     const crawler = m3.utility.crawler.create(),
-      isSameType = (cell) => (test) => cell.type === test.type
+      isSameType = (tile) => (cell) => cell.tile === tile
 
-    return (cell) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(cell))
+    return (cell, tile) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(tile ? tile : cell.tile))
   }
 )()
 
-m3.utility.adjacency.getSimilarCellsGreedy = (cell) => {
-  const cells = m3.utility.adjacency.getSimilarCells(cell),
+m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile) => {
+  const cells = m3.utility.adjacency.getSimilarCells(cell, tile),
     tested = []
 
   let more = true
@@ -30,7 +30,7 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell) => {
         return
       }
 
-      m3.utility.adjacency.getSimilarCells(cell).forEach((cell) => {
+      m3.utility.adjacency.getSimilarCells(cell, tile).forEach((cell) => {
         if (!cells.includes(cell)) {
           cells.push(cell)
           more = true
@@ -39,7 +39,7 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell) => {
     })
   }
 
-  return claims
+  return cells
 }
 
 m3.utility.adjacency.getClaims = (claim) => {
