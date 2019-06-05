@@ -1,6 +1,13 @@
+// XXX: Requires m3.utility.crawler
 m3.utility.adjacency = {}
 
-// TODO: Eventually return a linked-list hub-and-spoke type model (e.g. path)
+m3.utility.adjacency.getCells = (
+  () => {
+    const crawler = m3.utility.crawler.create()
+    return (cell) => crawler.initializeWithCell(cell).getAdjacent()
+  }
+)()
+
 m3.utility.adjacency.getClaims = (claim) => {
   if (!m3.model.claim.prototype.isPrototypeOf(claim)) {
     throw new Error('Please provide a valid claim')
