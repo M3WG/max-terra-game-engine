@@ -13,39 +13,37 @@ m3.utility.adjacency.getClaims = (claim) => {
     throw new Error('Please provide a valid claim')
   }
 
-  const claims = [claim],
-    crawler = m3.utility.crawler.create({
-      cell: claim.getCells()[0],
+  return claim.getCells().reduce((claims, cell) => {
+    m3.utility.adjacency.getCells(cell).forEach((test) => {
+      if (test.claim && !claims.includes(test.claim)) {
+        claims.push(test.claim)
+      }
     })
 
-  const collectAdjacenctClaims = (claim) => {
-    return claim.getCells().reduce((result, cell) => {
-      crawler.initializeWithCell(cell)
+    return claims
+  }, [claim])
+}
 
-      crawler.getAdjacent().forEach((test) => {
-        if (test.claim && !claims.includes(test.claim)) {
-          claims.push(test.claim)
-          result = true
-        }
-      })
+m3.utility.adjacency.getClaimsGreedy = (claim) => {
+  const claims = m3.utility.adjacency.getClaims(claim),
+    tested = []
 
-      return result
-    }, false)
-  }
-
-  const testedClaims = []
   let more = true
 
-  collectAdjacenctClaims(claim)
-
   while (more) {
-    more = claims.reduce((result, claim) => {
-      if (testedClaims.includes(claim)) {
-        return result
+    more = false
+    claims.forEach((claim) => {
+      if (tested.includes(claim)) {
+        return
       }
 
-      return collectAdjacenctClaims(claim) || result
-    }, false)
+      m3.utility.adjacency.getClaims(claim).forEach((claim) => {
+        if (!claims.includes(claim)) {
+          claims.push(claim)
+          more = true
+        }
+      })
+    })
   }
 
   return claims
