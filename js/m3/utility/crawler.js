@@ -8,13 +8,20 @@ m3.utility.crawler.prototype = (
   (undefined) => {
 
     function construct(options) {
+      options = options || {}
+
       if (m3.model.cell.prototype.isPrototypeOf(options.cell)) {
         return this.initializeWithCell(options.cell)
       }
 
+      // XXX: Exception thrown if not valid
+      if (options.map) {
+        this.setMap(options.map)
+      }
+
+      this.moveTo(options.x, options.y)
+
       return this
-        .setMap(options.map)
-        .moveTo(options.x, options.y)
     }
 
     function destruct() {
