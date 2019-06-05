@@ -7,54 +7,21 @@ m3.utility.match = (action) => {
     return
   }
 
-  const actionTileId = actionTile.getId(),
-    center = action.cell
-
   // XXX: Special case for single magic tile to tower
-  if (actionTileId == 7) {
+  // TODO: Make configurable the number of cells needed for match
+  if (actionTile.getId() == 7) {
     return {
       cell: [center],
       type: m3.model.claimType.get(6),
     }
   }
 
-  const slice = center.map.createSlice(center.getX() - 3, center.getY() - 3, 7, 7),
-        {x: cx, y: cy} = slice.getCellCoordinates(center)
+  const cells = m3.utility.adjacency.getSimilarCellsGreedy(action.cell, actionTile)
 
-  const is = (x, y) => {
-    const cell = slice.getCell(x, y)
-
-    if (!cell || cell.claim) {
-      return false
+  if (cells.length > 3) {
+    return {
+      cell: cells,
+      type: actionTile.getClaimType(),
     }
-
-    return cell.tile.getId() == actionTileId
-  }
-
-  const gatherPermutation = cells => cells.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
-  const testPermutation = cells => cells.reduce((result, {dx, dy}) => result && is(cx + dx, cy + dy), true)
-
-  for (const shape of m3.config.shapes) {
-    let rotations = shape.rotate ? 4 : 0
-    do {
-      let mirrors = shape.mirror ? 2 : 0
-      do {
-        for (const permutation of shape.permutation) {
-          if (testPermutation(permutation)) {
-            return {
-              cell: gatherPermutation(permutation),
-              type: actionTile.getClaimType(),
-            }
-          }
-        }
-        if (mirrors > 0) {
-          slice.flip()
-        }
-      } while (mirrors-->1)
-
-      if (rotations > 0) {
-        slice.rotate()
-      }
-    } while (rotations-->1)
   }
 }
