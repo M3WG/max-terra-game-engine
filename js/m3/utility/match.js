@@ -11,7 +11,7 @@ m3.utility.match = (action) => {
   // TODO: Make configurable the number of cells needed for match
   if (actionTile.getId() == 7) {
     return {
-      cell: [center],
+      cell: [action.cell],
       type: m3.model.claimType.get(6),
     }
   }
