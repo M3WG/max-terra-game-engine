@@ -49,12 +49,4 @@ m3.config.claimTypes = {
     score: 0,
     type: 7,
   },
-  7: {
-    id: 7,
-    lineOfSight: 6,
-    name: 'ley line',
-    priority: 1,
-    score: 100,
-    type: 7,
-  },
 }
