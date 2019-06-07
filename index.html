@@ -439,13 +439,20 @@
 
       function updateTurnScore(player) {
         const isCity = (claim) => claim.type.getId() === 1,
+          isWatchtower = (claim) => claim.type.getId() === 6,
           isPlayerOwned = (claim) => claim.player === player,
-          isPlayerOwnedCity = (claim) => isPlayerOwned(claim) && isCity(claim)
+          isPlayerOwnedCity = (claim) => isPlayerOwned(claim) && isCity(claim),
+          isPlayerOwnedWatchtower = (claim) => isPlayerOwned(claim) && isWatchtower(claim)
 
         player.incrementScore(
           claimStore.filter(isPlayerOwnedCity).reduce((score, city) => {
             const adjacencies = m3.utility.adjacency.getClaimsGreedy(city)
             return score + adjacencies.length - 1
+          }, 0)
+          +
+          claimStore.filter(isPlayerOwnedWatchtower).reduce((score, watchtower) => {
+            const adjacencies = m3.utility.adjacency.getClaimsGreedy(watchtower)
+            return (score + adjacencies.length - 1) * 0.25
           }, 0)
         )
       }
