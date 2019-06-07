@@ -43,14 +43,23 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile) => {
 }
 
 m3.utility.adjacency.getClaims = (target) => {
-  const cells = [];
+  const cells = [],
+    initial = []
 
-  if (m3.model.claim.prototype.isPrototypeOf(target)) {
-    cells.push(...target.getCells())
+  if (m3.model.cell.prototype.isPrototypeOf(target)) {
+    cells.push(target)
   } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
-    cells.push(target.getCells())
+    cells.push(...target.getCells())
+    initial.push(target)
   } else if (Array.isArray(target)) {
-    cells.push(...target)
+    target.forEach((target) => {
+      if (m3.model.cell.prototype.isPrototypeOf(target)) {
+        cells.push(target)
+      } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
+        cells.push(...target.getCells())
+        initial.push(target)
+      }
+    })
   } else {
     throw new Error('Please provide a valid target')
   }
@@ -63,7 +72,7 @@ m3.utility.adjacency.getClaims = (target) => {
     })
 
     return claims
-  }, [claim])
+  }, initial)
 }
 
 m3.utility.adjacency.getClaimsGreedy = (target) => {
