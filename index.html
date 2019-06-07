@@ -447,12 +447,12 @@
         player.incrementScore(
           claimStore.filter(isPlayerOwnedCity).reduce((score, city) => {
             const adjacencies = m3.utility.adjacency.getClaimsGreedy(city)
-            return score + adjacencies.length - 1
+            return score + (adjacencies.length - 1)
           }, 0)
           +
           claimStore.filter(isPlayerOwnedWatchtower).reduce((score, watchtower) => {
             const adjacencies = m3.utility.adjacency.getClaimsGreedy(watchtower)
-            return (score + adjacencies.length - 1) * 0.25
+            return score + ((adjacencies.length - 1) * 0.25)
           }, 0)
         )
       }
