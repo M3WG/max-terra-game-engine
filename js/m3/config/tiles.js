@@ -6,7 +6,10 @@ m3.config.tiles = {
     color: '#4B0082',
     desc: 'void',
     icon: '🌀',
-    picker: {},
+    picker: {
+      active: true,
+      position: 7,
+    },
     randomWeight: 10,
   },
   1: {
