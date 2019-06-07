@@ -42,12 +42,20 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile) => {
   return cells
 }
 
-m3.utility.adjacency.getClaims = (claim) => {
-  if (!m3.model.claim.prototype.isPrototypeOf(claim)) {
-    throw new Error('Please provide a valid claim')
+m3.utility.adjacency.getClaims = (target) => {
+  const cells = [];
+
+  if (m3.model.claim.prototype.isPrototypeOf(target)) {
+    cells.push(...target.getCells())
+  } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
+    cells.push(target.getCells())
+  } else if (Array.isArray(target)) {
+    cells.push(...target)
+  } else {
+    throw new Error('Please provide a valid target')
   }
 
-  return claim.getCells().reduce((claims, cell) => {
+  return cells.reduce((claims, cell) => {
     m3.utility.adjacency.getCells(cell).forEach((test) => {
       if (test.claim && !claims.includes(test.claim)) {
         claims.push(test.claim)
@@ -58,8 +66,8 @@ m3.utility.adjacency.getClaims = (claim) => {
   }, [claim])
 }
 
-m3.utility.adjacency.getClaimsGreedy = (claim) => {
-  const claims = m3.utility.adjacency.getClaims(claim),
+m3.utility.adjacency.getClaimsGreedy = (target) => {
+  const claims = m3.utility.adjacency.getClaims(target),
     tested = []
 
   let more = true
