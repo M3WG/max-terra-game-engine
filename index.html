@@ -446,21 +446,39 @@
       }
 
       function updateTurnScore(player) {
-        const isCity = (claim) => claim.type.getId() === 1,
-          isWatchtower = (claim) => claim.type.getId() === 6,
-          isPlayerOwned = (claim) => claim.player === player,
-          isPlayerOwnedCity = (claim) => isPlayerOwned(claim) && isCity(claim),
-          isPlayerOwnedWatchtower = (claim) => isPlayerOwned(claim) && isWatchtower(claim)
+        // TODO: Change allowedClaims/isAllowedClaim to use a configuration value, e.g. claim.isEconomy()
+        const allowedClaims = [1, 6],
+          isAllowedClaim = (claim) => allowedClaims.includes(claim.type.getId()),
+          isPlayer = (test) => test === player,
+          isPlayerOwned = (claim) => isPlayer(claim.player)
+
+        const calculateClaimScore = (claim) => {
+          const adjacencies = m3.utility.adjacency.getClaimsGreedy(claim),
+            isClaim = (test) => test === claim
+
+          const calculateAdjacencyScore = (adjacency) => {
+            const ownerMultiplier = isPlayer(adjacency.player) ? 1 : 0.5,
+              sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
+
+            return ownerMultiplier * sizeMultiplier
+          }
+
+          return adjacencies.reduce((score, adjacency) => {
+            if (isClaim(adjacency)) {
+              return score
+            }
+
+            return score + calculateAdjacencyScore(adjacency)
+          }, 0)
+        }
 
         player.incrementScore(
-          claimStore.filter(isPlayerOwnedCity).reduce((score, city) => {
-            const adjacencies = m3.utility.adjacency.getClaimsGreedy(city)
-            return score + (adjacencies.length - 1)
-          }, 0)
-          +
-          claimStore.filter(isPlayerOwnedWatchtower).reduce((score, watchtower) => {
-            const adjacencies = m3.utility.adjacency.getClaimsGreedy(watchtower)
-            return score + ((adjacencies.length - 1) * 0.25)
+          claimStore.reduce((score, claim) => {
+            if (!isPlayerOwned(claim) || !isAllowedClaim(claim)) {
+              return score
+            }
+
+            return score + calculateClaimScore(claim)
           }, 0)
         )
       }
@@ -472,26 +490,6 @@
       function vw(value) {
         return window.innerWidth / 100 * value
       }
-
-      /*
-      XXX: Accidental commit, keep for now
-      Adjacency:
-      each round:
-      for each city claim, get adjacent claims
-        when claims are adjacent, they go into an array of their adjacent claims
-        each claim appears in only one array, even if it's just by itself
-        if claim already belongs in an array, skip checks and use reference to that array
-        cities are adjacent if they appear
-        eventually adjacency checks will include all water
-
-      claims have "Centers" which is the midpoint between all cells--becomes important with greedy matching
-      score per turn: each bucket of adjacencies, for each city claim, collect score from all other adjacent claims divided by a distance modifier multiplied by type modifier (and modifier based on city size)
-
-      Greedy matching:
-      Eliminate shape checks
-      Instead crawl through for at least four adjacent cells of same type
-      Additional cells beyond 4 become part of the claim
-      */
     </script>
   </body>
 </html>
