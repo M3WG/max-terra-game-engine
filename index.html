@@ -335,8 +335,6 @@
           } else if (isRoundEnd) {
             const firstPlayer = game.getPlayer(0)
 
-            // XXX: Goes forever!
-            // TODO: Check game end condition
             game.createRound().createTurn({
               player: firstPlayer,
             })
