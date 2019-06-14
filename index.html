@@ -330,8 +330,7 @@
           const isGameEnd = isRoundEnd && m3.utility.map.getPercentClaimed(map) > (0.125 * playerCount)
 
           if (isGameEnd) {
-            alert('Game Over');
-            mapComponent.getCells().forEach((cell) => cell.off('click'))
+            handleGameEnd()
           } else if (isRoundEnd) {
             const firstPlayer = game.getPlayer(0)
 
@@ -379,6 +378,13 @@
           tileId = tile.getId()
 
         return inventory.get(tileId) || 0
+      }
+
+      function handleGameEnd() {
+        mapComponent.getCells().forEach((cell) => cell.off('click'))
+        map.getCells().forEach((cell) => cell.setFog(false))
+
+        alert('Game Over');
       }
 
       function modifyPlayerInventory(player, tile, amount) {
