@@ -42,3 +42,55 @@
   filter: grayscale(1);
   opacity: 0.1;
 }
+
+/* Unclaimed Tile Sprites */
+.m3-c-cell[data-tile="0"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="1"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="2"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="3"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="4"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="5"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="6"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell[data-tile="7"] {
+  background-image: url('../../img/');
+}
+
+/* Claimed Tile Sprites */
+.m3-c-cell-claim[data-tile="0"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="1"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="2"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="3"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="4"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="5"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="6"] {
+  background-image: url('../../img/');
+}
+.m3-c-cell-claim[data-tile="7"] {
+  background-image: url('../../img/');
+}
