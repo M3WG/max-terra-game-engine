@@ -43,6 +43,12 @@
   opacity: 0.1;
 }
 
+/* Always Visible */
+.m3-c-cell-claim.m3-c-cell-fog[data-tile="7"] {
+  filter: none;
+  opacity: 1;
+}
+
 /* Unclaimed Tile Sprites */
 .m3-c-cell[data-tile="0"] {
   background-image: url('../../img/');
