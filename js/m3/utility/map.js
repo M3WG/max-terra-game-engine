@@ -6,6 +6,13 @@ m3.utility.map.csvToData = function(csv) {
   // TODO: Convert CSV string to two-dimensional array
 }
 
+m3.utility.map.getPercentClaimed = (model) => {
+  const cells = model.getCells(),
+    isClaimed = (cell) => Boolean(cell.claim)
+
+  return cells.filter(isClaimed).length / cells.length
+}
+
 m3.utility.map.import = function(model, data) {
   model.getCells().forEach(function setTile(cell) {
     const x = cell.getX(),
