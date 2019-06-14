@@ -318,7 +318,7 @@
           })
 
           claimStore.push(claim)
-          turnPlayer.incrementScore(claim.type.getScore())
+          turnPlayer.incrementScore(claim.type.getScore() * claim.getSize())
           drawClaimFog(claim, false)
         }
 
