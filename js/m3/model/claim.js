@@ -56,6 +56,10 @@ m3.model.claim.prototype = (
       }, [])
     }
 
+    function getSize() {
+      return this.config.cell.length
+    }
+
     function _claimCells() {
       const setClaim = (cell) => cell.setClaim(this)
       this.getCells().forEach(setClaim)
@@ -68,6 +72,7 @@ m3.model.claim.prototype = (
       destruct,
       getCells,
       getFogShape,
+      getSize,
     }, _prototype)
   }
 )()
