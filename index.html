@@ -457,10 +457,11 @@
             isClaim = (test) => test === claim
 
           const calculateAdjacencyScore = (adjacency) => {
-            const ownerMultiplier = isPlayer(adjacency.player) ? 1 : 0.5,
+            const claimMultiplier = adjacency.type.getMultiplier(),
+              ownerMultiplier = isPlayer(adjacency.player) ? 1 : 0.5,
               sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
 
-            return ownerMultiplier * sizeMultiplier
+            return claimMultiplier * ownerMultiplier * sizeMultiplier
           }
 
           return adjacencies.reduce((score, adjacency) => {
