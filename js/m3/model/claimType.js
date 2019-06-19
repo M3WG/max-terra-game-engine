@@ -20,6 +20,10 @@ m3.model.claimType.prototype = (
       return this.config.lineOfSight;
     }
 
+    function getMultiplier() {
+      return Number(this.config.multiplier)
+    }
+
     function getPriority() {
       return this.config.priority
     }
@@ -36,6 +40,7 @@ m3.model.claimType.prototype = (
       construct,
       destruct,
       getLineOfSight,
+      getMultiplier,
       getPriority,
       getScore,
       getShape,
