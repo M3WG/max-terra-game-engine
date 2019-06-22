@@ -12,6 +12,10 @@ m3.model.claim.prototype = (
       this.player = this.config.player
       this.type = this.config.type
 
+      if (!Array.isArray(this.config.cell)) {
+        this.config.cell = []
+      }
+
       _claimCells.call(this);
 
       return this
