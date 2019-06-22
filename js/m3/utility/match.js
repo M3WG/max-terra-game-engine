@@ -16,8 +16,7 @@ m3.utility.match = (action) => {
     }
   }
 
-  const cells = m3.utility.adjacency.getSimilarCellsGreedy(action.cell, actionTile)
-    .filter((cell) => !cell.claim)
+  const cells = m3.utility.adjacency.getSimilarCellsGreedy(action.cell, actionTile, (cell) => !cell.claim)
 
   if (cells.length > 3) {
     return {
