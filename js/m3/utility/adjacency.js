@@ -8,36 +8,38 @@ m3.utility.adjacency.getCells = (
   }
 )()
 
-m3.utility.adjacency.getSimilarCells = (
-  () => {
-    const crawler = m3.utility.crawler.create(),
-      isSameType = (tile) => (cell) => cell.tile === tile
+m3.utility.adjacency.getSimilarCells = (function IIFE() {
+  const crawler = m3.utility.crawler.create(),
+    isSameType = (tile) => (cell) => cell.tile === tile
 
-    return (cell, tile) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(tile ? tile : cell.tile))
+  return (cell, tile) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(tile ? tile : cell.tile))
+})()
+
+m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile, filter) => {
+  if (typeof filter != 'function') {
+    filter = (x) => x
   }
-)()
 
-m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile) => {
-  const cells = m3.utility.adjacency.getSimilarCells(cell, tile),
+  const cells = m3.utility.adjacency.getSimilarCells(cell, tile).filter(filter),
     tested = []
 
-  let more = true
-
-  while (more) {
+  let more
+  do {
     more = false
+
     cells.forEach((cell) => {
       if (tested.includes(cell)) {
         return
       }
 
       m3.utility.adjacency.getSimilarCells(cell, tile).forEach((cell) => {
-        if (!cells.includes(cell)) {
+        if (filter(cell) && !cells.includes(cell)) {
           cells.push(cell)
           more = true
         }
       })
     })
-  }
+  } while (more)
 
   return cells
 }
@@ -75,13 +77,16 @@ m3.utility.adjacency.getClaims = (target) => {
   }, initial)
 }
 
-m3.utility.adjacency.getClaimsGreedy = (target) => {
-  const claims = m3.utility.adjacency.getClaims(target),
+m3.utility.adjacency.getClaimsGreedy = (target, filter) => {
+  if (typeof filter != 'function') {
+    filter = (x) => x
+  }
+
+  const claims = m3.utility.adjacency.getClaims(target).filter(filter),
     tested = []
 
-  let more = true
-
-  while (more) {
+  let more
+  do {
     more = false
     claims.forEach((claim) => {
       if (tested.includes(claim)) {
@@ -89,13 +94,13 @@ m3.utility.adjacency.getClaimsGreedy = (target) => {
       }
 
       m3.utility.adjacency.getClaims(claim).forEach((claim) => {
-        if (!claims.includes(claim)) {
+        if (filter(claim) && !claims.includes(claim)) {
           claims.push(claim)
           more = true
         }
       })
     })
-  }
+  } while (more)
 
   return claims
 }
