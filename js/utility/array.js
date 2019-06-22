@@ -4,7 +4,7 @@ var utility = utility || {}
 
 utility.array = {}
 
-utility.array.copy = array => [].slice.call(array)
+utility.array.copy = array => Array.isArray(array) ? [].slice.call(array) : []
 
 utility.array.randomIndex = array => {
   if (Array.isArray(array)) {
