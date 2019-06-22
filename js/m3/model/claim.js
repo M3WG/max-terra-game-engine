@@ -64,6 +64,14 @@ m3.model.claim.prototype = (
       return this.config.cell.length
     }
 
+    // XXX: Techically a utility function
+    function toPath() {
+      return m3.model.path.create({
+        cells: this.getCells(),
+      })
+    }
+
+    // TODO: Move out into game controller
     function _claimCells() {
       const setClaim = (cell) => cell.setClaim(this)
       this.getCells().forEach(setClaim)
@@ -77,6 +85,7 @@ m3.model.claim.prototype = (
       getCells,
       getFogShape,
       getSize,
+      toPath,
     }, _prototype)
   }
 )()
