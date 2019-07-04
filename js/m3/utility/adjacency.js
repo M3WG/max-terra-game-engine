@@ -77,12 +77,12 @@ m3.utility.adjacency.getClaims = (target) => {
   }, initial)
 }
 
-m3.utility.adjacency.getClaimsGreedy = (target, filter) => {
+m3.utility.adjacency.getClaimsGreedy = (target) => {
   if (typeof filter != 'function') {
     filter = (x) => x
   }
 
-  const claims = m3.utility.adjacency.getClaims(target).filter(filter),
+  const claims = m3.utility.adjacency.getClaims(target),
     tested = []
 
   let more
@@ -94,7 +94,7 @@ m3.utility.adjacency.getClaimsGreedy = (target, filter) => {
       }
 
       m3.utility.adjacency.getClaims(claim).forEach((claim) => {
-        if (filter(claim) && !claims.includes(claim)) {
+        if (!claims.includes(claim)) {
           claims.push(claim)
           more = true
         }
