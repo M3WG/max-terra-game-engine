@@ -44,9 +44,17 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile, filter) => {
   return cells
 }
 
-m3.utility.adjacency.getClaims = (target) => {
+// XXX: Traverses water
+// XXX: Should we refactor so second parameter is an internal variable? (e.g. closure with a named function so it can call itself recursively)
+m3.utility.adjacency.getClaims = (target, tested) => {
+  tested = Array.isArray(tested) ? tested : []
+
   const cells = [],
     initial = []
+
+  const isTested = (cell) => tested.includes(cell),
+    isUntested = (...args) => !isTested(...args),
+    setTested = (cell) => tested.push(cell)
 
   if (m3.model.cell.prototype.isPrototypeOf(target)) {
     cells.push(target)
@@ -66,11 +74,42 @@ m3.utility.adjacency.getClaims = (target) => {
     throw new Error('Please provide a valid target')
   }
 
+  // XXX: Hardcoded water
+  const traverseWater = (cell) => {
+    if (cell.tile.getId() != 2) {
+      return []
+    }
+
+    return m3.utility.adjacency.getClaims(
+      m3.utility.adjacency.getSimilarCellsGreedy(cell).filter(isUntested),
+      tested
+    )
+  }
+
   return cells.reduce((claims, cell) => {
-    m3.utility.adjacency.getCells(cell).forEach((test) => {
-      if (test.claim && !claims.includes(test.claim)) {
-        claims.push(test.claim)
+    if (isTested(cell)) {
+      return claims
+    }
+
+    setTested(cell)
+
+    const pushClaim = (claim) => {
+      if (claim && !claims.includes(claim)) {
+        claims.push(claim)
       }
+    }
+
+    traverseWater(cell).forEach(pushClaim)
+
+    m3.utility.adjacency.getCells(cell).forEach((cell) => {
+      if (isTested(cell)) {
+        return
+      }
+
+      setTested(cell)
+
+      pushClaim(cell.claim)
+      traverseWater(cell).forEach(pushClaim)
     })
 
     return claims
