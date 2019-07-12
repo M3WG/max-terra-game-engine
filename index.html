@@ -324,7 +324,7 @@
           turnPlayer.incrementScore(score)
           drawClaimFog(claim, false)
 
-          logScore(turnPlayer, score, claim)
+          logScore(score, claim)
         }
 
         const action = turn.createAction(options),
@@ -392,14 +392,14 @@
         alert('Game Over')
       }
 
-      function logScore(player, score, ...claims) {
-        console.log('SCORE:', player.getName(), score, claims, ...claims.map((claim) => {
+      function logScore(score, ...claims) {
+        console.log('SCORE:', score, ...claims.map((claim) => {
           const cell = claim.getCells()[0],
             x = cell.getX(),
             y = cell.getY()
 
           return mapComponent.getCell(x, y)._rootElement
-        }));
+        }), claims);
       }
 
       function modifyPlayerInventory(player, tile, amount) {
@@ -479,7 +479,7 @@
               sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
 
             const score = claimMultiplier * ownerMultiplier * sizeMultiplier
-            logScore(player, score, claim, adjacency)
+            logScore(score, claim, adjacency)
 
             return score
           }
