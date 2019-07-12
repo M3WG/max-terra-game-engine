@@ -318,9 +318,13 @@
             ...match,
           })
 
+          const score = claim.type.getScore() * claim.getSize()
+
           claimStore.push(claim)
-          turnPlayer.incrementScore(claim.type.getScore() * claim.getSize())
+          turnPlayer.incrementScore(score)
           drawClaimFog(claim, false)
+
+          logScore(turnPlayer, score, claim)
         }
 
         const action = turn.createAction(options),
@@ -385,7 +389,17 @@
         mapComponent.getCells().forEach((cell) => cell.off('click'))
         map.getCells().forEach((cell) => cell.setFog(false))
 
-        alert('Game Over');
+        alert('Game Over')
+      }
+
+      function logScore(player, score, ...claims) {
+        console.log('SCORE:', player.getName(), score, claims, ...claims.map((claim) => {
+          const cell = claim.getCells()[0],
+            x = cell.getX(),
+            y = cell.getY()
+
+          return mapComponent.getCell(x, y)._rootElement
+        }));
       }
 
       function modifyPlayerInventory(player, tile, amount) {
@@ -462,7 +476,10 @@
               ownerMultiplier = isPlayer(adjacency.player) ? 1 : 0.5,
               sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
 
-            return claimMultiplier * ownerMultiplier * sizeMultiplier
+            const score = claimMultiplier * ownerMultiplier * sizeMultiplier
+            logScore(player, score, claim, adjacency)
+
+            return score
           }
 
           return adjacencies.reduce((score, adjacency) => {
