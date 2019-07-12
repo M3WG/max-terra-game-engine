@@ -411,6 +411,8 @@
       }
 
       function transitionPlayerView(nextPlayer, currentPlayer) {
+        console.log('=== ROUND ' + game.getRoundCount() + ' - ' + nextPlayer.getName() + ' ===')
+
         updateTilePickerInventory(nextPlayer)
 
         if (nextPlayer === currentPlayer) {
