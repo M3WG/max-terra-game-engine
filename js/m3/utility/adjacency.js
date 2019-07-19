@@ -12,15 +12,15 @@ m3.utility.adjacency.getSimilarCells = (function IIFE() {
   const crawler = m3.utility.crawler.create(),
     isSameType = (tile) => (cell) => cell.tile === tile
 
-  return (cell, tile) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(tile ? tile : cell.tile))
+  return (cell) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(cell.tile))
 })()
 
-m3.utility.adjacency.getSimilarCellsGreedy = (cell, tile, filter) => {
+m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   if (typeof filter != 'function') {
     filter = (x) => x
   }
 
-  const cells = m3.utility.adjacency.getSimilarCells(cell, tile).filter(filter),
+  const cells = m3.utility.adjacency.getSimilarCells(cell).filter(filter),
     tested = []
 
   let more
