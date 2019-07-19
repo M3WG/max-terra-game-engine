@@ -1,6 +1,6 @@
 'use strict'
 
-m3.utility.match = (action) => {
+m3.utility.match = (action, player) => {
   const actionTile = action.tile
 
   if (!actionTile.isMatchable()) {
@@ -16,7 +16,8 @@ m3.utility.match = (action) => {
     }
   }
 
-  const cells = m3.utility.adjacency.getSimilarCellsGreedy(action.cell, (cell) => !cell.claim)
+  const canMatch = (cell) => !cell.claim || cell.claim && cell.claim.player == player
+  const cells = m3.utility.adjacency.getSimilarCellsGreedy(action.cell, canMatch)
 
   if (cells.length > 3) {
     return {

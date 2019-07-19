@@ -310,21 +310,10 @@
         modifyPlayerInventory(turnPlayer, cell.tile, +1)
         cell.setTile(tile)
 
-        const match = m3.utility.match(options)
+        const match = m3.utility.match(options, turnPlayer)
 
         if (match) {
-          const claim = m3.model.claim.create({
-            player: turnPlayer,
-            ...match,
-          })
-
-          const score = claim.type.getScore() * claim.getSize()
-
-          claimStore.push(claim)
-          turnPlayer.incrementScore(score)
-          drawClaimFog(claim, false)
-
-          logScore(score, claim)
+          handleMatch(match, turnPlayer)
         }
 
         const action = turn.createAction(options),
@@ -390,6 +379,38 @@
         map.getCells().forEach((cell) => cell.setFog(false))
 
         alert('Game Over')
+      }
+
+      function handleMatch(match, player) {
+        const cells = match.cell,
+          unclaimedCells = cells.filter((cell) => !cell.claim)
+
+        cells.reduce((claims, cell) => {
+          const claim = cell.claim
+
+          if (claim && !claims.includes(claim)) {
+            claims.push(claim)
+          }
+
+          return claims
+        }, []).forEach((claim) => {
+          claim.destruct()
+          claimStore.splice(claimStore.indexOf(claim), 1)
+        })
+
+        const claim = m3.model.claim.create({
+          player,
+          ...match,
+        })
+
+        claimStore.push(claim)
+
+        const score = claim.type.getScore() * unclaimedCells.length
+
+        player.incrementScore(score)
+        logScore(score, claim)
+
+        drawClaimFog(claim, false)
       }
 
       function logScore(score, ...claims) {
