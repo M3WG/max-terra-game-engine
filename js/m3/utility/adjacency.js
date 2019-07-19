@@ -8,12 +8,7 @@ m3.utility.adjacency.getCells = (
   }
 )()
 
-m3.utility.adjacency.getSimilarCells = (function IIFE() {
-  const crawler = m3.utility.crawler.create(),
-    isSameType = (tile) => (cell) => cell.tile === tile
-
-  return (cell) => crawler.initializeWithCell(cell).getAdjacent().filter(isSameType(cell.tile))
-})()
+m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.tile == cell.tile)
 
 m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   if (typeof filter != 'function') {
