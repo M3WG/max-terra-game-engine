@@ -4,7 +4,7 @@ m3.utility.adjacency = {}
 m3.utility.adjacency.getCells = (
   () => {
     const crawler = m3.utility.crawler.create()
-    return (cell) => crawler.initializeWithCell(cell).getAdjacent()
+    return (cell) => [cell, ...crawler.initializeWithCell(cell).getAdjacent()]
   }
 )()
 
