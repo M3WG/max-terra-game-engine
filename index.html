@@ -141,7 +141,7 @@
         '#0000FF',
         '#FFFF00',
         '#FF00FF',
-      ];
+      ]
 
       const playerCount = Math.min(parseInt(prompt('How many players?')) || 1, 4)
       const players = Array(playerCount).fill().map((_, index) =>
@@ -399,7 +399,7 @@
             y = cell.getY()
 
           return mapComponent.getCell(x, y)._rootElement
-        }), claims);
+        }), claims)
       }
 
       function modifyPlayerInventory(player, tile, amount) {
