@@ -91,7 +91,7 @@ m3.config.tiles = {
   },
   7: {
     id: 7,
-    claimType: 7,
+    claimType: 6,
     color: '#FF66FF',
     desc: 'magic',
     icon: '🧙',
