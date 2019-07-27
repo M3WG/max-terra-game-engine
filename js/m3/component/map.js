@@ -6,17 +6,6 @@ m3.component.map.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this._cell = []
-      _build.call(this)
-
-      this.render().attach()
-
-      return this
-    }
-
     function getCell(x, y) {
       if (this._cell[y]) {
         return this._cell[y][x]
@@ -34,17 +23,9 @@ m3.component.map.prototype = (
       return this.config.model
     }
 
-    function render() {
-      this._cell.forEach(function renderColumn(column) {
-        column.forEach(function renderCell(cell) {
-          cell.render()
-        })
-      })
+    function setup() {
+      this._cell = []
 
-      return this
-    }
-
-    function _build() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-map'
 
@@ -82,14 +63,28 @@ m3.component.map.prototype = (
           tr.appendChild(td)
         }
       }
+
+      this.update()
+
+      return this
+    }
+
+    function update() {
+      this._cell.forEach(function updateColumn(column) {
+        column.forEach(function updateCell(cell) {
+          cell.update()
+        })
+      })
+
+      return this
     }
 
     return Object.setPrototypeOf({
-      construct,
       getCell,
       getCells,
       getModel,
-      render,
+      setup,
+      update,
     }, _prototype)
   }
 )()

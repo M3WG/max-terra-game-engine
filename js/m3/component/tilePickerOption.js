@@ -9,16 +9,6 @@ m3.component.tilePickerOption.prototype = (
     const _disabledModifier = 'm3-c-tilePickerOption-disabled',
       _selectedModifier = 'm3-c-tilePickerOption-selected'
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _build.call(this)
-
-      this.attach()
-
-      return this
-    }
-
     function click() {
       const index = this.parent.getOptionIndex(this)
       this.parent.setSelectedIndex(index)
@@ -78,7 +68,7 @@ m3.component.tilePickerOption.prototype = (
       return this
     }
 
-    function _build() {
+    function setup() {
       const tile = this.getValue()
 
       this._rootElement = document.createElement('button')
@@ -105,6 +95,8 @@ m3.component.tilePickerOption.prototype = (
       inventory.className = 'm3-c-tilePickerOption--inventory'
       this._rootElement.appendChild(inventory)
       this._inventory = inventory
+
+      return this
     }
 
     function _onClick(e) {
@@ -115,7 +107,6 @@ m3.component.tilePickerOption.prototype = (
     }
 
     return Object.setPrototypeOf({
-      construct,
       click,
       getValue,
       isDisabled,
@@ -123,6 +114,7 @@ m3.component.tilePickerOption.prototype = (
       setInventory,
       setDisabled,
       setSelected,
+      setup,
     }, _prototype)
   }
 )()

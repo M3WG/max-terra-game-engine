@@ -206,7 +206,7 @@
       // Create components
       const mapComponent = m3.component.map.create({
         model: map,
-      }, document.querySelector('.m3-a-map')).setId('map').attach()
+      }, document.querySelector('.m3-a-map')).setId('map')
 
       mapComponent.getCells().forEach((component) => {
         component.on('click', () => doAction(component))
@@ -216,16 +216,16 @@
       /*
       const minimapComponent = m3.component.minimap.create({
         model: map,
-      }, document.querySelector('.m3-a-minimap')).attach()
+      }, document.querySelector('.m3-a-minimap'))
       */
 
       const scoreboardComponent = m3.component.scoreboard.create({
         player: players,
-      }, document.querySelector('.m3-a-scoreboard')).attach()
+      }, document.querySelector('.m3-a-scoreboard'))
 
       const gameStatusComponent = m3.component.gameStatus.create({
         model: game,
-      }, document.querySelector('.m3-a-gameStatus')).attach()
+      }, document.querySelector('.m3-a-gameStatus'))
 
       const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
         tile.config.picker && tile.config.picker.active
@@ -237,7 +237,7 @@
 
       const tilePickerComponent = m3.component.tilePicker.create({
         option: tilePickerOptions,
-      }, document.querySelector('.m3-a-tilePicker')).attach()
+      }, document.querySelector('.m3-a-tilePicker'))
 
       // Initialize player views
       startLocations.forEach((claim) => {
@@ -334,7 +334,7 @@
           updateTilePickerInventory(turnPlayer)
         }
 
-        gameStatusComponent.render()
+        gameStatusComponent.update()
       }
 
       // Utility functions

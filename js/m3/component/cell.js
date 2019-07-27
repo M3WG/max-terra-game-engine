@@ -6,20 +6,6 @@ m3.component.cell.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _build.call(this)
-
-      if (this.config.model) {
-        this.config.model.on('change', _onModelChange.bind(this))
-      }
-
-      this.render().attach()
-
-      return this
-    }
-
     function click() {
       this.emit('click')
 
@@ -38,7 +24,25 @@ m3.component.cell.prototype = (
       return this.config.y
     }
 
-    function render() {
+    function setup() {
+      this._rootElement = document.createElement('div')
+      this._rootElement.className = 'm3-c-cell'
+      this._rootElement.addEventListener('click', _onClick.bind(this))
+
+      this._icon = document.createElement('div')
+      this._icon.className = 'm3-c-cell--icon'
+      this._rootElement.appendChild(this._icon)
+
+      if (this.config.model) {
+        this.config.model.on('change', _onModelChange.bind(this))
+      }
+
+      this.update()
+
+      return this
+    }
+
+    function update() {
       const model = this.getModel(),
         tile = this.getModel().tile
 
@@ -66,16 +70,6 @@ m3.component.cell.prototype = (
       }
 
       return this
-    }
-
-    function _build() {
-      this._rootElement = document.createElement('div')
-      this._rootElement.className = 'm3-c-cell'
-      this._rootElement.addEventListener('click', _onClick.bind(this))
-
-      this._icon = document.createElement('div')
-      this._icon.className = 'm3-c-cell--icon'
-      this._rootElement.appendChild(this._icon)
     }
 
     function _getClaimDirectionClassnames() {
@@ -121,16 +115,16 @@ m3.component.cell.prototype = (
     }
 
     function _onModelChange(data) {
-      this.render()
+      this.update()
     }
 
     return Object.setPrototypeOf({
-      construct,
       click,
       getModel,
       getX,
       getY,
-      render,
+      setup,
+      update,
     }, _prototype)
   }
 )()

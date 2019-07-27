@@ -11,30 +11,25 @@ Please assign these to the `m3.component` namespace:
 
 m3.component.foo = {}
 
-m3.component.foo.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
-
 m3.component.foo.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
+    function setup() {
+      this._rootElement = document.createElement('div')
 
-      _build.call(this)
-      this.render().attach()
+      this.attach()
 
       return this
     }
 
-    function _build() {
-
-    }
-
     return Object.setPrototypeOf({
-      construct,
+      setup,
     }, _prototype)
   }
 )()
+
+m3.component.foo.create = function create(...args) {
+  return Object.create(this.prototype).construct(...args)
+}
 ```

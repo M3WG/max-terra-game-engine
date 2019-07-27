@@ -6,19 +6,13 @@ m3.component.scoreboard.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _build.call(this)
-
-      return this
-    }
-
-    function _build() {
+    function setup() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-scoreboard'
 
       _buildPlayers.call(this)
+
+      return this
     }
 
     function _buildPlayers() {
@@ -33,7 +27,7 @@ m3.component.scoreboard.prototype = (
     }
 
     return Object.setPrototypeOf({
-      construct,
+      setup,
     }, _prototype)
   }
 )()

@@ -12,10 +12,14 @@ m3.component.base.prototype = (
 
       utility.pubsub.decorate(this)
 
+      this.setup().attach()
+
       return this
     }
 
     function destruct() {
+      this.teardown()
+
       return this
     }
 
@@ -40,6 +44,10 @@ m3.component.base.prototype = (
     }
 
     function getBoundingClientRect() {
+      if (!this._rootElement) {
+        return {}
+      }
+
       return this._rootElement.getBoundingClientRect()
     }
 
@@ -53,6 +61,14 @@ m3.component.base.prototype = (
       return this
     }
 
+    function setup() {
+      return this
+    }
+
+    function teardown() {
+      return this
+    }
+
     return {
       construct,
       destruct,
@@ -60,6 +76,8 @@ m3.component.base.prototype = (
       getBoundingClientRect,
       getId,
       setId,
+      setup,
+      teardown,
     }
   }
 )()

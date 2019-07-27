@@ -6,37 +6,11 @@ m3.component.scoreboardPlayer.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      const model = this.getModel()
-
-      _build.call(this)
-
-      if (model) {
-        model.on('change', _onModelChange.bind(this))
-      }
-
-      this.render().attach()
-
-      return this
-    }
-
     function getModel() {
       return this.config.model
     }
 
-    function render() {
-      const model = this.getModel()
-
-      this._color.style.backgroundColor = model.getColor()
-      this._name.innerHTML = model.getName()
-      this._score.innerHTML = model.score
-
-      return this
-    }
-
-    function _build() {
+    function setup() {
       this._rootElement = document.createElement('li')
       this._rootElement.className = 'm3-c-scoreboard--player'
 
@@ -51,16 +25,36 @@ m3.component.scoreboardPlayer.prototype = (
       this._score = document.createElement('div')
       this._score.className = 'm3-c-scoreboard--playerScore'
       this._rootElement.appendChild(this._score)
+
+      const model = this.getModel()
+
+      if (model) {
+        model.on('change', _onModelChange.bind(this))
+      }
+
+      this.update()
+
+      return this
+    }
+
+    function update() {
+      const model = this.getModel()
+
+      this._color.style.backgroundColor = model.getColor()
+      this._name.innerHTML = model.getName()
+      this._score.innerHTML = model.score
+
+      return this
     }
 
     function _onModelChange(data) {
-      this.render()
+      this.update()
     }
 
     return Object.setPrototypeOf({
-      construct,
       getModel,
-      render,
+      setup,
+      update,
     }, _prototype)
   }
 )()

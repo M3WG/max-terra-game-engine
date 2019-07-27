@@ -6,21 +6,11 @@ m3.component.gameStatus.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _build.call(this)
-
-      this.render()
-
-      return this
-    }
-
     function getModel() {
       return this.config.model
     }
 
-    function render() {
+    function update() {
       const game = this.getModel(),
         round = game.getCurrentRound(),
         turn = round.getCurrentTurn()
@@ -32,7 +22,7 @@ m3.component.gameStatus.prototype = (
       this._actionValue.innerHTML = 4 - turn.getActionCount()
     }
 
-    function _build() {
+    function setup() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-gameStatus'
 
@@ -69,12 +59,16 @@ m3.component.gameStatus.prototype = (
       this._actionValue = document.createElement('div')
       this._actionValue.className = 'm3-c-gameStatus--value'
       action.appendChild(this._actionValue)
+
+      this.update()
+
+      return this
     }
 
     return Object.setPrototypeOf({
-      construct,
       getModel,
-      render,
+      setup,
+      update,
     }, _prototype)
   }
 )()

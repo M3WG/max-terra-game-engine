@@ -6,16 +6,6 @@ m3.component.tilePicker.prototype = (
   (undefined) => {
     const _prototype = m3.component.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _build.call(this)
-
-      this.setSelectedIndex(0)
-
-      return this
-    }
-
     function getSelectedIndex() {
       for (let i = 0, length = this._option.length; i < length; i++) {
         if (this._option[i].isSelected()) {
@@ -64,11 +54,15 @@ m3.component.tilePicker.prototype = (
       return this
     }
 
-    function _build() {
+    function setup() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-tilePicker'
 
       _buildOptions.call(this)
+
+      this.setSelectedIndex(0)
+
+      return this
     }
 
     function _buildOptions() {
@@ -89,13 +83,13 @@ m3.component.tilePicker.prototype = (
     }
 
     return Object.setPrototypeOf({
-      construct,
       getSelectedIndex,
       getOption,
       getOptionIndex,
       getOptions,
       getValue,
       setSelectedIndex,
+      setup,
     }, _prototype)
   }
 )()
