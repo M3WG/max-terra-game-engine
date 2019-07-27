@@ -18,8 +18,6 @@ m3.component.foo.prototype = (
     function setup() {
       this._rootElement = document.createElement('div')
 
-      this.attach()
-
       return this
     }
 
