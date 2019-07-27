@@ -1,6 +1,5 @@
-# Match Terra Prototype
-**Match Terra** is a strategy game combining elements of Minesweeper and Civilization.
-It supports up to four players in a hotseat multiplayer mode.
+# Match Terra prototype
+**Match Terra** is a hotseat strategy game for up to four players that combines elements of Minesweeper and Civilization.
 
 ## Roadmap
 - Implement remaining alpha features
