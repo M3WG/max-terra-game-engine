@@ -46,77 +46,88 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   return cells
 }
 
-// XXX: Traverses water
-// XXX: Should we refactor so second parameter is an internal variable? (e.g. closure with a named function so it can call itself recursively)
-m3.utility.adjacency.getClaims = (target, tested) => {
-  tested = Array.isArray(tested) ? tested : []
-
-  const cells = [],
-    initial = []
+m3.utility.adjacency.getClaims = (function IIFE() {
+  const tested = []
 
   const isTested = (cell) => tested.includes(cell),
-    isUntested = (...args) => !isTested(...args),
+    isUntested = (cell) => !tested.includes(cell),
     setTested = (cell) => tested.push(cell)
 
-  if (m3.model.cell.prototype.isPrototypeOf(target)) {
-    cells.push(target)
-  } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
-    cells.push(...target.getCells())
-    initial.push(target)
-  } else if (Array.isArray(target)) {
-    target.forEach((target) => {
-      if (m3.model.cell.prototype.isPrototypeOf(target)) {
-        cells.push(target)
-      } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
-        cells.push(...target.getCells())
-        initial.push(target)
-      }
-    })
-  } else {
-    throw new Error('Please provide a valid target')
+  const massageInput = (target) => {
+    const cells = [],
+      initial = []
+
+    if (m3.model.cell.prototype.isPrototypeOf(target)) {
+      cells.push(target)
+    } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
+      cells.push(...target.getCells())
+      initial.push(target)
+    } else if (Array.isArray(target)) {
+      target.forEach((target) => {
+        if (m3.model.cell.prototype.isPrototypeOf(target)) {
+          cells.push(target)
+        } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
+          cells.push(...target.getCells())
+          initial.push(target)
+        }
+      })
+    } else {
+      throw new Error('Please provide a valid target')
+    }
+
+    return {cells, initial};
   }
 
   // XXX: Hardcoded water
+  // TODO: Make configurable, e.g. tile.isTraversable()
   const traverseWater = (cell) => {
     if (cell.tile.getId() != 2) {
       return []
     }
 
-    return m3.utility.adjacency.getClaims(
-      m3.utility.adjacency.getSimilarCellsGreedy(cell).filter(isUntested),
-      tested
+    return collect(
+      m3.utility.adjacency.getSimilarCellsGreedy(cell).filter(isUntested)
     )
   }
 
-  return cells.reduce((claims, cell) => {
-    if (isTested(cell)) {
-      return claims
-    }
+  function collect(target) {
+    const {cells, initial} = massageInput(target)
 
-    setTested(cell)
-
-    const pushClaim = (claim) => {
-      if (claim && !claims.includes(claim)) {
-        claims.push(claim)
-      }
-    }
-
-    traverseWater(cell).forEach(pushClaim)
-
-    m3.utility.adjacency.getCells(cell).forEach((cell) => {
+    return cells.reduce((claims, cell) => {
       if (isTested(cell)) {
-        return
+        return claims
       }
 
       setTested(cell)
 
-      pushClaim(cell.claim)
-      traverseWater(cell).forEach(pushClaim)
-    })
+      const pushClaim = (claim) => {
+        if (claim && !claims.includes(claim)) {
+          claims.push(claim)
+        }
+      }
 
-    return claims
-  }, initial)
-}
+      traverseWater(cell).forEach(pushClaim)
+
+      m3.utility.adjacency.getCells(cell).forEach((cell) => {
+        if (isTested(cell)) {
+          return
+        }
+
+        setTested(cell)
+
+        pushClaim(cell.claim)
+        traverseWater(cell).forEach(pushClaim)
+      })
+
+      return claims
+    }, initial)
+  }
+
+  return (target) => {
+    tested.length = 0
+    return collect(target)
+  }
+})()
 
 m3.utility.adjacency.getClaimsGreedy = (target) => {
   if (typeof filter != 'function') {
