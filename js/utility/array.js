@@ -38,3 +38,5 @@ utility.array.shuffle = array => {
 
   return array
 }
+
+utility.array.unique = array => [...Set(array)]
