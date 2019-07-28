@@ -1,10 +1,16 @@
 const m3 = (
-  function m3IIFE(undefined) {
+  function IIFE(undefined) {
     'use strict'
+
+    function configure(config) {
+      this.config = Object.assign({}, config)
+      return this
+    }
 
     return {
       component: {},
       config: {},
+      configure,
       model: {},
       utility: {},
     }
