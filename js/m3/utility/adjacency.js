@@ -90,88 +90,30 @@ m3.utility.adjacency.getPathsGreedy = (cell, cellFilter, pathFilter) => {
   return cells
 }
 
-m3.utility.adjacency.getClaims = (function IIFE() {
-  const tested = []
-
-  const isTested = (cell) => tested.includes(cell),
-    isUntested = (cell) => !tested.includes(cell),
-    setTested = (cell) => tested.push(cell)
-
-  const massageInput = (target) => {
-    const cells = [],
-      initial = []
-
-    if (m3.model.cell.prototype.isPrototypeOf(target)) {
-      cells.push(target)
-    } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
-      cells.push(...target.getCells())
-      initial.push(target)
-    } else if (Array.isArray(target)) {
-      target.forEach((target) => {
-        if (m3.model.cell.prototype.isPrototypeOf(target)) {
-          cells.push(target)
-        } else if (m3.model.claim.prototype.isPrototypeOf(target)) {
-          cells.push(...target.getCells())
-          initial.push(target)
-        }
-      })
+m3.utility.adjacency.getClaims = (target) => {
+  if (!m3.model.cell.prototype.isPrototypeOf(target)) {
+    if (m3.model.claim.prototype.isPrototypeOf(target)) {
+      target = target.getCells()[0]
     } else {
       throw new Error('Please provide a valid target')
     }
-
-    return {cells, initial};
   }
 
   // XXX: Hardcoded water
-  // TODO: Make configurable, e.g. tile.isTraversable()
-  const traverseWater = (cell) => {
-    if (cell.tile.getId() != 2) {
-      return []
+  const cellFilter = (cell) => cell.claim || cell.tile.getId() == 2
+
+  const getClaims = (claims, cell) => {
+    const claim = cell.claim
+
+    if (claim && !claims.includes(claim)) {
+      claims.push(claim)
     }
 
-    return collect(
-      m3.utility.adjacency.getSimilarCellsGreedy(cell).filter(isUntested)
-    )
+    return claims
   }
 
-  function collect(target) {
-    const {cells, initial} = massageInput(target)
-
-    return cells.reduce((claims, cell) => {
-      if (isTested(cell)) {
-        return claims
-      }
-
-      setTested(cell)
-
-      const pushClaim = (claim) => {
-        if (claim && !claims.includes(claim)) {
-          claims.push(claim)
-        }
-      }
-
-      traverseWater(cell).forEach(pushClaim)
-
-      m3.utility.adjacency.getCells(cell).forEach((cell) => {
-        if (isTested(cell)) {
-          return
-        }
-
-        setTested(cell)
-
-        pushClaim(cell.claim)
-        traverseWater(cell).forEach(pushClaim)
-      })
-
-      return claims
-    }, initial)
-  }
-
-  return (target) => {
-    tested.length = 0
-    return collect(target)
-  }
-})()
+  return m3.utility.adjacency.getPathsGreedy(target, cellFilter).reduce(getClaims, [])
+}
 
 m3.utility.adjacency.getClaimsGreedy = (target) => {
   if (typeof filter != 'function') {
