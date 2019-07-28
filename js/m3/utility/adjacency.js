@@ -1,12 +1,19 @@
 // XXX: Requires m3.utility.crawler
 m3.utility.adjacency = {}
 
-m3.utility.adjacency.getCells = (
-  () => {
-    const crawler = m3.utility.crawler.create()
-    return (cell) => [cell, ...crawler.initializeWithCell(cell).getAdjacent()]
-  }
-)()
+m3.utility.adjacency.getCells = (cell) => {
+  const map = cell.map,
+    x = cell.getX(),
+    y = cell.getY();
+
+  return [
+    cell,
+    map.getCell(x + 1, y),
+    map.getCell(x - 1, y),
+    map.getCell(x, y + 1),
+    map.getCell(x, y - 1),
+  ].filter((cell) => m3.model.cell.prototype.isPrototypeOf(cell))
+}
 
 m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.tile == cell.tile)
 
