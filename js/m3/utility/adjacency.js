@@ -1,4 +1,3 @@
-// XXX: Requires m3.utility.crawler
 m3.utility.adjacency = {}
 
 m3.utility.adjacency.getCells = (cell) => {
@@ -22,7 +21,9 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
     filter = (x) => x
   }
 
-  const cells = m3.utility.adjacency.getSimilarCells(cell).filter(filter),
+  const select = m3.utility.adjacency.getSimilarCells
+
+  const cells = select(cell).filter(filter),
     tested = []
 
   let more
@@ -34,7 +35,7 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
         return
       }
 
-      m3.utility.adjacency.getSimilarCells(cell).filter(filter).forEach((cell) => {
+      select(cell).forEach((cell) => {
         if (filter(cell) && !cells.includes(cell)) {
           cells.push(cell)
           more = true
@@ -62,10 +63,11 @@ m3.utility.adjacency.getPaths = (cell, cellFilter) => {
   }, [])
 }
 
-// XXX: Will select the entire map if not careful
-// TODO: pathFilter parameter?
+// XXX: Be careful. This will slowly select the entire map without filters.
 m3.utility.adjacency.getPathsGreedy = (cell, cellFilter) => {
-  const cells = m3.utility.adjacency.getPaths(cell, cellFilter),
+  const select = (cell) => m3.utility.adjacency.getPaths(cell, cellFilter)
+
+  const cells = select(cell),
     tested = []
 
   let more
@@ -76,7 +78,7 @@ m3.utility.adjacency.getPathsGreedy = (cell, cellFilter) => {
         return
       }
 
-      m3.utility.adjacency.getPaths(cell, cellFilter).forEach((cell) => {
+      select(cell, cellFilter).forEach((cell) => {
         if (!cells.includes(cell)) {
           cells.push(cell)
           more = true
@@ -119,7 +121,9 @@ m3.utility.adjacency.getClaimsGreedy = (target, claimFilter) => {
     claimFilter = (x) => x
   }
 
-  const claims = m3.utility.adjacency.getClaims(target).filter(claimFilter),
+  const select = m3.utility.adjacency.getClaims
+
+  const claims = select(target).filter(claimFilter),
     tested = []
 
   let more
@@ -130,8 +134,8 @@ m3.utility.adjacency.getClaimsGreedy = (target, claimFilter) => {
         return
       }
 
-      m3.utility.adjacency.getClaims(claim).filter(claimFilter).forEach((claim) => {
-        if (!claims.includes(claim)) {
+      select(claim).forEach((claim) => {
+        if (claimFilter(claim) && !claims.includes(claim)) {
           claims.push(claim)
           more = true
         }
