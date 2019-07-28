@@ -34,7 +34,7 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
         return
       }
 
-      m3.utility.adjacency.getSimilarCells(cell).forEach((cell) => {
+      m3.utility.adjacency.getSimilarCells(cell).filter(filter).forEach((cell) => {
         if (filter(cell) && !cells.includes(cell)) {
           cells.push(cell)
           more = true
