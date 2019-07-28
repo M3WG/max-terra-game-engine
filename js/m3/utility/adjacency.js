@@ -46,6 +46,22 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   return cells
 }
 
+m3.utility.adjacency.getPaths = (cell, cellFilter) => {
+  return m3.utility.adjacency.getSimilarCellsGreedy(cell, cellFilter).reduce((cells, cell) => {
+    if (!cells.includes(cell)) {
+      m3.utility.adjacency.getCells(cell).forEach((cell) => {
+        if (cells.includes(cell)) {
+          return
+        }
+
+        cells.push(...m3.utility.adjacency.getSimilarCellsGreedy(cell, cellFilter))
+      })
+    }
+
+    return cells
+  }, [])
+}
+
 m3.utility.adjacency.getClaims = (function IIFE() {
   const tested = []
 
