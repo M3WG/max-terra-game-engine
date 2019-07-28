@@ -62,12 +62,10 @@ m3.utility.adjacency.getPaths = (cell, cellFilter) => {
   }, [])
 }
 
-m3.utility.adjacency.getPathsGreedy = (cell, cellFilter, pathFilter) => {
-  if (typeof pathFilter != 'function') {
-    pathFilter = (x) => x
-  }
-
-  const cells = m3.utility.adjacency.getPaths(cell, cellFilter).filter(pathFilter),
+// XXX: Will select the entire map if not careful
+// TODO: pathFilter parameter?
+m3.utility.adjacency.getPathsGreedy = (cell, cellFilter) => {
+  const cells = m3.utility.adjacency.getPaths(cell, cellFilter),
     tested = []
 
   let more
@@ -78,7 +76,7 @@ m3.utility.adjacency.getPathsGreedy = (cell, cellFilter, pathFilter) => {
         return
       }
 
-      m3.utility.adjacency.getPaths(cell, cellFilter).filter(pathFilter).forEach((cell) => {
+      m3.utility.adjacency.getPaths(cell, cellFilter).forEach((cell) => {
         if (!cells.includes(cell)) {
           cells.push(cell)
           more = true
@@ -100,6 +98,7 @@ m3.utility.adjacency.getClaims = (target) => {
   }
 
   // XXX: Hardcoded water
+  // TODO: Make configurable, e.g. cell.tile.isTraversible()
   const cellFilter = (cell) => cell.claim || cell.tile.getId() == 2
 
   const getClaims = (claims, cell) => {
@@ -115,12 +114,12 @@ m3.utility.adjacency.getClaims = (target) => {
   return m3.utility.adjacency.getPathsGreedy(target, cellFilter).reduce(getClaims, [])
 }
 
-m3.utility.adjacency.getClaimsGreedy = (target) => {
-  if (typeof filter != 'function') {
-    filter = (x) => x
+m3.utility.adjacency.getClaimsGreedy = (target, claimFilter) => {
+  if (typeof claimFilter != 'function') {
+    claimFilter = (x) => x
   }
 
-  const claims = m3.utility.adjacency.getClaims(target),
+  const claims = m3.utility.adjacency.getClaims(target).filter(claimFilter),
     tested = []
 
   let more
@@ -131,7 +130,7 @@ m3.utility.adjacency.getClaimsGreedy = (target) => {
         return
       }
 
-      m3.utility.adjacency.getClaims(claim).forEach((claim) => {
+      m3.utility.adjacency.getClaims(claim).filter(claimFilter).forEach((claim) => {
         if (!claims.includes(claim)) {
           claims.push(claim)
           more = true
