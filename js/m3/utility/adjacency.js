@@ -62,6 +62,34 @@ m3.utility.adjacency.getPaths = (cell, cellFilter) => {
   }, [])
 }
 
+m3.utility.adjacency.getPathsGreedy = (cell, cellFilter, pathFilter) => {
+  if (typeof pathFilter != 'function') {
+    pathFilter = (x) => x
+  }
+
+  const cells = m3.utility.adjacency.getPaths(cell, cellFilter).filter(pathFilter),
+    tested = []
+
+  let more
+  do {
+    more = false
+    cells.forEach((cell) => {
+      if (tested.includes(cell)) {
+        return
+      }
+
+      m3.utility.adjacency.getPaths(cell, cellFilter).filter(pathFilter).forEach((cell) => {
+        if (!cells.includes(cell)) {
+          cells.push(cell)
+          more = true
+        }
+      })
+    })
+  } while (more)
+
+  return cells
+}
+
 m3.utility.adjacency.getClaims = (function IIFE() {
   const tested = []
 
