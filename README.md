@@ -1,5 +1,5 @@
-# Match Terra prototype
-**Match Terra** is a hotseat strategy game for up to four players that combines elements of Minesweeper and Civilization.
+# Tetra Forma prototype
+**Tetra Forma** is a hotseat strategy game for up to four players that combines elements of Minesweeper and Civilization.
 
 ## Roadmap
 - Implement remaining alpha features
