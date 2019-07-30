@@ -347,6 +347,60 @@
           .forEach(drawFog)
       }
 
+      function getAdjacentClaims(target) {
+        if (!m3.model.cell.prototype.isPrototypeOf(target)) {
+          if (m3.model.claim.prototype.isPrototypeOf(target)) {
+            target = target.getCells()[0]
+          } else {
+            throw new Error('Please provide a valid target')
+          }
+        }
+
+        // XXX: Hardcoded water
+        const cellFilter = (cell) => cell.claim || cell.tile.getId() == 2
+
+        const getClaims = (claims, cell) => {
+          const claim = cell.claim
+
+          if (claim && !claims.includes(claim)) {
+            claims.push(claim)
+          }
+
+          return claims
+        }
+
+        return m3.utility.adjacency.getPathsGreedy(target, cellFilter).reduce(getClaims, [])
+      }
+
+      function getAdjacentClaimsGreedy(target, claimFilter) {
+        if (typeof claimFilter != 'function') {
+          claimFilter = (x) => x
+        }
+
+        const select = getAdjacentClaims
+        const claims = select(target).filter(claimFilter),
+          tested = []
+
+        let more
+        do {
+          more = false
+          claims.forEach((claim) => {
+            if (tested.includes(claim)) {
+              return
+            }
+
+            select(claim).forEach((claim) => {
+              if (claimFilter(claim) && !claims.includes(claim)) {
+                claims.push(claim)
+                more = true
+              }
+            })
+          })
+        } while (more)
+
+        return claims
+      }
+
       function getPlayerInventory(player, tile) {
         const inventory = playerInventories.get(player),
           tileId = tile.getId()
@@ -493,7 +547,7 @@
           isPlayerOwned = (claim) => isPlayer(claim.player)
 
         const calculateClaimScore = (claim) => {
-          const adjacencies = m3.utility.adjacency.getClaimsGreedy(claim),
+          const adjacencies = getAdjacentClaimsGreedy(claim),
             isClaim = (test) => test === claim
 
           const calculateAdjacencyScore = (adjacency) => {
