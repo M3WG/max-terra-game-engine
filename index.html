@@ -301,7 +301,7 @@
 
         if (isTurnEnd) {
           const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
-          const isGameEnd = isRoundEnd && m3.utility.map.getPercentClaimed(map) > (0.125 * playerCount)
+          const isGameEnd = isRoundEnd && m3.utility.map.getPercent(map, (cell) => cell.claim) > (0.125 * playerCount)
 
           if (isGameEnd) {
             handleGameEnd()
