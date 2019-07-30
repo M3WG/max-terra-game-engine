@@ -267,7 +267,7 @@
           tile = tilePickerComponent.getValue(),
           turn = round.getCurrentTurn(),
           turnPlayer = turn.player
-        
+
         const options = {
           cell,
           tile,
@@ -293,7 +293,7 @@
         modifyPlayerInventory(turnPlayer, cell.tile, +1)
         cell.setTile(tile)
 
-        const match = m3.utility.match(options, turnPlayer)
+        const match = testMatch(cell, turnPlayer)
 
         if (match) {
           handleMatch(match, turnPlayer)
@@ -412,6 +412,28 @@
           value = inventory.get(tileId)
 
         inventory.set(tileId, value + amount || 0)
+      }
+
+      function testMatch(cell, player) {
+        const tile = cell.tile
+
+        if (!tile.isMatchable()) {
+          return
+        }
+
+        // XXX: Hardcoded magic
+        const minimumCells = tile.getId() == 7 ? 0 : 3
+
+        // filter selects unclaimed or claims to merge
+        const filter = (cell) => !cell.claim || cell.claim && cell.claim.player == player
+        const cells = m3.utility.adjacency.getSimilarCellsGreedy(cell, filter)
+
+        if (cells.length > minimumCells) {
+          return {
+            cell: cells,
+            type: tile.getClaimType(),
+          }
+        }
       }
 
       function transitionPlayerView(nextPlayer, currentPlayer) {
