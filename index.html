@@ -53,7 +53,6 @@
     <script src="./js/m3/model/turn.js"></script>
     <script src="./js/m3/model/user.js"></script>
 
-    <script src="./js/m3/utility/action.js"></script>
     <script src="./js/m3/utility/adjacency.js"></script>
     <script src="./js/m3/utility/claim.js"></script>
     <script src="./js/m3/utility/crawler.js"></script>
@@ -281,7 +280,7 @@
             throw new Error('Inventory is zero')
           }
 
-          m3.utility.action.validate(options)
+          validateAction(options)
         } catch (e) {
           console.error(e)
           alert('Invalid action: ' + e.message)
@@ -527,6 +526,24 @@
             return score + calculateClaimScore(claim)
           }, 0)
         )
+      }
+
+      function validateAction({cell, tile}) {
+        const cellTile = cell.tile
+
+        if (cell.claim) {
+          throw new Error('Cell is claimed')
+        }
+
+        if (cellTile.getId() == 2 && !tile.isPlaceableInWater()) {
+          throw new Error('Cell contains water')
+        }
+
+        if (cellTile.getId() == tile.getId()) {
+          throw new Error('Cell cannot be changed to itself')
+        }
+
+        return true
       }
 
       function vh(value) {
