@@ -19,7 +19,7 @@ m3.component.base.prototype = (
       return this
     }
 
-    function destruct() {
+    function destroy() {
       this.teardown()
 
       return this
@@ -72,9 +72,9 @@ m3.component.base.prototype = (
     }
 
     return {
-      construct,
-      destruct,
       attach,
+      construct,
+      destroy,
       getBoundingClientRect,
       getId,
       setId,
