@@ -1,3 +1,5 @@
+'use strict'
+
 m3.utility.adjacency = {}
 
 m3.utility.adjacency.getCells = (cell) => {
