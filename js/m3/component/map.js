@@ -3,15 +3,6 @@
 m3.component.map = m3.utility.component.inventFactory(
   ((undefined) => {
 
-    function destroy() {
-      const destroyCell = (cell) => cell.destroy(),
-        destroyRow = (row) => row.forEach(destroyCell)
-
-      this._cell.forEach(destroyRow)
-
-      return this
-    }
-
     function getCell(x, y) {
       if (this._cell[y]) {
         return this._cell[y][x]
@@ -75,6 +66,15 @@ m3.component.map = m3.utility.component.inventFactory(
       return this
     }
 
+    function teardown() {
+      const destroyCell = (cell) => cell.destroy(),
+        destroyRow = (row) => row.forEach(destroyCell)
+
+      this._cell.forEach(destroyRow)
+
+      return this
+    }
+
     function update() {
       this._cell.forEach(function updateColumn(column) {
         column.forEach(function updateCell(cell) {
@@ -86,11 +86,11 @@ m3.component.map = m3.utility.component.inventFactory(
     }
 
     return {
-      destroy,
       getCell,
       getCells,
       getModel,
       setup,
+      teardown,
       update,
     }
   })()
