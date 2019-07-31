@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.map = {}
-
-m3.model.map.prototype = (
-  (undefined) => {
+m3.model.map = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -11,10 +9,6 @@ m3.model.map.prototype = (
 
       this.cell = _createCells.call(this)
 
-      return this
-    }
-
-    function destruct() {
       return this
     }
 
@@ -74,19 +68,13 @@ m3.model.map.prototype = (
     // Game
     // Archetype?
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       createSlice,
       getCell,
       getCells,
       getHeight,
       getWidth,
-    }, _prototype)
-  }
-)()
-
-m3.model.map.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.claim = {}
-
-m3.model.claim.prototype = (
-  (undefined) => {
+m3.model.claim = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -18,10 +16,6 @@ m3.model.claim.prototype = (
 
       _claimCells.call(this);
 
-      return this
-    }
-
-    function destruct() {
       return this
     }
 
@@ -79,18 +73,12 @@ m3.model.claim.prototype = (
 
     // Player
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       getCells,
       getFogShape,
       getSize,
       toPath,
-    }, _prototype)
-  }
-)()
-
-m3.model.claim.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

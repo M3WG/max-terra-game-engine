@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.cell = {}
-
-m3.model.cell.prototype = (
-  (undefined) => {
+m3.model.cell = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -54,20 +52,14 @@ m3.model.cell.prototype = (
       return this
     }
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       getFog,
       getX,
       getY,
       setClaim,
       setFog,
       setTile,
-    }, _prototype)
-  }
-)()
-
-m3.model.cell.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

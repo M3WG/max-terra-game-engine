@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.game = {}
-
-m3.model.game.prototype = (
-  (undefined) => {
+m3.model.game = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -13,10 +11,6 @@ m3.model.game.prototype = (
       this.player = this.config.player
       this.round = []
 
-      return this
-    }
-
-    function destruct() {
       return this
     }
 
@@ -65,9 +59,8 @@ m3.model.game.prototype = (
 
     // Map
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       createRound,
       getCurrentRound,
       getPlayer,
@@ -75,11 +68,6 @@ m3.model.game.prototype = (
       getPlayers,
       getRoundCount,
       pushRound,
-    }, _prototype)
-  }
-)()
-
-m3.model.game.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

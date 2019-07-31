@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.round = {}
-
-m3.model.round.prototype = (
-  (undefined) => {
+m3.model.round = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -12,10 +10,6 @@ m3.model.round.prototype = (
       this.game = this.config.game
       this.turn = []
 
-      return this
-    }
-
-    function destruct() {
       return this
     }
 
@@ -48,18 +42,12 @@ m3.model.round.prototype = (
       return this
     }
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       createTurn,
       getCurrentTurn,
       getTurnCount,
       pushTurn,
-    }, _prototype)
-  }
-)()
-
-m3.model.round.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

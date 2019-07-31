@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.action = {}
-
-m3.model.action.prototype = (
-  (undefined) => {
+m3.model.action = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -16,18 +14,8 @@ m3.model.action.prototype = (
       return this
     }
 
-    function destruct() {
-      return this
-    }
-
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
-    }, _prototype)
-  }
-)()
-
-m3.model.action.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

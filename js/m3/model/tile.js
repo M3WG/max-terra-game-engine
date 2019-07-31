@@ -1,20 +1,8 @@
 'use strict'
 
-m3.model.tile = {}
-
-m3.model.tile.prototype = (
-  (undefined) => {
+m3.model.tile = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      return this
-    }
-
-    function destruct() {
-      return this
-    }
 
     function getClaimType() {
       return m3.model.claimType.get(this.config.claimType)
@@ -48,12 +36,7 @@ m3.model.tile.prototype = (
       return Boolean(this.config.placeableInWater)
     }
 
-    // id
-    // color
-
-    return Object.setPrototypeOf({
-      construct,
-      destruct,
+    return {
       getClaimType,
       getColor,
       getIcon,
@@ -62,35 +45,28 @@ m3.model.tile.prototype = (
       isMatchable,
       isPlaceableInFog,
       isPlaceableInWater,
-    }, _prototype)
+    }
+  })(), {
+    get: function (id) {
+      if (this.is(id)) {
+        return id
+      }
+
+      if (this.store.has(id)) {
+        return this.store.get(id)
+      }
+
+      const config = m3.config.tiles[id]
+      config.id = id
+
+      const instance = this.create(config)
+      this.store.set(id, instance)
+      return instance
+    },
+    getAll: function () {
+      return Object.entries(m3.config.tiles)
+        .map(([id]) => this.get(id))
+    },
+    store: new Map(),
   }
-)()
-
-m3.model.tile.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
-
-m3.model.tile.get = function (id) {
-  if (this.prototype.isPrototypeOf(id)) {
-    return id
-  }
-
-  if (this.store.has(id)) {
-    return this.store.get(id)
-  }
-
-  const config = m3.config.tiles[id]
-  config.id = id
-
-  const instance = this.create(config)
-  this.store.set(id, instance)
-  return instance
-}
-
-m3.model.tile.getAll = function () {
-  return Object.entries(m3.config.tiles)
-    .map(([id]) => this.get(id))
-}
-
-m3.model.tile.store = new Map()
+)

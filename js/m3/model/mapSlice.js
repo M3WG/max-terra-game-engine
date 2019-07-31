@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.mapSlice = {}
-
-m3.model.mapSlice.prototype = (
-  (undefined) => {
+m3.model.mapSlice = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -14,10 +12,6 @@ m3.model.mapSlice.prototype = (
       this.cell = _getCells(this.config)
       this.map = this.config.map
 
-      return this
-    }
-
-    function destruct() {
       return this
     }
 
@@ -127,9 +121,8 @@ m3.model.mapSlice.prototype = (
       }
     }
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       flip,
       getCell,
       getCellCoordinates,
@@ -139,11 +132,6 @@ m3.model.mapSlice.prototype = (
       getX,
       getY,
       rotate,
-    }, _prototype)
-  }
-)()
-
-m3.model.mapSlice.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)

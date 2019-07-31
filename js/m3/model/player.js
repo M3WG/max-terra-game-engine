@@ -1,9 +1,7 @@
 'use strict'
 
-m3.model.player = {}
-
-m3.model.player.prototype = (
-  (undefined) => {
+m3.model.player = m3.utility.model.inventFactory(
+  ((undefined) => {
     const _prototype = m3.model.base.prototype
 
     function construct(...args) {
@@ -14,18 +12,10 @@ m3.model.player.prototype = (
       return this
     }
 
-    function destruct() {
-      return this
-    }
-
-    // User
-
     function getColor() {
       return this.config.color;
     }
 
-    // XXX: Temporary
-    // TODO: Prefer account name via this.user
     function getName() {
       return this.config.name
     }
@@ -37,17 +27,11 @@ m3.model.player.prototype = (
       return this
     }
 
-    return Object.setPrototypeOf({
+    return {
       construct,
-      destruct,
       getColor,
       getName,
       incrementScore,
-    }, _prototype)
-  }
-)()
-
-m3.model.player.create = function(...args) {
-  const instance = Object.create(this.prototype)
-  return instance.construct(...args)
-}
+    }
+  })()
+)
