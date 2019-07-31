@@ -13,5 +13,5 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
   ...mixin,
 })
 
-m3.utility.component.invent = (definition) => Object.setPrototypeOf(Object.assign({}, definition), m3.component.base)
+m3.utility.component.invent = (definition) => Object.setPrototypeOf(Object.assign({}, definition), m3.component.base.prototype)
 m3.utility.component.inventFactory = (definition, mixin) => m3.utility.component.factory(m3.utility.component.invent(definition), mixin)
