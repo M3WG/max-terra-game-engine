@@ -2,6 +2,8 @@
 
 m3.component.base = {}
 
+m3.component.is = (x) => m3.component.base.prototype.isPrototypeOf(x)
+
 m3.component.base.prototype = (
   (undefined) => {
 
