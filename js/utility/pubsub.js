@@ -22,75 +22,58 @@ utility.pubsub.decorate = (target) => {
   return target
 }
 
-utility.pubsub.prototype = (
-  (undefined) => {
+utility.pubsub.prototype = {
+  construct: function() {
+    this._handler = {}
+    return this
+  },
+  destruct: function() {
+    this.off()
+    return this
+  },
+  emit: function(event, ...args) {
+    if (!this._handler[event]) {
+      return this
+    }
 
-    function construct() {
-      this._handler = {}
+    const execute = (handler) => handler(...args)
+    this._handler[event].forEach(execute)
+
+    return this
+  },
+  off: function(event, handler) {
+    if (event === undefined) {
+      Object.keys(this._handler).forEach((event) => {
+        this.off(event)
+      })
 
       return this
     }
 
-    function destruct() {
-      this.off()
+    if (handler === undefined) {
+      delete this._handler[event]
+    }
 
+    if (!this._handler[event]) {
       return this
     }
 
-    function emit(event, ...args) {
-      if (!this._handler[event]) {
-        return this
-      }
+    const handlers = this._handler[event],
+      index = handlers.indexOf(handler)
 
-      const execute = (handler) => handler(...args)
-      this._handler[event].forEach(execute)
-
-      return this
+    if (index != -1) {
+      handlers.splice(index, 1)
     }
 
-    function off(event, handler) {
-      if (event === undefined) {
-        Object.keys(this._handler).forEach((event) => {
-          this.off(event)
-        })
-
-        return this
-      }
-
-      if (handler === undefined) {
-        delete this._handler[event]
-      }
-
-      if (!this._handler[event]) {
-        return this
-      }
-
-      const handlers = this._handler[event],
-        index = handlers.indexOf(handler)
-
-      if (index != -1) {
-        handlers.splice(index, 1)
-      }
-
-      return this
+    return this
+  },
+  on: function(event, handler) {
+    if (!this._handler[event]) {
+      this._handler[event] = []
     }
 
-    function on(event, handler) {
-      if (!this._handler[event]) {
-        this._handler[event] = []
-      }
+    this._handler[event].push(handler)
 
-      this._handler[event].push(handler)
-
-      return this
-    }
-
-    return {
-      construct,
-      destruct,
-      emit,
-      off,
-      on,
-    }
-  }
-)()
+    return this
+  },
+}
