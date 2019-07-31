@@ -2,7 +2,7 @@
 
 m3.utility.map = {}
 
-m3.utility.map.csvToData = function(csv) {
+m3.utility.map.csvToData = (csv) => {
   // TODO: Convert CSV string to two-dimensional array
 }
 
@@ -15,8 +15,8 @@ m3.utility.map.getPercent = (model, filter) => {
   return cells.filter(filter).length / cells.length
 }
 
-m3.utility.map.import = function(model, data) {
-  model.getCells().forEach(function setTile(cell) {
+m3.utility.map.import = (model, data) => {
+  model.getCells().forEach((cell) => {
     const x = cell.getX(),
       y = cell.getY()
 
@@ -24,12 +24,12 @@ m3.utility.map.import = function(model, data) {
   })
 }
 
-m3.utility.map.importCsv = function(model, csv) {
+m3.utility.map.importCsv = (model, csv) => {
   const data = this.csvToData(csv)
   this.import(model, data)
 }
 
-m3.utility.map.randomize = function(model) {
+m3.utility.map.randomize = (model) => {
   const tiles = utility.array.shuffle(
     m3.model.tile.getAll().reduce((tiles, tile) => [
       ...tiles,
@@ -42,8 +42,8 @@ m3.utility.map.randomize = function(model) {
   ))
 }
 
-m3.utility.map.zero = function(model) {
-  model.getCells().forEach(function setTile(cell) {
+m3.utility.map.zero = (model) => {
+  model.getCells().forEach((cell) => {
     cell.setTile(0)
   })
 }
