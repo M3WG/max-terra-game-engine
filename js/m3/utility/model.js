@@ -2,10 +2,6 @@
 
 m3.utility.model = {}
 
-m3.utility.model.invent = (definition) => Object.setPrototypeOf(Object.assign({}, definition), m3.model.base)
-
-m3.utility.model.inventFactory = (definition, mixin) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
-
 m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function create(...args) {
     return Object.create(this.prototype).construct(...args)
@@ -16,3 +12,6 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   prototype,
   ...mixin,
 })
+
+m3.utility.model.invent = (definition) => Object.setPrototypeOf(Object.assign({}, definition), m3.model.base)
+m3.utility.model.inventFactory = (definition, mixin) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
