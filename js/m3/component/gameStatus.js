@@ -1,10 +1,7 @@
 'use strict'
 
-m3.component.gameStatus = {}
-
-m3.component.gameStatus.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
+m3.component.gameStatus = m3.utility.component.inventFactory(
+  ((undefined) => {
 
     function getModel() {
       return this.config.model
@@ -65,14 +62,10 @@ m3.component.gameStatus.prototype = (
       return this
     }
 
-    return Object.setPrototypeOf({
+    return {
       getModel,
       setup,
       update,
-    }, _prototype)
-  }
-)()
-
-m3.component.gameStatus.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })()
+)

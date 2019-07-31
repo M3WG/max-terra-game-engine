@@ -1,10 +1,7 @@
 'use strict'
 
-m3.component.scoreboardPlayer = {}
-
-m3.component.scoreboardPlayer.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
+m3.component.scoreboardPlayer = m3.utility.component.inventFactory(
+  ((undefined) => {
 
     function getModel() {
       return this.config.model
@@ -47,18 +44,14 @@ m3.component.scoreboardPlayer.prototype = (
       return this
     }
 
-    function _onModelChange(data) {
+    function _onModelChange() {
       this.update()
     }
 
-    return Object.setPrototypeOf({
+    return {
       getModel,
       setup,
       update,
-    }, _prototype)
-  }
-)()
-
-m3.component.scoreboardPlayer.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })()
+)

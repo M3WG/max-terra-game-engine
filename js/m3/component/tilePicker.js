@@ -1,10 +1,7 @@
 'use strict'
 
-m3.component.tilePicker = {}
-
-m3.component.tilePicker.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
+m3.component.tilePicker = m3.utility.component.inventFactory(
+  ((undefined) => {
 
     function getSelectedIndex() {
       for (let i = 0, length = this._option.length; i < length; i++) {
@@ -82,7 +79,7 @@ m3.component.tilePicker.prototype = (
       this._option = this.config.option.filter(isValid).map(createOption)
     }
 
-    return Object.setPrototypeOf({
+    return {
       getSelectedIndex,
       getOption,
       getOptionIndex,
@@ -90,10 +87,6 @@ m3.component.tilePicker.prototype = (
       getValue,
       setSelectedIndex,
       setup,
-    }, _prototype)
-  }
-)()
-
-m3.component.tilePicker.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })()
+)

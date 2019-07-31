@@ -1,11 +1,7 @@
 'use strict'
 
-m3.component.tilePickerOption = {}
-
-m3.component.tilePickerOption.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
-
+m3.component.tilePickerOption = m3.utility.component.inventFactory(
+  ((undefined) => {
     const _disabledModifier = 'm3-c-tilePickerOption-disabled',
       _selectedModifier = 'm3-c-tilePickerOption-selected'
 
@@ -106,7 +102,7 @@ m3.component.tilePickerOption.prototype = (
       this.click()
     }
 
-    return Object.setPrototypeOf({
+    return {
       click,
       getValue,
       isDisabled,
@@ -115,10 +111,6 @@ m3.component.tilePickerOption.prototype = (
       setDisabled,
       setSelected,
       setup,
-    }, _prototype)
-  }
-)()
-
-m3.component.tilePickerOption.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })()
+)

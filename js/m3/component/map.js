@@ -1,10 +1,7 @@
 'use strict'
 
-m3.component.map = {}
-
-m3.component.map.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
+m3.component.map = m3.utility.component.inventFactory(
+  ((undefined) => {
 
     function getCell(x, y) {
       if (this._cell[y]) {
@@ -79,16 +76,12 @@ m3.component.map.prototype = (
       return this
     }
 
-    return Object.setPrototypeOf({
+    return {
       getCell,
       getCells,
       getModel,
       setup,
       update,
-    }, _prototype)
-  }
-)()
-
-m3.component.map.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })()
+)

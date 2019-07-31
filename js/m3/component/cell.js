@@ -1,10 +1,7 @@
 'use strict'
 
-m3.component.cell = {}
-
-m3.component.cell.prototype = (
-  (undefined) => {
-    const _prototype = m3.component.base.prototype
+m3.component.cell = m3.utility.component.inventFactory(
+  ((undefined) => {
 
     function click() {
       this.emit('click')
@@ -114,21 +111,16 @@ m3.component.cell.prototype = (
       this.click()
     }
 
-    function _onModelChange(data) {
+    function _onModelChange() {
       this.update()
     }
 
-    return Object.setPrototypeOf({
+    return {
       click,
       getModel,
       getX,
       getY,
       setup,
       update,
-    }, _prototype)
-  }
-)()
-
-m3.component.cell.create = function create(...args) {
-  return Object.create(this.prototype).construct(...args)
-}
+    }
+  })())
