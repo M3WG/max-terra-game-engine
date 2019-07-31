@@ -4,15 +4,15 @@ var utility = utility || {}
 
 utility.array = {}
 
-utility.array.copy = array => Array.isArray(array) ? [].slice.call(array) : []
+utility.array.copy = (array) => Array.isArray(array) ? [].slice.call(array) : []
 
-utility.array.randomIndex = array => {
+utility.array.randomIndex = (array) => {
   if (Array.isArray(array)) {
     return Math.floor(Math.random() * array.length)
   }
 }
 
-utility.array.randomValue = array => {
+utility.array.randomValue = (array) => {
   const randomIndex = utility.array.randomIndex
 
   if (Array.isArray(array)) {
@@ -21,13 +21,13 @@ utility.array.randomValue = array => {
   }
 }
 
-utility.array.reverse = array => {
+utility.array.reverse = (array) => {
   const copy = utility.array.copy
 
   return copy(array).reverse()
 }
 
-utility.array.shuffle = array => {
+utility.array.shuffle = (array) => {
   array = utility.array.copy(array)
 
   for (let i = array.length - 1; i > 0; i--) {
@@ -39,4 +39,4 @@ utility.array.shuffle = array => {
   return array
 }
 
-utility.array.unique = array => [...Set(array)]
+utility.array.unique = (array)=> [...Set(array)]
