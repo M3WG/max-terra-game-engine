@@ -2,12 +2,18 @@
 
 m3.component.scoreboard = m3.utility.component.inventFactory(
   ((undefined) => {
-    
+
     function setup() {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-scoreboard'
 
       _buildPlayers.call(this)
+
+      return this
+    }
+
+    function teardown() {
+      this._player.forEach((component) => component.destroy())
 
       return this
     }
@@ -25,6 +31,7 @@ m3.component.scoreboard = m3.utility.component.inventFactory(
 
     return {
       setup,
+      teardown,
     }
   })()
 )

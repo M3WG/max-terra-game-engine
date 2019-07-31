@@ -62,6 +62,12 @@ m3.component.tilePicker = m3.utility.component.inventFactory(
       return this
     }
 
+    function teardown() {
+      this._option.forEach((option) => option.destroy())
+
+      return this
+    }
+
     function _buildOptions() {
       const optionsElement = document.createElement('ul')
       optionsElement.className = 'm3-c-tilePicker--options'
@@ -87,6 +93,7 @@ m3.component.tilePicker = m3.utility.component.inventFactory(
       getValue,
       setSelectedIndex,
       setup,
+      teardown,
     }
   })()
 )
