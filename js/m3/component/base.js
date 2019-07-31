@@ -22,6 +22,8 @@ m3.component.base.prototype = (
     function destroy() {
       this.teardown()
 
+      this.config = {}
+
       return this
     }
 
