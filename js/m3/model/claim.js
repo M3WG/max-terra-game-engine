@@ -2,22 +2,6 @@
 
 m3.model.claim = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this.player = this.config.player
-      this.type = this.config.type
-
-      if (!Array.isArray(this.config.cell)) {
-        this.config.cell = []
-      }
-
-      _claimCells.call(this);
-
-      return this
-    }
 
     function getCells() {
       return utility.array.copy(this.config.cell)
@@ -58,27 +42,42 @@ m3.model.claim = m3.utility.model.inventFactory(
       return this.config.cell.length
     }
 
-    // XXX: Techically a utility function
-    function toPath() {
-      return m3.model.path.create({
-        cells: this.getCells(),
-      })
+    function setup() {
+      this.player = this.config.player
+      this.type = this.config.type
+
+      if (!Array.isArray(this.config.cell)) {
+        this.config.cell = []
+      }
+
+      // XXX: This doesn't feel right.
+      _claimCells.call(this);
+
+      return this
     }
 
-    // TODO: Move out into game controller
+    function teardown() {
+      this.player = undefined
+      this.type = undefined
+
+      // XXX: Cells still hold a reference to this, see below
+
+      return this
+    }
+
+    // XXX: This doesn't feel right
+    // TODO: Make claiming / claim checking the responsibility of the game controller
     function _claimCells() {
       const setClaim = (cell) => cell.setClaim(this)
       this.getCells().forEach(setClaim)
     }
 
-    // Player
-
     return {
-      construct,
       getCells,
       getFogShape,
       getSize,
-      toPath,
+      setup,
+      teardown,
     }
   })()
 )

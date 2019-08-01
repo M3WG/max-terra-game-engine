@@ -2,22 +2,6 @@
 
 m3.model.cell = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this.map = this.config.map
-
-      // TODO: Game controller?
-      this._fog = true
-
-      return this
-    }
-
-    function destruct() {
-      return this
-    }
 
     function getFog() {
       return this._fog
@@ -52,14 +36,29 @@ m3.model.cell = m3.utility.model.inventFactory(
       return this
     }
 
+    function setup() {
+      this.map = this.config.map
+
+      this._fog = true
+
+      return this
+    }
+
+    function teardown() {
+      this.map = undefined
+
+      return this
+    }
+
     return {
-      construct,
       getFog,
       getX,
       getY,
       setClaim,
       setFog,
       setTile,
+      setup,
+      teardown,
     }
   })()
 )

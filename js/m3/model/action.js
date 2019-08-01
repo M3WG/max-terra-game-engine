@@ -2,11 +2,8 @@
 
 m3.model.action = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
 
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
+    function setup() {
       this.cell = this.config.cell
       this.tile = this.config.tile
       this.turn = this.config.turn
@@ -14,8 +11,17 @@ m3.model.action = m3.utility.model.inventFactory(
       return this
     }
 
+    function teardown() {
+      this.cell = undefined
+      this.tile = undefined
+      this.turn = undefined
+
+      return this
+    }
+
     return {
-      construct,
+      setup,
+      teardown,
     }
   })()
 )

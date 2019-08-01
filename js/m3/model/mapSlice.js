@@ -2,18 +2,6 @@
 
 m3.model.mapSlice = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      _sanitizeConfig(this.config)
-
-      this.cell = _getCells(this.config)
-      this.map = this.config.map
-
-      return this
-    }
 
     function flip() {
       this.cell = utility.matrix.flip(this.cell)
@@ -58,6 +46,22 @@ m3.model.mapSlice = m3.utility.model.inventFactory(
 
     function rotate() {
       this.cell = utility.matrix.rotate90(this.cell)
+      return this
+    }
+
+    function setup() {
+      _sanitizeConfig(this.config)
+
+      this.cell = _getCells(this.config)
+      this.map = this.config.map
+
+      return this
+    }
+
+    function teardown() {
+      this.cell = undefined
+      this.map = undefined
+
       return this
     }
 
@@ -122,7 +126,6 @@ m3.model.mapSlice = m3.utility.model.inventFactory(
     }
 
     return {
-      construct,
       flip,
       getCell,
       getCellCoordinates,
@@ -132,6 +135,8 @@ m3.model.mapSlice = m3.utility.model.inventFactory(
       getX,
       getY,
       rotate,
+      setup,
+      teardown,
     }
   })()
 )

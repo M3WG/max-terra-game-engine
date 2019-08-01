@@ -2,17 +2,6 @@
 
 m3.model.turn = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this.action = []
-      this.player = this.config.player
-      this.round = this.config.round
-
-      return this
-    }
 
     // TODO: Deprecate and prefer pushAction() via a game controller
     function createAction(options) {
@@ -39,11 +28,28 @@ m3.model.turn = m3.utility.model.inventFactory(
       return this
     }
 
+    function setup() {
+      this.action = []
+      this.player = this.config.player
+      this.round = this.config.round
+
+      return this
+    }
+
+    function teardown() {
+      this.action.forEach((action) => action.destroy())
+      this.player = undefined
+      this.round = undefined
+
+      return this
+    }
+
     return {
-      construct,
       createAction,
       getActionCount,
       pushAction,
+      setup,
+      teardown,
     }
   })()
 )

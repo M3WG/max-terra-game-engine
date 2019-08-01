@@ -2,17 +2,6 @@
 
 m3.model.game = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this.map = this.config.map
-      this.player = this.config.player
-      this.round = []
-
-      return this
-    }
 
     // TODO: Deprecate and prefer pushRound() via a game controller
     function createRound() {
@@ -57,10 +46,23 @@ m3.model.game = m3.utility.model.inventFactory(
       return this
     }
 
-    // Map
+    function setup() {
+      this.map = this.config.map
+      this.player = this.config.player
+      this.round = []
+
+      return this
+    }
+
+    function teardown() {
+      this.map = this.config.map
+      this.player = this.config.player
+      this.round.forEach((round) => round.destroy())
+
+      return this
+    }
 
     return {
-      construct,
       createRound,
       getCurrentRound,
       getPlayer,
@@ -68,6 +70,8 @@ m3.model.game = m3.utility.model.inventFactory(
       getPlayers,
       getRoundCount,
       pushRound,
+      setup,
+      teardown,
     }
   })()
 )

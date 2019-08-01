@@ -2,7 +2,6 @@
 
 m3.model.tile = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
 
     function getClaimType() {
       return m3.model.claimType.get(this.config.claimType)

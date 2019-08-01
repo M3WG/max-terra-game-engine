@@ -2,15 +2,6 @@
 
 m3.model.map = m3.utility.model.inventFactory(
   ((undefined) => {
-    const _prototype = m3.model.base.prototype
-
-    function construct(...args) {
-      _prototype.construct.call(this, ...args)
-
-      this.cell = _createCells.call(this)
-
-      return this
-    }
 
     function createSlice(x, y, height, width) {
       return m3.model.mapSlice.create({
@@ -65,16 +56,26 @@ m3.model.map = m3.utility.model.inventFactory(
       return cells
     }
 
-    // Game
-    // Archetype?
+    function setup() {
+      this.cell = _createCells.call(this)
+
+      return this
+    }
+
+    function teardown() {
+      this.cell.forEach((cell) => cell.destroy())
+
+      return this
+    }
 
     return {
-      construct,
       createSlice,
       getCell,
       getCells,
       getHeight,
       getWidth,
+      setup,
+      teardown,
     }
   })()
 )
