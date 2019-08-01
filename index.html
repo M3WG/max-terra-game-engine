@@ -429,7 +429,7 @@
 
           return claims
         }, []).forEach((claim) => {
-          claim.destruct()
+          claim.destroy()
           claimStore.splice(claimStore.indexOf(claim), 1)
         })
 
