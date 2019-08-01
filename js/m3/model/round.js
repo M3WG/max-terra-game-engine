@@ -1,58 +1,42 @@
 'use strict'
 
-m3.model.round = m3.utility.model.inventFactory(
-  ((undefined) => {
+// TODO: Document internal data struct
+m3.model.round = m3.utility.model.inventFactory({
+  // TODO: Deprecate and prefer pushTurn() via a game controller
+  createTurn: function (options) {
+    options.round = this
 
-    // TODO: Deprecate and prefer pushTurn() via a game controller
-    function createTurn(options) {
-      options.round = this
+    const turn = m3.model.turn.create(options)
+    this.pushTurn(turn)
 
-      const turn = m3.model.turn.create(options)
-      this.pushTurn(turn)
-
-      return turn
+    return turn
+  },
+  getCurrentTurn: function () {
+    return this.turn[this.turn.length - 1]
+  },
+  getTurnCount: function () {
+    return this.turn.length
+  },
+  pushTurn: function (turn) {
+    if (!m3.model.turn.prototype.isPrototypeOf(turn)) {
+      throw new Error('Please provide a valid turn')
     }
 
-    function getCurrentTurn() {
-      return this.turn[this.turn.length - 1]
-    }
+    this.turn.push(turn)
+    this.emit('change')
 
-    function getTurnCount() {
-      return this.turn.length
-    }
+    return this
+  },
+  setup: function () {
+    this.game = this.data.game
+    this.turn = []
 
-    function pushTurn(turn) {
-      if (!m3.model.turn.prototype.isPrototypeOf(turn)) {
-        throw new Error('Please provide a valid turn')
-      }
+    return this
+  },
+  teardown: function () {
+    this.game = undefined
+    this.turn.forEach((turn) => turn.destroy())
 
-      this.turn.push(turn)
-      this.emit('change')
-
-      return this
-    }
-
-    function setup() {
-      this.game = this.data.game
-      this.turn = []
-
-      return this
-    }
-
-    function teardown() {
-      this.game = undefined
-      this.turn.forEach((turn) => turn.destroy())
-
-      return this
-    }
-
-    return {
-      createTurn,
-      getCurrentTurn,
-      getTurnCount,
-      pushTurn,
-      setup,
-      teardown,
-    }
-  })()
-)
+    return this
+  },
+})

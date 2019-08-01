@@ -1,34 +1,22 @@
 'use strict'
 
-m3.model.player = m3.utility.model.inventFactory(
-  ((undefined) => {
+// TODO: Document internal data struct
+m3.model.player = m3.utility.model.inventFactory({
+  getColor: function () {
+    return this.data.color;
+  },
+  getName: function () {
+    return this.data.name
+  },
+  incrementScore: function (value) {
+    this.score += value
+    this.emit('change')
 
-    function getColor() {
-      return this.data.color;
-    }
+    return this
+  },
+  setup: function () {
+    this.score = 0
 
-    function getName() {
-      return this.data.name
-    }
-
-    function incrementScore(value) {
-      this.score += value
-      this.emit('change')
-
-      return this
-    }
-
-    function setup() {
-      this.score = 0
-
-      return this
-    }
-
-    return {
-      getColor,
-      getName,
-      incrementScore,
-      setup,
-    }
-  })()
-)
+    return this
+  },
+})

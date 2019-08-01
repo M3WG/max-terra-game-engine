@@ -1,77 +1,54 @@
 'use strict'
 
-m3.model.game = m3.utility.model.inventFactory(
-  ((undefined) => {
+// TODO: Document internal data struct
+m3.model.game = m3.utility.model.inventFactory({
+  // TODO: Deprecate and prefer pushRound() via a game controller
+  createRound: function () {
+    const round = m3.model.round.create({
+      game: this,
+    })
 
-    // TODO: Deprecate and prefer pushRound() via a game controller
-    function createRound() {
-      const round = m3.model.round.create({
-        game: this,
-      })
+    this.pushRound(round)
 
-      this.pushRound(round)
-
-      return round
+    return round
+  },
+  getCurrentRound: function () {
+    return this.round[this.round.length - 1]
+  },
+  getPlayer: function (index) {
+    return this.player[index]
+  },
+  getPlayerCount: function () {
+    return this.player.length
+  },
+  getPlayers: function () {
+    return utility.array.copy(this.player)
+  },
+  getRoundCount: function () {
+    return this.round.length
+  },
+  pushRound: function (round) {
+    if (!m3.model.round.prototype.isPrototypeOf(round)) {
+      throw new Error('Please provide a valid round')
     }
 
-    function getCurrentRound() {
-      return this.round[this.round.length - 1]
-    }
+    this.round.push(round)
+    this.emit('change')
 
-    function getPlayer(index) {
-      return this.player[index]
-    }
+    return this
+  },
+  setup: function () {
+    this.map = this.data.map
+    this.player = this.data.player
+    this.round = []
 
-    function getPlayerCount() {
-      return this.player.length
-    }
+    return this
+  },
+  teardown: function () {
+    this.map = this.data.map
+    this.player = this.data.player
+    this.round.forEach((round) => round.destroy())
 
-    function getPlayers() {
-      // XXX: Not a copy
-      return this.player
-    }
-
-    function getRoundCount() {
-      return this.round.length
-    }
-
-    function pushRound(round) {
-      if (!m3.model.round.prototype.isPrototypeOf(round)) {
-        throw new Error('Please provide a valid round')
-      }
-
-      this.round.push(round)
-      this.emit('change')
-
-      return this
-    }
-
-    function setup() {
-      this.map = this.data.map
-      this.player = this.data.player
-      this.round = []
-
-      return this
-    }
-
-    function teardown() {
-      this.map = this.data.map
-      this.player = this.data.player
-      this.round.forEach((round) => round.destroy())
-
-      return this
-    }
-
-    return {
-      createRound,
-      getCurrentRound,
-      getPlayer,
-      getPlayerCount,
-      getPlayers,
-      getRoundCount,
-      pushRound,
-      setup,
-      teardown,
-    }
-  })()
-)
+    return this
+  },
+})
