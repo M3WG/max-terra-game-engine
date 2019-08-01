@@ -4,46 +4,31 @@ m3.model.base = {}
 
 m3.model.base.is = (x) => m3.model.base.isPrototypeOf(x)
 
-m3.model.base.prototype = (
-  (undefined) => {
+m3.model.base.prototype = {
+  construct: function (config) {
+    // TODO: Rethink config
+    this.config = Object.assign({}, config)
 
-    function construct(config) {
-      // TODO: Rethink config
-      this.config = Object.assign({}, config)
+    utility.pubsub.decorate(this)
 
-      utility.pubsub.decorate(this)
+    this.setup()
 
-      this.setup()
+    return this
+  },
+  destroy: function () {
+    this.config = {}
 
-      return this
-    }
+    this.teardown()
 
-    function destroy() {
-      this.config = {}
-
-      this.teardown()
-
-      return this
-    }
-
-    function getId() {
-      return Number(this.config.id)
-    }
-
-    function setup() {
-      return this
-    }
-
-    function teardown() {
-      return this
-    }
-
-    return {
-      construct,
-      destroy,
-      getId,
-      setup,
-      teardown,
-    }
+    return this
+  },
+  getId: function () {
+    return Number(this.config.id)
+  },
+  setup: function () {
+    return this
+  },
+  teardown: function () {
+    return this
   }
-)()
+}
