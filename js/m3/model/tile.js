@@ -1,7 +1,7 @@
 'use strict'
 
 // TODO: Document internal data struct
-m3.model.tile = m3.utility.model.inventFactory({
+m3.model.tile = m3.utility.model.inventSingletonFactory({
   getClaimType: function () {
     return m3.model.claimType.get(this.data.claimType)
   },
@@ -26,26 +26,4 @@ m3.model.tile = m3.utility.model.inventFactory({
   isPlaceableInWater: function () {
     return Boolean(this.data.placeableInWater)
   },
-}, {
-  get: function (id) {
-    if (this.is(id)) {
-      return id
-    }
-
-    if (this.store.has(id)) {
-      return this.store.get(id)
-    }
-
-    const config = m3.config.tiles[id]
-    config.id = id
-
-    const instance = this.create(config)
-    this.store.set(id, instance)
-    return instance
-  },
-  getAll: function () {
-    return Object.entries(m3.config.tiles)
-      .map(([id]) => this.get(id))
-  },
-  store: new Map(),
 })
