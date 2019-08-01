@@ -32,10 +32,7 @@ m3.utility.model.singletonFactory = (prototype, mixin = {}) => m3.utility.model.
     return instance
   },
   getSome: function(ids) {
-    return ids.reduce((models, id) => {
-      models.push(this.get(id))
-      return models
-    }, [])
+    return ids.map((id) => this.get(id))
   },
   getAll: function() {
     return Object.keys(this.data).map((id) => this.get(id))
