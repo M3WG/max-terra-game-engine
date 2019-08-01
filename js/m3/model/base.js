@@ -36,6 +36,7 @@ m3.model.base.prototype = {
   },
   set: function (key, value) {
     this.data[key] = value
+    this.emit('change')
     return this
   },
   setup: function () {
