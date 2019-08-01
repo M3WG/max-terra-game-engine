@@ -47,16 +47,16 @@ m3.model.game = m3.utility.model.inventFactory(
     }
 
     function setup() {
-      this.map = this.config.map
-      this.player = this.config.player
+      this.map = this.data.map
+      this.player = this.data.player
       this.round = []
 
       return this
     }
 
     function teardown() {
-      this.map = this.config.map
-      this.player = this.config.player
+      this.map = this.data.map
+      this.player = this.data.player
       this.round.forEach((round) => round.destroy())
 
       return this

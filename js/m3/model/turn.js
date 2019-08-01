@@ -30,8 +30,8 @@ m3.model.turn = m3.utility.model.inventFactory(
 
     function setup() {
       this.action = []
-      this.player = this.config.player
-      this.round = this.config.round
+      this.player = this.data.player
+      this.round = this.data.round
 
       return this
     }

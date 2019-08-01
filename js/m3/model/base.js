@@ -7,7 +7,7 @@ m3.model.base.is = (x) => m3.model.base.isPrototypeOf(x)
 m3.model.base.prototype = {
   construct: function (config) {
     // TODO: Rethink config
-    this.config = Object.assign({}, config)
+    this.data = Object.assign({}, config)
 
     utility.pubsub.decorate(this)
 
@@ -16,14 +16,14 @@ m3.model.base.prototype = {
     return this
   },
   destroy: function () {
-    this.config = {}
+    this.data = {}
 
     this.teardown()
 
     return this
   },
   getId: function () {
-    return Number(this.config.id)
+    return Number(this.data.id)
   },
   setup: function () {
     return this

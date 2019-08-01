@@ -8,11 +8,11 @@ m3.model.cell = m3.utility.model.inventFactory(
     }
 
     function getX() {
-      return this.config.x
+      return this.data.x
     }
 
     function getY() {
-      return this.config.y
+      return this.data.y
     }
 
     function setClaim(claim) {
@@ -37,7 +37,7 @@ m3.model.cell = m3.utility.model.inventFactory(
     }
 
     function setup() {
-      this.map = this.config.map
+      this.map = this.data.map
 
       this._fog = true
 

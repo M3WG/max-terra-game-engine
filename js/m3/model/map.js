@@ -27,17 +27,17 @@ m3.model.map = m3.utility.model.inventFactory(
     }
 
     function getHeight() {
-      return this.config.height
+      return this.data.height
     }
 
     function getWidth() {
-      return this.config.width
+      return this.data.width
     }
 
     function _createCells() {
       const cells = [],
-        height = this.config.height,
-        width = this.config.width
+        height = this.data.height,
+        width = this.data.width
 
       for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {

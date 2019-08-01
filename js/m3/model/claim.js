@@ -4,7 +4,7 @@ m3.model.claim = m3.utility.model.inventFactory(
   ((undefined) => {
 
     function getCells() {
-      return utility.array.copy(this.config.cell)
+      return utility.array.copy(this.data.cell)
     }
 
     function getFogShape() {
@@ -39,15 +39,15 @@ m3.model.claim = m3.utility.model.inventFactory(
     }
 
     function getSize() {
-      return this.config.cell.length
+      return this.data.cell.length
     }
 
     function setup() {
-      this.player = this.config.player
-      this.type = this.config.type
+      this.player = this.data.player
+      this.type = this.data.type
 
-      if (!Array.isArray(this.config.cell)) {
-        this.config.cell = []
+      if (!Array.isArray(this.data.cell)) {
+        this.data.cell = []
       }
 
       // XXX: This doesn't feel right.

@@ -4,11 +4,11 @@ m3.model.player = m3.utility.model.inventFactory(
   ((undefined) => {
 
     function getColor() {
-      return this.config.color;
+      return this.data.color;
     }
 
     function getName() {
-      return this.config.name
+      return this.data.name
     }
 
     function incrementScore(value) {

@@ -4,35 +4,35 @@ m3.model.tile = m3.utility.model.inventFactory(
   ((undefined) => {
 
     function getClaimType() {
-      return m3.model.claimType.get(this.config.claimType)
+      return m3.model.claimType.get(this.data.claimType)
     }
 
     function getColor() {
-      return this.config.color
+      return this.data.color
     }
 
     function getIcon() {
-      return this.config.icon
+      return this.data.icon
     }
 
     function getName() {
-      return this.config.desc
+      return this.data.desc
     }
 
     function getRandomWeight() {
-      return this.config.randomWeight
+      return this.data.randomWeight
     }
 
     function isMatchable() {
-      return Boolean(this.config.matchable)
+      return Boolean(this.data.matchable)
     }
 
     function isPlaceableInFog() {
-      return Boolean(this.config.placeableInFog)
+      return Boolean(this.data.placeableInFog)
     }
 
     function isPlaceableInWater() {
-      return Boolean(this.config.placeableInWater)
+      return Boolean(this.data.placeableInWater)
     }
 
     return {

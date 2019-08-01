@@ -33,7 +33,7 @@ m3.model.round = m3.utility.model.inventFactory(
     }
 
     function setup() {
-      this.game = this.config.game
+      this.game = this.data.game
       this.turn = []
 
       return this

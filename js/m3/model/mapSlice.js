@@ -23,25 +23,25 @@ m3.model.mapSlice = m3.utility.model.inventFactory(
 
     function getCellCoordinates(cell) {
       return {
-        x: cell.getX() - this.config.x,
-        y: cell.getY() - this.config.y,
+        x: cell.getX() - this.data.x,
+        y: cell.getY() - this.data.y,
       }
     }
 
     function getHeight() {
-      return this.config.height
+      return this.data.height
     }
 
     function getWidth() {
-      return this.config.width
+      return this.data.width
     }
 
     function getX() {
-      return this.config.x
+      return this.data.x
     }
 
     function getY() {
-      return this.config.y
+      return this.data.y
     }
 
     function rotate() {
@@ -50,10 +50,10 @@ m3.model.mapSlice = m3.utility.model.inventFactory(
     }
 
     function setup() {
-      _sanitizeConfig(this.config)
+      _sanitizeConfig(this.data)
 
-      this.cell = _getCells(this.config)
-      this.map = this.config.map
+      this.cell = _getCells(this.data)
+      this.map = this.data.map
 
       return this
     }

@@ -4,19 +4,19 @@ m3.model.claimType = m3.utility.model.inventFactory(
   ((undefined) => {
 
     function getLineOfSight() {
-      return this.config.lineOfSight;
+      return this.data.lineOfSight;
     }
 
     function getMultiplier() {
-      return Number(this.config.multiplier)
+      return Number(this.data.multiplier)
     }
 
     function getPriority() {
-      return this.config.priority
+      return this.data.priority
     }
 
     function getScore() {
-      return this.config.score
+      return this.data.score
     }
 
     return {
