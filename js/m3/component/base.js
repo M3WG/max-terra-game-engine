@@ -16,20 +16,18 @@ m3.component.base.prototype = {
 
     return this
   },
-  construct: function (config, parentElement, parentComponent) {
+  construct: function (config, parentElement, parentComponent, ...args) {
     this.config = Object.assign({}, config)
     this._parentElement = parentElement
     this.parent = parentComponent
 
     utility.pubsub.decorate(this)
-
-    this.setup().attach()
+    this.setup(...args).attach()
 
     return this
   },
   destroy: function () {
     this.teardown()
-
     this.config = {}
 
     return this
@@ -49,7 +47,7 @@ m3.component.base.prototype = {
 
     return this
   },
-  setup: function () {
+  setup: function (...args) {
     return this
   },
   teardown: function () {
