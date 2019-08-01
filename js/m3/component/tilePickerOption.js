@@ -1,30 +1,33 @@
 'use strict'
 
-m3.component.tilePickerOption = m3.utility.component.inventFactory(
-  ((undefined) => {
-    const _disabledModifier = 'm3-c-tilePickerOption-disabled',
-      _selectedModifier = 'm3-c-tilePickerOption-selected'
+m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
+  const _disabledModifier = 'm3-c-tilePickerOption-disabled',
+    _selectedModifier = 'm3-c-tilePickerOption-selected'
 
-    function click() {
+  function _onClick(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    this.click()
+  }
+
+  return {
+    click: function () {
       const index = this.parent.getOptionIndex(this)
       this.parent.setSelectedIndex(index)
 
       return this
-    }
-
-    function getValue() {
+    },
+    getValue: function () {
       return this.config.tile
-    }
-
-    function isDisabled() {
+    },
+    isDisabled: function () {
       return this._rootElement.classList.contains(_disabledModifier)
-    }
-
-    function isSelected() {
+    },
+    isSelected: function () {
       return this._rootElement.classList.contains(_selectedModifier)
-    }
-
-    function setInventory(value) {
+    },
+    setInventory: function (value) {
       value = Math.max(0, value) || 0
 
       if (value == Infinity || value == -Infinity) {
@@ -42,9 +45,8 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory(
       }
 
       return this
-    }
-
-    function setDisabled(state) {
+    },
+    setDisabled: function (state) {
       if (state) {
         this._rootElement.classList.add(_disabledModifier)
       } else {
@@ -52,9 +54,8 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory(
       }
 
       return this
-    }
-
-    function setSelected(state) {
+    },
+    setSelected: function (state) {
       if (state) {
         this._rootElement.classList.add(_selectedModifier)
       } else {
@@ -62,9 +63,8 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory(
       }
 
       return this
-    }
-
-    function setup() {
+    },
+    setup: function () {
       const tile = this.getValue()
 
       this._rootElement = document.createElement('button')
@@ -93,24 +93,6 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory(
       this._inventory = inventory
 
       return this
-    }
-
-    function _onClick(e) {
-      e.preventDefault()
-      e.stopPropagation()
-
-      this.click()
-    }
-
-    return {
-      click,
-      getValue,
-      isDisabled,
-      isSelected,
-      setInventory,
-      setDisabled,
-      setSelected,
-      setup,
-    }
-  })()
-)
+    },
+  }
+})())

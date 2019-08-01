@@ -1,71 +1,62 @@
 'use strict'
 
-m3.component.gameStatus = m3.utility.component.inventFactory(
-  ((undefined) => {
+m3.component.gameStatus = m3.utility.component.inventFactory({
+  getModel: function () {
+    return this.config.model
+  },
+  setup: function () {
+    this._rootElement = document.createElement('div')
+    this._rootElement.className = 'm3-c-gameStatus'
 
-    function getModel() {
-      return this.config.model
-    }
+    const items = document.createElement('ul')
+    items.className = 'm3-c-gameStatus--items'
+    this._rootElement.appendChild(items)
 
-    function update() {
-      const game = this.getModel(),
-        round = game.getCurrentRound(),
-        turn = round.getCurrentTurn()
+    const round = document.createElement('li')
+    round.className = 'm3-c-gameStatus--item m3-c-gameStatus--round'
+    round.innerHTML = '<div class="m3-c-gameStatus--label">Round</div>'
+    items.appendChild(round)
 
-      this._roundValue.innerHTML = game.getRoundCount()
-      this._turnColor.style.backgroundColor = turn.player.getColor()
-      this._turnValue.innerHTML = turn.player.getName()
-      // XXX: Hardcoded at 4 actions per turn
-      this._actionValue.innerHTML = 4 - turn.getActionCount()
-    }
+    this._roundValue = document.createElement('div')
+    this._roundValue.className = 'm3-c-gameStatus--value'
+    round.appendChild(this._roundValue)
 
-    function setup() {
-      this._rootElement = document.createElement('div')
-      this._rootElement.className = 'm3-c-gameStatus'
+    const turn = document.createElement('li')
+    turn.className = 'm3-c-gameStatus--item m3-c-gameStatus--turn'
+    items.appendChild(turn)
 
-      const items = document.createElement('ul')
-      items.className = 'm3-c-gameStatus--items'
-      this._rootElement.appendChild(items)
+    this._turnColor = document.createElement('div')
+    this._turnColor.className = 'm3-c-gameStatus--color'
+    turn.appendChild(this._turnColor)
 
-      const round = document.createElement('li')
-      round.className = 'm3-c-gameStatus--item m3-c-gameStatus--round'
-      round.innerHTML = '<div class="m3-c-gameStatus--label">Round</div>'
-      items.appendChild(round)
+    this._turnValue = document.createElement('div')
+    this._turnValue.className = 'm3-c-gameStatus--value'
+    turn.appendChild(this._turnValue)
 
-      this._roundValue = document.createElement('div')
-      this._roundValue.className = 'm3-c-gameStatus--value'
-      round.appendChild(this._roundValue)
+    const action = document.createElement('li')
+    action.className = 'm3-c-gameStatus--item m3-c-gameStatus--action'
+    action.innerHTML = '<div class="m3-c-gameStatus--label">Actions</div>'
+    items.appendChild(action)
 
-      const turn = document.createElement('li')
-      turn.className = 'm3-c-gameStatus--item m3-c-gameStatus--turn'
-      items.appendChild(turn)
+    this._actionValue = document.createElement('div')
+    this._actionValue.className = 'm3-c-gameStatus--value'
+    action.appendChild(this._actionValue)
 
-      this._turnColor = document.createElement('div')
-      this._turnColor.className = 'm3-c-gameStatus--color'
-      turn.appendChild(this._turnColor)
+    this.update()
 
-      this._turnValue = document.createElement('div')
-      this._turnValue.className = 'm3-c-gameStatus--value'
-      turn.appendChild(this._turnValue)
+    return this
+  },
+  update: function () {
+    const game = this.getModel(),
+      round = game.getCurrentRound(),
+      turn = round.getCurrentTurn()
 
-      const action = document.createElement('li')
-      action.className = 'm3-c-gameStatus--item m3-c-gameStatus--action'
-      action.innerHTML = '<div class="m3-c-gameStatus--label">Actions</div>'
-      items.appendChild(action)
+    this._roundValue.innerHTML = game.getRoundCount()
+    this._turnColor.style.backgroundColor = turn.player.getColor()
+    this._turnValue.innerHTML = turn.player.getName()
+    // XXX: Hardcoded at 4 actions per turn
+    this._actionValue.innerHTML = 4 - turn.getActionCount()
 
-      this._actionValue = document.createElement('div')
-      this._actionValue.className = 'm3-c-gameStatus--value'
-      action.appendChild(this._actionValue)
-
-      this.update()
-
-      return this
-    }
-
-    return {
-      getModel,
-      setup,
-      update,
-    }
-  })()
-)
+    return this
+  },
+})

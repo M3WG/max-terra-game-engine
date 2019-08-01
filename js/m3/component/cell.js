@@ -1,27 +1,64 @@
 'use strict'
 
-m3.component.cell = m3.utility.component.inventFactory(
-  ((undefined) => {
+m3.component.cell = m3.utility.component.inventFactory((() => {
+  function _getClaimDirectionClassnames() {
+    const classnames = [],
+      model = this.getModel(),
+      player = model.claim.player,
+      x = this.getX(),
+      y = this.getY()
 
-    function click() {
+    const map = model.map
+
+    const down = map.getCell(x, y + 1),
+      left = map.getCell(x - 1, y),
+      right = map.getCell(x + 1, y),
+      up = map.getCell(x, y - 1)
+
+    const isContiguous = (cell) => cell && cell.claim && cell.claim.player == player
+
+    if (isContiguous(down)) {
+      classnames.push('m3-c-cell-claimDown')
+    }
+
+    if (isContiguous(left)) {
+      classnames.push('m3-c-cell-claimLeft')
+    }
+
+    if (isContiguous(right)) {
+      classnames.push('m3-c-cell-claimRight')
+    }
+
+    if (isContiguous(up)) {
+      classnames.push('m3-c-cell-claimUp')
+    }
+
+    return classnames
+  }
+
+  function _onClick(e) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    this.click()
+  }
+
+  return {
+    click: function () {
       this.emit('click')
 
       return this
-    }
-
-    function getModel() {
+    },
+    getModel: function () {
       return this.config.model
-    }
-
-    function getX() {
+    },
+    getX: function () {
       return this.config.x
-    }
-
-    function getY() {
+    },
+    getY: function () {
       return this.config.y
-    }
-
-    function setup() {
+    },
+    setup: function () {
       this._rootElement = document.createElement('div')
       this._rootElement.className = 'm3-c-cell'
       this._rootElement.addEventListener('click', _onClick.bind(this))
@@ -31,15 +68,14 @@ m3.component.cell = m3.utility.component.inventFactory(
       this._rootElement.appendChild(this._icon)
 
       if (this.config.model) {
-        this.config.model.on('change', _onModelChange.bind(this))
+        this.config.model.on('change', this.update.bind(this))
       }
 
       this.update()
 
       return this
-    }
-
-    function update() {
+    },
+    update: function () {
       const model = this.getModel(),
         tile = this.getModel().tile
 
@@ -67,60 +103,6 @@ m3.component.cell = m3.utility.component.inventFactory(
       }
 
       return this
-    }
-
-    function _getClaimDirectionClassnames() {
-      const classnames = [],
-        model = this.getModel(),
-        player = model.claim.player,
-        x = this.getX(),
-        y = this.getY()
-
-      const map = model.map
-
-      const down = map.getCell(x, y + 1),
-        left = map.getCell(x - 1, y),
-        right = map.getCell(x + 1, y),
-        up = map.getCell(x, y - 1)
-
-      const isContiguous = (cell) => cell && cell.claim && cell.claim.player == player
-
-      if (isContiguous(down)) {
-        classnames.push('m3-c-cell-claimDown')
-      }
-
-      if (isContiguous(left)) {
-        classnames.push('m3-c-cell-claimLeft')
-      }
-
-      if (isContiguous(right)) {
-        classnames.push('m3-c-cell-claimRight')
-      }
-
-      if (isContiguous(up)) {
-        classnames.push('m3-c-cell-claimUp')
-      }
-
-      return classnames
-    }
-
-    function _onClick(e) {
-      e.preventDefault()
-      e.stopPropagation()
-
-      this.click()
-    }
-
-    function _onModelChange() {
-      this.update()
-    }
-
-    return {
-      click,
-      getModel,
-      getX,
-      getY,
-      setup,
-      update,
-    }
-  })())
+    },
+  }
+})())
