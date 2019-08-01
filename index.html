@@ -224,9 +224,9 @@
       }, document.querySelector('.m3-a-gameStatus'))
 
       const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
-        tile.config.picker && tile.config.picker.active
+        tile.data.picker && tile.data.picker.active
       ).sort((a, b) =>
-        a.config.picker.position - b.config.picker.position
+        a.data.picker.position - b.data.picker.position
       ).map((tile) => ({
         tile,
       }))
