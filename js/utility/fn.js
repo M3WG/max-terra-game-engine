@@ -2,8 +2,10 @@
 
 var utility = utility || {}
 
-utility.fn = {}
-utility.fn.compose = (...fns) => (x) => fns.reduceRight((v, fn) => fn(v), x)
-utility.fn.identity = (x) => () => x
-utility.fn.pipe = (...fns) => (x) => fns.reduce((v, fn) => fn(v), x)
-utility.fn.unary = (fn) => (x) => fn(x)
+utility.fn = {
+  const: (x) => () => x,
+  compose: (...fns) => (x) => fns.reduceRight((v, fn) => fn(v), x),
+  identity: (x) => x,
+  pipe: (...fns) => (x) => fns.reduce((v, fn) => fn(v), x),
+  unary: (fn) => (x) => fn(x),
+}
