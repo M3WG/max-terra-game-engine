@@ -535,7 +535,7 @@
 
       function getAdjacentClaimsGreedy(target, claimFilter) {
         if (typeof claimFilter != 'function') {
-          claimFilter = (x) => x
+          claimFilter = utility.fn.identity
         }
 
         const select = getAdjacentClaims

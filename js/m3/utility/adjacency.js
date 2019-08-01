@@ -20,7 +20,7 @@ m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(c
 
 m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   if (typeof filter != 'function') {
-    filter = (x) => x
+    filter = utility.fn.identity
   }
 
   const select = m3.utility.adjacency.getSimilarCells
