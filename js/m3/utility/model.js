@@ -3,9 +3,11 @@
 m3.utility.model = {}
 
 m3.utility.model.factory = (prototype, mixin = {}) => ({
-  create: function create(...args) {
-    return Object.create(this.prototype).construct(...args)
+  create: function create(data, ...args) {
+    data = {...this.defaults, ...data}
+    return Object.create(this.prototype).construct(data, ...args)
   },
+  defaults: {},
   is: function is(x) {
     return this.prototype.isPrototypeOf(x)
   },
@@ -13,7 +15,7 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   ...mixin,
 })
 
-m3.utility.model.invent = (definition) => Object.setPrototypeOf(Object.assign({}, definition), m3.model.base.prototype)
+m3.utility.model.invent = (definition) => Object.setPrototypeOf({...definition}, m3.model.base.prototype)
 m3.utility.model.inventFactory = (definition, mixin) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
 m3.utility.model.inventSingletonFactory = (definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.invent(definition), mixin)
 
