@@ -1,5 +1,5 @@
-# Max Terra game engine
-The **Max Terra** game engine is a toolkit for building 2d games with vanilla HTML, CSS, and JS.
+# Max Terra
+**Max Terra** is a toolkit for building 2d games with vanilla HTML, CSS, and JS.
 
 Games typically leverage maps and cells to create a playing field.
 Utilities for selecting contiguous cells and matching shapes are provided.
