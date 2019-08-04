@@ -1,7 +1,15 @@
-# Tetra Forma prototype
-**Tetra Forma** is a hotseat strategy game for up to four players that draws on the match 3 and turn based strategy genres, while also taking inspiration from games like Minesweeper and Tetris. This project is both a game and an engine prototype.
+# Max Terra game engine
+The **Max Terra** game engine is a toolkit for building 2d games with vanilla HTML, CSS, and JS.
+
+Games typically leverage maps and cells to create a playing field.
+Utilities for selecting contiguous cells and matching shapes are provided.
+All base models and UI components are fully extensible for complete customization.
+
+## Example project
+Please see the `example/` directory to see how a hotseat strategy game could be implemented with this engine.
 
 ## Roadmap
+- Clearly split code between the engine and its example project
 - Implement remaining alpha features
 - Improve and clean up codebase for extensibility
 - Complete documentation and contribution guidelines
