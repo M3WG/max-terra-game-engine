@@ -17,7 +17,7 @@ m3.component.base.prototype = {
     return this
   },
   construct: function (config, parentElement, parentComponent, ...args) {
-    this.config = Object.assign({}, config)
+    this.config = {...config}
     this._parentElement = parentElement
     this.parent = parentComponent
 
