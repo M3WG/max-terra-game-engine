@@ -3,12 +3,15 @@
 m3.utility.model = {}
 
 m3.utility.model.factory = (prototype, mixin = {}) => ({
-  create: function create(data, ...args) {
+  create: function (data, ...args) {
     data = {...this.defaults, ...data}
     return Object.create(this.prototype).construct(data, ...args)
   },
   defaults: {},
-  is: function is(x) {
+  extend: function (mixin = {}) {
+    return {...this.prototype, ...mixin}
+  },
+  is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },
   prototype,
