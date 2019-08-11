@@ -1,0 +1,48 @@
+body {
+  background-color: #191919;
+  font-family: sans-serif;
+}
+
+.tf-o-map {
+  position: relative;
+  z-index: 1;
+}
+
+.tf-o-ui {
+  height: 100%;
+  left: 0;
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.tf-o-ui--gameStatus {
+  filter: drop-shadow(0 0 2em #000000);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.tf-o-ui--minimap {
+  bottom: 3em;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.tf-o-ui--scoreboard {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.tf-o-ui--tilePicker {
+  bottom: 0;
+  filter: drop-shadow(0 0 2em #000000);
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
