@@ -2,13 +2,9 @@
 
 m3.utility.map = {}
 
-m3.utility.map.csvToData = (csv) => {
-  // TODO: Convert CSV string to two-dimensional array
-}
-
 m3.utility.map.getPercent = (model, filter) => {
   if (typeof filter != 'function') {
-    filter = (x) => x
+    filter = utility.fn.identity()
   }
 
   const cells = model.getCells()
@@ -22,11 +18,6 @@ m3.utility.map.import = (model, data) => {
 
     cell.setTile(data[y][x])
   })
-}
-
-m3.utility.map.importCsv = (model, csv) => {
-  const data = this.csvToData(csv)
-  this.import(model, data)
 }
 
 m3.utility.map.randomize = (model) => {
