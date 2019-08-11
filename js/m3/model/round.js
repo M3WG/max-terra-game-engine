@@ -18,7 +18,7 @@ m3.model.round = m3.utility.model.inventFactory({
     return this.turn.length
   },
   pushTurn: function (turn) {
-    if (!m3.model.turn.prototype.isPrototypeOf(turn)) {
+    if (!m3.model.turn.is(turn)) {
       throw new Error('Please provide a valid turn')
     }
 

@@ -13,7 +13,7 @@ m3.utility.adjacency.getCells = (cell) => {
     map.getCell(x - 1, y),
     map.getCell(x, y + 1),
     map.getCell(x, y - 1),
-  ].filter((cell) => m3.model.cell.prototype.isPrototypeOf(cell))
+  ].filter((cell) => m3.model.cell.is(cell))
 }
 
 m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.tile == cell.tile)

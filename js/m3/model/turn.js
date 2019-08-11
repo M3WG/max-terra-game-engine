@@ -15,7 +15,7 @@ m3.model.turn = m3.utility.model.inventFactory({
     return this.action.length
   },
   pushAction: function (action) {
-    if (!m3.model.action.prototype.isPrototypeOf(action)) {
+    if (!m3.model.action.is(action)) {
       throw new Error('Please provide a valid action')
     }
 

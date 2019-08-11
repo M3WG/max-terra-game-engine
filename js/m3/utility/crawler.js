@@ -8,7 +8,7 @@ m3.utility.crawler.prototype = (
   (undefined) => {
 
     function construct({cell, map, x, y}) {
-      if (m3.model.cell.prototype.isPrototypeOf(cell)) {
+      if (m3.model.cell.is(cell)) {
         return this.initializeWithCell(cell)
       }
 
@@ -31,7 +31,7 @@ m3.utility.crawler.prototype = (
         this.getLeft(),
         this.getRight(),
         this.getUp(),
-      ].filter((cell) => m3.model.cell.prototype.isPrototypeOf(cell))
+      ].filter((cell) => m3.model.cell.is(cell))
     }
 
     function getDown() {
@@ -71,7 +71,7 @@ m3.utility.crawler.prototype = (
     }
 
     function initializeWithCell(cell) {
-      if (!m3.model.cell.prototype.isPrototypeOf(cell)) {
+      if (!m3.model.cell.is(cell)) {
         throw new Error('Please provide a valid cell')
       }
 
@@ -101,7 +101,7 @@ m3.utility.crawler.prototype = (
     }
 
     function setMap(map) {
-      if (!m3.model.map.prototype.isPrototypeOf(map)) {
+      if (!m3.model.map.is(map)) {
         throw new Error('Please provide a valid map')
       }
 

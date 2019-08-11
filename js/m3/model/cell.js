@@ -13,7 +13,7 @@ m3.model.cell = m3.utility.model.inventFactory({
     return this.data.y
   },
   setClaim: function (claim) {
-    if (m3.model.claim.prototype.isPrototypeOf(claim)) {
+    if (m3.model.claim.is(claim)) {
       this.claim = claim
       this.emit('change')
     }

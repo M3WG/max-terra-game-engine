@@ -51,7 +51,7 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
     optionsElement.className = 'm3-c-tilePicker--options'
     this._rootElement.appendChild(optionsElement)
 
-    const isValid = (config) => config && m3.model.tile.prototype.isPrototypeOf(config.tile)
+    const isValid = (config) => config && m3.model.tile.is(config.tile)
     const createOption = (config) => {
       const container = document.createElement('li')
       container.className = 'm3-c-tilePicker--option'

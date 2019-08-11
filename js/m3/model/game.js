@@ -28,7 +28,7 @@ m3.model.game = m3.utility.model.inventFactory({
     return this.round.length
   },
   pushRound: function (round) {
-    if (!m3.model.round.prototype.isPrototypeOf(round)) {
+    if (!m3.model.round.is(round)) {
       throw new Error('Please provide a valid round')
     }
 

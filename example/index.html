@@ -509,8 +509,8 @@
       }
 
       function getAdjacentClaims(target) {
-        if (!m3.model.cell.prototype.isPrototypeOf(target)) {
-          if (m3.model.claim.prototype.isPrototypeOf(target)) {
+        if (!m3.model.cell.is(target)) {
+          if (m3.model.claim.is(target)) {
             target = target.getCells()[0]
           } else {
             throw new Error('Please provide a valid target')
