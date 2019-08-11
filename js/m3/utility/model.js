@@ -9,7 +9,7 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   },
   defaults: {},
   extend: function (mixin = {}) {
-    return {...this.prototype, ...mixin}
+    return m3.utility.model.invent({...this.prototype, ...mixin})
   },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
