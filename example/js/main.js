@@ -307,7 +307,7 @@ const tilePickerComponent = m3.component.tilePicker.create({
 startLocations.forEach((claim) => {
   const cell = claim.getCells()[0],
     cellComponent = mapComponent.getCell(cell.getX(), cell.getY()),
-    player = claim.player,
+    player = claim.getPlayer(),
     rect = cellComponent.getBoundingClientRect(),
     x = cellComponent._rootElement.offsetLeft - vw(50) + (0.5 * rect.width),
     y = cellComponent._rootElement.offsetTop - vh(50) + (0.5 * rect.height)
@@ -409,7 +409,7 @@ function drawClaimFog(claim, state) {
 }
 
 function drawPlayerFog(player, state) {
-  const filterInPlayer = (claim) => claim.player == player
+  const filterInPlayer = (claim) => claim.getPlayer() == player
   const drawFog = (claim) => drawClaimFog(claim, state)
 
   claimStore.filter(filterInPlayer)
@@ -508,7 +508,7 @@ function handleMatch(match, player) {
 
   claimStore.push(claim)
 
-  const score = claim.type.getScore() * unclaimedCells.length
+  const score = claim.getType().getScore() * unclaimedCells.length
 
   player.incrementScore(score)
   logScore(score, claim)
@@ -545,7 +545,7 @@ function testMatch(cell, player) {
   const minimumCells = tile.getId() == 7 ? 0 : 3
 
   // filter selects unclaimed or claims to merge
-  const filter = (cell) => !cell.getClaim() || cell.getClaim().player == player
+  const filter = (cell) => !cell.getClaim() || cell.getClaim().getPlayer() == player
   const cells = m3.utility.adjacency.getSimilarCellsGreedy(cell, filter)
 
   if (cells.length > minimumCells) {
@@ -611,9 +611,9 @@ function updateTilePickerInventory(player) {
 function updateTurnScore(player) {
   // TODO: Change allowedClaims/isAllowedClaim to use a configuration value, e.g. claim.isEconomy()
   const allowedClaims = [1, 6],
-    isAllowedClaim = (claim) => allowedClaims.includes(claim.type.getId()),
+    isAllowedClaim = (claim) => allowedClaims.includes(claim.getType().getId()),
     isPlayer = (test) => test === player,
-    isPlayerOwned = (claim) => isPlayer(claim.player)
+    isPlayerOwned = (claim) => isPlayer(claim.getPlayer())
 
   const calculateClaimScore = (claim) => {
     const adjacencies = getAdjacentClaimsGreedy(claim),
@@ -621,7 +621,7 @@ function updateTurnScore(player) {
 
     const calculateAdjacencyScore = (adjacency) => {
       const claimMultiplier = adjacency.type.getMultiplier(),
-        ownerMultiplier = isPlayer(adjacency.player) ? 1 : 0.5,
+        ownerMultiplier = isPlayer(adjacency.getPlayer()) ? 1 : 0.5,
         sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
 
       const score = claimMultiplier * ownerMultiplier * sizeMultiplier

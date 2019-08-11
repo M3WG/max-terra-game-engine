@@ -5,7 +5,7 @@ m3.model.claim = m3.utility.model.inventFactory({
     return utility.array.copy(this.data.cell)
   },
   getFogShape: function () {
-    const radius = this.type.getLineOfSight()
+    const radius = this.getType().getLineOfSight()
 
     return this.getCells().reduce((shape, cell) => {
       const cx = cell.getX(),
@@ -34,13 +34,16 @@ m3.model.claim = m3.utility.model.inventFactory({
       return shape
     }, [])
   },
+  getPlayer: function() {
+    return this.data.player
+  },
   getSize: function () {
     return this.data.cell.length
   },
+  getType: function() {
+    return this.data.type
+  },
   setup: function () {
-    this.player = this.data.player
-    this.type = this.data.type
-
     if (!Array.isArray(this.data.cell)) {
       this.data.cell = []
     }
@@ -53,11 +56,7 @@ m3.model.claim = m3.utility.model.inventFactory({
     return this
   },
   teardown: function () {
-    this.player = undefined
-    this.type = undefined
-
     // XXX: Cells still hold a reference to this, see setup()
-
     return this
   },
 })
