@@ -76,7 +76,7 @@ m3.utility.crawler.prototype = (
       }
 
       return this
-        .setMap(cell.map)
+        .setMap(cell.getMap())
         .moveTo(cell.getX(), cell.getY())
     }
 

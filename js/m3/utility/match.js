@@ -7,7 +7,7 @@ m3.utility.match = {}
 m3.utility.match.shape = (cell, shapes, filter) => {
   // XXX: Slice has hardcoded dimensions (7x7)
   // TODO: Make this configurable or automaticaLly derived from shapes
-  const slice = center.map.createSlice(cell.getX() - 3, cell.getY() - 3, 7, 7),
+  const slice = center.getMap().createSlice(cell.getX() - 3, cell.getY() - 3, 7, 7),
     {x: cx, y: cy} = slice.getCellCoordinates(cell)
 
   if (typeof filter != 'function') {

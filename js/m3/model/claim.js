@@ -10,7 +10,7 @@ m3.model.claim = m3.utility.model.inventFactory({
     return this.getCells().reduce((shape, cell) => {
       const cx = cell.getX(),
         cy = cell.getY(),
-        map = cell.map,
+        map = cell.getMap(),
         slice = map.createSlice(cx - radius, cy - radius, radius * 2 + 1, radius * 2 + 1)
 
       // XXX: Distance formula

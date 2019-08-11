@@ -6,6 +6,9 @@ m3.model.cell = m3.utility.model.inventFactory({
   getFog: function () {
     return this.data.fog
   },
+  getMap: function() {
+    return this.data.map
+  },
   getX: function () {
     return this.data.x
   },
@@ -31,13 +34,7 @@ m3.model.cell = m3.utility.model.inventFactory({
     return this
   },
   setup: function () {
-    this.map = this.data.map
     this.data.fog = true
-
-    return this
-  },
-  teardown: function () {
-    this.map = undefined
 
     return this
   },

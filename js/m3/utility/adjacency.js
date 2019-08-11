@@ -3,7 +3,7 @@
 m3.utility.adjacency = {}
 
 m3.utility.adjacency.getCells = (cell) => {
-  const map = cell.map,
+  const map = cell.getMap(),
     x = cell.getX(),
     y = cell.getY();
 

@@ -8,7 +8,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       x = this.getX(),
       y = this.getY()
 
-    const map = model.map
+    const map = model.getMap()
 
     const down = map.getCell(x, y + 1),
       left = map.getCell(x - 1, y),
