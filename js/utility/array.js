@@ -13,19 +13,13 @@ utility.array.randomIndex = (array) => {
 }
 
 utility.array.randomValue = (array) => {
-  const randomIndex = utility.array.randomIndex
-
   if (Array.isArray(array)) {
-    const index = randomIndex(array)
+    const index = utility.array.randomIndex(array)
     return array[index]
   }
 }
 
-utility.array.reverse = (array) => {
-  const copy = utility.array.copy
-
-  return copy(array).reverse()
-}
+utility.array.reverse = (array) => utility.array.copy(array).reverse()
 
 utility.array.shuffle = (array) => {
   array = utility.array.copy(array)
