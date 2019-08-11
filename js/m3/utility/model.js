@@ -33,7 +33,7 @@ m3.utility.model.singletonFactory = (prototype, mixin = {}) => m3.utility.model.
       return this.store.get(id)
     }
 
-    const data = this.data[id]
+    const data = this.data[id] || {}
     data.id = id
 
     const instance = this.create(data)
