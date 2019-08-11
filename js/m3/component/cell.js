@@ -4,7 +4,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
   function _getClaimDirectionClassnames() {
     const classnames = [],
       model = this.getModel(),
-      player = model.claim.player,
+      player = model.getClaim().player,
       x = this.getX(),
       y = this.getY()
 
@@ -15,7 +15,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       right = map.getCell(x + 1, y),
       up = map.getCell(x, y - 1)
 
-    const isContiguous = (cell) => cell && cell.claim && cell.claim.player == player
+    const isContiguous = (cell) => cell && cell.getClaim() && cell.getClaim().player == player
 
     if (isContiguous(down)) {
       classnames.push('m3-c-cell-claimDown')
@@ -83,9 +83,9 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
       this._icon.innerHTML = tile ? tile.getIcon() : ''
 
-      if (model.claim) {
+      if (model.getClaim()) {
         this._rootElement.classList.add('m3-c-cell-claim', ..._getClaimDirectionClassnames.call(this))
-        this._rootElement.style.backgroundColor = model.claim.player.getColor()
+        this._rootElement.style.backgroundColor = model.getClaim().player.getColor()
       } else {
         this._rootElement.classList.remove(
           'm3-c-cell-claim',

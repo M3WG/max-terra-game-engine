@@ -166,9 +166,19 @@ m3.model.tile.data = {
 m3.model.cell.defaults = {
   fog: true,
 }
+m3.model.cell.prototype.getClaim = function() {
+  return this.get('claim')
+}
 m3.model.cell.prototype.getFog = function() {
   return this.get('fog')
 }
+m3.model.cell.prototype.setClaim = function (claim) {
+  if (m3.model.claim.is(claim)) {
+    this.set('claim', claim)
+  }
+
+  return this
+},
 m3.model.cell.prototype.setFog = function(value) {
   return this.set('fog', Boolean(value))
 }
@@ -237,7 +247,8 @@ const createStartLocation = (player, x, y) => {
     type: m3.model.claimType.get(6),
   })
 
-  cell.setTile(7).setClaim(claim)
+  const tower = m3.model.tile.get(7)
+  cell.setTile(tower).setClaim(claim)
 
   claimStore.push(claim)
 
@@ -359,7 +370,7 @@ function doAction(component) {
 
   if (isTurnEnd) {
     const isRoundEnd = isTurnEnd && round.getTurnCount() >= game.getPlayerCount()
-    const isGameEnd = isRoundEnd && m3.utility.map.getPercent(map, (cell) => cell.claim) > (0.125 * playerCount)
+    const isGameEnd = isRoundEnd && m3.utility.map.getPercent(map, (cell) => cell.getClaim()) > (0.125 * playerCount)
 
     if (isGameEnd) {
       handleGameEnd()
@@ -415,7 +426,7 @@ function getAdjacentClaims(target) {
   }
 
   // XXX: Hardcoded water
-  const cellFilter = (cell) => cell.claim || cell.tile.getId() == 2
+  const cellFilter = (cell) => cell.getClaim() || cell.tile.getId() == 2
 
   const getClaims = (claims, cell) => {
     const claim = cell.claim
@@ -475,10 +486,10 @@ function handleGameEnd() {
 
 function handleMatch(match, player) {
   const cells = match.cell,
-    unclaimedCells = cells.filter((cell) => !cell.claim)
+    unclaimedCells = cells.filter((cell) => !cell.getClaim())
 
   cells.reduce((claims, cell) => {
-    const claim = cell.claim
+    const claim = cell.getClaim()
 
     if (claim && !claims.includes(claim)) {
       claims.push(claim)
@@ -534,7 +545,7 @@ function testMatch(cell, player) {
   const minimumCells = tile.getId() == 7 ? 0 : 3
 
   // filter selects unclaimed or claims to merge
-  const filter = (cell) => !cell.claim || cell.claim && cell.claim.player == player
+  const filter = (cell) => !cell.getClaim() || cell.getClaim().player == player
   const cells = m3.utility.adjacency.getSimilarCellsGreedy(cell, filter)
 
   if (cells.length > minimumCells) {
@@ -642,7 +653,7 @@ function updateTurnScore(player) {
 function validateAction({cell, tile}) {
   const cellTile = cell.getTile()
 
-  if (cell.claim) {
+  if (cell.getClaim()) {
     throw new Error('Cell is claimed')
   }
 
