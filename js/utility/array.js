@@ -1,7 +1,5 @@
 'use strict'
 
-var utility = utility || {}
-
 utility.array = {}
 
 utility.array.copy = (array) => Array.isArray(array) ? [].slice.call(array) : []

@@ -6,7 +6,5 @@ The `utility` namespace provides functions that would typically be provided by a
  */
 'use strict'
 
-var utility = utility || {}
-
 utility.foo = /* ... */
 ```

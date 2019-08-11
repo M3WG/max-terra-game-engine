@@ -1,7 +1,5 @@
 'use strict'
 
-var utility = utility || {}
-
 utility.pubsub = {}
 
 utility.pubsub.create = (...args) => Object.create(utility.pubsub.prototype).construct(...args)

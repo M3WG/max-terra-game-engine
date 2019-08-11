@@ -1,7 +1,5 @@
 'use strict'
 
-var utility = utility || {}
-
 utility.matrix = {}
 
 utility.matrix.flip = (matrix) => (

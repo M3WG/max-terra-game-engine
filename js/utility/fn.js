@@ -1,7 +1,5 @@
 'use strict'
 
-var utility = utility || {}
-
 utility.fn = {
   const: (x) => () => x,
   compose: (...fns) => (x) => fns.reduceRight((v, fn) => fn(v), x),

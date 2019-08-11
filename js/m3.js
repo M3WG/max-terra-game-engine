@@ -3,3 +3,5 @@ const m3 = {
   model: {},
   utility: {},
 }
+
+const utility = {}
