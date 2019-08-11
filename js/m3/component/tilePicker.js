@@ -1,15 +1,6 @@
 'use strict'
 
 m3.component.tilePicker = m3.utility.component.inventFactory({
-  getSelectedIndex: function () {
-    for (let i = 0, length = this._option.length; i < length; i++) {
-      if (this._option[i].isSelected()) {
-        return i
-      }
-    }
-
-    return 0
-  },
   getOption: function (index) {
     return this._option[index]
   },
@@ -18,6 +9,15 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
   },
   getOptions: function () {
     return utility.array.copy(this._option)
+  },
+  getSelectedIndex: function () {
+    for (let i = 0, length = this._option.length; i < length; i++) {
+      if (this._option[i].isSelected()) {
+        return i
+      }
+    }
+
+    return 0
   },
   getValue: function () {
     const index = this.getSelectedIndex(),
