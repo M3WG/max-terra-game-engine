@@ -3,9 +3,6 @@
 // TODO: Document internal data struct
 // TODO: Move claim and fog management to game controller
 m3.model.cell = m3.utility.model.inventFactory({
-  getFog: function () {
-    return this.data.fog
-  },
   getMap: function() {
     return this.data.map
   },
@@ -26,19 +23,9 @@ m3.model.cell = m3.utility.model.inventFactory({
 
     return this
   },
-  setFog: function (state) {
-    this.data.fog = Boolean(state)
-    this.emit('change')
-    return this
-  },
   setTile: function (id) {
     this.data.tile = m3.model.tile.get(id)
     this.emit('change')
-    return this
-  },
-  setup: function () {
-    this.data.fog = true
-
     return this
   },
 })

@@ -162,6 +162,17 @@ m3.model.tile.data = {
   },
 }
 
+// Extend models
+m3.model.cell.defaults = {
+  fog: true,
+}
+m3.model.cell.prototype.getFog = function() {
+  return this.get('fog')
+}
+m3.model.cell.prototype.setFog = function(value) {
+  return this.set('fog', Boolean(value))
+}
+
 // Create players
 const playerColors = [
   '#FF0000',
