@@ -426,7 +426,7 @@ function getAdjacentClaims(target) {
   }
 
   // XXX: Hardcoded water
-  const cellFilter = (cell) => cell.getClaim() || cell.tile.getId() == 2
+  const cellFilter = (cell) => cell.getClaim() || cell.getTile().getId() == 2
 
   const getClaims = (claims, cell) => {
     const claim = cell.claim
