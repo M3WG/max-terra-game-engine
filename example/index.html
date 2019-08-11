@@ -6,9 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=0" />
 
-    <link href="../css/main.css" rel="stylesheet" type="text/css" />
-    <link href="../css/keyframes.css" rel="stylesheet" />
-    <link href="../css/utility.css" rel="stylesheet" />
+    <link href="../css/utility/reset.css" rel="stylesheet" type="text/css" />
 
     <link href="../css/component/cell.css" rel="stylesheet" type="text/css" />
     <link href="../css/component/gameStatus.css" rel="stylesheet" type="text/css" />
@@ -56,59 +54,12 @@
     <script src="../js/m3/model/turn.js"></script>
   </head>
   <body>
-
-    <style>
-      .m3-a-map {
-        position: relative;
-        z-index: 1;
-      }
-
-      .m3-a-ui {
-        height: 100%;
-        left: 0;
-        position: fixed;
-        pointer-events: none;
-        top: 0;
-        width: 100%;
-        z-index: 2;
-      }
-
-      .m3-a-gameStatus {
-        filter: drop-shadow(0 0 2em #000000);
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-      }
-
-      .m3-a-minimap {
-        bottom: 3em;
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-      }
-
-      .m3-a-scoreboard {
-        left: 0;
-        position: absolute;
-        top: 0;
-      }
-
-      .m3-a-tilePicker {
-        bottom: 0;
-        filter: drop-shadow(0 0 2em #000000);
-        left: 0;
-        position: absolute;
-        width: 100%;
-      }
-    </style>
-
-    <div class="m3-a-map"></div>
-    <div class="m3-a-ui">
-      <div class="m3-a-gameStatus"></div>
-      <div class="m3-a-scoreboard"></div>
-      <div class="m3-a-tilePicker"></div>
-      <div class="m3-a-minimap"></div>
+    <div class="tf-o-map"></div>
+    <div class="tf-o-ui">
+      <div class="tf-o-ui--gameStatus"></div>
+      <div class="tf-o-ui--scoreboard"></div>
+      <div class="tf-o-ui--tilePicker"></div>
+      <div class="tf-o-ui--minimap"></div>
     </div>
 
     <script>
@@ -362,7 +313,7 @@
       // Create components
       const mapComponent = m3.component.map.create({
         model: map,
-      }, document.querySelector('.m3-a-map')).setId('map')
+      }, document.querySelector('.tf-o-map')).setId('map')
 
       mapComponent.getCells().forEach((component) => {
         component.on('click', () => doAction(component))
@@ -372,16 +323,16 @@
       /*
       const minimapComponent = m3.component.minimap.create({
         model: map,
-      }, document.querySelector('.m3-a-minimap'))
+      }, document.querySelector('.tf-o-ui--minimap'))
       */
 
       const scoreboardComponent = m3.component.scoreboard.create({
         player: players,
-      }, document.querySelector('.m3-a-scoreboard'))
+      }, document.querySelector('.tf-o-ui--scoreboard'))
 
       const gameStatusComponent = m3.component.gameStatus.create({
         model: game,
-      }, document.querySelector('.m3-a-gameStatus'))
+      }, document.querySelector('.tf-o-ui--gameStatus'))
 
       const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
         tile.data.picker && tile.data.picker.active
@@ -393,7 +344,7 @@
 
       const tilePickerComponent = m3.component.tilePicker.create({
         option: tilePickerOptions,
-      }, document.querySelector('.m3-a-tilePicker'))
+      }, document.querySelector('.tf-o-ui--tilePicker'))
 
       // Initialize player views
       startLocations.forEach((claim) => {
@@ -768,5 +719,55 @@
         return window.innerWidth / 100 * value
       }
     </script>
+    <style>
+      body {
+        background-color: #191919;
+        font-family: sans-serif;
+      }
+
+      .tf-o-map {
+        position: relative;
+        z-index: 1;
+      }
+
+      .tf-o-ui {
+        height: 100%;
+        left: 0;
+        position: fixed;
+        pointer-events: none;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .tf-o-ui--gameStatus {
+        filter: drop-shadow(0 0 2em #000000);
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
+      .tf-o-ui--minimap {
+        bottom: 3em;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .tf-o-ui--scoreboard {
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+
+      .tf-o-ui--tilePicker {
+        bottom: 0;
+        filter: drop-shadow(0 0 2em #000000);
+        left: 0;
+        position: absolute;
+        width: 100%;
+      }
+    </style>
   </body>
 </html>
