@@ -16,7 +16,8 @@ m3.utility.adjacency.getCells = (cell) => {
   ].filter((cell) => m3.model.cell.is(cell))
 }
 
-m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.tile == cell.tile)
+// TODO: Rethink definition of "similar" if cell tile becomes a stack - possibly a filter parameter
+m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.getTile() == cell.getTile())
 
 m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   if (typeof filter != 'function') {

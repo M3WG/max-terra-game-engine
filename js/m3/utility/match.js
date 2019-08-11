@@ -13,7 +13,7 @@ m3.utility.match.shape = (cell, shapes, filter) => {
   if (typeof filter != 'function') {
     /*
      * XXX: Identity function. Will return first extant shape.
-     * Try m3.utility.match.shape(cell, shapes, (x) => x.tile.getId() == cell.tile.getId())
+     * Try m3.utility.match.shape(cell, shapes, (x) => x.getTile().getId() == cell.getTile().getId())
      */
     filter = (x) => x
   }

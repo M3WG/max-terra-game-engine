@@ -9,6 +9,9 @@ m3.model.cell = m3.utility.model.inventFactory({
   getMap: function() {
     return this.data.map
   },
+  getTile: function() {
+    return this.data.tile
+  },
   getX: function () {
     return this.data.x
   },
@@ -29,7 +32,7 @@ m3.model.cell = m3.utility.model.inventFactory({
     return this
   },
   setTile: function (id) {
-    this.tile = m3.model.tile.get(id)
+    this.data.tile = m3.model.tile.get(id)
     this.emit('change')
     return this
   },

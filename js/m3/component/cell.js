@@ -77,7 +77,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
     },
     update: function () {
       const model = this.getModel(),
-        tile = this.getModel().tile
+        tile = model.getTile()
 
       this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
       this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)

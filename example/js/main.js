@@ -334,7 +334,7 @@ function doAction(component) {
   }
 
   modifyPlayerInventory(turnPlayer, tile, -1)
-  modifyPlayerInventory(turnPlayer, cell.tile, +1)
+  modifyPlayerInventory(turnPlayer, cell.getTile(), +1)
   cell.setTile(tile)
 
   const match = testMatch(cell, turnPlayer)
@@ -513,7 +513,7 @@ function modifyPlayerInventory(player, tile, amount) {
 }
 
 function testMatch(cell, player) {
-  const tile = cell.tile
+  const tile = cell.getTile()
 
   if (!tile.isMatchable()) {
     return
@@ -629,7 +629,7 @@ function updateTurnScore(player) {
 }
 
 function validateAction({cell, tile}) {
-  const cellTile = cell.tile
+  const cellTile = cell.getTile()
 
   if (cell.claim) {
     throw new Error('Cell is claimed')
