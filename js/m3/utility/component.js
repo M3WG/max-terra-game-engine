@@ -15,6 +15,10 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
     Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
     return this;
   },
+  extendDefaults: function (mixin = {}) {
+    this.defaults = {...this.defaults, ...mixin}
+    return this;
+  },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },
