@@ -16,13 +16,13 @@ m3.model.game = m3.utility.model.inventFactory({
     return this.round[this.round.length - 1]
   },
   getPlayer: function (index) {
-    return this.player[index]
+    return this.data.player[index]
   },
   getPlayerCount: function () {
-    return this.player.length
+    return this.data.player.length
   },
   getPlayers: function () {
-    return utility.array.copy(this.player)
+    return utility.array.copy(this.data.player)
   },
   getRoundCount: function () {
     return this.round.length
@@ -38,17 +38,17 @@ m3.model.game = m3.utility.model.inventFactory({
     return this
   },
   setup: function () {
-    this.map = this.data.map
-    this.player = this.data.player
     this.round = []
 
     return this
   },
   teardown: function () {
-    this.map = this.data.map
-    this.player = this.data.player
     this.round.forEach((round) => round.destroy())
 
     return this
+  },
+}, {
+  defaults: {
+    player: [],
   },
 })
