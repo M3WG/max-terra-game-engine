@@ -35,7 +35,7 @@ m3.component.scoreboardPlayer = m3.utility.component.inventFactory({
 
     this._color.style.backgroundColor = model.getColor()
     this._name.innerHTML = model.getName()
-    this._score.innerHTML = model.score
+    this._score.innerHTML = model.getScore()
 
     return this
   },

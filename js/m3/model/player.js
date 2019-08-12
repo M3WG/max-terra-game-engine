@@ -8,15 +8,17 @@ m3.model.player = m3.utility.model.inventFactory({
   getName: function () {
     return this.data.name
   },
+  getScore: function() {
+    return this.data.score
+  },
   incrementScore: function (value) {
-    this.score += value
+    this.data.score += value
     this.emit('change')
 
     return this
   },
-  setup: function () {
-    this.score = 0
-
-    return this
+}, {
+  defaults: {
+    score: 0,
   },
 })
