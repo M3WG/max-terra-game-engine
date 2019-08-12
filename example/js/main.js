@@ -163,25 +163,26 @@ m3.model.tile.data = {
 }
 
 // Extend models
-m3.model.cell.defaults = {
-  fog: true,
-}
-m3.model.cell.prototype.getClaim = function() {
-  return this.get('claim')
-}
-m3.model.cell.prototype.getFog = function() {
-  return this.get('fog')
-}
-m3.model.cell.prototype.setClaim = function (claim) {
-  if (m3.model.claim.is(claim)) {
-    this.set('claim', claim)
-  }
+m3.model.cell.extend({
+  getClaim: function () {
+    return this.get('claim')
+  },
+  getFog: function () {
+    return this.get('fog')
+  },
+  setClaim: function (claim) {
+    if (m3.model.claim.is(claim)) {
+      this.set('claim', claim)
+    }
 
-  return this
-},
-m3.model.cell.prototype.setFog = function(value) {
-  return this.set('fog', Boolean(value))
-}
+    return this
+  },
+  setFog: function (value) {
+    return this.set('fog', Boolean(value))
+  },
+}).extendDefaults({
+  fog: true,
+})
 
 // Create players
 const playerColors = [
