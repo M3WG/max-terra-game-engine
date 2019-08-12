@@ -2,8 +2,8 @@
 
 m3.utility.component = {}
 
-m3.utility.component.extend = (prototype = {}, definition = {}) = Object.setPrototypeOf({...definition}, prototype)
-m3.utility.component.extendFactory = (prototype, definition, mixin) = m3.utility.component.factory(m3.utility.component.extend(prototype, definition), mixin)
+m3.utility.component.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf({...definition}, prototype)
+m3.utility.component.extendFactory = (prototype, definition, mixin) => m3.utility.component.factory(m3.utility.component.extend(prototype, definition), mixin)
 
 m3.utility.component.factory = (prototype, mixin = {}) => ({
   create: function (config, ...args) {
