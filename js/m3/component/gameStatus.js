@@ -51,9 +51,11 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
       round = game.getCurrentRound(),
       turn = round.getCurrentTurn()
 
+    const player = turn.getPlayer()
+
     this._roundValue.innerHTML = game.getRoundCount()
-    this._turnColor.style.backgroundColor = turn.player.getColor()
-    this._turnValue.innerHTML = turn.player.getName()
+    this._turnColor.style.backgroundColor = player.getColor()
+    this._turnValue.innerHTML = player.getName()
     // XXX: Hardcoded at 4 actions per turn
     this._actionValue.innerHTML = 4 - turn.getActionCount()
 
