@@ -162,50 +162,6 @@ m3.model.tile.data = {
   },
 }
 
-// Extend models
-m3.model.cell.extend({
-  getClaim: function () {
-    return this.get('claim')
-  },
-  getFog: function () {
-    return this.get('fog')
-  },
-  setClaim: function (claim) {
-    if (m3.model.claim.is(claim)) {
-      this.set('claim', claim)
-    }
-
-    return this
-  },
-  setFog: function (value) {
-    return this.set('fog', Boolean(value))
-  },
-}).extendDefaults({
-  fog: true,
-})
-
-m3.model.game.extend({
-  createRound: function () {
-    const round = m3.model.round.create()
-
-    this.data.round.push(round)
-    this.emit('change')
-
-    return round
-  },
-  getCurrentRound: function () {
-    return this.round[this.round.length - 1]
-  },
-  getRoundCount: function () {
-    return this.data.round.length
-  },
-  getRounds: function () {
-    return utility.array.copy(this.data.round)
-  },
-}).extendDefaults({
-  round: [],
-})
-
 // Create players
 const playerColors = [
   '#FF0000',
