@@ -7,11 +7,15 @@ m3.utility.model.extendFactory = (prototype, definition, mixin) => m3.utility.mo
 m3.utility.model.extendSingletonFactory = (prototype, definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.extend(prototype, definition), mixin)
 
 m3.utility.model.factory = (prototype, mixin = {}) => ({
-  create: function (data, ...args) {
+  create: function (data = {}, ...args) {
     data = {...this.defaults, ...data}
     return Object.create(this.prototype).construct(data, ...args)
   },
   defaults: {},
+  extend: function (mixin = {}) {
+    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
+    return this;
+  },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },

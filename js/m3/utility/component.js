@@ -6,11 +6,15 @@ m3.utility.component.extend = (prototype = {}, definition = {}) => Object.setPro
 m3.utility.component.extendFactory = (prototype, definition, mixin) => m3.utility.component.factory(m3.utility.component.extend(prototype, definition), mixin)
 
 m3.utility.component.factory = (prototype, mixin = {}) => ({
-  create: function (config, ...args) {
+  create: function (config = {}, ...args) {
     config = {...this.defaults, ...config}
     return Object.create(this.prototype).construct(config, ...args)
   },
   defaults: {},
+  extend: function (mixin = {}) {
+    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
+    return this;
+  },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },
