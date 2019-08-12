@@ -2,19 +2,6 @@
 
 // TODO: Document internal data struct
 m3.model.game = m3.utility.model.inventFactory({
-  // TODO: Deprecate and prefer pushRound() via a game controller
-  createRound: function () {
-    const round = m3.model.round.create({
-      game: this,
-    })
-
-    this.pushRound(round)
-
-    return round
-  },
-  getCurrentRound: function () {
-    return this.round[this.round.length - 1]
-  },
   getPlayer: function (index) {
     return this.data.player[index]
   },
@@ -23,29 +10,6 @@ m3.model.game = m3.utility.model.inventFactory({
   },
   getPlayers: function () {
     return utility.array.copy(this.data.player)
-  },
-  getRoundCount: function () {
-    return this.round.length
-  },
-  pushRound: function (round) {
-    if (!m3.model.round.is(round)) {
-      throw new Error('Please provide a valid round')
-    }
-
-    this.round.push(round)
-    this.emit('change')
-
-    return this
-  },
-  setup: function () {
-    this.round = []
-
-    return this
-  },
-  teardown: function () {
-    this.round.forEach((round) => round.destroy())
-
-    return this
   },
 }, {
   defaults: {
