@@ -311,7 +311,7 @@ function doAction(component) {
     round = game.getCurrentRound(),
     tile = tilePickerComponent.getValue(),
     turn = round.getCurrentTurn(),
-    turnPlayer = turn.player
+    turnPlayer = turn.getPlayer()
 
   const options = {
     cell,
