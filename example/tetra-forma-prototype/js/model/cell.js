@@ -1,6 +1,6 @@
 'use strict'
 
-m3.model.cell.extend({
+m3.model.cell.extendPrototype({
   getClaim: function () {
     return this.get('claim')
   },

@@ -12,12 +12,12 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
     return Object.create(this.prototype).construct(config, ...args)
   },
   defaults: {},
-  extend: function (mixin = {}) {
-    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
-    return this;
-  },
   extendDefaults: function (mixin = {}) {
     this.defaults = {...this.defaults, ...mixin}
+    return this;
+  },
+  extendPrototype: function (mixin = {}) {
+    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
     return this;
   },
   extendValidate: function (fn) {

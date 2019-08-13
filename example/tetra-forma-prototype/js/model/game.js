@@ -1,6 +1,6 @@
 'use strict'
 
-m3.model.game.extend({
+m3.model.game.extendPrototype({
   createRound: function () {
     const round = m3.model.round.create()
 

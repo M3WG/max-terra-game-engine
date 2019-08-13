@@ -1,6 +1,6 @@
 'use strict'
 
-m3.model.turn.extend({
+m3.model.turn.extendPrototype({
   createAction: function () {
     const action = m3.model.action.create()
 
