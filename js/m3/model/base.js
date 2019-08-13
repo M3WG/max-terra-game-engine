@@ -26,7 +26,7 @@ m3.model.base.prototype = {
     return this.data[key]
   },
   getId: function () {
-    return Number(this.data.id)
+    return this.data.id
   },
   is: function (key, value, strict) {
     if (strict) {
