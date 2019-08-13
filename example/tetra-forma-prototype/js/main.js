@@ -192,8 +192,7 @@ const map = m3.model.map.create({
 })
 
 const game = m3.model.game.create({
-  map,
-  player: players,
+  players,
 })
 
 game.createRound().createTurn({
@@ -249,7 +248,7 @@ const minimapComponent = m3.component.minimap.create({
 */
 
 const scoreboardComponent = m3.component.scoreboard.create({
-  player: players,
+  players,
 }, document.querySelector('.tf-o-ui--scoreboard'))
 
 const gameStatusComponent = m3.component.gameStatus.create({

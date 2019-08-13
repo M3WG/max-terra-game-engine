@@ -22,7 +22,7 @@ const players = [
 ]
 
 const game = m3.model.game.create({
-  player: players,
+  players,
 })
 
 const map = m3.model.map.create({
@@ -35,7 +35,7 @@ const mapComponent = m3.component.map.create({
 }, document.querySelector('.xo-o-map'))
 
 const scoreboardComponent = m3.component.scoreboard.create({
-  player: players,
+  players,
 })
 
 mapComponent.getCells().forEach((cell) => cell.on('click', () => onCellClick(cell)))
