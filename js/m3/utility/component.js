@@ -8,6 +8,7 @@ m3.utility.component.extendFactory = (prototype, definition, mixin) => m3.utilit
 m3.utility.component.factory = (prototype, mixin = {}) => ({
   create: function (config = {}, ...args) {
     config = {...this.defaults, ...config}
+    this.validate(config)
     return Object.create(this.prototype).construct(config, ...args)
   },
   defaults: {},
@@ -23,6 +24,7 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
     return this.prototype.isPrototypeOf(x)
   },
   prototype,
+  validate: (config) => {},
   ...mixin,
 })
 

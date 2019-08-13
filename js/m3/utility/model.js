@@ -9,6 +9,7 @@ m3.utility.model.extendSingletonFactory = (prototype, definition, mixin) => m3.u
 m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function (data = {}, ...args) {
     data = {...this.defaults, ...data}
+    this.validate(data)
     return Object.create(this.prototype).construct(data, ...args)
   },
   defaults: {},
@@ -24,6 +25,7 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
     return this.prototype.isPrototypeOf(x)
   },
   prototype,
+  validate: (data) => {},
   ...mixin,
 })
 
