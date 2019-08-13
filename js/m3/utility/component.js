@@ -21,7 +21,17 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
     return this;
   },
   extendValidate: function (fn) {
-    this.validate = utility.fn.pipe(this.validate, fn)
+    if (typeof fn != 'function') {
+      throw new Error('Please provide a valid function')
+    }
+
+    const validate = this.validate
+
+    this.validate = (data) => {
+      validate(data)
+      fn(data)
+    }
+
     return this
   },
   is: function (x) {
