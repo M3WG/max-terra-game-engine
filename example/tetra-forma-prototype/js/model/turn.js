@@ -18,6 +18,6 @@ m3.model.turn.extendPrototype({
   getActions: function () {
     return utility.array.copy(this.data.action)
   },
-}).extendDefaults({
-  action: [],
+}).extendValidate((data) => {
+  data.action = []
 })

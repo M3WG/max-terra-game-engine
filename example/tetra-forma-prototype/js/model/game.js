@@ -18,6 +18,6 @@ m3.model.game.extendPrototype({
   getRounds: function () {
     return utility.array.copy(this.data.round)
   },
-}).extendDefaults({
-  round: [],
+}).extendValidate((data) => {
+  data.round = []
 })
