@@ -21,6 +21,10 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
     this.defaults = {...this.defaults, ...mixin}
     return this;
   },
+  extendValidate: function (fn) {
+    this.validate = utility.fn.pipe(this.validate, fn)
+    return this
+  },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },
