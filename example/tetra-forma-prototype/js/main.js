@@ -1,7 +1,6 @@
 // Data
 m3.model.claimType.data = {
   1: {
-    id: 1,
     lineOfSight: 3,
     multiplier: 1,
     name: 'city',
@@ -10,7 +9,6 @@ m3.model.claimType.data = {
     type: 1,
   },
   2: {
-    id: 2,
     lineOfSight: 3,
     multiplier: 1,
     name: 'farmstead',
@@ -19,7 +17,6 @@ m3.model.claimType.data = {
     type: 3,
   },
   3: {
-    id: 3,
     lineOfSight: 3,
     multiplier: 1,
     name: 'logging camp',
@@ -28,7 +25,6 @@ m3.model.claimType.data = {
     type: 4,
   },
   4: {
-    id: 4,
     lineOfSight: 3,
     multiplier: 1,
     name: 'quarry',
@@ -37,7 +33,6 @@ m3.model.claimType.data = {
     type: 5,
   },
   5: {
-    id: 5,
     lineOfSight: 3,
     multiplier: 1,
     name: 'mine',
@@ -46,7 +41,6 @@ m3.model.claimType.data = {
     type: 6,
   },
   6: {
-    id: 6,
     lineOfSight: 6,
     multiplier: 1,
     name: 'tower',
@@ -58,7 +52,6 @@ m3.model.claimType.data = {
 
 m3.model.tile.data = {
   0: {
-    id: 0,
     color: '#4B0082',
     desc: 'void',
     icon: '🌀',
@@ -69,7 +62,6 @@ m3.model.tile.data = {
     randomWeight: 10,
   },
   1: {
-    id: 1,
     claimType: 1,
     color: '#FFFFFF',
     desc: 'house',
@@ -82,7 +74,6 @@ m3.model.tile.data = {
     randomWeight: 196,
   },
   2: {
-    id: 2,
     color: '#5B60E1',
     desc: 'water',
     icon: '🌊',
@@ -94,7 +85,6 @@ m3.model.tile.data = {
     randomWeight: 196,
   },
   3: {
-    id: 3,
     claimType: 2,
     color: '#F0E48A',
     desc: 'field',
@@ -107,7 +97,6 @@ m3.model.tile.data = {
     randomWeight: 196,
   },
   4: {
-    id: 4,
     claimType: 3,
     color: '#287736',
     desc: 'forest',
@@ -120,7 +109,6 @@ m3.model.tile.data = {
     randomWeight: 196,
   },
   5: {
-    id: 5,
     claimType: 4,
     color: '#424242',
     desc: 'stone',
@@ -133,7 +121,6 @@ m3.model.tile.data = {
     randomWeight: 196,
   },
   6: {
-    id: 6,
     claimType: 5,
     color: '#FF9900',
     desc: 'gold',
@@ -146,7 +133,6 @@ m3.model.tile.data = {
     randomWeight: 5,
   },
   7: {
-    id: 7,
     claimType: 6,
     color: '#FF66FF',
     desc: 'magic',
@@ -186,14 +172,14 @@ const playerViews = new Map(
 )
 
 const startingInventory = [
-  [1, Infinity],
-  [3, Infinity],
-  [4, Infinity],
-  [5, Infinity],
-  [2, Infinity],
-  [6, 0],
-  [7, 1],
-  [0, 0],
+  ['1', Infinity],
+  ['3', Infinity],
+  ['4', Infinity],
+  ['5', Infinity],
+  ['2', Infinity],
+  ['6', 0],
+  ['7', 1],
+  ['0', 0],
 ]
 const playerInventories = new Map(
   players.map((player) => [player, new Map(startingInventory)])
