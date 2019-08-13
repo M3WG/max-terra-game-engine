@@ -15,4 +15,13 @@ m3.model.game = m3.utility.model.inventFactory({
   defaults: {
     player: [],
   },
+  validate: (data) => {
+    data.player = utility.array.copy(data.player)
+
+    data.player.forEach((player) => {
+      if (!m3.model.player.is(player)) {
+        throw new Error('Please provide a valid player')
+      }
+    })
+  },
 })

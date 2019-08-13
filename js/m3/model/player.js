@@ -3,7 +3,7 @@
 // TODO: Document internal data struct
 m3.model.player = m3.utility.model.inventFactory({
   getColor: function () {
-    return this.data.color;
+    return this.data.color
   },
   getName: function () {
     return this.data.name
@@ -21,4 +21,7 @@ m3.model.player = m3.utility.model.inventFactory({
   defaults: {
     score: 0,
   },
+  validate: (data) => {
+    data.score = Number(data.score)
+  }
 })
