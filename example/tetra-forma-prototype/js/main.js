@@ -393,7 +393,7 @@ function getAdjacentClaims(target) {
   const cellFilter = (cell) => cell.getClaim() || cell.getTile().getId() == 2
 
   const getClaims = (claims, cell) => {
-    const claim = cell.claim
+    const claim = cell.getClaim()
 
     if (claim && !claims.includes(claim)) {
       claims.push(claim)
