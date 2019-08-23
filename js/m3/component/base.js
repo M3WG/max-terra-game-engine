@@ -7,18 +7,18 @@ m3.component.base.is = (x) => m3.component.base.prototype.isPrototypeOf(x)
 m3.component.base.prototype = {
   attach: function (parentElement) {
     if (typeof parentElement != 'undefined') {
-      this._parentElement = parentElement
+      this.parentElement = parentElement
     }
 
-    if (this._parentElement instanceof Element) {
-      this._parentElement.appendChild(this.rootElement)
+    if (this.parentElement instanceof Element) {
+      this.parentElement.appendChild(this.rootElement)
     }
 
     return this
   },
   construct: function (config, parentElement, parentComponent, ...args) {
     this.config = {...config}
-    this._parentElement = parentElement
+    this.parentElement = parentElement
     this.parent = parentComponent
 
     utility.pubsub.decorate(this)
@@ -47,7 +47,7 @@ m3.component.base.prototype = {
 
     return this
   },
-  setup: function (...args) {
+  setup: function () {
     return this
   },
   teardown: function () {
