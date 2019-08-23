@@ -59,13 +59,13 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       return this.config.y
     },
     setup: function () {
-      this._rootElement = document.createElement('div')
-      this._rootElement.className = 'm3-c-cell'
-      this._rootElement.addEventListener('click', _onClick.bind(this))
+      this.rootElement = document.createElement('div')
+      this.rootElement.className = 'm3-c-cell'
+      this.rootElement.addEventListener('click', _onClick.bind(this))
 
       this._icon = document.createElement('div')
       this._icon.className = 'm3-c-cell--icon'
-      this._rootElement.appendChild(this._icon)
+      this.rootElement.appendChild(this._icon)
 
       if (this.config.model) {
         this.config.model.on('change', this.update.bind(this))
@@ -79,15 +79,15 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       const model = this.getModel(),
         tile = model.getTile()
 
-      this._rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
-      this._rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
+      this.rootElement.style.backgroundColor = tile ? tile.getColor() : 'transparent'
+      this.rootElement.setAttribute('data-tile', tile ? tile.getId() : -1)
       this._icon.innerHTML = tile ? tile.getIcon() : ''
 
       if (model.getClaim()) {
-        this._rootElement.classList.add('m3-c-cell-claim', ..._getClaimDirectionClassnames.call(this))
-        this._rootElement.style.backgroundColor = model.getClaim().getPlayer().getColor()
+        this.rootElement.classList.add('m3-c-cell-claim', ..._getClaimDirectionClassnames.call(this))
+        this.rootElement.style.backgroundColor = model.getClaim().getPlayer().getColor()
       } else {
-        this._rootElement.classList.remove(
+        this.rootElement.classList.remove(
           'm3-c-cell-claim',
           'm3-c-cell-claimDown',
           'm3-c-cell-claimLeft',
@@ -97,9 +97,9 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       }
 
       if (model.getFog()) {
-        this._rootElement.classList.add('m3-c-cell-fog')
+        this.rootElement.classList.add('m3-c-cell-fog')
       } else {
-        this._rootElement.classList.remove('m3-c-cell-fog')
+        this.rootElement.classList.remove('m3-c-cell-fog')
       }
 
       return this

@@ -11,7 +11,7 @@ m3.component.base.prototype = {
     }
 
     if (this._parentElement instanceof Element) {
-      this._parentElement.appendChild(this._rootElement)
+      this._parentElement.appendChild(this.rootElement)
     }
 
     return this
@@ -33,17 +33,17 @@ m3.component.base.prototype = {
     return this
   },
   getBoundingClientRect: function () {
-    if (!(this._rootElement instanceof Element)) {
+    if (!(this.rootElement instanceof Element)) {
       return {}
     }
 
-    return this._rootElement.getBoundingClientRect()
+    return this.rootElement.getBoundingClientRect()
   },
   getId: function () {
-    return this._rootElement.id
+    return this.rootElement.id
   },
   setId: function (id) {
-    this._rootElement.id = id
+    this.rootElement.id = id
 
     return this
   },

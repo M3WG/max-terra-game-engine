@@ -273,8 +273,8 @@ startLocations.forEach((claim) => {
     cellComponent = mapComponent.getCell(cell.getX(), cell.getY()),
     player = claim.getPlayer(),
     rect = cellComponent.getBoundingClientRect(),
-    x = cellComponent._rootElement.offsetLeft - vw(50) + (0.5 * rect.width),
-    y = cellComponent._rootElement.offsetTop - vh(50) + (0.5 * rect.height)
+    x = cellComponent.rootElement.offsetLeft - vw(50) + (0.5 * rect.width),
+    y = cellComponent.rootElement.offsetTop - vh(50) + (0.5 * rect.height)
 
   const playerView = playerViews.get(player)
 
@@ -486,7 +486,7 @@ function logScore(score, ...claims) {
       x = cell.getX(),
       y = cell.getY()
 
-    return mapComponent.getCell(x, y)._rootElement
+    return mapComponent.getCell(x, y).rootElement
   }), claims)
 }
 

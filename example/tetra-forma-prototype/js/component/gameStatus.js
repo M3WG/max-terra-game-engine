@@ -5,12 +5,12 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
     return this.config.model
   },
   setup: function () {
-    this._rootElement = document.createElement('div')
-    this._rootElement.className = 'm3-c-gameStatus'
+    this.rootElement = document.createElement('div')
+    this.rootElement.className = 'm3-c-gameStatus'
 
     const items = document.createElement('ul')
     items.className = 'm3-c-gameStatus--items'
-    this._rootElement.appendChild(items)
+    this.rootElement.appendChild(items)
 
     const round = document.createElement('li')
     round.className = 'm3-c-gameStatus--item m3-c-gameStatus--round'

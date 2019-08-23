@@ -22,10 +22,10 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
       return this.config.tile
     },
     isDisabled: function () {
-      return this._rootElement.classList.contains(_disabledModifier)
+      return this.rootElement.classList.contains(_disabledModifier)
     },
     isSelected: function () {
-      return this._rootElement.classList.contains(_selectedModifier)
+      return this.rootElement.classList.contains(_selectedModifier)
     },
     setInventory: function (value) {
       value = Math.max(0, value) || 0
@@ -48,18 +48,18 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
     },
     setDisabled: function (state) {
       if (state) {
-        this._rootElement.classList.add(_disabledModifier)
+        this.rootElement.classList.add(_disabledModifier)
       } else {
-        this._rootElement.classList.remove(_disabledModifier)
+        this.rootElement.classList.remove(_disabledModifier)
       }
 
       return this
     },
     setSelected: function (state) {
       if (state) {
-        this._rootElement.classList.add(_selectedModifier)
+        this.rootElement.classList.add(_selectedModifier)
       } else {
-        this._rootElement.classList.remove(_selectedModifier)
+        this.rootElement.classList.remove(_selectedModifier)
       }
 
       return this
@@ -67,29 +67,29 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
     setup: function () {
       const tile = this.getValue()
 
-      this._rootElement = document.createElement('button')
-      this._rootElement.className = 'm3-c-tilePickerOption'
-      this._rootElement.type = 'button'
-      this._rootElement.addEventListener('click', _onClick.bind(this))
+      this.rootElement = document.createElement('button')
+      this.rootElement.className = 'm3-c-tilePickerOption'
+      this.rootElement.type = 'button'
+      this.rootElement.addEventListener('click', _onClick.bind(this))
 
       const color = document.createElement('div')
       color.className = 'm3-c-tilePickerOption--color'
       color.style.backgroundColor = tile.getColor()
-      this._rootElement.appendChild(color)
+      this.rootElement.appendChild(color)
 
       const icon = document.createElement('div')
       icon.className = 'm3-c-tilePickerOption--icon'
       icon.innerHTML = tile.getIcon()
-      this._rootElement.appendChild(icon)
+      this.rootElement.appendChild(icon)
 
       const label = document.createElement('div')
       label.className = 'm3-c-tilePickerOption--label'
       label.innerHTML = tile.getName()
-      this._rootElement.appendChild(label)
+      this.rootElement.appendChild(label)
 
       const inventory = document.createElement('div')
       inventory.className = 'm3-c-tilePickerOption--inventory'
-      this._rootElement.appendChild(inventory)
+      this.rootElement.appendChild(inventory)
       this._inventory = inventory
 
       return this
