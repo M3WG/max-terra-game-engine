@@ -15,7 +15,7 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
-utility.dom.createElement = (tagName, {assign, children, listeners, props, parent}) => {
+utility.dom.createElement = (tagName, {assign, children, identity, listeners, props, parent}) => {
   const element = document.createElement(tagName)
 
   for (let prop in props) {
@@ -44,8 +44,16 @@ utility.dom.createElement = (tagName, {assign, children, listeners, props, paren
     parent.appendChild(element)
   }
 
-  if (typeof assign == 'function') {
-    assign(element)
+  if (Array.isArray(assign)) {
+    const [context, key] = assign;
+
+    if (context) {
+      context[key] = element;
+    }
+  }
+
+  if (typeof identity == 'function') {
+    identity(element)
   }
 
   return element

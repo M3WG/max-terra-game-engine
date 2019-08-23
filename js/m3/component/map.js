@@ -26,7 +26,7 @@ m3.component.map = m3.utility.component.inventFactory({
       },
       children: [
         createElement('table', {
-          assign: (x) => this._table = x,
+          assign: [this, '_table'],
           props: {
             className: 'm3-c-map--table',
             cellSpacing: 0,

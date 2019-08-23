@@ -70,7 +70,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
         ],
         children: [
           createElement('div', {
-            assign: (x) => this._icon = x,
+            assign: [this, '_icon'],
             props: {
               className: 'm3-c-cell--icon',
             },

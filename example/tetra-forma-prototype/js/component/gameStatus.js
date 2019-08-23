@@ -28,7 +28,7 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
               },
             }),
             createElement('div', {
-              assign: (x) => this._roundValue = x,
+              assign: [this, '_roundValue'],
               props: {
                 className: 'm3-c-gameStatus--value',
               },
@@ -41,13 +41,13 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
           },
           children: [
             createElement('div', {
-              assign: (x) => this._turnColor = x,
+              assign: [this, '_turnColor'],
               props: {
                 className: 'm3-c-gameStatus--color',
               },
             }),
             createElement('div', {
-              assign: (x) => this._turnValue = x,
+              assign: [this, '_turnValue'],
               props: {
                 className: 'm3-c-gameStatus--value',
               },
@@ -66,7 +66,7 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
               },
             }),
             createElement('div', {
-              assign: (x) => this._actionValue = x,
+              assign: [this, '_actionValue'],
               props: {
                 className: 'm3-c-gameStatus--value',
               },
