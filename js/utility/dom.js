@@ -19,7 +19,7 @@ utility.dom.createElement = (tagName, {assign, children, props, parent}) => {
   const element = document.createElement(tagName)
 
   for (let prop in props) {
-    if (prop.hasOwnProperty(prop) && prop in element) {
+    if (props.hasOwnProperty(prop) && prop in element) {
       element[prop] = props[prop]
     }
   }
