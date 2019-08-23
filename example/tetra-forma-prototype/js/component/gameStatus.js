@@ -8,39 +8,73 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
     this.rootElement = document.createElement('div')
     this.rootElement.className = 'm3-c-gameStatus'
 
-    const items = document.createElement('ul')
-    items.className = 'm3-c-gameStatus--items'
-    this.rootElement.appendChild(items)
+    const createElement = utility.dom.createElement
 
-    const round = document.createElement('li')
-    round.className = 'm3-c-gameStatus--item m3-c-gameStatus--round'
-    round.innerHTML = '<div class="m3-c-gameStatus--label">Round</div>'
-    items.appendChild(round)
-
-    this._roundValue = document.createElement('div')
-    this._roundValue.className = 'm3-c-gameStatus--value'
-    round.appendChild(this._roundValue)
-
-    const turn = document.createElement('li')
-    turn.className = 'm3-c-gameStatus--item m3-c-gameStatus--turn'
-    items.appendChild(turn)
-
-    this._turnColor = document.createElement('div')
-    this._turnColor.className = 'm3-c-gameStatus--color'
-    turn.appendChild(this._turnColor)
-
-    this._turnValue = document.createElement('div')
-    this._turnValue.className = 'm3-c-gameStatus--value'
-    turn.appendChild(this._turnValue)
-
-    const action = document.createElement('li')
-    action.className = 'm3-c-gameStatus--item m3-c-gameStatus--action'
-    action.innerHTML = '<div class="m3-c-gameStatus--label">Actions</div>'
-    items.appendChild(action)
-
-    this._actionValue = document.createElement('div')
-    this._actionValue.className = 'm3-c-gameStatus--value'
-    action.appendChild(this._actionValue)
+    createElement('ul', {
+      parent: this.rootElement,
+      props: {
+        className: 'm3-c-gameStatus--items',
+      },
+      children: [
+        createElement('li', {
+          props: {
+            className: 'm3-c-gameStatus--item m3-c-gameStatus--round',
+          },
+          children: [
+            createElement('div', {
+              props: {
+                className: 'm3-c-gameStatus--label',
+                innerHTML: 'Round',
+              },
+            }),
+            createElement('div', {
+              assign: (x) => this._roundValue = x,
+              props: {
+                className: 'm3-c-gameStatus--value',
+              },
+            }),
+          ],
+        }),
+        createElement('li', {
+          props: {
+            className: 'm3-c-gameStatus--item m3-c-gameStatus--turn',
+          },
+          children: [
+            createElement('div', {
+              assign: (x) => this._turnColor = x,
+              props: {
+                className: 'm3-c-gameStatus--color',
+              },
+            }),
+            createElement('div', {
+              assign: (x) => this._turnValue = x,
+              props: {
+                className: 'm3-c-gameStatus--value',
+              },
+            })
+          ],
+        }),
+        createElement('li', {
+          props: {
+            className: 'm3-c-gameStatus--item m3-c-gameStatus--action',
+          },
+          children: [
+            createElement('div', {
+              props: {
+                className: 'm3-c-gameStatus--label',
+                innerHTML: 'Action',
+              },
+            }),
+            createElement('div', {
+              assign: (x) => this._actionValue = x,
+              props: {
+                className: 'm3-c-gameStatus--value',
+              },
+            }),
+          ],
+        }),
+      ],
+    })
 
     this.update()
 
