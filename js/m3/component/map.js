@@ -18,13 +18,22 @@ m3.component.map = m3.utility.component.inventFactory({
   setup: function () {
     this._cell = []
 
-    this.rootElement = document.createElement('div')
-    this.rootElement.className = 'm3-c-map'
+    const createElement = utility.dom.createElement
 
-    this._table = document.createElement('table')
-    this._table.className = 'm3-c-map--table'
-    this._table.cellSpacing = 0
-    this.rootElement.appendChild(this._table)
+    this.rootElement = createElement('div', {
+      props: {
+        className: 'm3-c-map',
+      },
+      children: [
+        createElement('table', {
+          assign: (x) => this._table = x,
+          props: {
+            className: 'm3-c-map--table',
+            cellSpacing: 0,
+          },
+        }),
+      ],
+    })
 
     const model = this.getModel()
 
