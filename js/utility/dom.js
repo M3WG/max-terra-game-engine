@@ -15,17 +15,17 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
-utility.dom.createElement = (tagName, options = {}) => {
+utility.dom.createElement = (tagName, {assign, children, props, parent}) => {
   const element = document.createElement(tagName)
 
-  for (let property in properties) {
-    if (properties.hasOwnProperty(property) && property in element) {
-      element[property] = properties[property]
+  for (let prop in props) {
+    if (prop.hasOwnProperty(prop) && prop in element) {
+      element[prop] = props[prop]
     }
   }
 
-  if (Array.isArray(options.children)) {
-    options.children.forEach((child) => {
+  if (Array.isArray(children)) {
+    children.forEach((child) => {
       if (!(child instanceof Node)) {
         child = document.createTextNode(child)
       }
@@ -34,8 +34,12 @@ utility.dom.createElement = (tagName, options = {}) => {
     });
   }
 
-  if (options.parent instanceof Node) {
-    options.parent.appendChild(element)
+  if (parent instanceof Node) {
+    parent.appendChild(element)
+  }
+
+  if (typeof assign == 'function') {
+    assign(element)
   }
 
   return element
