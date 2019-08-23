@@ -59,13 +59,24 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       return this.config.y
     },
     setup: function () {
-      this.rootElement = document.createElement('div')
-      this.rootElement.className = 'm3-c-cell'
-      this.rootElement.addEventListener('click', _onClick.bind(this))
+      const createElement = utility.dom.createElement
 
-      this._icon = document.createElement('div')
-      this._icon.className = 'm3-c-cell--icon'
-      this.rootElement.appendChild(this._icon)
+      this.rootElement = createElement('div', {
+        props: {
+          className: 'm3-c-cell',
+        },
+        listeners: [
+          ['click', _onClick.bind(this)],
+        ],
+        children: [
+          createElement('div', {
+            assign: (x) => this._icon = x,
+            props: {
+              className: 'm3-c-cell--icon',
+            },
+          })
+        ],
+      })
 
       if (this.config.model) {
         this.config.model.on('change', this.update.bind(this))
