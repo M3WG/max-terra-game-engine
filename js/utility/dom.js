@@ -15,13 +15,19 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
-utility.dom.createElement = (tagName, {assign, children, props, parent}) => {
+utility.dom.createElement = (tagName, {assign, children, listeners, props, parent}) => {
   const element = document.createElement(tagName)
 
   for (let prop in props) {
     if (props.hasOwnProperty(prop) && prop in element) {
       element[prop] = props[prop]
     }
+  }
+
+  if (Array.isArray(listeners)) {
+    listeners.forEach(([...args]) => {
+      element.addEventListener(...args)
+    })
   }
 
   if (Array.isArray(children)) {
@@ -31,7 +37,7 @@ utility.dom.createElement = (tagName, {assign, children, props, parent}) => {
       }
 
       element.appendChild(child)
-    });
+    })
   }
 
   if (parent instanceof Node) {
