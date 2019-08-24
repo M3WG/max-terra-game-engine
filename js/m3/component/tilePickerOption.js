@@ -65,32 +65,45 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
       return this
     },
     setup: function () {
-      const tile = this.getValue()
+      const createElement = utility.dom.createElement,
+        tile = this.getValue()
 
-      this.rootElement = document.createElement('button')
-      this.rootElement.className = 'm3-c-tilePickerOption'
-      this.rootElement.type = 'button'
-      this.rootElement.addEventListener('click', _onClick.bind(this))
-
-      const color = document.createElement('div')
-      color.className = 'm3-c-tilePickerOption--color'
-      color.style.backgroundColor = tile.getColor()
-      this.rootElement.appendChild(color)
-
-      const icon = document.createElement('div')
-      icon.className = 'm3-c-tilePickerOption--icon'
-      icon.innerHTML = tile.getIcon()
-      this.rootElement.appendChild(icon)
-
-      const label = document.createElement('div')
-      label.className = 'm3-c-tilePickerOption--label'
-      label.innerHTML = tile.getName()
-      this.rootElement.appendChild(label)
-
-      const inventory = document.createElement('div')
-      inventory.className = 'm3-c-tilePickerOption--inventory'
-      this.rootElement.appendChild(inventory)
-      this._inventory = inventory
+      this.rootElement = createElement('button', {
+        props: {
+          className: 'm3-c-tilePickerOption',
+        },
+        listeners: [
+          ['click', _onClick.bind(this)],
+        ],
+        children: [
+          createElement('div', {
+            props: {
+              className: 'm3-c-tilePickerOption--color',
+            },
+            styles: {
+              backgroundColor: tile.getColor(),
+            },
+          }),
+          createElement('div', {
+            props: {
+              className: 'm3-c-tilePickerOption--icon',
+              innerHTML: tile.getIcon(),
+            },
+          }),
+          createElement('div', {
+            props: {
+              className: 'm3-c-tilePickerOption--label',
+              innerHTML: tile.getName(),
+            },
+          }),
+          createElement('div', {
+            assign: [this, '_inventory'],
+            props: {
+              className: 'm3-c-tilePickerOption--inventory',
+            },
+          }),
+        ],
+      })
 
       return this
     },

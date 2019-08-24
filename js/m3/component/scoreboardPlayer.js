@@ -5,20 +5,33 @@ m3.component.scoreboardPlayer = m3.utility.component.inventFactory({
     return this.config.model
   },
   setup: function () {
-    this.rootElement = document.createElement('li')
-    this.rootElement.className = 'm3-c-scoreboard--player'
+    const createElement = utility.dom.createElement
 
-    this._color = document.createElement('div')
-    this._color.className = 'm3-c-scoreboard--playerColor'
-    this.rootElement.appendChild(this._color)
-
-    this._name = document.createElement('div')
-    this._name.className = 'm3-c-scoreboard--playerName'
-    this.rootElement.appendChild(this._name)
-
-    this._score = document.createElement('div')
-    this._score.className = 'm3-c-scoreboard--playerScore'
-    this.rootElement.appendChild(this._score)
+    this.rootElement = createElement('li', {
+      props: {
+        className: 'm3-c-scoreboard--player',
+      },
+      children: [
+        createElement('div', {
+          assign: [this, '_color'],
+          props: {
+            className: 'm3-c-scoreboard--playerColor',
+          },
+        }),
+        createElement('div', {
+          assign: [this, '_name'],
+          props: {
+            className: 'm3-c-scoreboard--playerName',
+          },
+        }),
+        createElement('div', {
+          assign: [this, '_score'],
+          props: {
+            className: 'm3-c-scoreboard--playerScore',
+          },
+        }),
+      ],
+    })
 
     const model = this.getModel()
 

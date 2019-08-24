@@ -45,23 +45,28 @@ m3.component.map = m3.utility.component.inventFactory({
       width = model.getWidth()
 
     for (let y = 0; y < height; y++) {
-      const tr = document.createElement('tr')
-      tr.className = 'm3-c-map--row'
-      this._table.appendChild(tr)
+      const tr = createElement('tr', {
+        parent: this._table,
+        properties: {
+          className: 'm3-c-map--row',
+        },
+      })
 
       this._cell[y] = []
 
       for (let x = 0; x < width; x++) {
-        const td = document.createElement('td')
-        td.className = 'm3-c-map--cell'
+        const td = createElement('td', {
+          parent: tr,
+          properties: {
+            className: 'm3-c-map--cell',
+          },
+        })
 
         this._cell[y][x] = m3.component.cell.create({
           model: map.getCell(x, y),
           x,
           y,
         }, td, this)
-
-        tr.appendChild(td)
       }
     }
 

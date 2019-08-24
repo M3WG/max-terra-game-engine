@@ -44,23 +44,38 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
     return this
   },
   setup: function () {
-    this.rootElement = document.createElement('div')
-    this.rootElement.className = 'm3-c-tilePicker'
+    const createElement = utility.dom.createElement
 
-    const optionsElement = document.createElement('ul')
-    optionsElement.className = 'm3-c-tilePicker--options'
-    this.rootElement.appendChild(optionsElement)
+    this.rootElement = createElement('div', {
+      props: {
+        className: 'm3-c-tilePicker'
+      },
+      children: [
+        createElement('ul', {
+          props: {
+            className: 'm3-c-tilePicker--options',
+          },
+          children: [
+            createElement('ul', {
+              props: {
+                className: 'm3-c-tilePicker--options',
+              },
+              then: (element) => {
+                const isValid = (config) => config && m3.model.tile.is(config.tile)
+                const createOption = (config) => m3.component.tilePickerOption.create(config, createElement('li', {
+                  parent: element,
+                  props: {
+                    className: 'm3-c-tilePicker--option',
+                  },
+                }), this)
 
-    const isValid = (config) => config && m3.model.tile.is(config.tile)
-    const createOption = (config) => {
-      const container = document.createElement('li')
-      container.className = 'm3-c-tilePicker--option'
-      optionsElement.appendChild(container)
-
-      return m3.component.tilePickerOption.create(config, container, this)
-    }
-
-    this._option = this.config.option.filter(isValid).map(createOption)
+                this._option = this.config.option.filter(isValid).map(createOption)
+              }
+            }),
+          ],
+        }),
+      ],
+    })
 
     this.setSelectedIndex(0)
 
