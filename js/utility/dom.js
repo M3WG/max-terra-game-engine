@@ -15,12 +15,26 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
-utility.dom.createElement = (tagName, {assign, children, identity, listeners, props, parent}) => {
+utility.dom.createElement = (tagName, {assign, children, listeners, props, parent, styles, then}) => {
   const element = document.createElement(tagName)
+
+  if (Array.isArray(assign)) {
+    const [context, key] = assign;
+
+    if (context) {
+      context[key] = element;
+    }
+  }
 
   for (let prop in props) {
     if (props.hasOwnProperty(prop) && prop in element) {
       element[prop] = props[prop]
+    }
+  }
+
+  for (let style in styles) {
+    if (styles.hasOwnProperty(style) && style in element.style) {
+      element.style[style] = styles[style]
     }
   }
 
@@ -32,7 +46,12 @@ utility.dom.createElement = (tagName, {assign, children, identity, listeners, pr
 
   if (Array.isArray(children)) {
     children.forEach((child) => {
-      if (!(child instanceof Node)) {
+      if (m3.component.base.is(child)) {
+        child.attach(element)
+        return
+      }
+
+      if (typeof child =='string') {
         child = document.createTextNode(child)
       }
 
@@ -44,16 +63,8 @@ utility.dom.createElement = (tagName, {assign, children, identity, listeners, pr
     parent.appendChild(element)
   }
 
-  if (Array.isArray(assign)) {
-    const [context, key] = assign;
-
-    if (context) {
-      context[key] = element;
-    }
-  }
-
-  if (typeof identity == 'function') {
-    identity(element)
+  if (typeof then == 'function') {
+    then(element)
   }
 
   return element
