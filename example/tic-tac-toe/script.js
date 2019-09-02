@@ -64,7 +64,7 @@ function onCellClick(cellComponent) {
         {dx: 1, dy: 0},
         {dx: 2, dy: 0},
       ],
-      mirror: true,
+      rotate: true,
     },
     {
       definition: [
