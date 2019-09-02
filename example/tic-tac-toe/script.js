@@ -79,6 +79,9 @@ function onCellClick(cellComponent) {
     alert(currentPlayer.getName() + ' wins!')
     currentPlayer = players[0]
     clearMap()
+  } else if (m3.utility.map.getPercent(map, (cell) => cell.getTile().getId() == 'empty') == 0) {
+    alert('Draw!')
+    clearMap()
   } else {
     swapPlayers()
   }
