@@ -2,6 +2,12 @@
 
 m3.utility.map = {}
 
+m3.utility.map.fill = (model, tile) => {
+  model.getCells().forEach((cell) => {
+    cell.setTile(tile)
+  })
+}
+
 m3.utility.map.getPercent = (model, filter) => {
   if (typeof filter != 'function') {
     filter = utility.fn.identity()
@@ -31,10 +37,4 @@ m3.utility.map.randomize = (model) => {
   model.getCells().forEach((cell) => cell.setTile(
     utility.array.randomValue(tiles)
   ))
-}
-
-m3.utility.map.zero = (model) => {
-  model.getCells().forEach((cell) => {
-    cell.setTile(0)
-  })
 }
