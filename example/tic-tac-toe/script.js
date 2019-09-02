@@ -57,7 +57,8 @@ function onCellClick(cellComponent) {
   const tile = m3.model.tile.get(currentPlayer === players[0] ? 'X' : 'O')
   cell.setTile(tile)
 
-  if (m3.utility.match.shapes(cell, [
+  const isMatch = (x) => x && x.getTile() === tile
+  const shapes = [
     {
       definition: [
         {dx: 0, dy: 0},
@@ -74,7 +75,9 @@ function onCellClick(cellComponent) {
       ],
       mirror: true,
     },
-  ], (x) => x && x.getTile() === tile)) {
+  ]
+
+  if (m3.utility.match.shapes(cell, shapes, isMatch)) {
     currentPlayer.incrementScore(1)
     alert(currentPlayer.getName() + ' wins!')
     currentPlayer = players[0]
