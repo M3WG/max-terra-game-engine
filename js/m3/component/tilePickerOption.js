@@ -80,7 +80,7 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
             props: {
               className: 'm3-c-tilePickerOption--color',
             },
-            styles: {
+            style: {
               backgroundColor: tile.getColor(),
             },
           }),

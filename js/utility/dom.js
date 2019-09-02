@@ -4,7 +4,7 @@ utility.dom = {}
 
 utility.dom.contains = (outer, inner) => {
   do {
-    if (!(inner instanceof Element)) {
+    if (!(inner instanceof Node)) {
       return false
     }
     if (inner === outer) {
@@ -15,26 +15,32 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
-utility.dom.createElement = (tagName, {assign, children, listeners, props, parent, styles, then}) => {
+utility.dom.createElement = (tagName, {assign, children, data, listeners, props, parent, style, then}) => {
   const element = document.createElement(tagName)
 
   if (Array.isArray(assign)) {
-    const [context, key] = assign;
+    const [context, key] = assign
 
     if (context) {
-      context[key] = element;
+      context[key] = element
     }
   }
 
-  for (let prop in props) {
-    if (props.hasOwnProperty(prop) && prop in element) {
-      element[prop] = props[prop]
+  for (let key in props) {
+    if (props.hasOwnProperty(key) && key in element) {
+      element[key] = props[key]
     }
   }
 
-  for (let style in styles) {
-    if (styles.hasOwnProperty(style) && style in element.style) {
-      element.style[style] = styles[style]
+  for (let key in data) {
+    if (data.hasOwnProperty(key)) {
+      element.dataset[key] = data[key]
+    }
+  }
+
+  for (let key in style) {
+    if (style.hasOwnProperty(key) && key in element.style) {
+      element.style[key] = style[key]
     }
   }
 
