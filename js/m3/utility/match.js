@@ -49,8 +49,19 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
     })
   }
 
-  const gather = cells => cells.map(([x, y]) => map.getCell(cx + x, cy + y))
-  const test = cells => cells.reduce((result, [x, y, ...args]) => result && filter(map.getCell(cx + x, cy + y), ...args), true)
+  const test = (cells) => {
+    for (let [x, y, ...args] of cells) {
+      const cell = map.getCell(cx + x, cy + y)
+
+      if (!filter(cell, ...args)) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  const gather = (cells) => cells.map(([x, y]) => map.getCell(cx + x, cy + y))
 
   for (const permutation of permutations) {
     if (test(permutation)) {
