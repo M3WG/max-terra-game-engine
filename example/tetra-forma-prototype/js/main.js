@@ -584,7 +584,7 @@ function updateTurnScore(player) {
       isClaim = (test) => test === claim
 
     const calculateAdjacencyScore = (adjacency) => {
-      const claimMultiplier = adjacency.type.getMultiplier(),
+      const claimMultiplier = adjacency.getType().getMultiplier(),
         ownerMultiplier = isPlayer(adjacency.getPlayer()) ? 1 : 0.5,
         sizeMultiplier = Math.min(adjacency.getSize(), claim.getSize())
 
