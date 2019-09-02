@@ -5,13 +5,9 @@ m3.utility.match = {}
 // TODO: Define definition struct
 // SEE: example/tic-tac-toe
 m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false}, filter) => {
-  const radius = definition.reduce((max, {dx, dy}) => {
-    return Math.max(max, Math.abs(dx), Math.abs(dy))
-  }, 0)
-
-  const diameter = radius * 2 + 1,
-    slice = cell.getMap().createSlice(cell.getX() - radius, cell.getY() - radius, diameter, diameter),
-    {x: cx, y: cy} = slice.getCellCoordinates(cell)
+  const cx = cell.getX(),
+    cy = cell.getY(),
+    map = cell.getMap()
 
   if (typeof filter != 'function') {
     /*
@@ -34,27 +30,33 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
     )
   }
 
-  const gatherPermutation = cells => cells.map(({dx, dy}) => slice.getCell(cx + dx, cy + dy))
-  const testPermutation = cells => cells.reduce((result, {dx, dy}) => result && filter(slice.getCell(cx + dx, cy + dy)), true)
+  if (mirror) {
+    permutations.slice().forEach((permutation) => {
+      permutations.push(
+        permutation.map(({dx, dy}) => ({dx: -dx, dy: dy})),
+        permutation.map(({dx, dy}) => ({dx: dx, dy: -dy}))
+      )
+    })
+  }
 
-  let rotations = rotate ? 4 : 0
-  do {
-    let mirrors = mirror ? 2 : 0
-    do {
-      for (const permutation of permutations) {
-        if (testPermutation(permutation)) {
-          return gatherPermutation(permutation)
-        }
-      }
-      if (mirrors > 0) {
-        slice.flip()
-      }
-    } while (mirrors-->1)
+  if (rotate) {
+    permutations.slice().forEach((permutation) => {
+      permutations.push(
+        permutation.map(({dx, dy}) => ({dx: -dy, dy: dx})),
+        permutation.map(({dx, dy}) => ({dx: dy, dy: dx})),
+        permutation.map(({dx, dy}) => ({dx: dy, dy: -dx}))
+      )
+    })
+  }
 
-    if (rotations > 0) {
-      slice.rotate()
+  const gather = cells => cells.map(({dx, dy}) => map.getCell(cx + dx, cy + dy))
+  const test = cells => cells.reduce((result, {dx, dy}) => result && filter(map.getCell(cx + dx, cy + dy)), true)
+
+  for (const permutation of permutations) {
+    if (test(permutation)) {
+      return gather(permutation)
     }
-  } while (rotations-->1)
+  }
 }
 
 m3.utility.match.shapes = (cell, shapes, filter) => {
