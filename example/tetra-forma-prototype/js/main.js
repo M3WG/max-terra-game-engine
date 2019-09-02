@@ -234,7 +234,7 @@ const startLocations = players.map((player, index) => {
 // Create components
 const mapComponent = m3.component.map.create({
   model: map,
-}, document.querySelector('.tf-o-map')).setId('map')
+}).attach(document.querySelector('.tf-o-map'))
 
 mapComponent.getCells().forEach((component) => {
   component.on('click', () => doAction(component))
@@ -249,11 +249,11 @@ const minimapComponent = m3.component.minimap.create({
 
 const scoreboardComponent = m3.component.scoreboard.create({
   players,
-}, document.querySelector('.tf-o-ui--scoreboard'))
+}).attach(document.querySelector('.tf-o-ui--scoreboard'))
 
 const gameStatusComponent = m3.component.gameStatus.create({
   model: game,
-}, document.querySelector('.tf-o-ui--gameStatus'))
+}).attach(document.querySelector('.tf-o-ui--gameStatus'))
 
 const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
   tile.data.picker && tile.data.picker.active
@@ -265,7 +265,7 @@ const tilePickerOptions = m3.model.tile.getAll().filter((tile) =>
 
 const tilePickerComponent = m3.component.tilePicker.create({
   option: tilePickerOptions,
-}, document.querySelector('.tf-o-ui--tilePicker'))
+}).attach(document.querySelector('.tf-o-ui--tilePicker'))
 
 // Initialize player views
 startLocations.forEach((claim) => {

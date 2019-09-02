@@ -64,9 +64,11 @@ m3.component.map = m3.utility.component.inventFactory({
 
         this._cell[y][x] = m3.component.cell.create({
           model: map.getCell(x, y),
+          parentComponent: this,
+          parentElement: td,
           x,
           y,
-        }, td, this)
+        })
       }
     }
 

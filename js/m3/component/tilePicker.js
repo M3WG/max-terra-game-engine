@@ -62,12 +62,17 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
               },
               then: (element) => {
                 const isValid = (config) => config && m3.model.tile.is(config.tile)
-                const createOption = (config) => m3.component.tilePickerOption.create(config, createElement('li', {
-                  parent: element,
-                  props: {
-                    className: 'm3-c-tilePicker--option',
-                  },
-                }), this)
+                const createOption = (config) => {
+                  return m3.component.tilePickerOption.create({
+                    parentComponent: this,
+                    ...config
+                  }).attach(createElement('li', {
+                    parent: element,
+                    props: {
+                      className: 'm3-c-tilePicker--option',
+                    },
+                  }))
+                }
 
                 this._option = this.config.option.filter(isValid).map(createOption)
               }

@@ -32,7 +32,7 @@ const map = m3.model.map.create({
 
 const mapComponent = m3.component.map.create({
   model: map,
-}, document.querySelector('.xo-o-map'))
+}).attach(document.querySelector('.xo-o-map'))
 
 const scoreboardComponent = m3.component.scoreboard.create({
   players,

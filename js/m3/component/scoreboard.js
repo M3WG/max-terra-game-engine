@@ -16,7 +16,11 @@ m3.component.scoreboard = m3.utility.component.inventFactory({
           },
           then: (element) => {
             const isValid = (player) => m3.model.player.is(player)
-            const createPlayer = (player) => m3.component.scoreboardPlayer.create({model: player}, element, this)
+            const createPlayer = (player) => m3.component.scoreboardPlayer.create({
+              model: player,
+              parentComponent: this,
+              parentElement: element
+            })
 
             this._player = this.config.players.filter(isValid).map(createPlayer)
           },
