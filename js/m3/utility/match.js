@@ -22,8 +22,8 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   ]
 
   for (let i = 1, length = definition.length; i < length; i++) {
-    const {dx, dy} = definition[i]
-    const translate = (cell) => ({dx: cell.dx - dx, dy: cell.dy - dy})
+    const [dx, dy] = definition[i]
+    const translate = ([x, y]) => [x - dx, y - dy]
 
     permutations.push(
       definition.map(translate)
@@ -33,8 +33,8 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (mirror) {
     permutations.slice().forEach((permutation) => {
       permutations.push(
-        permutation.map(({dx, dy}) => ({dx: -dx, dy: dy})),
-        permutation.map(({dx, dy}) => ({dx: dx, dy: -dy}))
+        permutation.map(([x, y]) => [-x, y]),
+        permutation.map(([x, y]) => [x, -y])
       )
     })
   }
@@ -42,15 +42,15 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (rotate) {
     permutations.slice().forEach((permutation) => {
       permutations.push(
-        permutation.map(({dx, dy}) => ({dx: -dy, dy: dx})),
-        permutation.map(({dx, dy}) => ({dx: dy, dy: dx})),
-        permutation.map(({dx, dy}) => ({dx: dy, dy: -dx}))
+        permutation.map(([x, y]) => [-y, x]),
+        permutation.map(([x, y]) => [y, x]),
+        permutation.map(([x, y]) => [y, -x])
       )
     })
   }
 
-  const gather = cells => cells.map(({dx, dy}) => map.getCell(cx + dx, cy + dy))
-  const test = cells => cells.reduce((result, {dx, dy}) => result && filter(map.getCell(cx + dx, cy + dy)), true)
+  const gather = cells => cells.map(([x, y]) => map.getCell(cx + x, cy + y))
+  const test = cells => cells.reduce((result, [x, y]) => result && filter(map.getCell(cx + x, cy + y)), true)
 
   for (const permutation of permutations) {
     if (test(permutation)) {

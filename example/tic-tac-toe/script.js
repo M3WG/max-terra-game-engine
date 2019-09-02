@@ -61,17 +61,17 @@ function onCellClick(cellComponent) {
   const shapes = [
     {
       definition: [
-        {dx: 0, dy: 0},
-        {dx: 1, dy: 0},
-        {dx: 2, dy: 0},
+        [0, 0],
+        [1, 0],
+        [2, 0],
       ],
       rotate: true,
     },
     {
       definition: [
-        {dx: 0, dy: 0},
-        {dx: 1, dy: 1},
-        {dx: 2, dy: 2},
+        [0, 0],
+        [1, 1],
+        [2, 2],
       ],
       mirror: true,
     },
