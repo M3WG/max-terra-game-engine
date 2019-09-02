@@ -45,17 +45,24 @@ m3.model.mapSlice = m3.utility.model.inventFactory((() => {
     }
 
     if (config.x >= mapWidth) {
-      config.width = 1
-      config.x = mapWidth - 1
+      // XXX: Selects nothing
+      config.width = 0
+      config.x = 0
     }
 
     if (config.x + config.width >= mapWidth) {
       config.width -= config.x + config.width - mapWidth
     }
 
+    if (config.y < 0) {
+      config.height += config.y
+      config.y = 0
+    }
+
     if (config.y >= mapHeight) {
-      config.height = 1
-      config.y = mapHeight - 1
+      // XXX: Selects nothing
+      config.height = 0
+      config.y = 0
     }
 
     if (config.y + config.height >= mapHeight) {
