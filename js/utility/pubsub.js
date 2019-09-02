@@ -8,10 +8,10 @@ utility.pubsub.decorate = (target) => {
   const instance = utility.pubsub.create(),
     methods = ['emit', 'off', 'on']
 
-  target._pubsub = instance
+  target.pubsub = instance
 
   methods.forEach((method) => {
-    target[method] = function decorated(...args) {
+    target[method] = (...args) => {
       instance[method](...args)
       return target
     }
@@ -25,7 +25,7 @@ utility.pubsub.prototype = {
     this._handler = {}
     return this
   },
-  destruct: function() {
+  destroy: function() {
     this.off()
     return this
   },
@@ -41,15 +41,13 @@ utility.pubsub.prototype = {
   },
   off: function(event, handler) {
     if (event === undefined) {
-      Object.keys(this._handler).forEach((event) => {
-        this.off(event)
-      })
-
+      this._handler = {}
       return this
     }
 
     if (handler === undefined) {
       delete this._handler[event]
+      return this
     }
 
     if (!this._handler[event]) {
