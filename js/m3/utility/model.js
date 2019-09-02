@@ -17,6 +17,14 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
     this.defaults = {...this.defaults, ...mixin}
     return this;
   },
+  extendDelegate: function (key, fn) {
+    if (typeof fn != 'function') {
+      throw new Error('Please provide a valid function')
+    }
+
+    this.prototype[key] = fn(this.prototype[key])
+    return this
+  },
   extendPrototype: function (mixin = {}) {
     Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
     return this;
