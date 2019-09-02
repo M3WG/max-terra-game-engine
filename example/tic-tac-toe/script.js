@@ -1,11 +1,14 @@
 m3.model.tile.data = {
   'empty': {
-    icon: '',
+    color: '',
+    icon: '&nbsp;',
   },
   'O': {
+    color: '#0000FF',
     icon: 'O',
   },
   'X' : {
+    color: '#FF0000',
     icon: 'X',
   },
 }
@@ -21,25 +24,70 @@ const players = [
   }),
 ]
 
-const game = m3.model.game.create({
-  players,
-})
+let currentPlayer = players[0]
 
 const map = m3.model.map.create({
   height: 3,
   width: 3,
 })
 
+clearMap()
+
 const mapComponent = m3.component.map.create({
   model: map,
 }).attach(document.querySelector('.xo-o-map'))
 
-const scoreboardComponent = m3.component.scoreboard.create({
-  players,
-})
-
 mapComponent.getCells().forEach((cell) => cell.on('click', () => onCellClick(cell)))
 
-function onCellClick(cellComponent) {
+const scoreboardComponent = m3.component.scoreboard.create({
+  players,
+}).attach(document.querySelector('.xo-o-scoreboard'))
 
+function clearMap() {
+  m3.utility.map.fill(map, m3.model.tile.get('empty'))
+}
+
+function onCellClick(cellComponent) {
+  const cell = cellComponent.getModel()
+
+  if (cell.getTile().getId() != 'empty') {
+    return
+  }
+
+  const tile = m3.model.tile.get(currentPlayer === players[0] ? 'X' : 'O')
+  cell.setTile(tile)
+
+  if (m3.utility.match.shapes(cell, [
+    {
+      definition: [
+        {dx: 0, dy: 0},
+        {dx: 1, dy: 0},
+        {dx: 2, dy: 0},
+      ],
+      mirror: true,
+    },
+    {
+      definition: [
+        {dx: 0, dy: 0},
+        {dx: 1, dy: 1},
+        {dx: 2, dy: 2},
+      ],
+      mirror: true,
+    },
+  ], (x) => x && x.getTile() === tile)) {
+    currentPlayer.incrementScore(1)
+    alert(currentPlayer.getName() + ' wins!')
+    currentPlayer = players[0]
+    clearMap()
+  } else {
+    swapPlayers()
+  }
+}
+
+function swapPlayers() {
+  if (currentPlayer === players[0]) {
+    currentPlayer = players[1]
+  } else {
+    currentPlayer = players[0]
+  }
 }
