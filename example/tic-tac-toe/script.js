@@ -35,13 +35,13 @@ clearMap()
 
 const mapComponent = m3.component.map.create({
   model: map,
-}).attach(document.querySelector('.xo-o-map'))
+}).attach(document.querySelector('.xo-o-app--map'))
 
 mapComponent.getCells().forEach((cell) => cell.on('click', () => onCellClick(cell)))
 
 const scoreboardComponent = m3.component.scoreboard.create({
   players,
-}).attach(document.querySelector('.xo-o-scoreboard'))
+}).attach(document.querySelector('.xo-o-app--scoreboard'))
 
 function clearMap() {
   m3.utility.map.fill(map, m3.model.tile.get('empty'))
