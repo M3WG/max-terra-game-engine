@@ -12,9 +12,9 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (typeof filter != 'function') {
     /*
      * XXX: Identity function. Will return first extant shape.
-     * Try m3.utility.match.shape(cell, shapes, (x) => x.getTile().getId() == cell.getTile().getId())
+     * Additional parameters are filled from the definition, i.e. [x, y, ...args]
      */
-    filter = (x) => x
+    filter = (cell, ...args) => cell
   }
 
   const permutations = [
@@ -23,7 +23,7 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
 
   for (let i = 1, length = definition.length; i < length; i++) {
     const [dx, dy] = definition[i]
-    const translate = ([x, y]) => [x - dx, y - dy]
+    const translate = ([x, y, ...args]) => [x - dx, y - dy, ...args]
 
     permutations.push(
       definition.map(translate)
@@ -33,8 +33,8 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (mirror) {
     permutations.slice().forEach((permutation) => {
       permutations.push(
-        permutation.map(([x, y]) => [-x, y]),
-        permutation.map(([x, y]) => [x, -y])
+        permutation.map(([x, y, ...args]) => [-x, y, ...args]),
+        permutation.map(([x, y, ...args]) => [x, -y, ...args])
       )
     })
   }
@@ -42,15 +42,15 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (rotate) {
     permutations.slice().forEach((permutation) => {
       permutations.push(
-        permutation.map(([x, y]) => [-y, x]),
-        permutation.map(([x, y]) => [y, x]),
-        permutation.map(([x, y]) => [y, -x])
+        permutation.map(([x, y, ...args]) => [-y, x, ...args]),
+        permutation.map(([x, y, ...args]) => [y, x, ...args]),
+        permutation.map(([x, y, ...args]) => [y, -x, ...args])
       )
     })
   }
 
   const gather = cells => cells.map(([x, y]) => map.getCell(cx + x, cy + y))
-  const test = cells => cells.reduce((result, [x, y]) => result && filter(map.getCell(cx + x, cy + y)), true)
+  const test = cells => cells.reduce((result, [x, y, ...args]) => result && filter(map.getCell(cx + x, cy + y), ...args), true)
 
   for (const permutation of permutations) {
     if (test(permutation)) {
