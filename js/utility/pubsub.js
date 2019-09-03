@@ -22,7 +22,7 @@ utility.pubsub.decorate = function (target, instance) {
     instance = this.create()
   }
 
-  target.pubsub = instance
+  target.pubsub = instance;
 
   ['emit', 'off', 'on'].forEach((method) => {
     target[method] = (...args) => {
