@@ -52,3 +52,7 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
 
 m3.utility.component.invent = (definition = {}) => Object.setPrototypeOf({...definition}, m3.component.base.prototype)
 m3.utility.component.inventFactory = (definition, mixin = {}) => m3.utility.component.factory(m3.utility.component.invent(definition), mixin)
+
+m3.utility.component.is = function (x) {
+  return m3.component.base.prototype.isPrototypeOf(x)
+}

@@ -73,7 +73,7 @@ utility.dom.createElement = (tagName, {assign, children, data, listeners, props,
 
   if (Array.isArray(children)) {
     children.forEach((child) => {
-      if (m3.component.base.is(child)) {
+      if (m3.utility.component.is(child)) {
         child.attach(element)
         return
       }
