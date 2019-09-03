@@ -37,8 +37,8 @@ utility.pubsub.decorate = function (target, instance) {
 /**
  * Returns whether the provided value is a pubsub instance.
  */
-utility.pubsub.is = function (value) {
-  return this.prototype.isPrototypeOf(value)
+utility.pubsub.is = function (x) {
+  return this.prototype.isPrototypeOf(x)
 }
 
 /**
