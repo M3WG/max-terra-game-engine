@@ -1,16 +1,30 @@
 'use strict'
 
+/**
+ * Utility for providing simple event subscription.
+ * @namespace utility.pubsub
+ */
 utility.pubsub = {}
 
-utility.pubsub.create = (...args) => Object.create(utility.pubsub.prototype).construct(...args)
+/**
+ * Creates an instance of {@link utility.pubsub.prototype}.
+ */
+utility.pubsub.create = function (...args) {
+  return Object.create(this.prototype).construct(...args)
+}
 
-utility.pubsub.decorate = (target) => {
-  const instance = utility.pubsub.create(),
-    methods = ['emit', 'off', 'on']
+/**
+ * Decortates the target object with a pubsub instance and chainable emit, off, and on methods.
+ * A new instance will be created if one isn't provided.
+ */
+utility.pubsub.decorate = function (target, instance) {
+  if (!this.is(instance)) {
+    instance = this.create()
+  }
 
   target.pubsub = instance
 
-  methods.forEach((method) => {
+  ['emit', 'off', 'on'].forEach((method) => {
     target[method] = (...args) => {
       instance[method](...args)
       return target
@@ -20,15 +34,34 @@ utility.pubsub.decorate = (target) => {
   return target
 }
 
+/**
+ * Returns whether the provided value is a pubsub instance.
+ */
+utility.pubsub.is = function (value) {
+  return this.prototype.isPrototypeOf(value)
+}
+
+/**
+ * Prototype for pubsub instances.
+ */
 utility.pubsub.prototype = {
+  /**
+   * Called automatically by {@link utility.pubsub.create}.
+   */
   construct: function() {
     this._handler = {}
     return this
   },
+  /**
+   * Call to prepare for garbage collection.
+   */
   destroy: function() {
     this.off()
     return this
   },
+  /**
+   * Emits args to handlers subscribed to event.
+   */
   emit: function(event, ...args) {
     if (!this._handler[event]) {
       return this
@@ -39,6 +72,11 @@ utility.pubsub.prototype = {
 
     return this
   },
+  /**
+   * Unsubscribes the handler function from event.
+   * If no handler is provided, then all handlers for event are removed.
+   * If no event is provided, then all handlers for all events are removed.
+   */
   off: function(event, handler) {
     if (event === undefined) {
       this._handler = {}
@@ -63,6 +101,9 @@ utility.pubsub.prototype = {
 
     return this
   },
+  /**
+   * Subscribes the handler function to event.
+   */
   on: function(event, handler) {
     if (!this._handler[event]) {
       this._handler[event] = []

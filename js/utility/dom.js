@@ -1,7 +1,14 @@
 'use strict'
 
+/**
+ * Utility functions for manipulating the DOM.
+ * @namespace utility.array
+ */
 utility.dom = {}
 
+/**
+ * Returns whether the inner node is a descendent of the outer node.
+ */
 utility.dom.contains = (outer, inner) => {
   do {
     if (!(inner instanceof Node)) {
@@ -15,6 +22,20 @@ utility.dom.contains = (outer, inner) => {
   return false
 }
 
+/**
+ * Helper for creating an element with a tagName and options.
+ *
+ * @param {string} tagName
+ * @param {object} options
+ * @param {array} [options.assign] - Array of `[object, key]`, such that `object.key = element`
+ * @param {array} [options.children] - Array of child text nodes, elements, or components
+ * @param {object} [options.data] - Hash of properties to apply to element.dataset
+ * @param {array} [options.listeners] - Array of argument arrays to apply via element.addEventListener()
+ * @param {object} [options.props] - Hash of properties to apply to element
+ * @param {Node} [options.parent] - Appends element as its child
+ * @param {object} [options.style] - Hash of properties to apply to element.style
+ * @param {function} [options.then]- Callback function called with element before returning it
+ */
 utility.dom.createElement = (tagName, {assign, children, data, listeners, props, parent, style, then}) => {
   const element = document.createElement(tagName)
 

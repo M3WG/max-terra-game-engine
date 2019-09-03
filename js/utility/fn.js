@@ -1,5 +1,9 @@
 'use strict'
 
+/**
+ * Pure utility functions for functional composition.
+ * @namespace utility.fn
+ */
 utility.fn = {
   const: (x) => () => x,
   compose: (...fns) => (x) => fns.reduceRight((v, fn) => fn(v), x),
