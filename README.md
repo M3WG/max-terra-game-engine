@@ -8,7 +8,7 @@ All base models and UI components are fully extensible for complete customizatio
 ## Example projects
 Please see the `example/` directory for projects to get you started:
 - **[example/tic-tac-toe](example/tic-tac-toe)**: The simplest possible example with many areas for improvement.
-- **[example/tetra-forma-prototype](example/tetra-forma-prototype)**: See how a hotseat strategy game could be implemented with the game that inspired this project.
+- **[example/tetra-forma-prototype](example/tetra-forma-prototype)**: Tetra Forma is the hotseat strategy game that inspired this project.
 
 ## Roadmap
 - Implement remaining alpha features
