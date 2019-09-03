@@ -2,8 +2,6 @@
 
 m3.model.base = {}
 
-m3.model.base.is = (x) => m3.model.base.isPrototypeOf(x)
-
 m3.model.base.prototype = {
   create: function (data, ...args) {
     this.data = {...data}
