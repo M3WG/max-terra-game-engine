@@ -5,15 +5,14 @@ Games typically leverage maps and cells to create a playing field.
 Utilities for selecting contiguous cells and matching shapes are provided.
 All base models and UI components are fully extensible for complete customization.
 
-## Example project
-Please see the `example/` directory to see how a hotseat strategy game could be implemented with this engine.
+## Example projects
+Please see the `example/` directory for projects to get you started:
+- **[example/tic-tac-toe](/example/tic-tac-toe)**: The simplest possible example with many areas for improvement.
+- **[example/tetra-forma-prototype](/example/tetra-forma-prototype)**: See how a hotseat strategy game could be implemented with the game that inspired this project.
 
 ## Roadmap
-- Clearly split code between the engine and its example project
 - Implement remaining alpha features
-- Improve and clean up codebase for extensibility
-- Complete documentation and contribution guidelines
-- Release engine under GPL
+- Complete documentation
 - Host a game jam where the engine is the theme
 
 ## Dedication
