@@ -26,9 +26,10 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
     setup: function () {
       const createElement = utility.dom.createElement
 
-      this.rootElement = createElement('div', {
+      this.rootElement = createElement('button', {
         props: {
           className: 'm3-c-cell',
+          type: 'button',
         },
         listeners: [
           ['click', _onClick.bind(this)],

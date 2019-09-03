@@ -1,9 +1,12 @@
 .m3-c-cell {
   align-items: center;
+  border: 0;
   display: flex;
+  font-size: 1em;
   height: 3em;
   justify-content: center;
   line-height: 1;
+  padding: 0;
   position: relative;
   width: 3em;
 }
