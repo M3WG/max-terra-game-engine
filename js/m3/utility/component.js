@@ -9,7 +9,7 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
   create: function (config = {}, ...args) {
     config = {...this.defaults, ...config}
     this.validate(config)
-    return Object.create(this.prototype).construct(config, ...args)
+    return Object.create(this.prototype).create(config, ...args)
   },
   defaults: {},
   extendDefaults: function (mixin = {}) {

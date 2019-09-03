@@ -10,7 +10,7 @@ utility.pubsub = {}
  * Creates an instance of {@link utility.pubsub.prototype}.
  */
 utility.pubsub.create = function (...args) {
-  return Object.create(this.prototype).construct(...args)
+  return Object.create(this.prototype).create(...args)
 }
 
 /**
@@ -48,7 +48,7 @@ utility.pubsub.prototype = {
   /**
    * Called automatically by {@link utility.pubsub.create}.
    */
-  construct: function() {
+  create: function() {
     this._handler = {}
     return this
   },

@@ -5,7 +5,7 @@ m3.model.base = {}
 m3.model.base.is = (x) => m3.model.base.isPrototypeOf(x)
 
 m3.model.base.prototype = {
-  construct: function (data, ...args) {
+  create: function (data, ...args) {
     this.data = {...data}
 
     utility.pubsub.decorate(this)

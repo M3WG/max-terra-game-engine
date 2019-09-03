@@ -2,12 +2,12 @@
 
 m3.utility.crawler = {}
 
-m3.utility.crawler.create = (...args) => Object.create(m3.utility.crawler.prototype).construct(...args)
+m3.utility.crawler.create = (...args) => Object.create(m3.utility.crawler.prototype).create(...args)
 
 m3.utility.crawler.prototype = (
   (undefined) => {
 
-    function construct({cell, map, x, y}) {
+    function create({cell, map, x, y}) {
       if (m3.model.cell.is(cell)) {
         return this.initializeWithCell(cell)
       }
@@ -123,7 +123,7 @@ m3.utility.crawler.prototype = (
     }
 
     return {
-      construct,
+      create,
       destruct,
       getAdjacent,
       getDown,

@@ -10,7 +10,7 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function (data = {}, ...args) {
     data = {...this.defaults, ...data}
     this.validate(data)
-    return Object.create(this.prototype).construct(data, ...args)
+    return Object.create(this.prototype).create(data, ...args)
   },
   defaults: {},
   extendDefaults: function (mixin = {}) {
