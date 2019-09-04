@@ -14,7 +14,7 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
      * XXX: Identity function. Will return first extant shape.
      * Additional parameters are filled from the definition, i.e. [x, y, ...args]
      */
-    filter = (cell, ...args) => cell
+    filter = utility.fn.identity()
   }
 
   const permutations = [
