@@ -1,11 +1,19 @@
 'use strict'
 
+/**
+ * Utility functions for selecting cells adjacent to a {@link m3.model.cell.prototype} instance.
+ *
+ * @namespace utility.adjacency
+ */
 m3.utility.adjacency = {}
 
+/**
+ * Returns an array of cells adjacent to the specified cell.
+ */
 m3.utility.adjacency.getCells = (cell) => {
   const map = cell.getMap(),
     x = cell.getX(),
-    y = cell.getY();
+    y = cell.getY()
 
   return [
     cell,
@@ -16,9 +24,23 @@ m3.utility.adjacency.getCells = (cell) => {
   ].filter((cell) => m3.model.cell.is(cell))
 }
 
-// TODO: Rethink definition of "similar" if cell tile becomes a stack - possibly a filter parameter
+/**
+ * Returns an array of cells that are adjacent and similar to the specified cell.
+ * Similarity requires they have the same tile.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @todo Consider the meaning of similarity, whether we need an injectable filter function.
+ */
 m3.utility.adjacency.getSimilarCells = (cell) => m3.utility.adjacency.getCells(cell).filter((test) => test.getTile() == cell.getTile())
 
+/**
+ * Returns an array of all contiguous cells that are similar to the specified cell.
+ * Imagine the magic wand tool from your favorite image editor.
+ * In this case a single cell is considered contiguous.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @param {function} filter
+ */
 m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   if (typeof filter != 'function') {
     filter = utility.fn.identity()
@@ -50,6 +72,12 @@ m3.utility.adjacency.getSimilarCellsGreedy = (cell, filter) => {
   return cells
 }
 
+/**
+ * Returns an array of all contiguous cells that are adjacent to the contiguous cells of the specified cell.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @param {function} cellFilter - For {@link m3.utility.adjacency.getSimilarCellsGreedy}
+ */
 m3.utility.adjacency.getPaths = (cell, cellFilter) => {
   return m3.utility.adjacency.getSimilarCellsGreedy(cell, cellFilter).reduce((cells, cell) => {
     if (!cells.includes(cell)) {
@@ -66,7 +94,13 @@ m3.utility.adjacency.getPaths = (cell, cellFilter) => {
   }, [])
 }
 
-// XXX: Be careful. This will slowly select the entire map without filters.
+/**
+ * Returns an array of all cells that are contiguous and adjacent.
+ * Be careful: this will slowly select the entire map without a filter.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @param {function} cellFilter - For {@link m3.utility.adjacency.getSimilarCellsGreedy}
+ */
 m3.utility.adjacency.getPathsGreedy = (cell, cellFilter) => {
   const select = (cell) => m3.utility.adjacency.getPaths(cell, cellFilter)
 
