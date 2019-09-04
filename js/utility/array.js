@@ -53,4 +53,4 @@ utility.array.shuffle = (array) => {
 /**
  * Returns a copy of the provided array with only unique values.
  */
-utility.array.unique = (array)=> [...Set(array)]
+utility.array.unique = (array) => [...Set(array)]
