@@ -1,7 +1,6 @@
 .m3-c-gameStatus {
   display: flex;
   justify-content: center;
-  pointer-events: none;
 }
   .m3-c-gameStatus--action {}
   .m3-c-gameStatus--color {

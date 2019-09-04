@@ -1,6 +1,5 @@
 .m3-c-scoreboard {
   display: flex;
-  pointer-events: none;
 }
   .m3-c-scoreboard--player {
     display: flex;
@@ -29,7 +28,6 @@
     font-weight: 700;
     list-style-type: none;
     padding: 1em;
-    pointer-events: auto;
   }
 
 @media (min-width: 48em) {

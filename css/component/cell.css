@@ -1,7 +1,9 @@
 .m3-c-cell {
   align-items: center;
+  background-color: transparent;
   border: 0;
   display: flex;
+  font-family: inherit;
   font-size: 1em;
   height: 3em;
   justify-content: center;

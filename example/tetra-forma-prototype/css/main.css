@@ -35,6 +35,7 @@ body {
 
 .tf-o-ui--scoreboard {
   left: 0;
+  pointer-events: none;
   position: absolute;
   top: 0;
 }
