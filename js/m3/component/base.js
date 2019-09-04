@@ -3,9 +3,9 @@
 m3.component.base = {}
 
 m3.component.base.prototype = {
-  attach: function (parentElement) {
-    if (parentElement instanceof Element) {
-      parentElement.appendChild(this.rootElement)
+  attach: function (node) {
+    if (node instanceof Node) {
+      node.appendChild(this.rootElement)
     }
 
     return this
@@ -21,7 +21,16 @@ m3.component.base.prototype = {
   },
   destroy: function () {
     this.teardown()
+    this.pubsub.destroy()
+
     this.config = {}
+
+    return this
+  },
+  detach: function (node) {
+    if (this.rootElement && this.rootElement.parentNode instanceof Node) {
+      this.rootElement.parentNode.removeChild(this.rootElement)
+    }
 
     return this
   },
