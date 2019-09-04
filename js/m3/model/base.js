@@ -3,6 +3,7 @@
 /**
  * Namespace for the base model that all models extend.
  * There is no factory here because it's intended to be abstract.
+ *
  * @namespace m3.model.base
  */
 m3.model.base = {}
