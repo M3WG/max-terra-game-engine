@@ -41,14 +41,6 @@ m3.component.base.prototype = {
 
     return this.rootElement.getBoundingClientRect()
   },
-  getId: function () {
-    return this.rootElement.id
-  },
-  setId: function (id) {
-    this.rootElement.id = id
-
-    return this
-  },
   setup: function () {
     return this
   },
