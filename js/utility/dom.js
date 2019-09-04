@@ -34,7 +34,7 @@ utility.dom.contains = (outer, inner) => {
  * @param {object} [options.props] - Hash of properties to apply to element
  * @param {Node} [options.parent] - Appends element as its child
  * @param {object} [options.style] - Hash of properties to apply to element.style
- * @param {function} [options.then]- Callback function called with element before returning it
+ * @param {function} [options.then] - Callback function called with element before returning it
  */
 utility.dom.createElement = (tagName, {assign, children, data, listeners, props, parent, style, then}) => {
   const element = document.createElement(tagName)
