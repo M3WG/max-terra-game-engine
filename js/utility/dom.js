@@ -47,30 +47,6 @@ utility.dom.createElement = (tagName, {assign, children, data, listeners, props,
     }
   }
 
-  for (let key in props) {
-    if (props.hasOwnProperty(key) && key in element) {
-      element[key] = props[key]
-    }
-  }
-
-  for (let key in data) {
-    if (data.hasOwnProperty(key)) {
-      element.dataset[key] = data[key]
-    }
-  }
-
-  for (let key in style) {
-    if (style.hasOwnProperty(key) && key in element.style) {
-      element.style[key] = style[key]
-    }
-  }
-
-  if (Array.isArray(listeners)) {
-    listeners.forEach(([...args]) => {
-      element.addEventListener(...args)
-    })
-  }
-
   if (Array.isArray(children)) {
     children.forEach((child) => {
       if (m3.utility.component.is(child)) {
@@ -86,8 +62,32 @@ utility.dom.createElement = (tagName, {assign, children, data, listeners, props,
     })
   }
 
+  for (let key in data) {
+    if (data.hasOwnProperty(key)) {
+      element.dataset[key] = data[key]
+    }
+  }
+
+  if (Array.isArray(listeners)) {
+    listeners.forEach(([...args]) => {
+      element.addEventListener(...args)
+    })
+  }
+
   if (parent instanceof Node) {
     parent.appendChild(element)
+  }
+
+  for (let key in props) {
+    if (props.hasOwnProperty(key) && key in element) {
+      element[key] = props[key]
+    }
+  }
+
+  for (let key in style) {
+    if (style.hasOwnProperty(key) && key in element.style) {
+      element.style[key] = style[key]
+    }
   }
 
   if (typeof then == 'function') {
