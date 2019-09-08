@@ -32,6 +32,19 @@ m3.utility.crawler.prototype = {
 
     return this.getMap().getCell(x, y)
   },
+  getFirst: function (filter) {
+    if (typeof filter != 'function') {
+      filter = utility.fn.identity()
+    }
+
+    const cells = this.getAdjacent()
+
+    for (let cell in cells) {
+      if (filter(cell)) {
+        return cell
+      }
+    }
+  },
   getLeft: function () {
     const x = this.getX() - 1,
       y = this.getY()
@@ -47,6 +60,27 @@ m3.utility.crawler.prototype = {
 
     return this.getMap().getCell(x, y)
   },
+  getPriority: function (fn) {
+    if (typeof fn != 'function') {
+      filter = utility.fn.identity()
+    }
+
+    const cells = this.getAdjacent()
+
+    let resultCell,
+      resultWeight = -Infinity
+
+    for (let cell in cells) {
+      const weight = fn(cell)
+
+      if (weight > resultWeight) {
+        resultCell = cell
+        resultWeight = weight
+      }
+    }
+
+    return resultCell
+  },
   getUp: function () {
     const x = this.getX(),
       y = this.getY() + 1
@@ -54,16 +88,14 @@ m3.utility.crawler.prototype = {
     return this.getMap().getCell(x, y)
   },
   getX: function () {
-    return this.x;
+    return this.x
   },
   getY: function () {
-    return this.y;
+    return this.y
   },
   initialize: function ({cell, map, x, y}) {
     if (m3.model.cell.is(cell)) {
-      return this
-        .setMap(cell.getMap())
-        .moveTo(cell.getX(), cell.getY())
+      return this.moveToCell(cell)
     }
 
     this.setMap(map)
@@ -74,14 +106,42 @@ m3.utility.crawler.prototype = {
   moveDown: function () {
     return this.setY(this.getY() + 1)
   },
+  moveFirst: function (filter) {
+    const cell = this.getFirst(filter)
+
+    if (cell) {
+      this.moveToCell(cell)
+    }
+
+    return this
+  },
   moveLeft: function () {
     return this.setX(this.getX() - 1)
+  },
+  movePriority: function (fn) {
+    const cell = this.getPriority(fn)
+
+    if (cell) {
+      this.moveToCell(cell)
+    }
+
+    return this
   },
   moveRight: function () {
     return this.setX(this.getX() + 1)
   },
   moveTo: function (x, y) {
     return this.setX(x).setY(y)
+  },
+  moveToCell: function (cell) {
+    if (!m3.model.cell.is(cell)) {
+      throw new Error('Please provide a valid cell')
+    }
+
+    return this
+      .setMap(cell.getMap())
+      .setX(cell.getX())
+      .setY(cell.getY())
   },
   moveUp: function () {
     return this.setY(this.getY() - 1)
