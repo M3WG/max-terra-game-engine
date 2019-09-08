@@ -2,6 +2,7 @@
 
 /**
  * Utility for providing simple event subscription.
+ *
  * @namespace utility.pubsub
  */
 utility.pubsub = {}

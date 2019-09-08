@@ -2,6 +2,7 @@
 
 /**
  * Pure utility functions for functional composition.
+ *
  * @namespace utility.fn
  */
 utility.fn = {

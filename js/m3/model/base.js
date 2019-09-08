@@ -62,7 +62,7 @@ m3.model.base.prototype = {
     return this.data[key]
   },
   /**
-   * Returns the identifier.
+   * Returns the identifier used by singletons.
    * Shorthand for `this.get('id')`.
    */
   getId: function () {

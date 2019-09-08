@@ -2,6 +2,7 @@
 
 /**
  * Utility functions for manipulating the DOM.
+ *
  * @namespace utility.array
  */
 utility.dom = {}

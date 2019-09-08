@@ -2,6 +2,7 @@
 
 /**
  * Utility functions for manipulating arrays without side effects.
+ *
  * @namespace utility.array
  */
 utility.array = {}

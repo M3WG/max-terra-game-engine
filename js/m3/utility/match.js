@@ -1,9 +1,26 @@
 'use strict'
 
+/**
+ * Utility functions for matching cells.
+ *
+ * @namespace m3.utility.match
+ */
 m3.utility.match = {}
 
-// TODO: Define definition struct
-// SEE: example/tic-tac-toe
+/**
+ * Tests whether a target cell belongs to a shape and returns its constituent cells, if any.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @param {object} shape
+ * @param {mixed[]} shape.definition - Array of cells that belong to the shape
+ * @param {number} shape.definition[][0] - Δx from `cell`
+ * @param {number} shape.definition[][1] - Δy from `cell`
+ * @param {...mixed} shape.definition[][...] - Additional arguments to pass to `filter` ()
+ * @param {boolean} [shape.mirror=false] - Whether the shape mirrors horizontally and vertically
+ * @param {boolean} [shape.rotate=false] - Whether the shape has 90°, 180°, and 270° rotations
+ * @param {function} filter - Returns whether the tested cell belongs to the shape
+ * @return {m3.model.cell.prototype[]|undefined}
+ */
 m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false}, filter) => {
   const cx = cell.getX(),
     cy = cell.getY(),
@@ -12,7 +29,6 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   if (typeof filter != 'function') {
     /*
      * XXX: Identity function. Will return first extant shape.
-     * Additional parameters are filled from the definition, i.e. [x, y, ...args]
      */
     filter = utility.fn.identity()
   }
@@ -70,6 +86,14 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
   }
 }
 
+/**
+ * Returns the first matching shape that `cell` belongs to.
+ *
+ * @param {m3.model.cell.prototype} cell
+ * @param {mixed[]} shapes
+ * @param {function} filter
+ * @see m3.utility.match.shape
+ */
 m3.utility.match.shapes = (cell, shapes, filter) => {
   for (const shape of shapes) {
     const result = m3.utility.match.shape(cell, shape, filter)

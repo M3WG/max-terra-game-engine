@@ -2,6 +2,8 @@
 
 /**
  * Utility functions for working with 2D matrices without side effects.
+ *
+ * @namespace utility.matrix
  */
 utility.matrix = {}
 
