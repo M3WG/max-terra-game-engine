@@ -5,5 +5,10 @@
     "gulp": "^4.0.2",
     "jsdoc": "^3.6.3",
     "uglify-es": "^3.3.9"
+  },
+  "dependencies": {
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify-es": "^1.0.4"
   }
 }
