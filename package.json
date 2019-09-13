@@ -2,6 +2,8 @@
   "name": "max-terra-game-engine",
   "version": "1.0.0-alpha",
   "devDependencies": {
-    "jsdoc": "^3.6.3"
+    "gulp": "^4.0.2",
+    "jsdoc": "^3.6.3",
+    "uglify-es": "^3.3.9"
   }
 }
