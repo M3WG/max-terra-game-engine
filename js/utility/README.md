@@ -1,4 +1,4 @@
-The `utility` namespace provides functions that would typically be provided by a framework or game engine.
+The `utility` namespace defines functions that would typically be provided by a framework or game engine.
 
 ```js
 /**

@@ -3,12 +3,16 @@
 /**
  * Utility functions for manipulating the DOM.
  *
- * @namespace utility.array
+ * @namespace utility.dom
  */
 utility.dom = {}
 
 /**
  * Returns whether the inner node is a descendent of the outer node.
+ *
+ * @param {Node} outer
+ * @param {Node} inner
+ * @returns {boolean}
  */
 utility.dom.contains = (outer, inner) => {
   do {

@@ -8,7 +8,9 @@
 utility.pubsub = {}
 
 /**
- * Creates an instance of {@link utility.pubsub.prototype}.
+ * Creates an instance of {@link Pubsub}.
+ *
+ * @return {Pubsub}
  */
 utility.pubsub.create = function (...args) {
   return Object.create(this.prototype).create(...args)
@@ -17,6 +19,10 @@ utility.pubsub.create = function (...args) {
 /**
  * Decortates the target object with a pubsub instance and chainable emit, off, and on methods.
  * A new instance will be created if one isn't provided.
+ *
+ * @param {object} target
+ * @param {Pubsub} [instance]
+ * @returns {object} - Decorated target
  */
 utility.pubsub.decorate = function (target, instance) {
   if (!this.is(instance)) {
@@ -37,6 +43,9 @@ utility.pubsub.decorate = function (target, instance) {
 
 /**
  * Returns whether the provided value is a pubsub instance.
+ *
+ * @param {*} x
+ * @returns {boolean}
  */
 utility.pubsub.is = function (x) {
   return this.prototype.isPrototypeOf(x)
@@ -44,10 +53,15 @@ utility.pubsub.is = function (x) {
 
 /**
  * Prototype for pubsub instances.
+ *
+ * @interface Pubsub
+ * @see utility.pubsub
  */
 utility.pubsub.prototype = {
   /**
    * Called automatically by {@link utility.pubsub.create}.
+   *
+   * @alias Pubsub#create
    */
   create: function() {
     this._handler = {}
@@ -55,6 +69,8 @@ utility.pubsub.prototype = {
   },
   /**
    * Call to prepare for garbage collection.
+   *
+   * @alias Pubsub#destroy
    */
   destroy: function() {
     this.off()
@@ -62,6 +78,10 @@ utility.pubsub.prototype = {
   },
   /**
    * Emits args to handlers subscribed to event.
+   *
+   * @alias Pubsub#emit
+   * @param {string} event
+   * @param {...mixed} args
    */
   emit: function(event, ...args) {
     if (!this._handler[event]) {
@@ -77,6 +97,10 @@ utility.pubsub.prototype = {
    * Unsubscribes the handler function from event.
    * If no handler is provided, then all handlers for event are removed.
    * If no event is provided, then all handlers for all events are removed.
+   *
+   * @alias Pubsub#off
+   * @param {string} [event]
+   * @param {function} [handler]
    */
   off: function(event, handler) {
     if (event === undefined) {
@@ -104,6 +128,10 @@ utility.pubsub.prototype = {
   },
   /**
    * Subscribes the handler function to event.
+   *
+   * @alias Pubsub#on
+   * @param {string} event
+   * @param {function} handler
    */
   on: function(event, handler) {
     if (!this._handler[event]) {

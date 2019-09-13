@@ -3,7 +3,7 @@
 /**
  * Utility functions for selecting cells adjacent to a {@link m3.model.cell.prototype} instance.
  *
- * @namespace utility.adjacency
+ * @namespace m3.utility.adjacency
  */
 m3.utility.adjacency = {}
 

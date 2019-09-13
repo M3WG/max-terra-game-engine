@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Utility functions for manipulating arrays without side effects.
+ * Pure utility functions for manipulating arrays.
  *
  * @namespace utility.array
  */
