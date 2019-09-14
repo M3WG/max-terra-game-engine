@@ -40,6 +40,9 @@
     transition: opacity 0.25s ease;
     z-index: 2;
   }
+  .m3-c-tilePickerOption--icon:empty {
+    display: none;
+  }
   .m3-c-tilePickerOption--inventory {
     background-color: #000000;
     color: #FFFFFF;
@@ -50,6 +53,9 @@
     text-transform: uppercase;
     top: 0;
     z-index: 3;
+  }
+  .m3-c-tilePickerOption--inventory:empty {
+    display: none;
   }
   .m3-c-tilePickerOption--label {
     background-color: #000000;
@@ -63,6 +69,9 @@
     text-transform: uppercase;
     transform: translate3d(-50%, 0, 0);
     z-index: 3;
+  }
+  .m3-c-tilePickerOption--label:empty {
+    display: none;
   }
 
 .m3-c-tilePickerOption-disabled {
