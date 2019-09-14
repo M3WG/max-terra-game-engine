@@ -37,7 +37,7 @@ m3.component.base.prototype = {
    */
   /**
    * Called when creating a new instance, typically automatically via a factory.
-   * Components must not override this method.
+   * Components _must not_ override this method.
    *
    * @alias Component#create
    * @final
@@ -55,7 +55,7 @@ m3.component.base.prototype = {
   },
   /**
    * Prepares the component for garbage collection.
-   * Components must not override this method.
+   * Components _must not_ override this method.
    *
    * @alias Component#destroy
    * @final
@@ -105,8 +105,8 @@ m3.component.base.prototype = {
    * @type {Element}
    */
   /**
-   * Called via {@link app.component.base.create}.
-   * Components must override this method to create and assign an element to `this.rootElement`.
+   * Called via {@link Component#create}.
+   * Components _must_ override this method to create and assign an element to `this.rootElement`.
    *
    * @abstract
    * @alias Component#setup
@@ -117,8 +117,8 @@ m3.component.base.prototype = {
     return this
   },
   /**
-   * Called via {@link m3.component.base.destroy}.
-   * Components should override this method to free any refrences for garbage collection.
+   * Called via {@link Component#destroy}.
+   * Components _should_ override this method to free any refrences for garbage collection.
    *
    * @alias Component#teardown
    * @returns {Component}

@@ -20,7 +20,7 @@ m3.model.base = {}
 m3.model.base.prototype = {
   /**
    * Called when instantiating a new instance, typically automatically via a factory.
-   * Models must not override this method.
+   * Models _must not_ override this method.
    *
    * @alias Model#create
    * @final
@@ -36,8 +36,15 @@ m3.model.base.prototype = {
     return this
   },
   /**
+   * The internal data structure of the model instance.
+   * Initially filled with the values provided via {@link Model#create}.
+   *
+   * @name Model#data
+   * @type {object}
+   */
+  /**
    * Prepares the model for garbage collection.
-   * Models must not override this method.
+   * Models _must not_ override this method.
    *
    * @alias Model#destroy
    * @final
@@ -112,8 +119,8 @@ m3.model.base.prototype = {
     return this
   },
   /**
-   * Called via {@link app.model.base.create}.
-   * Models can override this method to initialize custom members.
+   * Called via {@link Model#create}.
+   * Models _can_ override this method to initialize custom members.
    *
    * @alias Model#setup
    * @param {...*} - Additional arguments from {@link app.model.base.create}
@@ -123,8 +130,8 @@ m3.model.base.prototype = {
     return this
   },
   /**
-   * Called via {@link m3.model.base.destroy}.
-   * Models should override this method to free any refrences for garbage collection.
+   * Called via {@link Model#destroy}.
+   * Models _should_ override this method to free any refrences for garbage collection.
    *
    * @alias Model#teardown
    * @returns {Model}
