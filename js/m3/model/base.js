@@ -24,6 +24,8 @@ m3.model.base.prototype = {
    *
    * @alias Model#create
    * @final
+   * @param {object} data - Copied into {@link Model#data}
+   * @param {...mixed} ...args - Passed into {@link Model#setup}
    * @returns {Model}
    * @see {@link m3.model.base.setup}
    */
@@ -123,7 +125,7 @@ m3.model.base.prototype = {
    * Models _can_ override this method to initialize custom members.
    *
    * @alias Model#setup
-   * @param {...*} - Additional arguments from {@link app.model.base.create}
+   * @param {...*} - Additional arguments from {@link Model#create}
    * @returns {Model}
    */
   setup: function () {

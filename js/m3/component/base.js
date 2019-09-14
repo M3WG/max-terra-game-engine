@@ -34,6 +34,11 @@ m3.component.base.prototype = {
    *
    * @alias Component#create
    * @final
+   * @param {object} config
+   * @param {Component} [config.parentComponent]
+   * @param {Element} [config.parentElement]
+   * @param {...mixed} [config....data] - Copied into {@link Component#data}
+   * @param {...mixed} [...args] - Passed into {@link Component#setup}
    * @returns {Component}
    * @see {@link m3.component.base.setup}
    */
@@ -110,7 +115,7 @@ m3.component.base.prototype = {
    *
    * @abstract
    * @alias Component#setup
-   * @param {...*} - Additional arguments from {@link app.component.base.create}
+   * @param {...*} - Additional arguments from {@link Component#create}
    * @returns {Component}
    */
   setup: function () {
