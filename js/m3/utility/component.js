@@ -6,10 +6,10 @@ m3.utility.component.extend = (prototype = {}, definition = {}) => Object.setPro
 m3.utility.component.extendFactory = (prototype, definition, mixin) => m3.utility.component.factory(m3.utility.component.extend(prototype, definition), mixin)
 
 m3.utility.component.factory = (prototype, mixin = {}) => ({
-  create: function (config = {}, ...args) {
-    config = {...this.defaults, ...config}
-    this.validate(config)
-    return Object.create(this.prototype).create(config, ...args)
+  create: function (data = {}, ...args) {
+    data = {...this.defaults, ...data}
+    this.validate(data)
+    return Object.create(this.prototype).create(data, ...args)
   },
   defaults: {},
   extendDefaults: function (mixin = {}) {
@@ -46,7 +46,7 @@ m3.utility.component.factory = (prototype, mixin = {}) => ({
     return this.prototype.isPrototypeOf(x)
   },
   prototype,
-  validate: (config) => {},
+  validate: (data) => {},
   ...mixin,
 })
 

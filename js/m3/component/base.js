@@ -29,13 +29,6 @@ m3.component.base.prototype = {
     return this
   },
   /**
-   * Data associated with the component instance.
-   * Initially filled with the values provided via {@link Component#create}.
-   *
-   * @name Component#config
-   * @type {object}
-   */
-  /**
    * Called when creating a new instance, typically automatically via a factory.
    * Components _must not_ override this method.
    *
@@ -44,8 +37,8 @@ m3.component.base.prototype = {
    * @returns {Component}
    * @see {@link m3.component.base.setup}
    */
-  create: function ({parentComponent, parentElement, ...config}, ...args) {
-    this.config = config
+  create: function ({parentComponent, parentElement, ...data}, ...args) {
+    this.data = data
     this.parent = parentComponent
 
     utility.pubsub.decorate(this)
@@ -53,6 +46,13 @@ m3.component.base.prototype = {
 
     return this
   },
+  /**
+   * Data associated with the component instance.
+   * Initially filled with the values provided via {@link Component#create}.
+   *
+   * @name Component#data
+   * @type {object}
+   */
   /**
    * Prepares the component for garbage collection.
    * Components _must not_ override this method.
@@ -66,7 +66,7 @@ m3.component.base.prototype = {
     this.teardown()
     this.pubsub.destroy()
 
-    this.config = {}
+    this.data = {}
 
     return this
   },

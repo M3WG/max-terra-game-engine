@@ -15,13 +15,13 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       return this
     },
     getModel: function () {
-      return this.config.model
+      return this.data.model
     },
     getX: function () {
-      return this.config.x
+      return this.data.x
     },
     getY: function () {
-      return this.config.y
+      return this.data.y
     },
     setup: function () {
       const createElement = utility.dom.createElement
@@ -44,8 +44,8 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
         ],
       })
 
-      if (this.config.model) {
-        this.config.model.on('change', this.update.bind(this))
+      if (this.data.model) {
+        this.data.model.on('change', this.update.bind(this))
       }
 
       this.update()

@@ -19,7 +19,7 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
       return this
     },
     getValue: function () {
-      return this.config.tile
+      return this.data.tile
     },
     isDisabled: function () {
       return this.rootElement.classList.contains(_disabledModifier)

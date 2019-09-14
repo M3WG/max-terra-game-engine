@@ -22,7 +22,7 @@ m3.component.scoreboard = m3.utility.component.inventFactory({
               parentElement: element
             })
 
-            this._player = this.config.players.filter(isValid).map(createPlayer)
+            this._player = this.data.players.filter(isValid).map(createPlayer)
           },
         }),
       ]

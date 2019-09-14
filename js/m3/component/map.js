@@ -13,7 +13,7 @@ m3.component.map = m3.utility.component.inventFactory({
     }, [])
   },
   getModel: function () {
-    return this.config.model
+    return this.data.model
   },
   setup: function () {
     this._cell = []

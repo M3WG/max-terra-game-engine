@@ -2,7 +2,7 @@
 
 m3.component.gameStatus = m3.utility.component.inventFactory({
   getModel: function () {
-    return this.config.model
+    return this.data.model
   },
   setup: function () {
     this.rootElement = document.createElement('div')

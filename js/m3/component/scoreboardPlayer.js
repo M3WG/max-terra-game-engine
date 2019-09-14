@@ -2,7 +2,7 @@
 
 m3.component.scoreboardPlayer = m3.utility.component.inventFactory({
   getModel: function () {
-    return this.config.model
+    return this.data.model
   },
   setup: function () {
     const createElement = utility.dom.createElement
