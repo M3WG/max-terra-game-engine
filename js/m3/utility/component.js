@@ -2,57 +2,51 @@
 
 m3.utility.component = {}
 
-m3.utility.component.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf({...definition}, prototype)
-m3.utility.component.extendFactory = (prototype, definition, mixin) => m3.utility.component.factory(m3.utility.component.extend(prototype, definition), mixin)
+m3.utility.component.extend = (prototype, mixin = {}) => {
+  if (!m3.utility.component.is(prototype)) {
+    throw new Error('Please provide a valid component')
+  }
+
+  Object.keys(mixin).forEach((key) => {
+    let value = mixin[key]
+
+    if (key == 'defaults' || key == 'validators') {
+      value = {...prototype[key], ...value}
+    }
+
+    prototype[key] = value
+  })
+
+  return prototype
+}
+
+m3.utility.component.extendDelegate = (prototype, fn) => {
+  if (typeof fn != 'function') {
+    throw new Error ('Please provide a valid function')
+  }
+
+  return m3.utility.component.extend(
+    prototype,
+    fn(prototype)
+  )
+}
 
 m3.utility.component.factory = (prototype, mixin = {}) => ({
-  create: function (data = {}, ...args) {
-    data = {...this.defaults, ...data}
-    this.validate(data)
-    return Object.create(this.prototype).create(data, ...args)
-  },
-  defaults: {},
-  extendDefaults: function (mixin = {}) {
-    this.defaults = {...this.defaults, ...mixin}
-    return this
-  },
-  extendDelegate: function (key, fn) {
-    if (typeof fn != 'function') {
-      throw new Error('Please provide a valid function')
-    }
-
-    this.prototype[key] = fn(this.prototype[key])
-    return this
-  },
-  extendPrototype: function (mixin = {}) {
-    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key]);
-    return this;
-  },
-  extendValidate: function (fn) {
-    if (typeof fn != 'function') {
-      throw new Error('Please provide a valid function')
-    }
-
-    const validate = this.validate
-
-    this.validate = (data) => {
-      validate(data)
-      fn(data)
-    }
-
-    return this
+  create: function (...args) {
+    return Object.create(this.prototype).create(...args)
   },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },
   prototype,
-  validate: (data) => {},
   ...mixin,
 })
 
-m3.utility.component.invent = (definition = {}) => Object.setPrototypeOf({...definition}, m3.component.base.prototype)
-m3.utility.component.inventFactory = (definition, mixin = {}) => m3.utility.component.factory(m3.utility.component.invent(definition), mixin)
+m3.utility.component.invent = (definition = {}, prototype) => Object.setPrototypeOf(
+  {...definition},
+  m3.utility.component.is(prototype) ? prototype : m3.component.base.prototype
+)
 
-m3.utility.component.is = function (x) {
-  return m3.component.base.prototype.isPrototypeOf(x)
-}
+m3.utility.component.inventFactory = (definition, mixin = {}, prototype) => m3.utility.component.factory(m3.utility.component.invent(definition, prototype), mixin)
+
+m3.utility.component.is = (x) => m3.component.base.prototype.isPrototypeOf(x)
