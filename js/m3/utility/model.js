@@ -5,6 +5,7 @@ m3.utility.model = {}
 m3.utility.model.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf(
   {
     ...definition,
+    defaults: {...prototype.defaults, ...definition.defaults},
     validators: {...prototype.validators, ...definition.validators},
   },
   prototype
@@ -14,13 +15,11 @@ m3.utility.model.extendFactory = (prototype, definition, mixin) => m3.utility.mo
 m3.utility.model.extendSingletonFactory = (prototype, definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.extend(prototype, definition), mixin)
 
 m3.utility.model.factory = (prototype, mixin = {}) => ({
-  create: function (data = {}, ...args) {
-    data = {...this.defaults, ...data}
-    return Object.create(this.prototype).create(data, ...args)
+  create: function (...args) {
+    return Object.create(this.prototype).create(...args)
   },
-  defaults: {},
   extendDefaults: function (mixin = {}) {
-    this.defaults = {...this.defaults, ...mixin}
+    this.prototype.defaults = {...this.prototype.defaults, ...mixin}
     return this
   },
   extendPrototype: function (mixin = {}) {
@@ -41,6 +40,7 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
 m3.utility.model.invent = (definition = {}) => Object.setPrototypeOf(
   {
     ...definition,
+    defaults: {...definition.defaults},
     validators: {...definition.validators},
   },
   m3.model.base.prototype

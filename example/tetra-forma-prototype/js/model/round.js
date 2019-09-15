@@ -9,6 +9,9 @@ m3.model.round = m3.utility.model.inventFactory({
 
     return turn
   },
+  defaults: {
+    turns: [],
+  },
   getCurrentTurn: function () {
     return this.data.turns[this.data.turns.length - 1]
   },
@@ -27,9 +30,5 @@ m3.model.round = m3.utility.model.inventFactory({
 
       return values
     },
-  },
-}, {
-  defaults: {
-    turns: [],
   },
 })

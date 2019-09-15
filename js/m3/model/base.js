@@ -30,11 +30,13 @@ m3.model.base.prototype = {
    * @see {@link Model#setup}
    */
   create: function (data, ...args) {
+    data = {...this.defaults, ...data}
+
     Object.keys(this.validators).forEach((key) =>
       data[key] = this.validators[key](data[key])
     )
 
-    this.data = {...data}
+    this.data = data
 
     utility.pubsub.decorate(this)
     this.setup(...args)
@@ -48,6 +50,13 @@ m3.model.base.prototype = {
    * @name Model#data
    * @type {object}
    */
+  /**
+   * The default values.
+   *
+   * @name Model#defaults
+   * @type {object}
+   */
+  defaults: {},
   /**
    * Prepares the model for garbage collection.
    * Models _must not_ override this method.
@@ -110,6 +119,17 @@ m3.model.base.prototype = {
     }
 
     return this.data[key] == value
+  },
+  /**
+   * Resets the instance to its default values.
+   *
+   * @alias Model#reset
+   * @returns {Model}
+   */
+  reset: function () {
+    this.data = {...this.defaults}
+    this.emit('change')
+    return this
   },
   /**
    * Sets `key` to `value` within the internal data structure.

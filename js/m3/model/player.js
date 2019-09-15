@@ -2,6 +2,9 @@
 
 // TODO: Document internal data struct
 m3.model.player = m3.utility.model.inventFactory({
+  defaults: {
+    score: 0,
+  },
   getColor: function () {
     return this.data.color
   },
@@ -17,11 +20,9 @@ m3.model.player = m3.utility.model.inventFactory({
 
     return this
   },
-}, {
-  defaults: {
-    score: 0,
+  validators: {
+    color: String,
+    name: String,
+    score: Number,
   },
-  validate: (data) => {
-    data.score = Number(data.score)
-  }
 })
