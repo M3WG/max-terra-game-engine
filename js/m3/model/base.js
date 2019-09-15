@@ -33,7 +33,7 @@ m3.model.base.prototype = {
     data = {...this.defaults, ...data}
 
     Object.keys(this.validators).forEach((key) =>
-      data[key] = this.validators[key](data[key])
+      data[key] = this.validate(key, data[key])
     )
 
     this.data = data
@@ -140,11 +140,7 @@ m3.model.base.prototype = {
    * @returns {Model}
    */
   set: function (key, value) {
-    if (this.validators[key]) {
-      value = this.validators[key](value)
-    }
-
-    this.data[key] = value
+    this.data[key] = this.validate(key, value)
     this.emit('change')
     return this
   },
@@ -170,10 +166,25 @@ m3.model.base.prototype = {
     return this
   },
   /**
+   * Executes the validator function for key with value if one exists.
+   *
+   * @alias Model#validate
+   * @param {string} key
+   * @param {mixed} value
+   * @returns {mixed} - Coerced value
+   */
+  validate: function (key, value) {
+    if (typeof this.validators[key] == 'function') {
+      value = this.validators[key](value)
+    }
+
+    return value
+  },
+  /**
    * Hash of validation functions for ensuring type safety when setting keys.
    *
    * A validator function _must_ accept a value and return it like an identity function.
-   * It _should_ massage the value into the correct type and throw an exception if proceeding is impossible.
+   * It _should_ coerce the value into the correct type and throw an exception if proceeding is impossible.
    *
    * Providing validator functions is optional but recommended.
    *
