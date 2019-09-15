@@ -25,14 +25,18 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   ...mixin,
 })
 
-m3.utility.model.invent = (definition = {}, prototype) => Object.setPrototypeOf(
-  {
-    ...definition,
-    defaults: {...definition.defaults},
-    validators: {...definition.validators},
-  },
-  m3.utility.model.is(prototype) ? prototype : m3.model.base.prototype
-)
+m3.utility.model.invent = (definition = {}, prototype) => {
+  prototype = m3.utility.model.is(prototype) ? prototype : m3.model.base.prototype
+
+  return Object.setPrototypeOf(
+    {
+      ...definition,
+      defaults: {...prototype.defaults, ...definition.defaults},
+      validators: {...prototype.validators, ...definition.validators},
+    },
+    prototype
+  )
+}
 
 m3.utility.model.inventFactory = (definition, mixin = {}) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
 m3.utility.model.inventSingletonFactory = (definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.invent(definition), mixin)
