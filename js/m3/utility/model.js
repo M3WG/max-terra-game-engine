@@ -2,7 +2,14 @@
 
 m3.utility.model = {}
 
-m3.utility.model.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf({...definition}, prototype)
+m3.utility.model.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf(
+  {
+    ...definition,
+    validators: {...prototype.validators, ...definition.validators},
+  },
+  prototype
+)
+
 m3.utility.model.extendFactory = (prototype, definition, mixin) => m3.utility.model.factory(m3.utility.model.extend(prototype, definition), mixin)
 m3.utility.model.extendSingletonFactory = (prototype, definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.extend(prototype, definition), mixin)
 
