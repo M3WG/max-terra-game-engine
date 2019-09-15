@@ -38,8 +38,8 @@ m3.utility.model.invent = (definition = {}, prototype) => {
   )
 }
 
-m3.utility.model.inventFactory = (definition, mixin = {}) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
-m3.utility.model.inventSingletonFactory = (definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.invent(definition), mixin)
+m3.utility.model.inventFactory = (definition, mixin = {}, prototype) => m3.utility.model.factory(m3.utility.model.invent(definition, prototype), mixin)
+m3.utility.model.inventSingletonFactory = (definition, mixin = {}, prototype) => m3.utility.model.singletonFactory(m3.utility.model.invent(definition, prototype), mixin)
 
 m3.utility.model.is = (x) => m3.model.base.prototype.isPrototypeOf(x)
 
