@@ -3,21 +3,21 @@
 /**
  * Provides a natural language interface for navigating a map.
  *
- * @namespace m3.utility.crawler
+ * @namespace m3.utility.mapCrawler
  */
-m3.utility.crawler = {}
+m3.utility.mapCrawler = {}
 
 /**
- * Creates an instance of {@link m3.utility.crawler.prototype}.
+ * Creates an instance of {@link m3.utility.mapCrawler.prototype}.
  */
-m3.utility.crawler.create = function (...args) {
+m3.utility.mapCrawler.create = function (...args) {
   return Object.create(this.prototype).initialize(...args)
 }
 
 /**
- * Prototype for the crawler interface.
+ * Prototype for the mapCrawler interface.
  */
-m3.utility.crawler.prototype = {
+m3.utility.mapCrawler.prototype = {
   getAdjacent: function () {
     return [
       this.getDown(),
