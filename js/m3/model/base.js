@@ -75,30 +75,6 @@ m3.model.base.prototype = {
     return this
   },
   /**
-   * Extends the prototype with the mixin.
-   * Defaults and validators will be merged.
-   *
-   * This method affects all instances.
-   * So it's recommended to only call this during initial setup.
-   *
-   * @alias Model#extend
-   * @param {object} mixin
-   * @returns {Model}
-   */
-  extend: function (mixin = {}) {
-    Object.keys(mixin).forEach((key) => {
-      let value = mixin[key]
-
-      if (key == 'defaults' || key == 'validators') {
-        value = {...this[key], ...value}
-      }
-
-      this[key] = value
-    })
-
-    return this
-  },
-  /**
    * Returns whether `key` exists within the internal data structure.
    *
    * @alias Model#has

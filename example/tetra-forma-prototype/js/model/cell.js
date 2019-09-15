@@ -1,6 +1,6 @@
 'use strict'
 
-m3.model.cell.prototype.extend({
+m3.utility.model.extend(m3.model.cell.prototype, {
   defaults: {
     fog: true,
   },

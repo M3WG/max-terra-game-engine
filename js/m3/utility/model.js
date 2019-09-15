@@ -2,6 +2,30 @@
 
 m3.utility.model = {}
 
+m3.utility.model.extend = (prototype, mixin = {}) => {
+  Object.keys(mixin).forEach((key) => {
+    let value = mixin[key]
+
+    if (key == 'defaults' || key == 'validators') {
+      value = {...prototype[key], ...value}
+    }
+
+    prototype[key] = value
+  })
+
+  return prototype
+}
+
+m3.utility.model.extendDelegate = (prototype, fn) => {
+  if (typeof fn != 'function') {
+    throw new Error ('Please provide a valid function')
+  }
+
+  return m3.utility.model.extend(
+    fn(prototype)
+  )
+}
+
 m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function (...args) {
     return Object.create(this.prototype).create(...args)
