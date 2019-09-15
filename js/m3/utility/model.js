@@ -3,6 +3,10 @@
 m3.utility.model = {}
 
 m3.utility.model.extend = (prototype, mixin = {}) => {
+  if (!m3.utility.model.is(prototype)) {
+    throw new Error('Please provide a valid model')
+  }
+
   Object.keys(mixin).forEach((key) => {
     let value = mixin[key]
 
