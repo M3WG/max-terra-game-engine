@@ -22,17 +22,17 @@ gulp.task('dist-js', () => {
     // Main namespace
     'js/m3.js',
     // Utilities
-    'js/m3/utility/array.js',
-    'js/m3/utility/dom.js',
     'js/m3/utility/fn.js',
-    'js/m3/utility/matrix.js',
-    'js/m3/utility/pubsub.js',
     'js/m3/utility/adjacency.js',
+    'js/m3/utility/array.js',
     'js/m3/utility/component.js',
-    'js/m3/utility/crawler.js',
+    'js/m3/utility/dom.js',
     'js/m3/utility/map.js',
+    'js/m3/utility/mapCrawler.js',
     'js/m3/utility/match.js',
+    'js/m3/utility/matrix.js',
     'js/m3/utility/model.js',
+    'js/m3/utility/pubsub.js',
     // Components
     'js/m3/component/base.js',
     'js/m3/component/cell.js',
