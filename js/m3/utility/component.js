@@ -7,16 +7,7 @@ m3.utility.component.extend = (prototype, mixin = {}) => {
     throw new Error('Please provide a valid component')
   }
 
-  Object.keys(mixin).forEach((key) => {
-    let value = mixin[key]
-
-    if (key == 'defaults' || key == 'validators') {
-      value = {...prototype[key], ...value}
-    }
-
-    prototype[key] = value
-  })
-
+  Object.keys(mixin).forEach((key) => prototype[key] = mixin[key])
   return prototype
 }
 
