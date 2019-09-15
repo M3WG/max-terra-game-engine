@@ -12,7 +12,7 @@ m3.model.base = {}
  * Prototype for the base model.
  *
  * The base model provides a simple wrapper for a flat internal data structure.
- * Users are encouraged to extend it with custom members with getters and setters.
+ * Users are encouraged to extend it with custom members and accessor methods.
  *
  * @implements Pubsub
  * @interface Model
@@ -27,9 +27,13 @@ m3.model.base.prototype = {
    * @param {object} data - Copied into {@link Model#data}
    * @param {...mixed} ...args - Passed into {@link Model#setup}
    * @returns {Model}
-   * @see {@link m3.model.base.setup}
+   * @see {@link Model#setup}
    */
   create: function (data, ...args) {
+    Object.keys(this.validators).forEach((key) =>
+      data[key] = this.validators[key](data[key])
+    )
+
     this.data = {...data}
 
     utility.pubsub.decorate(this)
@@ -51,7 +55,7 @@ m3.model.base.prototype = {
    * @alias Model#destroy
    * @final
    * @returns {Model}
-   * @see {@link m3.model.base.teardown}
+   * @see {@link Model#teardown}
    */
   destroy: function () {
     this.teardown()
@@ -116,6 +120,10 @@ m3.model.base.prototype = {
    * @returns {Model}
    */
   set: function (key, value) {
+    if (this.validators[key]) {
+      value = this.validators[key](value)
+    }
+
     this.data[key] = value
     this.emit('change')
     return this
@@ -125,7 +133,7 @@ m3.model.base.prototype = {
    * Models _can_ override this method to initialize custom members.
    *
    * @alias Model#setup
-   * @param {...*} - Additional arguments from {@link Model#create}
+   * @param {...mixed} - Additional arguments from {@link Model#create}
    * @returns {Model}
    */
   setup: function () {
@@ -140,5 +148,17 @@ m3.model.base.prototype = {
    */
   teardown: function () {
     return this
-  }
+  },
+  /**
+   * Hash of validation functions for ensuring type safety when setting keys.
+   *
+   * A validator function _must_ accept a value and return it like an identity function.
+   * It _should_ massage the value into the correct type and throw an exception if proceeding is impossible.
+   *
+   * Providing validator functions is optional but recommended.
+   *
+   * @alias Model#validators
+   * @type {object}
+   */
+  validators: {},
 }
