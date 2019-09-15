@@ -26,6 +26,7 @@ m3.utility.model.extendDelegate = (prototype, fn) => {
   }
 
   return m3.utility.model.extend(
+    prototype,
     fn(prototype)
   )
 }
