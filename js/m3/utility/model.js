@@ -2,18 +2,6 @@
 
 m3.utility.model = {}
 
-m3.utility.model.extend = (prototype = {}, definition = {}) => Object.setPrototypeOf(
-  {
-    ...definition,
-    defaults: {...prototype.defaults, ...definition.defaults},
-    validators: {...prototype.validators, ...definition.validators},
-  },
-  prototype
-)
-
-m3.utility.model.extendFactory = (prototype, definition, mixin) => m3.utility.model.factory(m3.utility.model.extend(prototype, definition), mixin)
-m3.utility.model.extendSingletonFactory = (prototype, definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.extend(prototype, definition), mixin)
-
 m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function (...args) {
     return Object.create(this.prototype).create(...args)
@@ -37,21 +25,19 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   ...mixin,
 })
 
-m3.utility.model.invent = (definition = {}) => Object.setPrototypeOf(
+m3.utility.model.invent = (definition = {}, prototype) => Object.setPrototypeOf(
   {
     ...definition,
     defaults: {...definition.defaults},
     validators: {...definition.validators},
   },
-  m3.model.base.prototype
+  m3.utility.model.is(prototype) ? prototype : m3.model.base.prototype
 )
 
 m3.utility.model.inventFactory = (definition, mixin = {}) => m3.utility.model.factory(m3.utility.model.invent(definition), mixin)
 m3.utility.model.inventSingletonFactory = (definition, mixin) => m3.utility.model.singletonFactory(m3.utility.model.invent(definition), mixin)
 
-m3.utility.model.is = function (x) {
-  return m3.model.base.prototype.isPrototypeOf(x)
-}
+m3.utility.model.is = (x) => m3.model.base.prototype.isPrototypeOf(x)
 
 m3.utility.model.singletonFactory = (prototype, mixin = {}) => m3.utility.model.factory(prototype, {
   data: {},
