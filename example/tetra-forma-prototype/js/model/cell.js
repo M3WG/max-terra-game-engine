@@ -2,21 +2,27 @@
 
 m3.model.cell.extendPrototype({
   getClaim: function () {
-    return this.get('claim')
+    return this.data.claim
   },
   getFog: function () {
-    return this.get('fog')
+    return this.data.fog
   },
-  setClaim: function (claim) {
-    if (m3.model.claim.is(claim)) {
-      this.set('claim', claim)
-    }
-
+  setClaim: function (value) {
+    this.set('claim', value)
     return this
   },
   setFog: function (value) {
-    return this.set('fog', Boolean(value))
+    return this.set('fog', value)
   },
 }).extendDefaults({
   fog: true,
+}).extendValidators({
+  claim: (value) => {
+    if (value !== null && value !== undefined && !m3.model.claim.is(value)) {
+      throw new Error('Please provide a valid claim')
+    }
+
+    return value
+  },
+  fog: Boolean,
 })

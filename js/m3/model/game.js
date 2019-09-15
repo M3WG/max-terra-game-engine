@@ -11,14 +11,17 @@ m3.model.game = m3.utility.model.inventFactory({
   getPlayers: function () {
     return utility.array.copy(this.data.players)
   },
-}, {
-  validate: (data) => {
-    data.players = utility.array.copy(data.players)
+  validators: {
+    players: (values) => {
+      values = utility.array.copy(values)
 
-    data.players.forEach((player) => {
-      if (!m3.model.player.is(player)) {
-        throw new Error('Please provide a valid player')
-      }
-    })
+      values.forEach((value) => {
+        if (!m3.model.player.is(value)) {
+          throw new Error('Please provide a valid player')
+        }
+      })
+
+      return values
+    },
   },
 })

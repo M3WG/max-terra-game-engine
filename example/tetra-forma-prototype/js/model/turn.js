@@ -4,20 +4,32 @@ m3.model.turn.extendPrototype({
   createAction: function () {
     const action = m3.model.action.create()
 
-    this.data.action.push(action)
+    this.data.actions.push(action)
     this.emit('change')
 
     return action
   },
   getCurrentAction: function () {
-    return this.data.action[this.data.action.length - 1]
+    return this.data.actions[this.data.actions.length - 1]
   },
   getActionCount: function () {
-    return this.data.action.length
+    return this.data.actions.length
   },
   getActions: function () {
-    return utility.array.copy(this.data.action)
+    return utility.array.copy(this.data.actions)
   },
-}).extendValidate((data) => {
-  data.action = []
+}).extendDefaults({
+  actions: [],
+}).extendValidators({
+  actions: (values) => {
+    values = utility.array.copy(values)
+
+    values.forEach((value) => {
+      if (!m3.model.action.is(value)) {
+        throw new Error('Please provide a valid round')
+      }
+    })
+
+    return values
+  },
 })
