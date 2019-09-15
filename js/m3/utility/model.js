@@ -6,18 +6,6 @@ m3.utility.model.factory = (prototype, mixin = {}) => ({
   create: function (...args) {
     return Object.create(this.prototype).create(...args)
   },
-  extendDefaults: function (mixin = {}) {
-    this.prototype.defaults = {...this.prototype.defaults, ...mixin}
-    return this
-  },
-  extendPrototype: function (mixin = {}) {
-    Object.keys(mixin).forEach((key) => this.prototype[key] = mixin[key])
-    return this
-  },
-  extendValidators: function (mixin = {}) {
-    this.prototype.validators = {...this.prototype.validators, ...mixin}
-    return this
-  },
   is: function (x) {
     return this.prototype.isPrototypeOf(x)
   },

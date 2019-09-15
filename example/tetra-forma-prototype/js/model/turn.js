@@ -1,6 +1,6 @@
 'use strict'
 
-m3.model.turn.extendPrototype({
+m3.model.turn.prototype.extend({
   createAction: function () {
     const action = m3.model.action.create()
 
@@ -8,6 +8,9 @@ m3.model.turn.extendPrototype({
     this.emit('change')
 
     return action
+  },
+  defaults: {
+    actions: [],
   },
   getCurrentAction: function () {
     return this.data.actions[this.data.actions.length - 1]
@@ -18,18 +21,17 @@ m3.model.turn.extendPrototype({
   getActions: function () {
     return utility.array.copy(this.data.actions)
   },
-}).extendDefaults({
-  actions: [],
-}).extendValidators({
-  actions: (values) => {
-    values = utility.array.copy(values)
+  validators: {
+    actions: (values) => {
+      values = utility.array.copy(values)
 
-    values.forEach((value) => {
-      if (!m3.model.action.is(value)) {
-        throw new Error('Please provide a valid round')
-      }
-    })
+      values.forEach((value) => {
+        if (!m3.model.action.is(value)) {
+          throw new Error('Please provide a valid round')
+        }
+      })
 
-    return values
+      return values
+    },
   },
 })

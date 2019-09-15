@@ -1,6 +1,9 @@
 'use strict'
 
-m3.model.cell.extendPrototype({
+m3.model.cell.prototype.extend({
+  defaults: {
+    fog: true,
+  },
   getClaim: function () {
     return this.data.claim
   },
@@ -14,15 +17,14 @@ m3.model.cell.extendPrototype({
   setFog: function (value) {
     return this.set('fog', value)
   },
-}).extendDefaults({
-  fog: true,
-}).extendValidators({
-  claim: (value) => {
-    if (value !== null && value !== undefined && !m3.model.claim.is(value)) {
-      throw new Error('Please provide a valid claim')
-    }
+  validators: {
+    claim: (value) => {
+      if (value !== null && value !== undefined && !m3.model.claim.is(value)) {
+        throw new Error('Please provide a valid claim')
+      }
 
-    return value
+      return value
+    },
+    fog: Boolean,
   },
-  fog: Boolean,
 })
