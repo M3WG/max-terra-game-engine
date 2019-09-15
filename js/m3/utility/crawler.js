@@ -34,7 +34,7 @@ m3.utility.crawler.prototype = {
   },
   getFirst: function (filter) {
     if (typeof filter != 'function') {
-      filter = utility.fn.identity()
+      filter = m3.utility.fn.identity()
     }
 
     const cells = this.getAdjacent()
@@ -62,7 +62,7 @@ m3.utility.crawler.prototype = {
   },
   getPriority: function (fn) {
     if (typeof fn != 'function') {
-      filter = utility.fn.identity()
+      filter = m3.utility.fn.identity()
     }
 
     const cells = this.getAdjacent()

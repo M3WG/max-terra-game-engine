@@ -46,7 +46,7 @@ m3.component.base.prototype = {
     this.data = data
     this.parent = parentComponent
 
-    utility.pubsub.decorate(this)
+    m3.utility.pubsub.decorate(this)
     this.setup(...args).attach(parentElement)
 
     return this

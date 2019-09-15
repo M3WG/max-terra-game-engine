@@ -3,16 +3,16 @@
 /**
  * Utility for providing simple event subscription.
  *
- * @namespace utility.pubsub
+ * @namespace m3.utility.pubsub
  */
-utility.pubsub = {}
+m3.utility.pubsub = {}
 
 /**
  * Creates an instance of {@link Pubsub}.
  *
  * @return {Pubsub}
  */
-utility.pubsub.create = function (...args) {
+m3.utility.pubsub.create = function (...args) {
   return Object.create(this.prototype).create(...args)
 }
 
@@ -24,7 +24,7 @@ utility.pubsub.create = function (...args) {
  * @param {Pubsub} [instance]
  * @returns {object} - Decorated target
  */
-utility.pubsub.decorate = function (target, instance) {
+m3.utility.pubsub.decorate = function (target, instance) {
   if (!this.is(instance)) {
     instance = this.create()
   }
@@ -47,7 +47,7 @@ utility.pubsub.decorate = function (target, instance) {
  * @param {*} x
  * @returns {boolean}
  */
-utility.pubsub.is = function (x) {
+m3.utility.pubsub.is = function (x) {
   return this.prototype.isPrototypeOf(x)
 }
 
@@ -55,11 +55,11 @@ utility.pubsub.is = function (x) {
  * Prototype for pubsub instances.
  *
  * @interface Pubsub
- * @see utility.pubsub
+ * @see m3.utility.pubsub
  */
-utility.pubsub.prototype = {
+m3.utility.pubsub.prototype = {
   /**
-   * Called automatically by {@link utility.pubsub.create}.
+   * Called automatically by {@link m3.utility.pubsub.create}.
    *
    * @alias Pubsub#create
    */

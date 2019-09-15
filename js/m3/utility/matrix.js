@@ -3,15 +3,15 @@
 /**
  * Pure utility functions for manipulating 2D matrices.
  *
- * @namespace utility.matrix
+ * @namespace m3.utility.matrix
  */
-utility.matrix = {}
+m3.utility.matrix = {}
 
 /**
  * A two-dimensional matrix.
  *
  * @typedef Matrix2D
- * @see utility.matrix
+ * @see m3.utility.matrix
  * @type {mixed[][]}
  */
 
@@ -21,7 +21,7 @@ utility.matrix = {}
  * @param {Matrix2D} matrix
  * @return {Matrix2D} - Shallow copy
  */
-utility.matrix.flip = (matrix) => (
+m3.utility.matrix.flip = (matrix) => (
   matrix[0].map((_, index) => (
     matrix.map(row => row[index])
   ))
@@ -34,7 +34,7 @@ utility.matrix.flip = (matrix) => (
  * @param {Matrix2D} matrix
  * @return {Matrix2D} - Shallow copy
  */
-utility.matrix.rotate90 = utility.fn.pipe(utility.array.reverse, utility.matrix.flip)
+m3.utility.matrix.rotate90 = m3.utility.fn.pipe(m3.utility.array.reverse, m3.utility.matrix.flip)
 ; // XXX: JSDoc requires semi-colon
 
 /**
@@ -43,7 +43,7 @@ utility.matrix.rotate90 = utility.fn.pipe(utility.array.reverse, utility.matrix.
  * @param {Matrix2D} matrix
  * @return {Matrix2D} - Shallow copy
  */
-utility.matrix.rotate180 = (matrix) => utility.array.reverse(matrix.map(utility.array.reverse))
+m3.utility.matrix.rotate180 = (matrix) => m3.utility.array.reverse(matrix.map(m3.utility.array.reverse))
 ; // XXX: JSDoc requires semi-colon
 
 /**
@@ -53,4 +53,4 @@ utility.matrix.rotate180 = (matrix) => utility.array.reverse(matrix.map(utility.
  * @param {Matrix2D} matrix
  * @return {Matrix2D} - Shallow copy
  */
-utility.matrix.rotate270 = utility.fn.pipe(utility.matrix.flip, utility.array.reverse)
+m3.utility.matrix.rotate270 = m3.utility.fn.pipe(m3.utility.matrix.flip, m3.utility.array.reverse)

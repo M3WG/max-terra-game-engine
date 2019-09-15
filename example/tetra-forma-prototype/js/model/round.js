@@ -20,7 +20,7 @@ m3.model.round = m3.utility.model.inventFactory({
   },
   validators: {
     turns: (values) => {
-      values = utility.array.copy(values)
+      values = m3.utility.array.copy(values)
 
       values.forEach((value) => {
         if (!m3.model.turn.is(value)) {

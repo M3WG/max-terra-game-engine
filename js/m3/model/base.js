@@ -38,7 +38,7 @@ m3.model.base.prototype = {
 
     this.data = data
 
-    utility.pubsub.decorate(this)
+    m3.utility.pubsub.decorate(this)
     this.setup(...args)
 
     return this

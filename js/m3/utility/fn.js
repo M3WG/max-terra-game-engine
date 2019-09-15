@@ -3,9 +3,9 @@
 /**
  * Pure utility functions for functional composition.
  *
- * @namespace utility.fn
+ * @namespace m3.utility.fn
  */
-utility.fn = {
+m3.utility.fn = {
   /**
    * @param {...function} fns
    * @returns {function}

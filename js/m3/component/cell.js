@@ -24,7 +24,7 @@ m3.component.cell = m3.utility.component.inventFactory((() => {
       return this.data.y
     },
     setup: function () {
-      const createElement = utility.dom.createElement
+      const createElement = m3.utility.dom.createElement
 
       this.rootElement = createElement('button', {
         props: {

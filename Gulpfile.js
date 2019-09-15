@@ -19,18 +19,21 @@ gulp.task('dist-css', () => {
 
 gulp.task('dist-js', () => {
   return gulp.src([
+    // Main namespace
     'js/m3.js',
-    'js/utility/array.js',
-    'js/utility/dom.js',
-    'js/utility/fn.js',
-    'js/utility/matrix.js',
-    'js/utility/pubsub.js',
+    // Utilities
+    'js/m3/utility/array.js',
+    'js/m3/utility/dom.js',
+    'js/m3/utility/fn.js',
+    'js/m3/utility/matrix.js',
+    'js/m3/utility/pubsub.js',
     'js/m3/utility/adjacency.js',
     'js/m3/utility/component.js',
     'js/m3/utility/crawler.js',
     'js/m3/utility/map.js',
     'js/m3/utility/match.js',
     'js/m3/utility/model.js',
+    // Components
     'js/m3/component/base.js',
     'js/m3/component/cell.js',
     'js/m3/component/map.js',
@@ -39,6 +42,7 @@ gulp.task('dist-js', () => {
     'js/m3/component/scoreboardPlayer.js',
     'js/m3/component/tilePicker.js',
     'js/m3/component/tilePickerOption.js',
+    // Models
     'js/m3/model/base.js',
     'js/m3/model/cell.js',
     'js/m3/model/game.js',

@@ -19,11 +19,11 @@ m3.utility.model.extend(m3.model.turn.prototype, {
     return this.data.actions.length
   },
   getActions: function () {
-    return utility.array.copy(this.data.actions)
+    return m3.utility.array.copy(this.data.actions)
   },
   validators: {
     actions: (values) => {
-      values = utility.array.copy(values)
+      values = m3.utility.array.copy(values)
 
       values.forEach((value) => {
         if (!m3.model.action.is(value)) {

@@ -65,7 +65,7 @@ m3.component.tilePickerOption = m3.utility.component.inventFactory((() => {
       return this
     },
     setup: function () {
-      const createElement = utility.dom.createElement,
+      const createElement = m3.utility.dom.createElement,
         tile = this.getValue()
 
       this.rootElement = createElement('button', {

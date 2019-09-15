@@ -2,7 +2,7 @@
 
 m3.model.claim = m3.utility.model.inventFactory({
   getCells: function () {
-    return utility.array.copy(this.data.cell)
+    return m3.utility.array.copy(this.data.cell)
   },
   getFogShape: function () {
     const radius = this.getType().getLineOfSight()

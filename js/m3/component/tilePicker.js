@@ -8,7 +8,7 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
     return this._option.indexOf(option)
   },
   getOptions: function () {
-    return utility.array.copy(this._option)
+    return m3.utility.array.copy(this._option)
   },
   getSelectedIndex: function () {
     for (let i = 0, length = this._option.length; i < length; i++) {
@@ -44,7 +44,7 @@ m3.component.tilePicker = m3.utility.component.inventFactory({
     return this
   },
   setup: function () {
-    const createElement = utility.dom.createElement
+    const createElement = m3.utility.dom.createElement
 
     this.rootElement = createElement('div', {
       props: {

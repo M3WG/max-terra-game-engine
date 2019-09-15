@@ -3,9 +3,9 @@
 /**
  * Utility functions for manipulating the DOM.
  *
- * @namespace utility.dom
+ * @namespace m3.utility.dom
  */
-utility.dom = {}
+m3.utility.dom = {}
 
 /**
  * Returns whether the inner node is a descendent of the outer node.
@@ -14,7 +14,7 @@ utility.dom = {}
  * @param {Node} inner
  * @returns {boolean}
  */
-utility.dom.contains = (outer, inner) => {
+m3.utility.dom.contains = (outer, inner) => {
   do {
     if (!(inner instanceof Node)) {
       return false
@@ -43,7 +43,7 @@ utility.dom.contains = (outer, inner) => {
  * @param {function} [options.then] - Callback function called with element before returning it
  * @returns {Element}
  */
-utility.dom.createElement = (tagName, {assign, attrs, children, data, listeners, props, parent, style, then}) => {
+m3.utility.dom.createElement = (tagName, {assign, attrs, children, data, listeners, props, parent, style, then}) => {
   const element = document.createElement(tagName)
 
   if (Array.isArray(assign)) {

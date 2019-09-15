@@ -72,7 +72,7 @@ m3.model.mapSlice = m3.utility.model.inventFactory((() => {
 
   return {
     flip: function () {
-      this.cell = utility.matrix.flip(this.cell)
+      this.cell = m3.utility.matrix.flip(this.cell)
       return this
     },
     getCell: function (x, y) {
@@ -105,7 +105,7 @@ m3.model.mapSlice = m3.utility.model.inventFactory((() => {
       return this.data.y
     },
     rotate: function () {
-      this.cell = utility.matrix.rotate90(this.cell)
+      this.cell = m3.utility.matrix.rotate90(this.cell)
       return this
     },
     setup: function () {

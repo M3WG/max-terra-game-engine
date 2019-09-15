@@ -29,7 +29,7 @@ m3.utility.map.fill = (map, tile) => {
  */
 m3.utility.map.getPercent = (map, filter) => {
   if (typeof filter != 'function') {
-    filter = utility.fn.identity()
+    filter = m3.utility.fn.identity()
   }
 
   const cells = map.getCells()
@@ -58,7 +58,7 @@ m3.utility.map.import = (map, data) => {
  * @param {m3.model.map.prototype} map
  */
 m3.utility.map.randomize = (map) => {
-  const tiles = utility.array.shuffle(
+  const tiles = m3.utility.array.shuffle(
     m3.model.tile.getAll().reduce((tiles, tile) => [
       ...tiles,
       ...Array(tile.getRandomWeight()).fill(tile)
@@ -66,6 +66,6 @@ m3.utility.map.randomize = (map) => {
   )
 
   map.getCells().forEach((cell) => cell.setTile(
-    utility.array.randomValue(tiles)
+    m3.utility.array.randomValue(tiles)
   ))
 }

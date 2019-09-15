@@ -5,7 +5,7 @@ m3.component.scoreboardPlayer = m3.utility.component.inventFactory({
     return this.data.model
   },
   setup: function () {
-    const createElement = utility.dom.createElement
+    const createElement = m3.utility.dom.createElement
 
     this.rootElement = createElement('li', {
       props: {

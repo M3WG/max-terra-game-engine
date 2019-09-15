@@ -8,7 +8,7 @@ m3.component.gameStatus = m3.utility.component.inventFactory({
     this.rootElement = document.createElement('div')
     this.rootElement.className = 'm3-c-gameStatus'
 
-    const createElement = utility.dom.createElement
+    const createElement = m3.utility.dom.createElement
 
     createElement('ul', {
       parent: this.rootElement,

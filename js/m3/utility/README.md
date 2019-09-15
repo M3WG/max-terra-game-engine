@@ -1,4 +1,4 @@
-The `m3.utility` namespace defines utilities that solve common problems for game controllers.
+The `m3.utility` namespace defines reusable utilities.
 
 ```js
 /**

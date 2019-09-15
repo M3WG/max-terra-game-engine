@@ -407,7 +407,7 @@ function getAdjacentClaims(target) {
 
 function getAdjacentClaimsGreedy(target, claimFilter) {
   if (typeof claimFilter != 'function') {
-    claimFilter = utility.fn.identity()
+    claimFilter = m3.utility.fn.identity()
   }
 
   const select = getAdjacentClaims

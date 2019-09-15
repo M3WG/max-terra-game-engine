@@ -9,11 +9,11 @@ m3.model.game = m3.utility.model.inventFactory({
     return this.data.players.length
   },
   getPlayers: function () {
-    return utility.array.copy(this.data.players)
+    return m3.utility.array.copy(this.data.players)
   },
   validators: {
     players: (values) => {
-      values = utility.array.copy(values)
+      values = m3.utility.array.copy(values)
 
       values.forEach((value) => {
         if (!m3.model.player.is(value)) {

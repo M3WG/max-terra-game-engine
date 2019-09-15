@@ -30,7 +30,7 @@ m3.utility.match.shape = (cell, {definition = [], mirror = false, rotate = false
     /*
      * XXX: Identity function. Will return first extant shape.
      */
-    filter = utility.fn.identity()
+    filter = m3.utility.fn.identity()
   }
 
   const permutations = [

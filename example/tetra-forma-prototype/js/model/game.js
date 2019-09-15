@@ -19,11 +19,11 @@ m3.utility.model.extend(m3.model.game.prototype, {
     return this.data.rounds.length
   },
   getRounds: function () {
-    return utility.array.copy(this.data.rounds)
+    return m3.utility.array.copy(this.data.rounds)
   },
   validators: {
     rounds: (values) => {
-      values = utility.array.copy(values)
+      values = m3.utility.array.copy(values)
 
       values.forEach((value) => {
         if (!m3.model.round.is(value)) {

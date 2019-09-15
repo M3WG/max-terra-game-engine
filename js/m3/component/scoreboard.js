@@ -2,7 +2,7 @@
 
 m3.component.scoreboard = m3.utility.component.inventFactory({
   setup: function () {
-    const createElement = utility.dom.createElement
+    const createElement = m3.utility.dom.createElement
 
     this.rootElement = createElement('div', {
       props: {

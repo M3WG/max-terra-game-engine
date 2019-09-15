@@ -18,7 +18,7 @@ m3.component.map = m3.utility.component.inventFactory({
   setup: function () {
     this._cell = []
 
-    const createElement = utility.dom.createElement
+    const createElement = m3.utility.dom.createElement
 
     this.rootElement = createElement('div', {
       props: {

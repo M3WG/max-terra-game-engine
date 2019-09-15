@@ -17,16 +17,9 @@ const m3 = {
    */
   model: {},
   /**
-   * Defines utilities that solve common problems for game controllers.
+   * Defines reusable utilities.
    *
    * @namespace m3.utility
    */
   utility: {},
 }
-
-/**
- * Provides functions that would typically be provided by a framework or game engine.
- *
- * @namespace utility
- */
-const utility = {}
